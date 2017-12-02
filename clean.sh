@@ -1,4 +1,2 @@
-#!/bin/bash
-
-[[ -e ~/.vimrc ]] && unlink ~/.vimrc
+sh ./config/vim/clean.sh
 
