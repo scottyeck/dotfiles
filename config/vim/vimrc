@@ -16,7 +16,9 @@ colorscheme codeschool
 set number
 
 " Tab size
-autocmd Filetype js setlocal tabstop=2
+set tabstop=2
+set shiftwidth=4
+set expandtab
 
 " ------------------------------
 " ## Plugins
