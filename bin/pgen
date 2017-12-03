@@ -64,11 +64,9 @@ remove () {
         rm -rf $bundle/$name
         sync
         echo "Successfully removed plugin '$name'"
-        exit 0
+    else
+        echo "Plugin '$name' not found. Run 'pgen list' to view installed plugins"
     fi
-
-    echo "Plugin '$name' not found. Run 'pgen list' to view installed plugins"
-    exit 1
 }
 
 list () {
