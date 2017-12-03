@@ -4,25 +4,47 @@
 
 add="add"
 remove="remove"
+list="list"
+
+# Paths
+
+bundle="$HOME/.vim/bundle"
 
 # Commands
 
 add () {
-    echo $add
+    local repo=$2
+    cd $bundle
+    git clone $repo || exit 1
+    exit 0
 }
 
 remove () {
-    echo $remove
+    local name=$2
+    if [[ -e $bundle/$name ]] ; then
+        rm -rf $bundle/$name
+        echo "Removed plugin '$name'"
+        exit 0
+    else
+        echo "Plugin '$name' not found. Run 'pgen list' to view installed plugins"
+        exit 1
+    fi
+}
+
+list () {
+    ls $bundle
 }
 
 # Entry
 
 pgen () {
-    cmd=$1
+    local cmd=$1
     if [ $cmd = $add ] ; then
         add "$@"
     elif [ $cmd = $remove ] ; then
         remove "$@"
+    elif [ $cmd = $list ] ; then
+        list "$@"
     else
         echo "No command $1"
         exit 1
