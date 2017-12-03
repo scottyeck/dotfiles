@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPTPATH="$( cd "$( dirname $0 )" ; pwd )"
+
 # Symlink vimrc
-ln -sf $(pwd)/config/vim/vimrc ~/.vimrc
+ln -sf $SCRIPTPATH/vimrc ~/.vimrc
 

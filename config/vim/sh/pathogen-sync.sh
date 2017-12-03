@@ -3,9 +3,8 @@
 # Sync pathogen packages
 
 BUNDLE=~/.vim/bundle
-# TODO:
-# Fix this path
-WANT_PKG=$(cat ~/git/me/bag-of-tricks/config/vim/pathogenrc)
+SCRIPTPATH="$( cd "$( dirname $0 )" ; pwd)"
+WANT_PKG="$( cat $SCRIPTPATH/../pathogenrc )"
 
 getName () {
     local PKG=$1
