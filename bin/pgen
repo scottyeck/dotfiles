@@ -6,6 +6,7 @@ add="add"
 remove="remove"
 list="list"
 install="install"
+sync="sync"
 
 # Paths
 
@@ -19,6 +20,12 @@ getPluginName () {
     name="${url##*/}"
     name="${name%.git}"
     echo $name
+}
+
+getInstalledPluginUrl () {
+    local name=$1
+    local url=$(cat $bundle/$name/.git/config | grep 'url' | sed 's/url =//' | sed 's/ //g')
+    echo $url
 }
 
 # Commands
@@ -58,6 +65,16 @@ install () {
     done
 }
 
+sync () {
+    local result=""
+    local newline=$'\n'
+    for name in $( ls $bundle ); do
+        url=$( getInstalledPluginUrl $name )
+        result="${result}"$'\n'"${url}"
+    done
+    echo "${result}"
+}
+
 # Entry
 
 pgen () {
@@ -70,6 +87,8 @@ pgen () {
         list
     elif [ $cmd = $install ] ; then
         install
+    elif [ $cmd = $sync ] ; then
+        sync
     else
         echo "No command $1"
         exit 1
