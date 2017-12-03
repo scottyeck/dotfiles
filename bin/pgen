@@ -30,6 +30,20 @@ getInstalledPluginUrl () {
 
 # Commands
 
+sync () {
+    local result=""
+    for name in $( ls $bundle ); do
+        url=$( getInstalledPluginUrl $name )
+        if [[ $result = "" ]] ; then
+            result=$url
+        else
+            result="${result}"$'\n'"${url}"
+        fi
+    done
+    echo "${result}" > $rc
+}
+
+
 add () {
     local repo=$1
     local name=$( getPluginName $repo )
@@ -38,6 +52,7 @@ add () {
     else
         cd $bundle
         git clone $repo || exit 1
+        sync
         echo "Successfully added plugin '$name'"
     fi
 }
@@ -46,6 +61,7 @@ remove () {
     local name=$1
     if [[ -e $bundle/$name ]] ; then
         rm -rf $bundle/$name
+        sync
         echo "Successfully removed plugin '$name'"
         exit 0
     fi
@@ -63,16 +79,6 @@ install () {
     do
         add $line
     done
-}
-
-sync () {
-    local result=""
-    local newline=$'\n'
-    for name in $( ls $bundle ); do
-        url=$( getInstalledPluginUrl $name )
-        result="${result}"$'\n'"${url}"
-    done
-    echo "${result}"
 }
 
 # Entry
