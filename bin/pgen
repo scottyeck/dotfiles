@@ -5,10 +5,12 @@
 add="add"
 remove="remove"
 list="list"
+install="install"
 
 # Paths
 
 bundle="$HOME/.vim/bundle"
+rc="$HOME/.pathogenrc"
 
 # Utils
 
@@ -22,20 +24,19 @@ getPluginName () {
 # Commands
 
 add () {
-    local repo=$2
+    local repo=$1
     local name=$( getPluginName $repo )
     if [[ -e $bundle/$name ]] ; then
         echo "Plugin '$name' is already installed"
-        exit 1
+    else
+        cd $bundle
+        git clone $repo || exit 1
+        echo "Successfully added plugin '$name'"
     fi
-    cd $bundle
-    git clone $repo || exit 1
-    echo "Successfully added plugin '$name'"
-    exit 0
 }
 
 remove () {
-    local name=$2
+    local name=$1
     if [[ -e $bundle/$name ]] ; then
         rm -rf $bundle/$name
         echo "Successfully removed plugin '$name'"
@@ -50,16 +51,25 @@ list () {
     ls $bundle
 }
 
+install () {
+    cat $rc | while read line
+    do
+        add $line
+    done
+}
+
 # Entry
 
 pgen () {
     local cmd=$1
     if [ $cmd = $add ] ; then
-        add "$@"
+        add "$2"
     elif [ $cmd = $remove ] ; then
-        remove "$@"
+        remove "$2"
     elif [ $cmd = $list ] ; then
-        list "$@"
+        list
+    elif [ $cmd = $install ] ; then
+        install
     else
         echo "No command $1"
         exit 1
