@@ -10,12 +10,27 @@ list="list"
 
 bundle="$HOME/.vim/bundle"
 
+# Utils
+
+getPluginName () {
+    local url=$1
+    name="${url##*/}"
+    name="${name%.git}"
+    echo $name
+}
+
 # Commands
 
 add () {
     local repo=$2
+    local name=$( getPluginName $repo )
+    if [[ -e $bundle/$name ]] ; then
+        echo "Plugin '$name' is already installed"
+        exit 1
+    fi
     cd $bundle
     git clone $repo || exit 1
+    echo "Successfully added plugin '$name'"
     exit 0
 }
 
@@ -23,12 +38,12 @@ remove () {
     local name=$2
     if [[ -e $bundle/$name ]] ; then
         rm -rf $bundle/$name
-        echo "Removed plugin '$name'"
+        echo "Successfully removed plugin '$name'"
         exit 0
-    else
-        echo "Plugin '$name' not found. Run 'pgen list' to view installed plugins"
-        exit 1
     fi
+
+    echo "Plugin '$name' not found. Run 'pgen list' to view installed plugins"
+    exit 1
 }
 
 list () {
