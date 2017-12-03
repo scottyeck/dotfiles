@@ -32,8 +32,9 @@ getInstalledPluginUrl () {
 
 sync () {
     local result=""
-    for name in $( ls $bundle ); do
-        url=$( getInstalledPluginUrl $name )
+    local name=""
+    for name in $( ls $bundle ) ; do
+        local url=$( getInstalledPluginUrl $name )
         if [[ $result = "" ]] ; then
             result=$url
         else
