@@ -29,6 +29,11 @@ getInstalledPluginUrl () {
     echo $url
 }
 
+getCurrentSha () {
+    local name=$1
+    echo "$( cd $bundle/$name && git rev-parse HEAD )"
+}
+
 # Commands
 
 sync () {
@@ -36,6 +41,7 @@ sync () {
     local name=""
     for name in $( ls $bundle ) ; do
         local url=$( getInstalledPluginUrl $name )
+        local sha=$( getCurrentSha $name )
         if [[ $result = "" ]] ; then
             result=$url
         else
