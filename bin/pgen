@@ -69,15 +69,24 @@ sync () {
     echo "${result}" > $rc
 }
 
-
 add () {
     local repo=$1
     local name=$( getPluginName $repo )
+
+    local sha=""
+    if ! [ -z "$2" ] ; then
+        sha=$2
+    fi
+
     if [[ -e $bundle/$name ]] ; then
         echo "Plugin '$name' is already installed"
     else
         cd $bundle
         git clone $repo || exit 1
+        if ! [[ $sha = "" ]] ; then
+            cd $bundle/$name
+            git reset --hard $sha || exit 1
+        fi
         sync
         echo "Successfully added plugin '$name'"
     fi
@@ -120,7 +129,7 @@ prune () {
 pgen () {
     local cmd=$1
     if [ $cmd = $add ] ; then
-        add "$2"
+        add "$2" "$3"
     elif [ $cmd = $remove ] ; then
         remove "$2"
     elif [ $cmd = $list ] ; then
