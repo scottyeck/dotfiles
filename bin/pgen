@@ -7,6 +7,7 @@ remove="remove"
 list="list"
 install="install"
 sync="sync"
+prune="prune"
 
 # Paths
 
@@ -80,6 +81,16 @@ install () {
     done
 }
 
+prune () {
+    local name=""
+    for name in $( ls $bundle ) ; do
+        local url=$( getInstalledPluginUrl $name )
+        if ! grep -Fxq $url $rc ; then
+            remove $name
+        fi
+    done
+}
+
 # Entry
 
 pgen () {
@@ -94,6 +105,8 @@ pgen () {
         install
     elif [ $cmd = $sync ] ; then
         sync
+    elif [ $cmd = $prune ] ; then
+        prune
     else
         echo "No command $1"
         exit 1
