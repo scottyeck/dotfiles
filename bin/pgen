@@ -14,6 +14,10 @@ prune="prune"
 bundle="$HOME/.vim/bundle"
 rc="$HOME/.pathogenrc"
 
+# Helpers
+
+tab="  "
+
 # Utils
 
 getPluginName () {
@@ -37,17 +41,31 @@ getCurrentSha () {
 # Commands
 
 sync () {
-    local result=""
+    local result="{"$'\n'
     local name=""
-    for name in $( ls $bundle ) ; do
+    local index=-1
+    local bundle_list=$( ls $bundle )
+    local length=$( echo "$bundle_list" | wc -l )
+
+    for name in $bundle_list ; do
+
         local url=$( getInstalledPluginUrl $name )
         local sha=$( getCurrentSha $name )
-        if [[ $result = "" ]] ; then
-            result=$url
-        else
-            result="${result}"$'\n'"${url}"
+        local entry=$tab"\"${name}\": {"$'\n'
+
+        index=$((index + 1))
+        
+        entry=$entry$tab$tab"\"url\": \"$url\","$'\n'
+        entry=$entry$tab$tab"\"revision\": \"$sha\""$'\n'
+        entry=$entry$tab"}"
+
+        if ! [[ $index = $(( length - 1)) ]] ; then
+            entry=$entry","
         fi
+        entry=$entry$'\n'
+        result=$result$entry
     done
+    result=$result"}"
     echo "${result}" > $rc
 }
 
