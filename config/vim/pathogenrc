@@ -1,10 +1,42 @@
-https://github.com/w0rp/ale.git
-git@github.com:ctrlpvim/ctrlp.vim.git
-git@github.com:sbdchd/neoformat.git
-https://github.com/scrooloose/nerdtree
-git@github.com:Xuyuanp/nerdtree-git-plugin.git
-https://github.com/dermusikman/sonicpi.vim.git
-https://github.com/vim-airline/vim-airline
-git://github.com/tpope/vim-commentary.git
-https://github.com/tpope/vim-fugitive.git
-https://github.com/tpope/vim-sensible.git
+{
+  "ale": {
+    "url": "https://github.com/w0rp/ale.git",
+    "revision": "2f9869de44cf4b9542fc79a4c4566aa268910b23"
+  },
+  "ctrlp.vim": {
+    "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
+    "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
+  },
+  "neoformat": {
+    "url": "git@github.com:sbdchd/neoformat.git",
+    "revision": "2a4c1494cc947c5e9c8d1b31e96e73da7497ab3d"
+  },
+  "nerdtree": {
+    "url": "https://github.com/scrooloose/nerdtree",
+    "revision": "b89de09810b646ec2107160db3af9e530d20446c"
+  },
+  "nerdtree-git-plugin": {
+    "url": "git@github.com:Xuyuanp/nerdtree-git-plugin.git",
+    "revision": "6a9b3122cb89b3a45ec444f9787a895125aca8aa"
+  },
+  "sonicpi.vim": {
+    "url": "https://github.com/dermusikman/sonicpi.vim.git",
+    "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
+  },
+  "vim-airline": {
+    "url": "https://github.com/vim-airline/vim-airline",
+    "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
+  },
+  "vim-commentary": {
+    "url": "git://github.com/tpope/vim-commentary.git",
+    "revision": "89f43af18692d22ed999c3097e449f12fdd8b299"
+  },
+  "vim-fugitive": {
+    "url": "https://github.com/tpope/vim-fugitive.git",
+    "revision": "5032d9ee72361dc3cfaae1a9b3353211203e443f"
+  },
+  "vim-sensible": {
+    "url": "https://github.com/tpope/vim-sensible.git",
+    "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
+  }
+}
