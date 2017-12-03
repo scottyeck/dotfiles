@@ -1,8 +1,32 @@
 #!/bin/bash
 
+# Constants
+
+add="add"
+remove="remove"
+
+# Commands
+
+add () {
+    echo $add
+}
+
+remove () {
+    echo $remove
+}
+
+# Entry
+
 pgen () {
     cmd=$1
-    echo $cmd
+    if [ $cmd = $add ] ; then
+        add "$@"
+    elif [ $cmd = $remove ] ; then
+        remove "$@"
+    else
+        echo "No command $1"
+        exit 1
+    fi
 }
 
 pgen "$@"
