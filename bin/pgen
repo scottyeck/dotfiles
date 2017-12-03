@@ -1,0 +1,9 @@
+#!/bin/bash
+
+pgen () {
+    cmd=$1
+    echo $cmd
+}
+
+pgen "$@"
+
