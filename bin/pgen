@@ -108,9 +108,19 @@ list () {
 }
 
 install () {
-    cat $rc | while read line
-    do
-        add $line
+    local index=-1
+
+    rc_content="$( cat $rc )"
+    IFS=$'\n' lines=( $rc_content )
+
+    for line in ${lines[@]} ; do
+        index=$((index + 1))
+        line=$( echo $line | sed 's/ //g' )
+        if [[ "$line" =~ ^\".+\{$ ]] ; then
+            url=$( echo "${lines[$index + 1]}" | awk '{print $2}' | sed 's/\"//g' | sed 's/,//g' )
+            sha=$( echo "${lines[$index + 2]}" | awk '{print $2}' | sed 's/\"//g' | sed 's/,//g' )
+            add $url $sha
+        fi
     done
 }
 
