@@ -1,10 +1,10 @@
 #!/bin/bash
 
-npm-which () {
-  npm_bin=$(npm bin)
-  bin_name=$1
-  local_path="${npm_bin}/${bin_name}"
-  [[ -f $local_path ]] && echo $local_path && return
-  echo $(which $bin_name)
-}
+# Given an npm package, determines where it's installed,
+# either locally or globally.
 
+npm_bin=$(npm bin)
+bin_name=$1
+local_path="${npm_bin}/${bin_name}"
+[[ -f $local_path ]] && echo $local_path && return
+echo $(which $bin_name)
