@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Passes a command on to a locally installed version of
+# the specified package.
+
+PACKAGE_NAME=$1
+shift
+./node_modules/.bin/$PACKAGE_NAME "$@"
