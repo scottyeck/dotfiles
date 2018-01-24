@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Copies the sha of the Nth commit to your clipboard
+
+N=${1:-1}
+SHA="$(git log --format=format:%H | head -n $N | tail -n 1)"
+echo $SHA | pbcopy
+printf "Copied successfully!\n$SHA\n"
