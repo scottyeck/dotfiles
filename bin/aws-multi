@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Helper for using multiple AWS accounts
+
+# Constants
+switch="switch"
+list="list"
+current="current"
+
+switch() {
+  local slug=$1
+  cp ~/.aws/credentials-$slug ~/.aws/credentials
+  echo "Successfully switched to credentials for - $slug"
+}
+
+list() {
+  ls ~/.aws/ | grep credentials- | sed 's/credentials-//'
+}
+
+current() {
+  for slug in $( list ); do
+    if cmp -s ~/.aws/credentials ~/.aws/credentials-$slug ; then
+      echo $slug
+      exit 0
+    fi
+  done
+  echo "Could not identify current credentials."
+  exit 1
+}
+
+multi () {
+  local cmd=$1
+  if [ $cmd = $switch ] ; then
+    switch "$2"
+  elif [ $cmd = $current ] ; then
+    current
+  elif [ $cmd = $list ] ; then
+    list
+  fi
+}
+
+multi "$@"
