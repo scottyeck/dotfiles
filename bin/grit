@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Constants
+current="current"
+
+current() {
+  git branch | grep \* | awk '{print $2}'
+}
+
+grit () {
+  local cmd=$1
+  if [ $cmd = $current ] ; then
+    current
+  fi
+}
+
+grit "$@"
