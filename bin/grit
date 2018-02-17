@@ -1,16 +1,51 @@
 #!/bin/bash
 
-# Constants
-current="current"
+# Examples
+# grit push -c
+# grit checkout -f [query]
 
-current() {
-  git branch | grep \* | awk '{print $2}'
+# Constants
+push="push"
+checkout="checkout"
+
+getBranch () {
+  local branch=""
+  local OPTIND opt
+  while getopts ":cf:" opt; do
+    case $opt in
+      "c")
+        branch="$(git branch | grep \*)"
+        ;;
+      "f")
+        branch="$(git branch | grep $OPTARG)"
+        ;;
+      \?)
+        echo "Invalid option: -$OPTARG" >&2
+        ;;
+    esac
+  done
+  branch="$(echo "$branch" | sed 's/\*//' | awk '{print $1}')"
+  echo "$branch"
+}
+
+push () {
+  local branch="$(getBranch $@)"
+  git push origin $branch
+}
+
+checkout () {
+  local branch="$(getBranch $@)"
+  git checkout $branch
 }
 
 grit () {
   local cmd=$1
-  if [ $cmd = $current ] ; then
-    current
+  if [ $cmd = $push ] ; then
+    shift
+    push $@
+  elif [ $cmd = $checkout ] ; then
+    shift
+    checkout $@
   fi
 }
 
