@@ -52,6 +52,9 @@ push () {
   local branch="$(getBranch $@)"
   local remote="$(getRemote $@)"
   git push $remote $branch
+
+  # TODO
+  # Allow for force-push (Prompt for input first)
 }
 
 checkout () {
