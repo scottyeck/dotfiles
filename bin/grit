@@ -25,6 +25,8 @@ getBranch () {
     esac
   done
   branch="$(echo "$branch" | sed 's/\*//' | awk '{print $1}')"
+  echo "nope can't do that "
+  exit 1
   echo "$branch"
 }
 
