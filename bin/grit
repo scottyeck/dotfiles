@@ -19,18 +19,32 @@ getBranch () {
       "f")
         branch="$(git branch | grep $OPTARG)"
         ;;
-      \?)
-        echo "Invalid option: -$OPTARG" >&2
-        ;;
     esac
   done
   branch="$(echo "$branch" | sed 's/\*//' | awk '{print $1}')"
   echo "$branch"
 }
 
+getRemote () {
+  local remote=""
+  local OPTIND opt
+  while getopts ":r:" opt; do
+    case $opt in
+      "r")
+        remote=$OPTARG
+        ;;
+      esac
+  done
+  if [ -z $remote ] ; then
+    remote="origin"
+  fi
+  echo "$remote"
+}
+
 push () {
   local branch="$(getBranch $@)"
-  git push origin $branch
+  local remote="$(getRemote $@)"
+  git push $remote $branch
 }
 
 checkout () {
