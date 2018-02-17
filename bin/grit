@@ -2,6 +2,7 @@
 
 # Examples
 # grit push -c
+# grit push -c -r upstream
 # grit checkout -f [query]
 
 # Constants
@@ -21,6 +22,11 @@ getBranch () {
         ;;
     esac
   done
+
+  # TODO
+  # Need to provide escape hatch if query returns multiple branches
+  # Right now it just returns the first one - no good.
+
   branch="$(echo "$branch" | sed 's/\*//' | awk '{print $1}')"
   echo "$branch"
 }
