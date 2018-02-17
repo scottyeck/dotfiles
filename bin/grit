@@ -8,6 +8,7 @@
 # Constants
 push="push"
 checkout="checkout"
+merge="merge"
 
 getBranch () {
   local branch=""
@@ -58,6 +59,11 @@ checkout () {
   git checkout $branch
 }
 
+merge () {
+  local branch="$(getBranch $@)"
+  git merge $branch
+}
+
 grit () {
   local cmd=$1
   if [ $cmd = $push ] ; then
@@ -66,6 +72,9 @@ grit () {
   elif [ $cmd = $checkout ] ; then
     shift
     checkout $@
+  elif [ $cmd = $merge ] ; then
+    shift
+    merge $@
   fi
 }
 
