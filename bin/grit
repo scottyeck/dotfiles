@@ -48,10 +48,23 @@ getRemote () {
   echo "$remote"
 }
 
+getIsPreview () {
+  local preview=0
+  local OPTIND opt
+  while getopts ":p" opt; do
+    case $opt in
+      "p")
+        preview=1
+        ;;
+    esac
+  done
+  echo $preview
+}
+
 push () {
   local branch="$(getBranch $@)"
   local remote="$(getRemote $@)"
-  git push $remote $branch
+  echo "git push $remote $branch"
 
   # TODO
   # Allow for force-push (Prompt for input first)
@@ -59,25 +72,39 @@ push () {
 
 checkout () {
   local branch="$(getBranch $@)"
-  git checkout $branch
+  echo "git checkout $branch"
 }
 
 merge () {
   local branch="$(getBranch $@)"
-  git merge $branch
+  echo "git merge $branch"
 }
 
 grit () {
-  local cmd=$1
-  if [ $cmd = $push ] ; then
-    shift
-    push $@
-  elif [ $cmd = $checkout ] ; then
-    shift
-    checkout $@
-  elif [ $cmd = $merge ] ; then
-    shift
-    merge $@
+  local type=$1
+  shift
+
+  local cmd=""
+  local isPreview="$(getIsPreview $@)"
+
+  if [ $type = $push ] ; then
+    cmd="$(push $@)"
+  elif [ $type = $checkout ] ; then
+    cmd="$(checkout $@)"
+  elif [ $type = $merge ] ; then
+    cmd="$(merge $@)"
+  else
+    echo "grit - unrecognized command"
+    exit 1
+  fi
+
+  if [ "$isPreview" -eq "1" ] ; then
+    echo "grit - command preview..."
+    echo "$cmd"
+  else
+    echo "grit - executing command..."
+    echo "$cmd"
+    eval $cmd
   fi
 }
 
