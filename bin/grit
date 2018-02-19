@@ -23,13 +23,12 @@ getBranch () {
         ;;
     esac
   done
-
-  # TODO
-  # Need to provide escape hatch if query returns multiple branches
-  # Right now it just returns the first one - no good.
-
-  branch="$(echo "$branch" | sed 's/\*//' | awk '{print $1}')"
   echo "$branch"
+}
+
+cleanBranch () {
+  local branch=$1
+  echo "$branch" | sed 's/\*//' | awk '{print $1}'
 }
 
 getRemote () {
@@ -61,22 +60,22 @@ getIsPreview () {
   echo $preview
 }
 
-push () {
-  local branch="$(getBranch $@)"
-  local remote="$(getRemote $@)"
+getPushCmd () {
+  local remote=$1
+  local branch=$2
   echo "git push $remote $branch"
 
   # TODO
   # Allow for force-push (Prompt for input first)
 }
 
-checkout () {
-  local branch="$(getBranch $@)"
+getCheckoutCmd () {
+  local branch=$1
   echo "git checkout $branch"
 }
 
-merge () {
-  local branch="$(getBranch $@)"
+getMergeCmd () {
+  local branch=$1
   echo "git merge $branch"
 }
 
@@ -86,23 +85,40 @@ grit () {
 
   local cmd=""
   local isPreview="$(getIsPreview $@)"
+  local branch="$(getBranch $@)"
+  local remote="$(getRemote $@)"
+
+  local branchLen=$(echo "$branch" | wc -l)
+
+  if [ "$branchLen" -gt "1" ]; then
+    echo "grit - Vague query. Your query returned the following branches:"
+    echo "$branch"
+    echo "Please try again with a more specific query."
+    exit 1
+  elif [ -z "$branch" ]; then
+    echo "grit - Unsuccessful query. Your query returned no branches."
+    echo "Please try again with a more accurate query."
+    exit 1
+  fi
+
+  branch="$(cleanBranch "$branch")"
 
   if [ $type = $push ] ; then
-    cmd="$(push $@)"
+    cmd="$(getPushCmd $remote $branch)"
   elif [ $type = $checkout ] ; then
-    cmd="$(checkout $@)"
+    cmd="$(getCheckoutCmd $branch)"
   elif [ $type = $merge ] ; then
-    cmd="$(merge $@)"
+    cmd="$(getMergeCmd $branch)"
   else
-    echo "grit - unrecognized command"
+    echo "grit - Unrecognized command."
     exit 1
   fi
 
   if [ "$isPreview" -eq "1" ] ; then
-    echo "grit - command preview..."
+    echo "grit - Command preview..."
     echo "$cmd"
   else
-    echo "grit - executing command..."
+    echo "grit - Executing command..."
     echo "$cmd"
     eval $cmd
   fi
