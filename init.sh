@@ -1,1 +1,1 @@
-sh ./config/vim/init.sh
+sh ./config/shell/init.sh

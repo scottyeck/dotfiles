@@ -1,2 +1,2 @@
-sh ./config/vim/clean.sh
+sh ./config/shell/clean.sh
 
