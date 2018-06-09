@@ -8,6 +8,7 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # dotfiles
 PATH="$PATH:$HOME/git/me/bag-of-tricks/bin"
+PATH="$PATH:$HOME/git/me/bag-of-tricks/.cache/git-semantic-commits"
 
 export PATH
 export EDITOR='vim'
