@@ -1,1 +1,3 @@
-sh ./config/shell/init.sh
+#!/bin/bash
+
+./config/shell/init.sh

@@ -1,2 +1,4 @@
-sh ./config/shell/clean.sh
+#!/bin/bash
+
+./config/shell/clean.sh
 
