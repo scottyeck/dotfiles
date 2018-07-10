@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Trims leading and trailing whitespace
+# https://unix.stackexchange.com/a/205854
+function trim() {
+  awk '{$1=$1;print}'
+}
+
+trim $@
+
