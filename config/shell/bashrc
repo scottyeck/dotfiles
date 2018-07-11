@@ -17,5 +17,8 @@ PATH="$PATH:$HOME/git/me/bag-of-tricks/.cache/git-semantic-commits"
 # https://gist.github.com/AvnerCohen/a25a69df4e13f469c4ee
 git config --global alias.lastworks "for-each-ref --count=10 --sort=-committerdate refs/heads/"
 
+# Lists semantic commits help
+git config --global alias.sc git-sc
+
 export PATH
 export EDITOR='vim'
