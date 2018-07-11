@@ -10,15 +10,5 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 PATH="$PATH:$HOME/git/me/bag-of-tricks/bin"
 PATH="$PATH:$HOME/git/me/bag-of-tricks/.cache/git-semantic-commits"
 
-# git aliases
-
-# Lists the last 10 branches you worked on
-# Run `git lastworks`
-# https://gist.github.com/AvnerCohen/a25a69df4e13f469c4ee
-git config --global alias.lastworks "for-each-ref --count=10 --sort=-committerdate refs/heads/"
-
-# Lists semantic commits help
-git config --global alias.sc git-sc
-
 export PATH
 export EDITOR='vim'
