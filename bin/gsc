@@ -52,7 +52,8 @@ gsc () {
   for token in $restlines; do
     if getContainsElement "$token" "${COMMAND_TYPES[@]}"; then
       if $has_command_type ; then
-        echo "already has command_type"
+        echo "gsc: Error - Detected multiple commands specified"
+        echo "Run 'gsc --help' for proper usage."
         exit 1
       fi
       has_command_type=true
