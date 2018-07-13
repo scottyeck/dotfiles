@@ -13,6 +13,8 @@ COMMAND_TYPES=(feat docs chore fix refactor style test localize)
 SKIP_FLAGS=("--skip" "-s")
 HELP_FLAGS=("--help" "-h")
 
+# Check if an array contains an entry.
+# https://stackoverflow.com/a/8574392/2423549
 getContainsElement () {
   local e match="$1"
   shift
@@ -35,6 +37,8 @@ gsc () {
 
   # TODO: Check if args contain ' OR " properly
 
+  # Lop commit message off of last line and isolate remaining lines
+  # for further inspection.
   arglines=$(printf '%s\n' "$@")
   message=$(echo "$arglines" | tail -n 1)
   length=$(echo "$arglines" | wc -l)
@@ -48,8 +52,10 @@ gsc () {
   help=false
   skip=false
 
+  # Determine which commands / flags are present.
   for token in $restlines; do
     if getContainsElement "$token" "${COMMAND_TYPES[@]}"; then
+      # Can only have one command, so throw if another is found.
       if $has_command_type ; then
         echo "gsc: Error - Detected multiple commands specified"
         echo "Run 'gsc --help' for proper usage."
@@ -69,6 +75,7 @@ gsc () {
     exit 0
   fi
 
+  # Format command with optional skip prefix.
   final_message="$command_type: $message"
   if $skip ; then
     final_message="[ci skip] $final_message"
