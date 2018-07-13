@@ -11,62 +11,71 @@ test="test"
 localize="localize"
 
 COMMANDS=(feat docs chore fix refactor style test localize)
+SKIP_FLAGS=("--skip" "-s")
+HELP_FLAGS=("--help" "-h")
 
 getContainsElement () {
   local e match="$1"
   shift
   for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
+  return 1;
 }
 
-something () {
-  printf '%s\n' "${allargs[*]}"  # bash -c "$C"
+usage () {
+  echo "usage: gsc [type] [-sh] 'commit messsage'"
+  echo " type   type of commit"
+  echo "        options:"
+  for type in ${COMMANDS[@]}; do
+    echo "          * $type"
+  done
+  echo " -s     skip ci"
+  echo " -h    show usage"
 }
 
 gsc () {
+
+  # Check if args contain ' OR " properly
+
   arglines=$(printf '%s\n' "$@")
   message=$(echo "$arglines" | tail -n 1)
   length=$(echo "$arglines" | wc -l)
-  restlines=$(echo "$arglines" | head -n $(($length -1)))
-  # echo $count
-  # echo "$count"
-  # lines=$(cat arglines | wc -l)
-  # rest=$(echo "$arglines" | head -n $())
-  # echo "$message"
-  # echo "$rest"
-  # something $@
-  # message=$(echo "${@: -1}")
-  # echo "$message"
+  restlines="$arglines"
+  if (( $length > 1 )); then
+    restlines=$(echo "$arglines" | head -n $(($length -1)))
+  fi
 
+  subcommand=""
+  has_sub_command=false
+  help=false
+  skip=false
+
+  for token in $restlines; do
+    if getContainsElement "$token" "${COMMANDS[@]}"; then
+      if $has_sub_command ; then
+        echo "already has subcommand"
+        # TODO throw
+      fi
+      has_sub_command=true
+      subcommand=$token
+    elif getContainsElement "$token" "${SKIP_FLAGS[@]}"; then
+      skip=true
+    elif getContainsElement "$token" "${HELP_FLAGS[@]}"; then
+      help=true
+    fi
+  done
+
+  if $help ; then
+    usage
+    exit 0
+  fi
+
+  final_message="$subcommand: $message"
+  if $skip ; then
+    final_message="[ci skip] $final_message"
+  fi
+
+  command="git commit -m '$final_message'"
+  eval $command
 }
-
-# gsc () {
-#   SKIP=false
-#   while getopts ":s:" opt; do
-#     case $opt in
-#       s)
-#         SKIP=1
-#         ;;
-#     esac
-#   done
-
-#   echo "$@"
-#   shift $((OPTIND-1)) 
-#   echo "$@"
-
-#   echo "$SKIP"
-
-#   # while true; do
-#   #   case "$1" in
-#   #     -s | --skip ) SKIP=true; shift ;;
-#   #     -- ) shift; break ;;
-#   #     * ) break ;;
-#   #   esac
-#   # done
-#   echo "$SKIP"
-#   echo "$1"
-#   # getContainsElement "$1" "${COMMANDS[@]}"
-#   # echo $?
-# }
 
 gsc "$@"
