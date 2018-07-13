@@ -10,7 +10,7 @@ style="style"
 test="test"
 localize="localize"
 
-COMMANDS=(feat docs chore fix refactor style test localize)
+COMMAND_TYPES=(feat docs chore fix refactor style test localize)
 SKIP_FLAGS=("--skip" "-s")
 HELP_FLAGS=("--help" "-h")
 
@@ -25,7 +25,7 @@ usage () {
   echo "usage: gsc [type] [-sh] 'commit messsage'"
   echo " type   type of commit"
   echo "        options:"
-  for type in ${COMMANDS[@]}; do
+  for type in ${COMMAND_TYPES[@]}; do
     echo "          * $type"
   done
   echo " -s     skip ci"
@@ -34,7 +34,7 @@ usage () {
 
 gsc () {
 
-  # Check if args contain ' OR " properly
+  # TODO: Check if args contain ' OR " properly
 
   arglines=$(printf '%s\n' "$@")
   message=$(echo "$arglines" | tail -n 1)
@@ -44,19 +44,19 @@ gsc () {
     restlines=$(echo "$arglines" | head -n $(($length -1)))
   fi
 
-  subcommand=""
-  has_sub_command=false
+  command_type=""
+  has_command_type=false
   help=false
   skip=false
 
   for token in $restlines; do
-    if getContainsElement "$token" "${COMMANDS[@]}"; then
-      if $has_sub_command ; then
-        echo "already has subcommand"
-        # TODO throw
+    if getContainsElement "$token" "${COMMAND_TYPES[@]}"; then
+      if $has_command_type ; then
+        echo "already has command_type"
+        exit 1
       fi
-      has_sub_command=true
-      subcommand=$token
+      has_command_type=true
+      command_type=$token
     elif getContainsElement "$token" "${SKIP_FLAGS[@]}"; then
       skip=true
     elif getContainsElement "$token" "${HELP_FLAGS[@]}"; then
@@ -69,7 +69,7 @@ gsc () {
     exit 0
   fi
 
-  final_message="$subcommand: $message"
+  final_message="$command_type: $message"
   if $skip ; then
     final_message="[ci skip] $final_message"
   fi
