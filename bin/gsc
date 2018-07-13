@@ -8,7 +8,6 @@ fix="fix"
 refactor="refactor"
 style="style"
 test="test"
-localize="localize"
 
 COMMAND_TYPES=(feat docs chore fix refactor style test localize)
 SKIP_FLAGS=("--skip" "-s")
