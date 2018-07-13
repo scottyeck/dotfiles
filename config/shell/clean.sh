@@ -18,5 +18,3 @@ maybeUnlink ~/.bashrc
 maybeUnlink ~/.zshrc
 
 removeGitAliases
-
-rm -rf ~/git/me/bag-of-tricks/.cache
