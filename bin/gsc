@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# constants
+feat="feat"
+docs="docs"
+chore="chore"
+fix="fix"
+refactor="refactor"
+style="style"
+test="test"
+localize="localize"
+
+COMMANDS=(feat docs chore fix refactor style test localize)
+
+getContainsElement () {
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
+
+gsc () {
+  getContainsElement "$1" "${COMMANDS[@]}"
+  echo $?
+}
+
+gsc $@
