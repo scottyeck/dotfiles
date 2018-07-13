@@ -19,9 +19,54 @@ getContainsElement () {
   return 1
 }
 
-gsc () {
-  getContainsElement "$1" "${COMMANDS[@]}"
-  echo $?
+something () {
+  printf '%s\n' "${allargs[*]}"  # bash -c "$C"
 }
 
-gsc $@
+gsc () {
+  arglines=$(printf '%s\n' "$@")
+  message=$(echo "$arglines" | tail -n 1)
+  length=$(echo "$arglines" | wc -l)
+  restlines=$(echo "$arglines" | head -n $(($length -1)))
+  # echo $count
+  # echo "$count"
+  # lines=$(cat arglines | wc -l)
+  # rest=$(echo "$arglines" | head -n $())
+  # echo "$message"
+  # echo "$rest"
+  # something $@
+  # message=$(echo "${@: -1}")
+  # echo "$message"
+
+}
+
+# gsc () {
+#   SKIP=false
+#   while getopts ":s:" opt; do
+#     case $opt in
+#       s)
+#         SKIP=1
+#         ;;
+#     esac
+#   done
+
+#   echo "$@"
+#   shift $((OPTIND-1)) 
+#   echo "$@"
+
+#   echo "$SKIP"
+
+#   # while true; do
+#   #   case "$1" in
+#   #     -s | --skip ) SKIP=true; shift ;;
+#   #     -- ) shift; break ;;
+#   #     * ) break ;;
+#   #   esac
+#   # done
+#   echo "$SKIP"
+#   echo "$1"
+#   # getContainsElement "$1" "${COMMANDS[@]}"
+#   # echo $?
+# }
+
+gsc "$@"
