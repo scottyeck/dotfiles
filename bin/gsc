@@ -24,13 +24,15 @@ getContainsElement () {
 
 usage () {
   echo "usage: gsc [type] [-sh] 'commit messsage'"
-  echo " type   type of commit"
-  echo "        options:"
+  echo "  args:"
+  echo "    type   type of commit"
+  echo "             options:"
   for type in ${COMMAND_TYPES[@]}; do
-    echo "          * $type"
+  echo "               * $type"
   done
-  echo " -s     skip ci"
-  echo " -h    show usage"
+  echo "  options:"
+  echo "    -s     skip ci"
+  echo "    -h     show usage"
 }
 
 gsc () {
