@@ -35,6 +35,11 @@ usage () {
   echo "    -h     show usage"
 }
 
+throwInvalidArgumentError () {
+  echo "gsc: Error - $1"
+  echo "Run 'gsc --help' for proper usage."
+}
+
 gsc () {
 
   # TODO: Check if args contain ' OR " properly
@@ -59,8 +64,7 @@ gsc () {
     if getContainsElement "$token" "${COMMAND_TYPES[@]}"; then
       # Can only have one command, so throw if another is found.
       if $has_command_type ; then
-        echo "gsc: Error - Detected multiple commands specified"
-        echo "Run 'gsc --help' for proper usage."
+        throwInvalidArgumentError "Detected multiple commands specified."
         exit 1
       fi
       has_command_type=true
@@ -75,6 +79,11 @@ gsc () {
   if $help ; then
     usage
     exit 0
+  fi
+
+  if [ -z $command_type ]; then
+    throwInvalidArgumentError "No valid command detected."
+    exit 1
   fi
 
   # Format command with optional skip prefix.
