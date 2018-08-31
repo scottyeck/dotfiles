@@ -9,5 +9,8 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # dotfiles
 PATH="$PATH:$HOME/git/me/bag-of-tricks/bin"
 
+# node_modules
+PATH="$PATH:$HOME/git/me/bag-of-tricks/node_modules/.bin"
+
 export PATH
 export EDITOR='vim'
