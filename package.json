@@ -9,6 +9,7 @@
     "http-server": "0.11.1",
     "tinypng-cli": "0.0.7",
     "tldr": "3.2.5",
-    "tree-cli": "0.4.12"
+    "tree-cli": "0.4.12",
+    "trello-cli": "0.2.1"
   }
 }
