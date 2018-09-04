@@ -6,6 +6,9 @@
   "author": "Scotty Eckenthal <scott.eckenthal@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "tldr": "3.2.5"
+    "http-server": "0.11.1",
+    "tinypng-cli": "0.0.7",
+    "tldr": "3.2.5",
+    "tree-cli": "0.4.12"
   }
 }
