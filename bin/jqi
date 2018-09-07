@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Formats a JSON file in place
+function jqi() {
+  FILE=$1
+  cat $FILE | jq '.' > tmp-$FILE
+  mv tmp-$FILE $FILE
+  echo "Formatted $FILE"
+}
+
+jqi $@
+
