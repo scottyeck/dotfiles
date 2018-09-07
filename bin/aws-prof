@@ -2,7 +2,6 @@
 
 # Default to a particular aws profile
 function aws-prof() {
-  echo $AWS_PROFILE
   aws $@ --profile $AWS_PROFILE
 }
 
