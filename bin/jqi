@@ -3,8 +3,9 @@
 # Formats a JSON file in place
 function jqi() {
   FILE=$1
-  cat $FILE | jq '.' > tmp-$FILE
-  mv tmp-$FILE $FILE
+  TMPFILE=tmp-$FILE
+  cat $FILE | jq '.' > $TMPFILE
+  mv $TMPFILE $FILE
   echo "Formatted $FILE"
 }
 
