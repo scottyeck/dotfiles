@@ -12,6 +12,7 @@ test="test"
 COMMAND_TYPES=(feat docs chore fix refactor style test localize)
 SKIP_FLAGS=("--skip" "-s")
 HELP_FLAGS=("--help" "-h")
+WIP_FLAGS=("--wip" "-w")
 
 # Check if an array contains an entry.
 # https://stackoverflow.com/a/8574392/2423549
@@ -31,8 +32,9 @@ usage () {
   echo "               * $type"
   done
   echo "  options:"
-  echo "    -s     skip ci"
-  echo "    -h     show usage"
+  echo "    --skip|-s     skip ci"
+  echo "    --wip |-w     wip"
+  echo "    --help|-h     show usage"
 }
 
 throwInvalidArgumentError () {
@@ -58,6 +60,7 @@ gsc () {
   has_command_type=false
   help=false
   skip=false
+  wip=false
 
   # Determine which commands / flags are present.
   for token in $restlines; do
@@ -71,6 +74,8 @@ gsc () {
       command_type=$token
     elif getContainsElement "$token" "${SKIP_FLAGS[@]}"; then
       skip=true
+    elif getContainsElement "$token" "${WIP_FLAGS[@]}"; then
+      wip=true
     elif getContainsElement "$token" "${HELP_FLAGS[@]}"; then
       help=true
     fi
@@ -89,7 +94,10 @@ gsc () {
   # Format command with optional skip prefix.
   final_message="$command_type: $message"
   if $skip ; then
-    final_message="WIP [ci skip] $final_message"
+    final_message="[ci skip] $final_message"
+  fi
+  if $wip ; then
+    final_message="WIP - $final_message"
   fi
 
   command="git commit -m '$final_message'"
