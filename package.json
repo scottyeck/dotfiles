@@ -6,7 +6,7 @@
   "author": "Scotty Eckenthal <scott.eckenthal@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "handlebars-cmd": "0.1.4",
+    "hbs-cli": "1.2.0",
     "http-server": "0.11.1",
     "tinypng-cli": "0.0.7",
     "tldr": "3.2.5",
