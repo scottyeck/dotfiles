@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Default to a particular aws profile
-function aws-prof() {
-  aws $@ --profile $AWS_PROFILE
-}
-
-aws-prof $@
-
