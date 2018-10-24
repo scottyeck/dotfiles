@@ -1,3 +1,6 @@
+echo "Loading remote bash configuration"
+echo "..."
+
 # npm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvmCKAGES="${HOME}/.npm-packages"
@@ -14,3 +17,20 @@ PATH="$PATH:$HOME/git/me/bag-of-tricks/node_modules/.bin"
 
 export PATH
 export EDITOR='vim'
+
+LOCAL_CONFIG_FILE="/Users/$USER/.localrc"
+
+if [ -f "$LOCAL_CONFIG_FILE" ]; then
+  echo "Loading local bash configuration"
+  echo '...'
+  source $LOCAL_CONFIG_FILE
+  echo "Local bash configuration loaded successfully"
+  echo '...'
+else
+  echo "Warning - No local bash configuration found. You may be missing important environment settings."
+  echo "Please ensure the existence of /Users/$USER/.localrc"
+  echo "..."
+fi
+
+echo "Successfully remote loaded bash configuration"
+echo "..."
