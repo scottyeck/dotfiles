@@ -24,7 +24,7 @@ if [ -f "$LOCAL_CONFIG_FILE" ]; then
   echo "Loading local bash configuration"
   echo '...'
   source $LOCAL_CONFIG_FILE
-  echo "Local bash configuration loaded successfully"
+  echo "Successfully loaded local bash configuration"
   echo '...'
 else
   echo "Warning - No local bash configuration found. You may be missing important environment settings."
@@ -32,5 +32,5 @@ else
   echo "..."
 fi
 
-echo "Successfully remote loaded bash configuration"
+echo "Successfully loaded remote bash configuration"
 echo "..."
