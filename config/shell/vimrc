@@ -47,7 +47,7 @@ map <C-b> :NERDTreeToggle<CR>
 
 " Autorefresh NERDTree...
 " ...on save
-autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
+" autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 
 " ### vim-airline
 
