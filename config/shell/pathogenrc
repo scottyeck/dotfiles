@@ -35,6 +35,10 @@
     "url": "https://github.com/tpope/vim-fugitive.git",
     "revision": "5032d9ee72361dc3cfaae1a9b3353211203e443f"
   },
+  "vim-prettier": {
+    "url": "https://github.com/prettier/vim-prettier",
+    "revision": "f2755ec6fe465fb6af051a254d826018dcde2a50"
+  },
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
