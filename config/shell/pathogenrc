@@ -28,8 +28,8 @@
     "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
   },
   "vim-commentary": {
-    "url": "git://github.com/tpope/vim-commentary.git",
-    "revision": "89f43af18692d22ed999c3097e449f12fdd8b299"
+    "url": "git@github.com:tpope/vim-commentary.git",
+    "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
   },
   "vim-fugitive": {
     "url": "https://github.com/tpope/vim-fugitive.git",
