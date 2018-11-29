@@ -1,0 +1,20 @@
+#!/bin/bash
+
+getCoreAudioPid () {
+  PID="$(ps -ef | grep coreaudiod | grep -v grep | awk '{print $2}')"
+  echo "$PID"
+}
+
+restartAudio () {
+  OLD_PID="$(getCoreAudioPid)"
+  kill -9 $OLD_PID
+  NEW_PID="$(getCoreAudioPid)"
+  if [ "$OLD_PID" == "$NEW_PID" ]; then
+    echo "Unable to restart core-audio. (You may wish to retry as sudo.)"
+  else
+    echo "Successfully restarted core-audio - Re-crank your volume!! 🔈"
+  fi
+}
+
+restartAudio
+
