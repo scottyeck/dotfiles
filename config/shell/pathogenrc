@@ -35,6 +35,10 @@
     "url": "https://github.com/tpope/vim-fugitive.git",
     "revision": "5032d9ee72361dc3cfaae1a9b3353211203e443f"
   },
+  "vim-multiple-cursors": {
+    "url": "git@github.com:terryma/vim-multiple-cursors.git",
+    "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
+  },
   "vim-prettier": {
     "url": "https://github.com/prettier/vim-prettier",
     "revision": "f2755ec6fe465fb6af051a254d826018dcde2a50"
@@ -42,5 +46,9 @@
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
+  },
+  "vim-todo-lists": {
+    "url": "https://github.com/aserebryakov/vim-todo-lists.git",
+    "revision": "11e1fc7a4491332f568d82db9538ee728ae8eb45"
   }
 }
