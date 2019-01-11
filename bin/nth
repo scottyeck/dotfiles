@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function nth () {
+  NUM=$1
+  # Print the first n items and then take the last one
+  head -n $NUM | tail -n 1
+}
+
+nth $@
