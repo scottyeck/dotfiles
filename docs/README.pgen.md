@@ -50,7 +50,7 @@ $ pgen prune
 
 I wrote this so that I could easily sync `vim` plugins installed using _Pathogen_ across machines, the idea being I could just pull down a `.pathogenrc` and run `pgen install`. From there it wasn't much extra to add an extra layer of abstraction to `add`/`remove`, etc.
 
-My _guess_ is that this tool is (or was) a not-so-great idea built in lieu of just doing actual research to solve a particular problem,but it's here and integrated into my workflow now so 🤷‍♂️.
+My _guess_ is that this tool is (or was) a not-so-great idea built in lieu of just doing actual research to solve a particular problem, but it's here and integrated into my workflow now so 🤷‍♂️.
 
 ## Further thoughts
 
