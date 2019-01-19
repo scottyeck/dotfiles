@@ -39,6 +39,10 @@
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
   },
+  "vim-orgmode": {
+    "url": "https://github.com/jceb/vim-orgmode",
+    "revision": "35e94218c12a0c063b4b3a9b48e7867578e1e13c"
+  },
   "vim-prettier": {
     "url": "https://github.com/prettier/vim-prettier",
     "revision": "f2755ec6fe465fb6af051a254d826018dcde2a50"
