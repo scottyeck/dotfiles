@@ -94,7 +94,7 @@ gsc () {
   # Format command with optional skip prefix.
   final_message="$command_type: $message"
   if $skip ; then
-    final_message="[ci skip] $final_message"
+    final_message="[skip ci] $final_message"
   fi
   if $wip ; then
     final_message="WIP - $final_message"
