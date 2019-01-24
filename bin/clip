@@ -1,0 +1,15 @@
+#!/bin/bash
+
+pr_template="pr-template"
+
+clip () {
+    local cmd=$1
+    local path=""
+    if [ $cmd = $pr_template ] ; then
+      path="./.github/PULL_REQUEST_TEMPLATE.md"
+    fi
+
+    cat $path | pbcopy
+}
+
+clip $@
