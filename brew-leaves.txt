@@ -2,7 +2,10 @@ automake
 awscli
 bash
 coreutils
+dep
+ffmpeg
 fontforge
+fswatch
 fzf
 gdrive
 hub
@@ -17,6 +20,7 @@ peco
 runit
 shpotify
 swagger-codegen
+sachaos/todoist/todoist
 ttfautohint
 wget
 yarn
