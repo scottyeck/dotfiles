@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# An extremely opinionated and non-generalized helper
+# for fetching and saving CloudWatch logs to tmp dirs
+
+flog () {
+  LAMBDA=$1
+  shift
+
+  # ensure dir exists
+  mkdir -p ~/tmp/logs/$LAMBDA
+
+  awslogs get /aws/lambda/$LAMBDA $@ > ~/tmp/logs/$LAMBDA/$(now).txt
+}
+
+flog $@
