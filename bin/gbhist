@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Gets names of most recent 10 branches excluding the current one
+#
+# Based on git-alias described here:
+# https://gist.github.com/AvnerCohen/a25a69df4e13f469c4ee
+#
+# Perform additional processing to isolate branch name from ref
+# so that the output can be piped easily.
+#
+# Ex. Checkout the most recent branch you were on.
+# ```
+# $ gbhist | nth 1 | xargs git checkout
+# ```
+
+gbhist () {
+  local LASTWORKS="$(git for-each-ref --count=10 --sort=-committerdate refs/heads/ | awk '{print $3}' | sed 's/refs\/heads\///')"
+
+  # Use `tail` to remove first line since that is the current branch
+  echo $LASTWORKS | tr ' ' '\n' | tail -n +2
+}
+
+
+gbhist
