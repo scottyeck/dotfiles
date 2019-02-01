@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# This should really be consolidated in a flag somewhere in the `ghbhist` tool
+# but in lieue of more work, why not just do this.
+
+gblast () {
+  gbhist | nth 1
+}
+
+gblast

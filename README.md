@@ -18,6 +18,6 @@ Read up on these CLI helpers I use:
 
 ## TODO:
 
-- [ ] Clean up output of `git lastworks` alias or port to a script for better customization.
+- [ ] Consolidate `gbhist` and `gblast`
 - [ ] Add `brew-leaves` to init.
 - [ ] Complete CLI tool docs.
