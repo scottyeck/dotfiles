@@ -8,6 +8,7 @@
   "dependencies": {
     "hbs-cli": "1.2.0",
     "http-server": "0.11.1",
+    "pomo": "1.1.1",
     "tinypng-cli": "0.0.7",
     "tldr": "3.2.5",
     "tree-cli": "0.4.12",
