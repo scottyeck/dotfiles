@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./config/shell/init.sh
+./rc/init.sh

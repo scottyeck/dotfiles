@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./config/shell/clean.sh
+./rc/clean.sh
 
