@@ -3,16 +3,17 @@
 TEMPLATE_PATH="./.github/PULL_REQUEST_TEMPLATE.md"
 
 pullr () {
-  local command="hub pull-request"
+  local cmd="hub pull-request"
 
   if [ -s $TEMPLATE_PATH ] ; then
     echo "Using pull-request template."
-    cmd="$command -e -F $TEMPLATE_PATH"
+    cmd="$cmd -e -F $TEMPLATE_PATH"
   else
     echo "No pull-request template found."
   fi
 
-  eval $command
+  echo "Running cmd - $cmd"
+  eval $cmd
 }
 
 pullr
