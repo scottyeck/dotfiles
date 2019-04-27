@@ -13,11 +13,15 @@
   },
   "nerdtree": {
     "url": "https://github.com/scrooloose/nerdtree",
-    "revision": "b89de09810b646ec2107160db3af9e530d20446c"
+    "revision": "7513f256aa1d59b6a749cefe5ac505375b1b8a6a"
   },
   "nerdtree-git-plugin": {
     "url": "git@github.com:Xuyuanp/nerdtree-git-plugin.git",
     "revision": "6a9b3122cb89b3a45ec444f9787a895125aca8aa"
+  },
+  "ranger.vim": {
+    "url": "https://github.com/francoiscabrol/ranger.vim",
+    "revision": "e8963d5b1ea0d42f1706bc5442290d68b0f731bd"
   },
   "sonicpi.vim": {
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
