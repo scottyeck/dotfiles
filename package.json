@@ -6,6 +6,7 @@
   "author": "Scotty Eckenthal <scott.eckenthal@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "6.26.0",
     "hbs-cli": "1.2.0",
     "http-server": "0.11.1",
     "pomo": "1.1.1",
