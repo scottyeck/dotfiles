@@ -15,6 +15,9 @@ PATH="$PATH:$HOME/git/me/bag-of-tricks/bin"
 # node_modules
 PATH="$PATH:$HOME/git/me/bag-of-tricks/node_modules/.bin"
 
+# cargo
+PATH="$PATH:$HOME/.cargo/bin"
+
 export PATH
 export EDITOR='vim'
 
