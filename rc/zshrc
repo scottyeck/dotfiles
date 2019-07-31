@@ -23,7 +23,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias gcur='echo $(git_current_branch)'
 
- Base vi mode configuration
+# Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html
 
 bindkey -v
