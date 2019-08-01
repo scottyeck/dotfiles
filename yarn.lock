@@ -42,6 +42,11 @@ ansi-styles@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-1.0.0.tgz#cb102df1c56f5123eab8b67cd7b98027a0279178"
 
+any-promise@^1.1.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/any-promise/-/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
+  integrity sha1-q8av7tzqUugJzcA3au0845Y10X8=
+
 any-promise@~0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/any-promise/-/any-promise-0.1.0.tgz#830b680aa7e56f33451d4b049f3bd8044498ee27"
@@ -408,6 +413,11 @@ boom@2.x.x:
   resolved "https://registry.npmjs.org/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
+
+bottleneck@^2.18.1:
+  version "2.19.4"
+  resolved "https://registry.npmjs.org/bottleneck/-/bottleneck-2.19.4.tgz#63c505687a0ddaf89a6f515225c75e05833bb079"
+  integrity sha512-2poBdvpAGG+dkMVKZqtDhyuMN6JviD81h89W4bfmt3UO7O60F+qf/84V0alNqL8PM1RByl4SZ1fVMu/ZvxkmcA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -1204,9 +1214,10 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-hbs-cli@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/hbs-cli/-/hbs-cli-1.2.0.tgz#eeca5b4457224e2b77b3d00a2fb0e408e1f2d336"
+hbs-cli@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/hbs-cli/-/hbs-cli-1.3.0.tgz#fe779e0b517e8181547dc200808db80ee1df401a"
+  integrity sha512-5K9frPttsxUPqmIGz5eRaihEklyTCMkgL+gTdqUSS/KduqY30G63h98RUFvSS+krkQM09BH99ZiJGfyrLw+/ew==
   dependencies:
     babel-runtime "^5.8.34"
     debug "^2.2.0"
@@ -1215,6 +1226,7 @@ hbs-cli@1.2.0:
     handlebars "^4.0.5"
     lodash.merge "^3.3.2"
     minimist "^1.2.0"
+    mkdirp-then "^1.2.0"
     resolve "^1.1.6"
 
 he@^1.1.1:
@@ -1248,6 +1260,7 @@ http-proxy@^1.8.1:
 http-server@0.11.1:
   version "0.11.1"
   resolved "https://registry.npmjs.org/http-server/-/http-server-0.11.1.tgz#2302a56a6ffef7f9abea0147d838a5e9b6b6a79b"
+  integrity sha512-6JeGDGoujJLmhjiRGlt8yK8Z9Kl0vnl/dQoQZlc4oeqaUoAKQg94NILLfrY3oWzSyFaQCVNTcKE5PZ3cH8VP9w==
   dependencies:
     colors "1.0.3"
     corser "~2.0.0"
@@ -1919,6 +1932,14 @@ mixin-deep@^1.2.0:
   dependencies:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
+
+mkdirp-then@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/mkdirp-then/-/mkdirp-then-1.2.0.tgz#a492c879ca4d873f5ee45008f8f55fd0150de3c5"
+  integrity sha1-pJLIecpNhz9e5FAI+PVf0BUN48U=
+  dependencies:
+    any-promise "^1.1.0"
+    mkdirp "^0.5.0"
 
 mkdirp@0.5.x, mkdirp@0.x.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1:
   version "0.5.1"
@@ -2922,6 +2943,7 @@ term-list@~0.2.0:
 tinypng-cli@0.0.7:
   version "0.0.7"
   resolved "https://registry.npmjs.org/tinypng-cli/-/tinypng-cli-0.0.7.tgz#02053cb58d1fc1f100777114e83dab510a7cc788"
+  integrity sha1-AgU8tY0fwfEAd3EU6D2rUQp8x4g=
   dependencies:
     array-uniq "^1.0.2"
     chalk "^1.1.3"
@@ -2931,9 +2953,10 @@ tinypng-cli@0.0.7:
     prettysize "0.0.3"
     request "^2.70.0"
 
-tldr@3.2.5:
-  version "3.2.5"
-  resolved "https://registry.npmjs.org/tldr/-/tldr-3.2.5.tgz#8eb6573d4c6e7689b58d7abe482736764f9b8400"
+tldr@3.2.7:
+  version "3.2.7"
+  resolved "https://registry.npmjs.org/tldr/-/tldr-3.2.7.tgz#663ba8efb14ee1c8dacc9f06d9144001d5c28428"
+  integrity sha512-doBsf7QGSMo3YZR+KRDAgf+v/ct5cUqdy+nvIhyTXJIhYI7eFxMhvZ3mRZkSmmvVDL6INUD/Bri0jvTDvdEneQ==
   dependencies:
     chalk "^2.3.0"
     commander "^2.9.0"
@@ -2998,6 +3021,7 @@ tough-cookie@~2.4.3:
 tree-cli@0.4.12:
   version "0.4.12"
   resolved "https://registry.npmjs.org/tree-cli/-/tree-cli-0.4.12.tgz#5c3465deed4130ba4806d18a52e272dfc54d247e"
+  integrity sha1-XDRl3u1BMLpIBtGKUuJy38VNJH4=
   dependencies:
     bluebird "^3.4.6"
     chalk "^1.1.3"
@@ -3006,11 +3030,13 @@ tree-cli@0.4.12:
     meow "^3.7.0"
     object-assign "^4.1.0"
 
-trello-cli@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/trello-cli/-/trello-cli-0.2.1.tgz#d51a79d8727c27c191a10beb92817eb7d5b6de62"
+trello-cli@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/trello-cli/-/trello-cli-0.3.0.tgz#cc769ffd64cd4470fbd0aa1ced0335cebf0d3bfd"
+  integrity sha512-U2BswS6tG0xSXoE64chBTTVWPNFGAhX54g3/zNEGlZuDTj1Iu7EFGVLWqxUA8F63prdacwj13fKvGtwS0Q/mcw==
   dependencies:
     async "~0.2.9"
+    bottleneck "^2.18.1"
     colors "~0.6.2"
     limiter "^1.1.0"
     nconf "~0.6.7"
