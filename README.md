@@ -12,6 +12,7 @@ $ sh init.sh
 
 Read up on these CLI helpers I use:
 
+* [`flog`](./docs/README.flog.md)
 * [`now`](./docs/README.now.md)
 * [`nth`](./docs/README.nth.md)
 * [`pgen`](./docs/README.pgen.md)
