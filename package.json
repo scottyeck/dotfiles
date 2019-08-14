@@ -13,6 +13,7 @@
     "pomo": "1.1.1",
     "tinypng-cli": "0.0.7",
     "tldr": "3.2.7",
-    "tree-cli": "0.4.12"
+    "tree-cli": "0.4.12",
+    "urlencode-cli": "2.0.0"
   }
 }
