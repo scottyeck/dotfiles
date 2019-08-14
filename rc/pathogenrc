@@ -35,6 +35,10 @@
     "url": "git@github.com:tpope/vim-commentary.git",
     "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
   },
+  "vim-easy-align": {
+    "url": "https://github.com/junegunn/vim-easy-align",
+    "revision": "12dd6316974f71ce333e360c0260b4e1f81169c3"
+  },
   "vim-fugitive": {
     "url": "https://github.com/tpope/vim-fugitive.git",
     "revision": "5032d9ee72361dc3cfaae1a9b3353211203e443f"
