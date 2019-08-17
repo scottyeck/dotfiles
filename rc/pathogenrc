@@ -7,6 +7,10 @@
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
     "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
   },
+  "typescript-vim": {
+    "url": "https://github.com/leafgarland/typescript-vim",
+    "revision": "5a319ea5504e18215d155576c78d1b7fb8e22c8f"
+  },
   "vim-airline": {
     "url": "https://github.com/vim-airline/vim-airline",
     "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
