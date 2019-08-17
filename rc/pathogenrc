@@ -1,27 +1,7 @@
 {
-  "ale": {
-    "url": "https://github.com/w0rp/ale.git",
-    "revision": "2f9869de44cf4b9542fc79a4c4566aa268910b23"
-  },
   "ctrlp.vim": {
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
     "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
-  },
-  "neoformat": {
-    "url": "git@github.com:sbdchd/neoformat.git",
-    "revision": "2a4c1494cc947c5e9c8d1b31e96e73da7497ab3d"
-  },
-  "nerdtree": {
-    "url": "https://github.com/scrooloose/nerdtree",
-    "revision": "7513f256aa1d59b6a749cefe5ac505375b1b8a6a"
-  },
-  "nerdtree-git-plugin": {
-    "url": "git@github.com:Xuyuanp/nerdtree-git-plugin.git",
-    "revision": "6a9b3122cb89b3a45ec444f9787a895125aca8aa"
-  },
-  "ranger.vim": {
-    "url": "https://github.com/francoiscabrol/ranger.vim",
-    "revision": "e8963d5b1ea0d42f1706bc5442290d68b0f731bd"
   },
   "sonicpi.vim": {
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
@@ -31,29 +11,17 @@
     "url": "https://github.com/vim-airline/vim-airline",
     "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
   },
+  "vim-colorschemes": {
+    "url": "https://github.com/flazz/vim-colorschemes",
+    "revision": "9e7ab1cfec5d3db85aa1c4e87329fd869ecf94e9"
+  },
   "vim-commentary": {
     "url": "git@github.com:tpope/vim-commentary.git",
     "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
   },
-  "vim-easy-align": {
-    "url": "https://github.com/junegunn/vim-easy-align",
-    "revision": "12dd6316974f71ce333e360c0260b4e1f81169c3"
-  },
-  "vim-fugitive": {
-    "url": "https://github.com/tpope/vim-fugitive.git",
-    "revision": "5032d9ee72361dc3cfaae1a9b3353211203e443f"
-  },
   "vim-multiple-cursors": {
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
-  },
-  "vim-orgmode": {
-    "url": "https://github.com/jceb/vim-orgmode",
-    "revision": "35e94218c12a0c063b4b3a9b48e7867578e1e13c"
-  },
-  "vim-prettier": {
-    "url": "https://github.com/prettier/vim-prettier",
-    "revision": "f2755ec6fe465fb6af051a254d826018dcde2a50"
   },
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
