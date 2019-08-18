@@ -42,3 +42,8 @@ let g:ctrlp_dont_split = 'NERD'
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
+" ### NERDTree
+
+" Open NERDTree when vim starts up
+autocmd vimenter * NERDTree
+
