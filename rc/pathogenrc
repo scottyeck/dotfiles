@@ -28,8 +28,8 @@
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
   },
   "vim-prettier": {
-    "url": "https://github.com/prettier/vim-prettier",
-    "revision": "2de626a6013ee87cc06a3fa1cdf9191c4d36bea9"
+    "url": "https://github.com/scottyeck/vim-prettier",
+    "revision": "57e19c798cb719b28f55c1ec712c2685e1be240b"
   },
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
