@@ -36,3 +36,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " Tell CtrlP not to split when opening a file from NERDTree
 let g:ctrlp_dont_split = 'NERD'
 
+" ### vim-prettier
+
+" Enable vim-prettier to run (async) in files without requiring the "@format" doc tag
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
