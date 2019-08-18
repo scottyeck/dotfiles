@@ -27,6 +27,10 @@
     "url": "git@github.com:tpope/vim-commentary.git",
     "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
   },
+  "vim-fugitive": {
+    "url": "https://github.com/tpope/vim-fugitive",
+    "revision": "c242cb63699d8d1e4e3eb100127621d4269f557e"
+  },
   "vim-multiple-cursors": {
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
