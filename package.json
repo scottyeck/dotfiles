@@ -11,7 +11,7 @@
     "http-server": "0.11.1",
     "pomd": "2.3.4",
     "tinypng-cli": "0.0.7",
-    "tldr": "3.2.7",
+    "tldr": "^3.2.7",
     "tree-cli": "0.4.12",
     "urlencode-cli": "2.0.0"
   }
