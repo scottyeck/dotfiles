@@ -22,6 +22,7 @@ source $ZSH/oh-my-zsh.sh
 # Custom zsh configuration
 
 alias gcur='echo $(git_current_branch)'
+alias todo='todo.sh'
 
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html
