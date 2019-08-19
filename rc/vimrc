@@ -46,7 +46,8 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " TODO: Pursue setup here https://medium.com/@victormours/a-better-nerdtree-setup-3d3921abc0b9
 
 " Open NERDTree when vim starts up (unless entering a git commit)
-:autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | endif
+" https://vi.stackexchange.com/questions/15997/change-buffer-focus-on-enter
+:autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | wincmd w | endif
 
 " https://codeyarns.com/2014/05/05/how-to-highlight-current-file-in-nerdtree/
 
