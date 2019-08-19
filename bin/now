@@ -1,3 +1,23 @@
 #!/bin/bash
 
-date -u +"%Y-%m-%dT%H:%M:%SZ"
+# Constants
+date="date"
+
+shownow () {
+  date -u +"%Y-%m-%dT%H:%M:%SZ"
+}
+
+showdate () {
+  date -u +"%Y-%m-%d"
+}
+
+now () {
+  local cmd=$1
+  if [ "$cmd" = "$date" ] ; then
+    showdate "$@"
+  else
+    shownow "$@"
+  fi
+}
+
+now "$@"
