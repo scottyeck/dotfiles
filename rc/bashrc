@@ -1,8 +1,6 @@
 echo "Loading remote bash configuration"
 echo "..."
 
-export DOTFILES_PATH="$HOME/git/me/bag-of-tricks"
-
 # npm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvmCKAGES="${HOME}/.npm-packages"

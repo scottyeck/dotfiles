@@ -15,6 +15,10 @@
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
     "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
   },
+  "todo.txt-vim": {
+    "url": "https://gitlab.com/dbeniamine/todo.txt-vim.git",
+    "revision": "ba4854e3659348cedaede9340ac93280134b079e"
+  },
   "typescript-vim": {
     "url": "https://github.com/leafgarland/typescript-vim",
     "revision": "5a319ea5504e18215d155576c78d1b7fb8e22c8f"
