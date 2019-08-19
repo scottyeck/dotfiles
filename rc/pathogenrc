@@ -7,6 +7,10 @@
     "url": "git@github.com:scrooloose/nerdtree.git",
     "revision": "184fbb6ffea6dc69726b229a08153c9d08522386"
   },
+  "nerdtree-git-plugin": {
+    "url": "https://github.com/Xuyuanp/nerdtree-git-plugin",
+    "revision": "0501cdfbe3064d1f2d0987929565bccee5f5a6a5"
+  },
   "sonicpi.vim": {
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
     "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
