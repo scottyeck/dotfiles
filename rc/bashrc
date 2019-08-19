@@ -1,6 +1,8 @@
 echo "Loading remote bash configuration"
 echo "..."
 
+export DOTFILES_PATH="$HOME/git/me/bag-of-tricks"
+
 # npm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvmCKAGES="${HOME}/.npm-packages"
@@ -10,13 +12,16 @@ unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # dotfiles
-PATH="$PATH:$HOME/git/me/bag-of-tricks/bin"
+PATH="$PATH:$DOTFILES_PATH/bin"
 
 # node_modules
-PATH="$PATH:$HOME/git/me/bag-of-tricks/node_modules/.bin"
+PATH="$PATH:$DOTFILES_PATH/node_modules/.bin"
 
 # cargo
 PATH="$PATH:$HOME/.cargo/bin"
+
+# todo.txt
+export TODOTXT_CFG_FILE=$DOTFILES_PATH/rc/todo.cfg
 
 export PATH
 export EDITOR='vim'
