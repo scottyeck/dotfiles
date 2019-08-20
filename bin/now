@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# Constants
-date="date"
+# Formats
+dateFormat="date"
+
+# Flags
+dateFlagLong="--date"
+dateFlagShort="-d"
+offsetFlagLong="--offset"
+offsetFlagShort="-o"
 
 shownow () {
   date -u +"%Y-%m-%dT%H:%M:%SZ"
@@ -11,9 +17,60 @@ showdate () {
   date -u +"%Y-%m-%d"
 }
 
+# TODO: Move into common. Consolidate with gsc
+throwInvalidArgumentError () {
+  echo "now: Error - $1"
+  #TODO: write now --help
+  echo "Run 'now --help' for proper usage."
+}
+
+# TODO: Consolidate these setters. Move into common for use elsewhere.
+setFormat() {
+  local newFormat=$1
+  local existingFormat=$2
+  if ! [ -z $existingFormat ] ; then
+    throwInvalidArgumentError "Multiple format values specified."
+  fi
+  echo "$newFormat"
+}
+
+setOffset() {
+  local newOffset=$1
+  local existingOffset=$2
+  if ! [ -z $existingOffset ] ; then
+    throwInvalidArgumentError "Multiple offset values specified."
+  fi
+  echo "$newOffset"
+}
+
 now () {
-  local cmd=$1
-  if [ "$cmd" = "$date" ] ; then
+
+  # Flag management
+
+  local flagDetect=""
+  local format=""
+  local offset=""
+
+  # Break args into separate lines
+  # TODO: Split args by equals signs (maybe with straight sed s/=/ /) so that we can manage
+  #   flag detection similarly
+  arglines=$(printf '%s\n' "$@")
+  for token in $arglines; do
+
+    # Check to see if we're collecting a value corresponding to a flag
+    if [ "$flagDetect" = "$offsetFlagLong" ] || [ "$flagDetect" = "$offsetFlagShort" ] ; then
+      offset=$(setOffset $token $offset)
+      flagDetect=""
+
+    # Otherwise, we're detecting flags
+    elif [ "$token" = "$dateFlagLong" ] || [ "$token" = "$dateFlagShort" ] ; then
+      format=$(setFormat $dateFormat $format)
+    elif [ "$token" = "$offsetFlagLong" ] || [ "$token" = "$offsetFlagShort" ] ; then
+      flagDetect="$token"
+    fi
+  done
+
+  if [ "$format" = "$dateFormat" ] ; then
     showdate "$@"
   else
     shownow "$@"

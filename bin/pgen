@@ -79,6 +79,7 @@ add () {
     fi
 
     if [[ -e $bundle/$name ]] ; then
+        # TODO: Ensure plugin is installed at coorect sha
         echo "Plugin '$name' is already installed"
     else
         cd $bundle
