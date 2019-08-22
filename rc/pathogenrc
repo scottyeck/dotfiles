@@ -7,6 +7,10 @@
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
     "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
   },
+  "goyo.vim": {
+    "url": "https://github.com/junegunn/goyo.vim",
+    "revision": "6b6ed2734084fdbb6315357ddcaecf9c8e6f143d"
+  },
   "nerdtree": {
     "url": "git@github.com:scrooloose/nerdtree.git",
     "revision": "184fbb6ffea6dc69726b229a08153c9d08522386"
@@ -42,6 +46,10 @@
   "vim-fugitive": {
     "url": "https://github.com/tpope/vim-fugitive",
     "revision": "c242cb63699d8d1e4e3eb100127621d4269f557e"
+  },
+  "vim-markdown": {
+    "url": "https://github.com/plasticboy/vim-markdown",
+    "revision": "da5a7ac96f517e0fd6f886bc3fbe27156ca1f946"
   },
   "vim-multiple-cursors": {
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
