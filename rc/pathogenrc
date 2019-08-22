@@ -1,4 +1,8 @@
 {
+  "ale": {
+    "url": "https://github.com/dense-analysis/ale",
+    "revision": "73812c3e41c1c7fcf1705811f35ac4c9ccec003e"
+  },
   "ctrlp.vim": {
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
     "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
@@ -18,6 +22,10 @@
   "todo.txt-vim": {
     "url": "https://gitlab.com/dbeniamine/todo.txt-vim.git",
     "revision": "ba4854e3659348cedaede9340ac93280134b079e"
+  },
+  "typescript-vim": {
+    "url": "https://github.com/leafgarland/typescript-vim",
+    "revision": "5a319ea5504e18215d155576c78d1b7fb8e22c8f"
   },
   "vim-airline": {
     "url": "https://github.com/vim-airline/vim-airline",

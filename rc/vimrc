@@ -70,3 +70,18 @@ endfunction
 
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call s:syncTree()
+
+" ### Ale
+
+" Recommended configuration for linting / fixing
+" https://www.vimfromscratch.com/articles/setting-up-vim-for-typescript/
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tsserver', 'tslint']
+\}
+let g:ale_fixers = {
+\    'javascript': ['eslint'],
+\    'typescript': ['prettier'],
+\    'html': ['prettier']
+\}
+let g:ale_fix_on_save = 1
