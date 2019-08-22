@@ -114,6 +114,7 @@ install () {
     rc_content="$( cat $rc )"
     IFS=$'\n' lines=( $rc_content )
 
+    # TODO: Replace this garbage with use of jq
     for line in ${lines[@]} ; do
         index=$((index + 1))
         line=$( echo $line | sed 's/ //g' )
