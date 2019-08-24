@@ -55,6 +55,10 @@
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
   },
+  "vim-open-github": {
+    "url": "https://github.com/k0kubun/vim-open-github",
+    "revision": "3a7c7e0b4aa89fa51b4c1fb20c93eb92a375acd3"
+  },
   "vim-prettier": {
     "url": "https://github.com/scottyeck/vim-prettier",
     "revision": "57e19c798cb719b28f55c1ec712c2685e1be240b"
