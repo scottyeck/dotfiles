@@ -9,8 +9,11 @@ execute pathogen#infect()
 " ------------------------------
 
 syntax on
-filetype plugin indent on
 colorscheme codeschool
+
+" Enable filetype plugin detection under ~/.vim/ftplugin
+" https://www.gilesorr.com/blog/vim-ftplugin.html
+filetype plugin indent on
 
 " Line numbers
 set number
