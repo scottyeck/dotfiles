@@ -7,3 +7,8 @@ ln -sf $SCRIPTPATH/vimrc ~/.vimrc
 ln -sf $SCRIPTPATH/pathogenrc ~/.pathogenrc
 ln -sf $SCRIPTPATH/bashrc ~/.bashrc
 ln -sf $SCRIPTPATH/zshrc ~/.zshrc
+
+# Install pathogen
+
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
