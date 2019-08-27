@@ -41,6 +41,22 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " Tell CtrlP not to split when opening a file from NERDTree
 let g:ctrlp_dont_split = 'NERD'
 
+" Ensure CtrlP opens file in a writeable buffer (not NERDTree)
+" https://vi.stackexchange.com/questions/10016/stop-ctrlp-from-opening-in-nerdtree
+
+function! CtrlPCommand()
+    let c = 0
+    let wincount = winnr('$')
+    " Don't open it here if current buffer is not writable (e.g. NERDTree)
+    while !empty(getbufvar(+expand("<abuf>"), "&buftype")) && c < wincount
+        exec 'wincmd w'
+        let c = c + 1
+    endwhile
+    exec 'CtrlP'
+endfunction
+
+let g:ctrlp_cmd = 'call CtrlPCommand()'
+
 " ### vim-prettier
 
 " Enable vim-prettier to run (async) in files without requiring the "@format" doc tag
