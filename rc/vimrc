@@ -72,7 +72,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " Open NERDTree when vim starts up (unless entering a git commit or todo.txt)
 " https://vi.stackexchange.com/questions/15997/change-buffer-focus-on-enter
 let file_name = expand('%:t')
-:autocmd VimEnter * if (&filetype !=# 'gitcommit') && (file_name !=# 'todo.txt') && (file_name !=# 'PULLREQ_EDITMSG') | NERDTree | wincmd w | endif
+:autocmd VimEnter * if (&filetype !=# 'gitcommit') && (file_name !=# 'todo.txt') && (file_name !=# 'git-rebase-todo') && (file_name !=# 'PULLREQ_EDITMSG') | NERDTree | wincmd w | endif
 
 " https://codeyarns.com/2014/05/05/how-to-highlight-current-file-in-nerdtree/
 
