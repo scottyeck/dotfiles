@@ -48,8 +48,8 @@
     "revision": "b97a9abe29c39c4e1a45ae199dbb470df362f538"
   },
   "vim-markdown": {
-    "url": "https://github.com/plasticboy/vim-markdown",
-    "revision": "da5a7ac96f517e0fd6f886bc3fbe27156ca1f946"
+    "url": "git@github.com:gabrielelana/vim-markdown.git",
+    "revision": "d18363153771bdd9c932a217611326c5ce4fd812"
   },
   "vim-multiple-cursors": {
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
