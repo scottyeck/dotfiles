@@ -28,6 +28,16 @@ set splitright
 
 let maplocalleader="\<space>"
 
+" Highlight line in insert mode
+" https://stackoverflow.com/a/6489348/2423549
+" :autocmd InsertEnter * set cul
+" :autocmd InsertLeave * set nocul
+
+" Change cursor shape when switching between insert / normal mode
+" https://stackoverflow.com/a/30199177/2423549
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
 " ------------------------------
 " ## Plugins
 " ------------------------------
