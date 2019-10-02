@@ -9,17 +9,18 @@ current="current"
 
 switch() {
   local slug=$1
-  cp ~/.aws/credentials-$slug ~/.aws/credentials
+  rm -r ~/.aws
+  cp -r ~/.aws-$slug ~/.aws
   echo "Successfully switched to credentials for - $slug"
 }
 
 list() {
-  ls ~/.aws/ | grep credentials- | sed 's/credentials-//'
+  ls -lah ~ | awk '{print $9}' | grep ".aws-" | sed 's/\.aws-//'
 }
 
 current() {
   for slug in $( list ); do
-    if cmp -s ~/.aws/credentials ~/.aws/credentials-$slug ; then
+    if cmp -s ~/.aws/credentials ~/.aws-$slug/credentials ; then
       echo $slug
       exit 0
     fi
