@@ -20,6 +20,7 @@
     - TODO: Add karabiner rc to dotfiles
   - Skitch
   - Slack
+    - https://slack.com/downloads/instructions/mac
   - Figma
   - Vs Code
     - Prettier / eslint / quit thing / project manager
