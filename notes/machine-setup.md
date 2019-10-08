@@ -1,0 +1,44 @@
+# machine setup
+
+- Download
+  - Chrome
+    - Login w/ personal email. Extensions will follow.
+    - Settings > Default Browser > Make default
+  - Divvy
+    - License from email
+    - Register name as "Scott Eckenthal"
+    - Settings > General 
+      - Check Start Divvy at Login
+      - Use global shortcut: Cmd+Shift+Space
+    - System Prefs > Security & Privacy > Privacy > Accessibility > Allow Divvy access
+    - L / R / A / F shortcuts
+  - Alfred
+    - TODO: Maybe not?
+  - Karabiner Elements
+    - Remaps Caps Lock to Escape
+    - Remaps Option / Cmd keys for external keyboard
+    - TODO: Add karabiner rc to dotfiles
+  - Skitch
+  - Slack
+  - Figma
+  - Vs Code
+    - Prettier / eslint / quit thing / project manager
+  - iTerm 2
+    - TODO: Install oh-my-zsh
+    - TODO: Change to zsh
+  - Spotify
+
+- System Prefs
+  - Dock
+    - Shrink Size.
+    - Check "Automatically hide and show the Dock"
+  - Trackpad
+    - Tap to click
+  - Three-finger drag
+    - Accessibility > Mouse & Trackpad > Trackpad Options > Enable Dragging - Select "three finger drag"
+    - @see https://www.makeuseof.com/tag/three-finger-drag-mac/
+  - Resolution
+    - Displays > Display > Scaled - Choose "More space"
+  - Bluetooth
+    - Add external trackpad
+    - Add headphones
