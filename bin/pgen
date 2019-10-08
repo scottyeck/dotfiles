@@ -29,7 +29,11 @@ getPluginName () {
 
 getInstalledPluginUrl () {
     local name=$1
-    local url=$(cat $bundle/$name/.git/config | grep 'url' | sed 's/url =//' | sed 's/ //g')
+
+    # Last entry here removes a non-standard space char from a git-config by literally
+    # copy+pasting it. Apparently this is what sed likes. :shrug:
+    # @see https://stackoverflow.com/a/7558627
+    local url=$(cat $bundle/$name/.git/config | grep 'url' | sed 's/url =//' | sed 's/ //g' | sed 's/	//g')
     echo $url
 }
 
