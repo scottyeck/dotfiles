@@ -73,6 +73,9 @@ add () {
     local repo=$1
     local name=$( getPluginName $repo )
 
+    # Ensure our target dir exists
+    mkdir -p $bundle
+
     local sha=""
     if ! [ -z "$2" ] ; then
         sha=$2
