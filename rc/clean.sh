@@ -12,5 +12,6 @@ maybeUnlink ~/.vimrc
 maybeUnlink ~/.pathogenrc
 maybeUnlink ~/.bashrc
 maybeUnlink ~/.zshrc
+maybeUnlink ~/.gitconfig
 
 # TODO: Destroy pathogen deps under ~/.vim
