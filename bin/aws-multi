@@ -20,7 +20,9 @@ list() {
 
 current() {
   for slug in $( list ); do
-    if cmp -s ~/.aws/credentials ~/.aws-$slug/credentials ; then
+    # We can't compare credentials because it contains an MFA token,
+    # so we rely on comparing config instead.
+    if cmp -s ~/.aws/config ~/.aws-$slug/config; then
       echo $slug
       exit 0
     fi
