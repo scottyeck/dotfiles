@@ -28,6 +28,8 @@
     - TODO: Install oh-my-zsh
     - TODO: Change to zsh
   - Spotify
+  - Fl.ux
+    - https://justgetflux.com/news/pages/macquickstart/
 
 - System Prefs
   - Dock
