@@ -22,3 +22,6 @@ Read up on these CLI helpers I use:
 - [ ] Consolidate `gbhist` and `gblast`
 - [ ] Add `brew-leaves` to init.
 - [ ] Complete CLI tool docs.
+- [ ] Tool-specific setup / teardown fns.
+- [ ] Rename this thing to dotfiles.
+- [ ] Deal with relative paths internal to setup / teardown.
