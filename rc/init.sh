@@ -17,6 +17,10 @@ ln -sf $SCRIPT_PATH/init.vim $CONFIG_PATH/nvim/init.vim
 mkdir -p $TODO_CONFIG_PATH
 ln -sf $SCRIPT_PATH/todo.cfg $TODO_CONFIG_PATH/todo.cfg
 
+# Setup vim lang-specific settings
+mkdir -p $VIM_CONFIG_PATH
+ln -sf $SCRIPT_PATH/ftplugin $VIM_CONFIG_PATH/ftplugin
+
 # Install pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim

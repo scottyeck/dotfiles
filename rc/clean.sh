@@ -17,5 +17,6 @@ maybeUnlink ~/.zshrc
 maybeUnlink ~/.gitconfig
 maybeUnlink $CONFIG_PATH/nvim/init.vim
 maybeUnlink $TODO_CONFIG_PATH/todo.cfg
+maybeUnlink $VIM_CONFIG_PATH/ftplugin
 
 # TODO: Destroy pathogen deps under ~/.vim
