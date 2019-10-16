@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./common.sh
+
 function maybeUnlink () {
   FILE=$1
   if [ -f $FILE ]; then
@@ -13,5 +15,7 @@ maybeUnlink ~/.pathogenrc
 maybeUnlink ~/.bashrc
 maybeUnlink ~/.zshrc
 maybeUnlink ~/.gitconfig
+maybeUnlink $CONFIG_PATH/nvim/init.vim
+maybeUnlink $TODO_CONFIG_PATH/todo.cfg
 
 # TODO: Destroy pathogen deps under ~/.vim
