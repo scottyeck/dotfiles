@@ -1,19 +1,24 @@
 #!/bin/bash
 
-SCRIPTPATH="$( cd "$( dirname $0 )" ; pwd )"
+SCRIPT_PATH="$( cd "$( dirname $0 )" ; pwd )"
 
 # Symlink homedir root rc's
-ln -sf $SCRIPTPATH/vimrc ~/.vimrc
-ln -sf $SCRIPTPATH/pathogenrc ~/.pathogenrc
-ln -sf $SCRIPTPATH/bashrc ~/.bashrc
-ln -sf $SCRIPTPATH/zshrc ~/.zshrc
-ln -sf $SCRIPTPATH/gitconfig ~/.gitconfig
+ln -sf $SCRIPT_PATH/vimrc ~/.vimrc
+ln -sf $SCRIPT_PATH/pathogenrc ~/.pathogenrc
+ln -sf $SCRIPT_PATH/bashrc ~/.bashrc
+ln -sf $SCRIPT_PATH/zshrc ~/.zshrc
+ln -sf $SCRIPT_PATH/gitconfig ~/.gitconfig
 
-CONFIGPATH=~/.config
+CONFIG_PATH=~/.config
 
 # Setup homedir config rc's
-mkdir -p $CONFIGPATH/nvim
-ln -sf $SCRIPTPATH/init.vim $CONFIGPATH/nvim/init.vim
+mkdir -p $CONFIG_PATH/nvim
+ln -sf $SCRIPT_PATH/init.vim $CONFIG_PATH/nvim/init.vim
+
+# Setup todo.txt config
+TODO_CONFIG_PATH=~/.todo
+mkdir -p $TODO_CONFIG_PATH
+ln -sf $SCRIPT_PATH/todo.cfg $TODO_CONFIG_PATH/todo.cfg
 
 # Install pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
