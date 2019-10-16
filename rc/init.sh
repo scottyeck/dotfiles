@@ -20,3 +20,7 @@ ln -sf $SCRIPT_PATH/todo.cfg $TODO_CONFIG_PATH/todo.cfg
 # Install pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+# TODO:
+# Set up setup / teardown fns for each rc rather than having
+# everything littered together here.
