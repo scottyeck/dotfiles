@@ -1,0 +1,12 @@
+#!/bin/bash
+
+scripts="scripts"
+
+pjson () {
+  local cmd=$1
+  if [ $cmd = $scripts ] ; then
+    cat package.json | jq '.scripts'
+  fi
+}
+
+pjson "$@"
