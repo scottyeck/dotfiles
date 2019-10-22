@@ -28,6 +28,10 @@ set splitright
 
 let maplocalleader="\<space>"
 
+" Specify spellcheck dict location
+" https://www.ostechnix.com/use-spell-check-feature-vim-text-editor/
+set spellfile=~/.vim/spell/en.utf8-.add
+
 " Highlight line in insert mode
 " https://stackoverflow.com/a/6489348/2423549
 " :autocmd InsertEnter * set cul
