@@ -19,7 +19,7 @@ Then:
 
 ```sh
 $ cat some-file.txt | nth 4
-# > Daniel Day Lewis
+# > 4. Daniel Day Lewis
 ```
 
 Note that we index at 1. This is to keep in line with printing the nth word in a line via `awk`.
