@@ -1,0 +1,13 @@
+#!/bin/bash
+
+annoy () {
+  say "task startingn"
+  if  eval $@ ; then
+    say "task complete"
+  else
+    say "task failed"
+  fi
+}
+
+annoy $@
+
