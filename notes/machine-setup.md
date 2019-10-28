@@ -30,6 +30,8 @@
   - Spotify
   - Fl.ux
     - https://justgetflux.com/news/pages/macquickstart/
+  - SelfControl
+    - https://selfcontrolapp.com/
 
 - System Prefs
   - Dock
