@@ -24,6 +24,10 @@ PATH="$PATH:$HOME/.cargo/bin"
 # todo.txt
 export TODOTXT_CFG_FILE=$DOTFILES_PATH/rc/todo.cfg
 
+# Ensure we're using the corect ctags
+# https://www.freecodecamp.org/news/make-your-vim-smarter-using-ctrlp-and-ctags-846fc12178a4/
+alias ctags="$(brew --prefix)/bin/ctags"
+
 export PATH
 export EDITOR='vim'
 
