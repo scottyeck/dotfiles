@@ -1,7 +1,7 @@
 #!/bin/bash
 
 annoy () {
-  say "task startingn"
+  say "task starting"
   if  eval $@ ; then
     say "task complete"
   else
