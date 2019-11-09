@@ -27,6 +27,9 @@ alias gcur='echo $(git_current_branch)'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 
+# Mimics existing gcn! but without amend
+alias gcn='git commit -v --no-edit'
+
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html
 
