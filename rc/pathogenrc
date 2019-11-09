@@ -71,6 +71,10 @@
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
   },
+  "vim-todo-highlight": {
+    "url": "https://github.com/sakshamgupta05/vim-todo-highlight",
+    "revision": "f63723ef9f3a1cf0a3fd63b84b161c287fea398f"
+  },
   "vim-todo-lists": {
     "url": "https://github.com/aserebryakov/vim-todo-lists.git",
     "revision": "11e1fc7a4491332f568d82db9538ee728ae8eb45"
