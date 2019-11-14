@@ -111,17 +111,10 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call s:syncTree()
 
-" ### Ale
+" ### coc
 
-" Recommended configuration for linting / fixing
-" https://www.vimfromscratch.com/articles/setting-up-vim-for-typescript/
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tsserver', 'tslint']
-\}
-let g:ale_fixers = {
-\    'javascript': ['eslint'],
-\    'typescript': ['prettier'],
-\    'html': ['prettier']
-\}
-let g:ale_fix_on_save = 1
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)

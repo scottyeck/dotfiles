@@ -1,7 +1,7 @@
 {
-  "ale": {
-    "url": "https://github.com/dense-analysis/ale",
-    "revision": "73812c3e41c1c7fcf1705811f35ac4c9ccec003e"
+  "coc.nvim": {
+    "url": "git@github.com:neoclide/coc.nvim.git",
+    "revision": "812e184dc7b2068fa64c06df41be3a7432914179"
   },
   "ctrlp.vim": {
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
@@ -50,6 +50,10 @@
   "vim-github-hub": {
     "url": "git@github.com:jez/vim-github-hub.git",
     "revision": "158551fa56e019774b6aed7084c0802c4db88436"
+  },
+  "vim-jsx-typescript": {
+    "url": "git@github.com:peitalin/vim-jsx-typescript.git",
+    "revision": "f84b2c9796016206051e14b9d5c7a0ab7e2bde2c"
   },
   "vim-markdown": {
     "url": "git@github.com:gabrielelana/vim-markdown.git",

@@ -26,6 +26,7 @@ source $DOTFILES_PATH/rc/todo.cfg
 alias gcur='echo $(git_current_branch)'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
+alias vim='nvim'
 
 # Mimics existing gcn! but without amend
 alias gcn='git commit -v --no-edit'

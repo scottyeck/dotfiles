@@ -22,6 +22,12 @@ mkdir -p $VIM_CONFIG_PATH
 ln -sf $SCRIPT_PATH/ftplugin $VIM_CONFIG_PATH/ftplugin
 ln -sf $SCRIPT_PATH/spell $VIM_CONFIG_PATH/spell
 
+# Setup coc config
+mkdir -p $CONFIG_PATH/coc/extensions
+ln -sf $SCRIPT_PATH/coc.json $CONFIG_PATH/coc/extensions/package.json
+echo "coc extensions configured. Please install by running:"
+echo "cd $CONFIG_PATH/coc/extensions && npm install"
+
 # Install pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
