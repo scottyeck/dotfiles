@@ -25,11 +25,20 @@ PATH="$PATH:$HOME/.cargo/bin"
 export TODOTXT_CFG_FILE=$DOTFILES_PATH/rc/todo.cfg
 
 # Ensure we're using the corect ctags
-# https://www.freecodecamp.org/news/make-your-vim-smarter-using-ctrlp-and-ctags-846fc12178a4/
+# @see https://www.freecodecamp.org/news/make-your-vim-smarter-using-ctrlp-and-ctags-846fc12178a4/
 alias ctags="$(brew --prefix)/bin/ctags"
 
 export PATH
 export EDITOR='vim'
+
+# If vim is launched inside a Neovim terminal, launch
+# vanilla vim and not neovim.
+# @see https://github.com/neovim/neovim/issues/9960#issuecomment-488269954
+if [[ -n "${NVIM_LISTEN_ADDRESS}" ]]
+then
+    # TODO update the path each time Vim has a major upgrade
+    export VIMRUNTIME=/usr/share/vim/vim81
+fi
 
 LOCAL_CONFIG_FILE="/Users/$USER/.localrc"
 
