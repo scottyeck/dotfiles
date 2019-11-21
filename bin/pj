@@ -1,11 +1,17 @@
 #!/bin/bash
 
 scripts="scripts"
+deps="deps"
+dev="dev"
 
 pj () {
   local cmd=$1
   if [ $cmd = $scripts ] ; then
     cat package.json | jq '.scripts'
+  elif [ $cmd = $deps ] ; then
+    cat package.json | jq '.dependencies'
+  elif [ $cmd = $dev ] ; then
+    cat package.json | jq '.devDependencies'
   fi
 }
 
