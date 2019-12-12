@@ -65,5 +65,11 @@ export KEYTIMEOUT=1
 
 source ~/.bashrc
 
+# Zsh execution of bash prompt helper
+# @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
+# @see https://superuser.com/questions/735660/whats-the-zsh-equivalent-of-bashs-prompt-command
+prmptcmd() { eval "$PROMPT_COMMAND" }
+precmd_functions=(prmptcmd)
+
 echo "Successfully loaded zsh configuration"
 echo "..."

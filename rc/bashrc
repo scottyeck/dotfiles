@@ -31,6 +31,11 @@ alias ctags="$(brew --prefix)/bin/ctags"
 export PATH
 export EDITOR='vim'
 
+# Log bash history
+# @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
+mkdir -p ~/.logs
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+
 # If vim is launched inside a Neovim terminal, launch
 # vanilla vim and not neovim.
 # @see https://github.com/neovim/neovim/issues/9960#issuecomment-488269954
