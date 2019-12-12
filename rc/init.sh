@@ -35,3 +35,7 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 # TODO:
 # Set up setup / teardown fns for each rc rather than having
 # everything littered together here.
+
+# TODO:
+# Manage Dropbox symlinks
+
