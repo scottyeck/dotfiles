@@ -7,23 +7,13 @@ getCoreAudioPid () {
 
 restartAudio () {
   OLD_PID="$(getCoreAudioPid)"
-  NEW_PID=$OLD_PID
-  ATTEMPT=0
-
-  while [ "$NEW_PID" == "$OLD_PID" ]; do
-    kill -9 $OLD_PID
-
-    if [ $ATTEMPT -ge "5" ]; then
-      echo "Unable to restart core-audio. (You may wish to retry as sudo.)"
-      exit 1
-    fi
-
-    sleep 1
-    ATTEMPT=$((ATTEMPT + 1))
-    NEW_PID="$(getCoreAudioPid)"
-  done
-
-  echo "Successfully restarted core-audio - Re-crank your volume!! 🔈"
+  kill -9 $OLD_PID
+  NEW_PID="$(getCoreAudioPid)"
+  if [ "$OLD_PID" == "$NEW_PID" ]; then
+    echo "Unable to restart core-audio. (You may wish to retry as sudo.)"
+  else
+    echo "Successfully restarted core-audio - Re-crank your volume!! 🔈"
+  fi
 }
 
 restartAudio
