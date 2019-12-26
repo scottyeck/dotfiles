@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Extremely opinionated helper utililty used to convert markdown
+# files to formatted .docx files using pandoc. Basically just
+# encapsulates options I use all the time.
+pdoc () {
+  # Ensure ref docs dir is configured.
+  if [ -z ${PANDOC_REF_DOCS_DIR} ]; then
+    echo "Warning: No configuration set for pandoc reference docs."
+  fi
+
+  local MD_FILE=$1
+  # Keep basename and just change extension.
+  local DOCX_FILE="$(echo $MD_FILE | sed 's/\.md/\.docx/')"
+
+  # Specify alt markdown formatter to disable bookmark generation
+  # @see https://github.com/jgm/pandoc/issues/3476#issuecomment-468271784
+  local FROM_FORMAT="markdown-auto_identifiers"
+  local TO_FORMAT="docx"
+
+  pandoc $MD_FILE \
+    --from $FROM_FORMAT \
+    --to $TO_FORMAT \
+    --output $DOCX_FILE \
+    --reference-doc $PANDOC_REF_DOCS_DIR/ref.docx
+}
+
+pdoc "$@"
