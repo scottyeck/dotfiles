@@ -8,6 +8,7 @@ getCoreAudioPid () {
 restartAudio () {
   OLD_PID="$(getCoreAudioPid)"
   kill -9 $OLD_PID
+  sleep 1
   NEW_PID="$(getCoreAudioPid)"
   if [ "$OLD_PID" == "$NEW_PID" ]; then
     echo "Unable to restart core-audio. (You may wish to retry as sudo.)"
