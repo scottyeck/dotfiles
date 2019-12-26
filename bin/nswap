@@ -1,10 +1,18 @@
 #!/bin/bash
 
+# Swaps names of two files.
+#
+# Usage:
+#   $ nswap path/to/file1.txt path/to/file2.txt
+#
 nswap () {
   local FILE_A=$1
   local FILE_B=$2
   
+  # Hash contents to generate temp name
   local TMP_NAME=$(cat $FILE_A | openssl sha256)
+
+  # Switcheroo
   mv $FILE_A $TMP_NAME
   mv $FILE_B $FILE_A
   mv $TMP_NAME $FILE_B
