@@ -75,6 +75,10 @@
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
   },
+  "vim-surround": {
+    "url": "git@github.com:tpope/vim-surround.git",
+    "revision": "f51a26d3710629d031806305b6c8727189cd1935"
+  },
   "vim-todo-highlight": {
     "url": "https://github.com/sakshamgupta05/vim-todo-highlight",
     "revision": "f63723ef9f3a1cf0a3fd63b84b161c287fea398f"
