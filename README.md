@@ -19,6 +19,7 @@ Read up on these CLI helpers I use:
 
 ## TODO:
 
+- [ ] Add pre-commit hook that alphabetizes spells
 - [ ] Add `brew-leaves` to init.
 - [ ] Add notes about [shpotify](https://github.com/hnarayanan/shpotify) _somewhere_.
 - [ ] Complete CLI tool docs.
