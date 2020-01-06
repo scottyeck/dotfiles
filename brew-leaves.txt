@@ -1,3 +1,4 @@
+cocoapods
 ctags
 dnote/dnote/dnote
 fzf
@@ -7,7 +8,9 @@ imagemagick
 jq
 maven
 mdp
+moreutils
 neovim
+pandoc
 pkg-config
 the_silver_searcher
 tig
