@@ -35,6 +35,10 @@
     "url": "git@github.com:tpope/vim-commentary.git",
     "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
   },
+  "vim-eunuch": {
+    "url": "git@github.com:tpope/vim-eunuch.git",
+    "revision": "75efe06ccc63b7cd50b193b99cce83e3ad3e60cb"
+  },
   "vim-fugitive": {
     "url": "git@github.com:tpope/vim-fugitive.git",
     "revision": "b97a9abe29c39c4e1a45ae199dbb470df362f538"
@@ -78,5 +82,9 @@
   "vim-todo-lists": {
     "url": "https://github.com/aserebryakov/vim-todo-lists.git",
     "revision": "11e1fc7a4491332f568d82db9538ee728ae8eb45"
+  },
+  "vim-vinegar": {
+    "url": "git@github.com:tpope/vim-vinegar.git",
+    "revision": "fcce70f1403ba4101668a4c960c577bddbd00f06"
   }
 }
