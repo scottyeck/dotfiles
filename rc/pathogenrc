@@ -1,8 +1,4 @@
 {
-  "coc.nvim": {
-    "url": "git@github.com:neoclide/coc.nvim.git",
-    "revision": "812e184dc7b2068fa64c06df41be3a7432914179"
-  },
   "ctrlp.vim": {
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
     "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
