@@ -7,10 +7,6 @@
     "url": "https://github.com/junegunn/goyo.vim",
     "revision": "6b6ed2734084fdbb6315357ddcaecf9c8e6f143d"
   },
-  "nerdtree": {
-    "url": "git@github.com:scrooloose/nerdtree.git",
-    "revision": "184fbb6ffea6dc69726b229a08153c9d08522386"
-  },
   "nerdtree-git-plugin": {
     "url": "https://github.com/Xuyuanp/nerdtree-git-plugin",
     "revision": "0501cdfbe3064d1f2d0987929565bccee5f5a6a5"
