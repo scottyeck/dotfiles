@@ -2,6 +2,7 @@ cocoapods
 ctags
 dnote/dnote/dnote
 fzf
+github/gh/gh
 gnumeric
 hub
 imagemagick
