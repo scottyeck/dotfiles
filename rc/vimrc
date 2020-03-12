@@ -1,4 +1,8 @@
 execute pathogen#infect()
+syntax on
+" Enable filetype plugin detection under ~/.vim/ftplugin
+" https://www.gilesorr.com/blog/vim-ftplugin.html
+filetype plugin indent on
 
 " # .vimrc
 
@@ -8,15 +12,10 @@ execute pathogen#infect()
 " ## Settings
 " ------------------------------
 
-syntax on
 colorscheme codeschool
 
 " Use zsh as shell inside vim
 set shell=/bin/zsh
-
-" Enable filetype plugin detection under ~/.vim/ftplugin
-" https://www.gilesorr.com/blog/vim-ftplugin.html
-filetype plugin indent on
 
 " Line numbers
 set number
