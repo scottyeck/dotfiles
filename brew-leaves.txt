@@ -4,6 +4,8 @@ dnote/dnote/dnote
 fzf
 github/gh/gh
 gnumeric
+gource
+graphviz
 hub
 imagemagick
 jq
@@ -17,4 +19,5 @@ the_silver_searcher
 tig
 todo-txt
 watchman
+xsv
 yarn

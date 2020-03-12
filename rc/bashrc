@@ -21,6 +21,11 @@ PATH="$PATH:$DOTFILES_PATH/node_modules/.bin"
 # cargo
 PATH="$PATH:$HOME/.cargo/bin"
 
+# sqlite, via brew
+# > sqlite is keg-only, which means it was not symlinked into /usr/local,
+# > because macOS provides an older sqlite3.
+PATH="$PATH:/usr/local/opt/sqlite/bin"
+
 # todo.txt
 export TODOTXT_CFG_FILE=$DOTFILES_PATH/rc/todo.cfg
 
