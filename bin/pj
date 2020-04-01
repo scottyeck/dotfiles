@@ -5,13 +5,14 @@ deps="deps"
 dev="dev"
 
 pj () {
-  local cmd=$1
+  local path=$1
+  local cmd=$2
   if [ $cmd = $scripts ] ; then
-    cat package.json | jq '.scripts'
+    cat $path/package.json | jq '.scripts'
   elif [ $cmd = $deps ] ; then
-    cat package.json | jq '.dependencies'
+    cat $path/package.json | jq '.dependencies'
   elif [ $cmd = $dev ] ; then
-    cat package.json | jq '.devDependencies'
+    cat $path/package.json | jq '.devDependencies'
   fi
 }
 
