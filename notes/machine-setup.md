@@ -32,6 +32,8 @@
     - https://justgetflux.com/news/pages/macquickstart/
   - SelfControl
     - https://selfcontrolapp.com/
+  - VLC
+    - https://get.videolan.org/
 
 - System Prefs
   - Dock
