@@ -32,6 +32,11 @@ alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 alias vim='nvim'
 
+# Allows for cd'ing to frequently used directories
+# https://thoughtbot.com/blog/cding-to-frequently-used-directories-in-zsh
+setopt auto_cd
+cdpath=($HOME/git/fabric $HOME/git/me)
+
 # Mimics existing gcn! but without amend
 alias gcn='git commit -v --no-edit'
 
