@@ -18,7 +18,7 @@ colorscheme codeschool
 set shell=/bin/zsh
 
 " Line numbers
-set number
+set relativenumber
 
 " Tab size
 set tabstop=2
@@ -28,7 +28,7 @@ set expandtab
 " Open vertical splits to the right, not left
 set splitright
 
-let maplocalleader="\<space>"
+let mapleader="\<space>"
 
 " Specify spellcheck dict location
 " https://www.ostechnix.com/use-spell-check-feature-vim-text-editor/
