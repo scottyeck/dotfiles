@@ -55,6 +55,10 @@
     "url": "git@github.com:peitalin/vim-jsx-typescript.git",
     "revision": "f84b2c9796016206051e14b9d5c7a0ab7e2bde2c"
   },
+  "vim-markdown": {
+    "url": "git@github.com:gabrielelana/vim-markdown.git",
+    "revision": "772de97c97d37e5e22d7bd6884b17b858a687bc2"
+  },
   "vim-multiple-cursors": {
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
@@ -66,6 +70,10 @@
   "vim-prettier": {
     "url": "https://github.com/scottyeck/vim-prettier",
     "revision": "57e19c798cb719b28f55c1ec712c2685e1be240b"
+  },
+  "vim-repeat": {
+    "url": "git@github.com:tpope/vim-repeat.git",
+    "revision": "c947ad2b6a16983724a0153bdf7f66d7a80a32ca"
   },
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
