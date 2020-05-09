@@ -1,4 +1,8 @@
 {
+  "CamelCaseMotion": {
+    "url": "git@github.com:bkad/CamelCaseMotion.git",
+    "revision": "de439d7c06cffd0839a29045a103fe4b44b15cdc"
+  },
   "ctrlp.vim": {
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
     "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
