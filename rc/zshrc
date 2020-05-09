@@ -10,21 +10,8 @@ export DOTFILES_PATH="$HOME/git/me/bag-of-tricks"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simple"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  copydir
-  copyfile
-  git
-  osx
-  yarn
-)
-
 source $ZSH/oh-my-zsh.sh
-source $DOTFILES_PATH/rc/todo.cfg
-
+source $DOTFILES_PATH/rc/todo.cfg 
 # Custom zsh configuration
 
 alias gcur='echo $(git_current_branch)'

@@ -7,6 +7,7 @@ ln -sf $SCRIPT_PATH/vimrc ~/.vimrc
 ln -sf $SCRIPT_PATH/pathogenrc ~/.pathogenrc
 ln -sf $SCRIPT_PATH/bashrc ~/.bashrc
 ln -sf $SCRIPT_PATH/zshrc ~/.zshrc
+ln -sf $SCRIPT_PATH/zshenv ~/.zshenv
 ln -sf $SCRIPT_PATH/gitconfig ~/.gitconfig
 
 # Setup homedir config rc's
