@@ -1,8 +1,10 @@
 cocoapods
 ctags
 dnote/dnote/dnote
+fx
 fzf
 github/gh/gh
+gist
 gnumeric
 gource
 graphviz
