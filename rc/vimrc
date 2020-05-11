@@ -57,6 +57,10 @@ let g:netrw_browse_split = 4
 " Re-map fzf to Ctrl-p
 nnoremap <C-p> :Files<Cr>
 
+" Respect gitignore / prefer ag
+" @see https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
 " ### vim-prettier
 
 " Enable vim-prettier to run (async) in files without requiring the "@format" doc tag
