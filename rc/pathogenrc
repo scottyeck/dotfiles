@@ -19,6 +19,10 @@
     "url": "https://github.com/junegunn/goyo.vim",
     "revision": "6b6ed2734084fdbb6315357ddcaecf9c8e6f143d"
   },
+  "gruvbox": {
+    "url": "https://github.com/morhetz/gruvbox.git",
+    "revision": "040138616bec342d5ea94d4db296f8ddca17007a"
+  },
   "nerdtree-git-plugin": {
     "url": "https://github.com/Xuyuanp/nerdtree-git-plugin",
     "revision": "0501cdfbe3064d1f2d0987929565bccee5f5a6a5"
