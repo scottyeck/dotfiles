@@ -7,9 +7,13 @@
     "url": "git@github.com:neoclide/coc.nvim.git",
     "revision": "705f94fdd3e9919b6f3c69e4dd44bf3bb5167f60"
   },
-  "ctrlp.vim": {
-    "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
-    "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
+  "fzf": {
+    "url": "git@github.com:junegunn/fzf.git",
+    "revision": "e6d33f77da8cc36786c814f499f6cb3405e8c4c1"
+  },
+  "fzf.vim": {
+    "url": "git@github.com:junegunn/fzf.vim.git",
+    "revision": "3925db8307ed3ed102eefdebfa4073396c2c347b"
   },
   "goyo.vim": {
     "url": "https://github.com/junegunn/goyo.vim",
