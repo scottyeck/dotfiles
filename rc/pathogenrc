@@ -3,6 +3,10 @@
     "url": "git@github.com:bkad/CamelCaseMotion.git",
     "revision": "de439d7c06cffd0839a29045a103fe4b44b15cdc"
   },
+  "coc.nvim": {
+    "url": "git@github.com:neoclide/coc.nvim.git",
+    "revision": "705f94fdd3e9919b6f3c69e4dd44bf3bb5167f60"
+  },
   "ctrlp.vim": {
     "url": "git@github.com:ctrlpvim/ctrlp.vim.git",
     "revision": "bde7a2950adaa82e894d7bdf69e3e7383e40d229"
