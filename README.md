@@ -23,6 +23,7 @@ Read up on these CLI helpers I use:
 - [ ] Add `brew-leaves` to init.
 - [ ] Add notes about [shpotify](https://github.com/hnarayanan/shpotify) _somewhere_.
 - [ ] Complete CLI tool docs.
-- [ ] Tool-specific setup / teardown fns.
+- [ ] Tool-specific setup / teardown functions.
 - [ ] Rename this thing to dotfiles.
 - [ ] Deal with relative paths internal to setup / teardown.
+

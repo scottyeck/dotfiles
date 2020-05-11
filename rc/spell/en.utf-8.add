@@ -11,6 +11,7 @@ Auth
 Blog
 Bugsnag
 CDN
+CLI
 CMS
 COVID
 CSS
@@ -163,6 +164,7 @@ datastore
 dev
 diff
 discoverability
+dotfiles
 env
 fabrictech
 facebook
@@ -181,6 +183,7 @@ identityId
 immediatley
 impactful
 inbounds
+init
 inline
 inncluding
 ish
@@ -227,6 +230,7 @@ serverless
 sitemap
 skillsets
 spellfile
+teardown
 templating
 til
 touchpoints
