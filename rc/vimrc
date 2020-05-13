@@ -55,8 +55,8 @@ let g:netrw_browse_split = 4
 
 " ### fzf.vim
 
-" Re-map fzf to Ctrl-p
-nnoremap <C-p> :Files<Cr>
+" Re-map fzf to Ctrl-p with MRU bindings
+nnoremap <C-p> :FilesMru<Cr>
 
 " Respect gitignore / prefer ag
 " @see https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore

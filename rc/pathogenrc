@@ -11,6 +11,10 @@
     "url": "git@github.com:junegunn/fzf.git",
     "revision": "e6d33f77da8cc36786c814f499f6cb3405e8c4c1"
   },
+  "fzf-filemru": {
+    "url": "git@github.com:tweekmonster/fzf-filemru.git",
+    "revision": "090087d1b786758c9d2cb7e02dcdc2dcb2f3b605"
+  },
   "fzf.vim": {
     "url": "git@github.com:junegunn/fzf.vim.git",
     "revision": "3925db8307ed3ed102eefdebfa4073396c2c347b"
