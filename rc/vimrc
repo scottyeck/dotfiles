@@ -82,3 +82,10 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " @see https://github.com/bkad/CamelCaseMotion
 let g:camelcasemotion_key = '<leader>'
 
+
+" ### vim-fugitive
+
+" Prefer Vertical split for Gdiff (not fugitive-specific)
+" @see https://github.com/tpope/vim-fugitive/issues/510
+set diffopt+=vertical
+
