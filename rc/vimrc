@@ -45,9 +45,15 @@ set spellfile=~/.vim/spell/en.utf-8.add
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-" Open file in previous window in netrw
-" https://vi.stackexchange.com/a/19924
-let g:netrw_browse_split = 4
+" Modify behaviors for opening windows in netrw - currently set
+" to open in same window.
+" @see https://groups.google.com/d/msg/vim_use/Gb_YeadW5FE/5wptj3orcSsJ
+" @see https://vi.stackexchange.com/a/19924 (Previous settings)
+let g:netrw_browse_split = 0
+
+" Assume use of JSONC format for syntax highlighting
+" @see https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " ------------------------------
 " ## Mappings
