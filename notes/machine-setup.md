@@ -25,6 +25,7 @@
   - Vs Code
     - Prettier / eslint / quit thing / project manager
   - iTerm 2
+      - Enable _Scroll wheel sends arrow keys when in alternate screen mode_ (via [StackOverflow](https://stackoverflow.com/a/37879399))
     - TODO: Install oh-my-zsh
     - TODO: Change to zsh
   - Spotify
