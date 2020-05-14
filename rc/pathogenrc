@@ -79,9 +79,9 @@
     "url": "git@github.com:terryma/vim-multiple-cursors.git",
     "revision": "f4fd6ad4e4075dd14d208af059063f1f3cfb7d55"
   },
-  "vim-open-github": {
-    "url": "https://github.com/k0kubun/vim-open-github",
-    "revision": "3a7c7e0b4aa89fa51b4c1fb20c93eb92a375acd3"
+  "vim-obsession": {
+    "url": "git@github.com:tpope/vim-obsession.git",
+    "revision": "96a3f837c112cb64e0a9857b69f6d6a71041155e"
   },
   "vim-prettier": {
     "url": "https://github.com/scottyeck/vim-prettier",
@@ -91,6 +91,10 @@
     "url": "git@github.com:tpope/vim-repeat.git",
     "revision": "c947ad2b6a16983724a0153bdf7f66d7a80a32ca"
   },
+  "vim-rhubarb": {
+    "url": "git@github.com:tpope/vim-rhubarb.git",
+    "revision": "5130596a65330a4e8523d3ac1582f6c31ea6bc63"
+  },
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
@@ -98,6 +102,14 @@
   "vim-surround": {
     "url": "git@github.com:tpope/vim-surround.git",
     "revision": "f51a26d3710629d031806305b6c8727189cd1935"
+  },
+  "vim-textobj-comment": {
+    "url": "git@github.com:glts/vim-textobj-comment.git",
+    "revision": "58ae4571b76a5bf74850698f23d235eef991dd4b"
+  },
+  "vim-textobj-user": {
+    "url": "git@github.com:kana/vim-textobj-user.git",
+    "revision": "41a675ddbeefd6a93664a4dc52f302fe3086a933"
   },
   "vim-vinegar": {
     "url": "git@github.com:tpope/vim-vinegar.git",
