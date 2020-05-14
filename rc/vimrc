@@ -87,5 +87,9 @@ let g:camelcasemotion_key = '<leader>'
 
 " Prefer Vertical split for Gdiff (not fugitive-specific)
 " @see https://github.com/tpope/vim-fugitive/issues/510
-set diffopt+=vertical
+" @see https://github.com/thoughtbot/dotfiles/issues/655#issuecomment-605019271
+if &diff
+    set diffopt-=internal
+    set diffopt+=vertical
+endif
 
