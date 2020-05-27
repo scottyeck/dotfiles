@@ -3,6 +3,14 @@
     "url": "git@github.com:bkad/CamelCaseMotion.git",
     "revision": "de439d7c06cffd0839a29045a103fe4b44b15cdc"
   },
+  "asyncrun.vim": {
+    "url": "git@github.com:skywind3000/asyncrun.vim.git",
+    "revision": "58d23e70569994b36208ed2a653f0a2d75c24fbc"
+  },
+  "asynctasks.vim": {
+    "url": "git@github.com:skywind3000/asynctasks.vim.git",
+    "revision": "0211dcedaade257f9ae4b9e155c41328b647ca5d"
+  },
   "coc.nvim": {
     "url": "git@github.com:neoclide/coc.nvim.git",
     "revision": "705f94fdd3e9919b6f3c69e4dd44bf3bb5167f60"

@@ -99,3 +99,19 @@ if &diff
     set diffopt+=vertical
 endif
 
+" ### async-run
+" @see https://github.com/skywind3000/asynctasks.vim#get-started
+
+" Open quickfix window automatically
+let g:asyncrun_open = 6
+
+" Open an internal terminal
+let g:asynctasks_term_pos = 'right'
+
+" ### VSCode-like settings
+
+" Shortcut to pop Task list
+nnoremap <C-r><C-t> :CocList tasks<Cr>
+
+" Open terminal in vertical split
+nnoremap <C-j> :vs\|:te<Cr>
