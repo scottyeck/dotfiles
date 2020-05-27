@@ -47,6 +47,10 @@
     "url": "https://github.com/vim-airline/vim-airline",
     "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
   },
+  "vim-bufkill": {
+    "url": "git@github.com:qpkorr/vim-bufkill.git",
+    "revision": "1bcdcb4a03a6ac1de06bc84b7f94ca08f4485f42"
+  },
   "vim-colorschemes": {
     "url": "https://github.com/flazz/vim-colorschemes",
     "revision": "9e7ab1cfec5d3db85aa1c4e87329fd869ecf94e9"
