@@ -19,6 +19,14 @@ alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 alias vim='nvim'
 
+# Render an interactive git branch picker sorted by most recent commit,
+# and checkout the selection.
+# @via https://github.com/liamfd
+alias gbrecent='git checkout $(git branch --sort=-committerdate | fzf)'
+
+# Initialize bitwarden and expose session as env var
+alias bwi='eval $(bw login | grep export | sed "s/^$ //")'
+
 # Allows for cd'ing to frequently used directories
 # https://thoughtbot.com/blog/cding-to-frequently-used-directories-in-zsh
 setopt auto_cd

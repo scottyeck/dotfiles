@@ -55,6 +55,10 @@ let g:netrw_browse_split = 0
 " @see https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" Make double-<Esc> clear search highlights
+" @see https://stackoverflow.com/a/19877212
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
 " ------------------------------
 " ## Mappings
 " ------------------------------
@@ -75,6 +79,10 @@ nnoremap <C-p> :FilesMru<Cr>
 " Respect gitignore / prefer ag
 " @see https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Make :Ag not match file names, only the file content
+" @see https://github.com/junegunn/fzf.vim/issues/346
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " ### vim-prettier
 
