@@ -19,11 +19,15 @@ Read up on these CLI helpers I use:
 
 ## TODO:
 
+- [ ] Rename this thing to dotfiles.
+- [ ] Add various configs that are currently missing
+  - [ ] Alacritty
+  - [ ] Karabiner elements
 - [ ] Add pre-commit hook that alphabetizes spells
+  - _Alternatively_, just put the spells in Dropbox because this is annoying.
 - [ ] Add `brew-leaves` to init.
 - [ ] Add notes about [shpotify](https://github.com/hnarayanan/shpotify) _somewhere_.
 - [ ] Complete CLI tool docs.
 - [ ] Tool-specific setup / teardown functions.
-- [ ] Rename this thing to dotfiles.
 - [ ] Deal with relative paths internal to setup / teardown.
 
