@@ -33,7 +33,7 @@ set splitright
 let mapleader="\<space>"
 
 " Specify spellcheck dict location
-" https://www.ostechnix.com/use-spell-check-feature-vim-text-editor/
+" @see https://www.ostechnix.com/use-spell-check-feature-vim-text-editor/
 set spellfile=~/.vim/spell/en.utf-8.add
 
 " Enable spell in git commits
@@ -71,6 +71,12 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 " Switch between buffers with Ctrl
 nnoremap <C-l> :bn<Cr> 
 nnoremap <C-h> :bp<Cr> 
+
+" Open terminal in vertical split
+nnoremap <C-j> :vs\|:te<Cr>
+
+" " Use escape in terminal mode because it's simpler
+" tnoremap <Esc> <C-\><C-n>
 
 " ------------------------------
 " ## Plugins
@@ -112,7 +118,7 @@ if &diff
     set diffopt+=vertical
 endif
 
-" ### async-run
+" ### async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
 
 " Open quickfix window automatically
@@ -126,5 +132,3 @@ let g:asynctasks_term_pos = 'right'
 " Shortcut to pop Task list
 nnoremap <C-r><C-t> :CocList tasks<Cr>
 
-" Open terminal in vertical split
-nnoremap <C-j> :vs\|:te<Cr>
