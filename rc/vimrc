@@ -12,8 +12,9 @@ filetype plugin indent on
 " ## Settings
 " ------------------------------
 
-colorscheme gruvbox
-set background=dark " gruvbox dark mode
+" Note that colors are no longer configured here as I'm preferring to use
+" colors consistent with my terminal theme configured in alacritty.yaml.
+" @see https://jeffkreeftmeijer.com/vim-16-color/
 
 " Use zsh as shell inside vim
 set shell=/bin/zsh
