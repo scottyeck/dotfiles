@@ -39,43 +39,31 @@ alias gcn='git commit -v --no-edit'
 # https://dougblack.io/words/zsh-vi-mode.html
 
 bindkey -v
-export KEYTIMEOUT=1
 
-# bindkey '^P' up-history
-# bindkey '^N' down-history
-# bindkey '^?' backward-delete-char
-# bindkey '^h' backward-delete-char
-# bindkey '^w' backward-kill-word
-# bindkey '^r' history-incremental-search-backward
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 # Override cursor behavior to detect mode
 # http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
 
-function _set_cursor() {
-    if [[ $TMUX = '' ]]; then
-      echo -ne $1
-    else
-      echo -ne "\ePtmux;\e\e$1\e\\"
+function zle-keymap-select {
+    if [ "$TERM" = "xterm-256color" ]; then
+        if [ $KEYMAP = vicmd ]; then
+            # the command mode for vi
+            echo -ne "\e[2 q"
+        else
+            # the insert mode for vi
+            echo -ne "\e[4 q"
+        fi
     fi
 }
 
-function _set_block_cursor() { _set_cursor '\e[2 q' }
-function _set_beam_cursor() { _set_cursor '\e[6 q' }
-
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-      _set_block_cursor
-  else
-      _set_beam_cursor
-  fi
-}
-
 zle -N zle-keymap-select
-
-# ensure beam cursor when starting new terminal
-precmd_functions+=(_set_beam_cursor) #
-# ensure insert mode and beam cursor when exiting vim
-zle-line-init() { zle -K viins; _set_beam_cursor }
+export KEYTIMEOUT=1
 
 # Bash configuration
 
