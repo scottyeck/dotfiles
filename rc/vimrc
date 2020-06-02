@@ -132,3 +132,12 @@ let g:asynctasks_term_pos = 'right'
 " Shortcut to pop Task list
 nnoremap <C-r><C-t> :CocList tasks<Cr>
 
+
+" Support gx inside vim terminal buffers
+
+function! Open(url)
+  silent execute '!open ' . a:url
+  redraw!
+endfunction
+
+autocmd BufEnter term://* nnoremap <buffer> gx viW"xy \| :call Open(@x)<CR>
