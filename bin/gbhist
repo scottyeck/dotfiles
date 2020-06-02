@@ -15,9 +15,7 @@
 
 gbhist () {
   local LASTWORKS="$(git for-each-ref --count=10 --sort=-committerdate refs/heads/ | awk '{print $3}' | sed 's/refs\/heads\///')"
-
-  # Use `tail` to remove first line since that is the current branch
-  echo $LASTWORKS | tr ' ' '\n' | tail -n +2
+  echo $LASTWORKS | tr ' ' '\n'
 }
 
 
