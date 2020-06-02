@@ -65,7 +65,7 @@
   },
   "vim-fugitive": {
     "url": "git@github.com:tpope/vim-fugitive.git",
-    "revision": "b97a9abe29c39c4e1a45ae199dbb470df362f538"
+    "revision": "27a5c3abd211c2784513dab4db082fa414ad0967"
   },
   "vim-github-hub": {
     "url": "git@github.com:jez/vim-github-hub.git",
