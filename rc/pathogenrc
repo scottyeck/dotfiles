@@ -1,4 +1,8 @@
 {
+  "BufOnly.vim": {
+    "url": "git@github.com:vim-scripts/BufOnly.vim.git",
+    "revision": "43dd92303979bdb234a3cb2f5662847f7a3affe7"
+  },
   "CamelCaseMotion": {
     "url": "git@github.com:bkad/CamelCaseMotion.git",
     "revision": "de439d7c06cffd0839a29045a103fe4b44b15cdc"
