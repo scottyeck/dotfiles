@@ -24,8 +24,8 @@
     "revision": "e6d33f77da8cc36786c814f499f6cb3405e8c4c1"
   },
   "fzf-checkout.vim": {
-    "url": "git@github.com:stsewd/fzf-checkout.vim.git",
-    "revision": "97241f6f155a31eae11e21311e78923707ffef18"
+    "url": "git@github.com:scottyeck/fzf-checkout.vim.git",
+    "revision": "7405867ccff7fec4e51b58d8f84d1c94b720fc02"
   },
   "fzf-filemru": {
     "url": "git@github.com:tweekmonster/fzf-filemru.git",

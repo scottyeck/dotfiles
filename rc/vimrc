@@ -95,6 +95,9 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 " @see https://github.com/junegunn/fzf.vim/issues/346
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
+" Sort branches by recency via :GCheckout
+let g:fzf_checkout_git_options = '--sort=-committerdate'
+
 " ### vim-prettier
 
 " Enable vim-prettier to run (async) in files without requiring the "@format" doc tag
