@@ -1,5 +1,5 @@
 execute pathogen#infect()
-syntax on
+syntax enable
 " Enable filetype plugin detection under ~/.vim/ftplugin
 " https://www.gilesorr.com/blog/vim-ftplugin.html
 filetype plugin indent on
@@ -12,9 +12,9 @@ filetype plugin indent on
 " ## Settings
 " ------------------------------
 
-" Note that colors are no longer configured here as I'm preferring to use
-" colors consistent with my terminal theme configured in alacritty.yaml.
-" @see https://jeffkreeftmeijer.com/vim-16-color/
+" Note that colorscheme matches alacritty config
+" @see https://draculatheme.com/vim
+colorscheme dracula
 
 " Use zsh as shell inside vim
 set shell=/bin/zsh

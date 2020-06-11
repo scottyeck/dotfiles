@@ -59,6 +59,10 @@
     "url": "https://github.com/leafgarland/typescript-vim",
     "revision": "5a319ea5504e18215d155576c78d1b7fb8e22c8f"
   },
+  "vim": {
+    "url": "git@github.com:dracula/vim.git",
+    "revision": "494dbe9d4effff140ffe6743b614d900a0f34dd7"
+  },
   "vim-airline": {
     "url": "https://github.com/vim-airline/vim-airline",
     "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
