@@ -1,8 +1,8 @@
 {
-  "name": "bag-of-tricks",
+  "name": "dotfiles",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:scottyeck/bag-of-tricks.git",
+  "repository": "git@github.com:scottyeck/dotfiles.git",
   "author": "Scotty Eckenthal <scott.eckenthal@gmail.com>",
   "license": "MIT",
   "dependencies": {

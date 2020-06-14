@@ -1,4 +1,4 @@
-# bag-of-tricks
+# dotfiles
 
 > My dotfiles / various scripts repo..
 
