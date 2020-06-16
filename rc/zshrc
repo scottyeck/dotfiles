@@ -45,12 +45,12 @@ alias gcn='git commit -v --no-edit'
 bindkey -v
 export KEYTIMEOUT=1
 
-# bindkey '^P' up-history
-# bindkey '^N' down-history
-# bindkey '^?' backward-delete-char
-# bindkey '^h' backward-delete-char
-# bindkey '^w' backward-kill-word
-# bindkey '^r' history-incremental-search-backward
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 # Override cursor behavior to detect mode
 # http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
