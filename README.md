@@ -19,11 +19,8 @@ Read up on these CLI helpers I use:
 
 ## TODO
 
-* [ ] Rename this thing to dotfiles.
 * [ ] Add various configs that are currently missing
-  * [ ] Alacritty
   * [ ] Karabiner elements
-  * [ ] coc - config / extensions
 * [ ] Add pre-commit hook that alphabetizes spells
   * _Alternatively_, just put the spells in Dropbox because this is annoying.
 * [ ] Add `brew-leaves` to init.
