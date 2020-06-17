@@ -18,8 +18,10 @@ maybeUnlink ~/.zshenv
 maybeUnlink ~/.gitconfig
 maybeUnlink $CONFIG_PATH/nvim/init.vim
 maybeUnlink $CONFIG_PATH/coc/extensions/package.json
+maybeUnlink $CONFIG_PATH/alacritty/alacritty.yml
 maybeUnlink $TODO_CONFIG_PATH/todo.cfg
 maybeUnlink $VIM_CONFIG_PATH/ftplugin
 maybeUnlink $VIM_CONFIG_PATH/spell
 
-# TODO: Destroy pathogen deps under ~/.vim
+rm -r ~/.vim/bundle/*
+

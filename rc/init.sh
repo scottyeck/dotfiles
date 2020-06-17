@@ -10,9 +10,14 @@ ln -sf $SCRIPT_PATH/zshrc ~/.zshrc
 ln -sf $SCRIPT_PATH/zshenv ~/.zshenv
 ln -sf $SCRIPT_PATH/gitconfig ~/.gitconfig
 
+source ~/.zshrc
+
 # Setup homedir config rc's
 mkdir -p $CONFIG_PATH/nvim
 ln -sf $SCRIPT_PATH/init.vim $CONFIG_PATH/nvim/init.vim
+
+mkdir -p $CONFIG_PATH/alacritty
+ln -sf $SCRIPT_PATH/alacritty.yml $ $CONFIG_PATH/alacritty/alacritty.yml
 
 # Setup todo.txt config
 mkdir -p $TODO_CONFIG_PATH
@@ -33,9 +38,8 @@ echo "cd $CONFIG_PATH/coc/extensions && npm install"
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-# TODO:
-# Set up setup / teardown fns for each rc rather than having
-# everything littered together here.
+# Install vim dependencies
+pgen install
 
 # TODO:
 # Manage Dropbox symlinks
