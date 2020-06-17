@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./rc/clean.sh
+DOTFILES_DIR=$(pwd) ./rc/clean.sh
 

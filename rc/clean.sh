@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source $DOTFILES_DIR/rc/common.sh
 
 function maybeUnlink () {
   FILE=$1
@@ -23,5 +23,6 @@ maybeUnlink $TODO_CONFIG_PATH/todo.cfg
 maybeUnlink $VIM_CONFIG_PATH/ftplugin
 maybeUnlink $VIM_CONFIG_PATH/spell
 
-rm -r ~/.vim/bundle/*
+# Delete vim plugins
+rm -rf ~/.vim/bundle/*
 

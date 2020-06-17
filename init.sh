@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./rc/init.sh
+DOTFILES_DIR=$(pwd) ./rc/init.sh
