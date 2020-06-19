@@ -11,9 +11,9 @@
     "json-minify": "exact1.0.0",
     "neovim": "exact4.8.0",
     "pomd": "2.3.4",
-    "react-devtools": "exact4.7.0",
+    "react-devtools": "^3",
     "serve": "exact11.3.2",
-    "tinypng-cli": "0.0.7",
+    "tinypng-cli": "exact0.0.7",
     "tldr": "^3.3.2",
     "tree-cli": "0.4.12",
     "urlencode-cli": "2.0.0"
