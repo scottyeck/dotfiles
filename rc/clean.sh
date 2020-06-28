@@ -12,6 +12,7 @@ function maybeUnlink () {
 
 maybeUnlink ~/.vimrc
 maybeUnlink ~/.pathogenrc
+maybeUnlink ~/.tmux.conf
 maybeUnlink ~/.bashrc
 maybeUnlink ~/.zshrc
 maybeUnlink ~/.zshenv

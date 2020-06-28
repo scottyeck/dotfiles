@@ -4,6 +4,7 @@ source $DOTFILES_DIR/rc/common.sh
 
 # Symlink homedir root rc's
 ln -sf $SCRIPT_PATH/vimrc ~/.vimrc
+ln -sf $SCRIPT_PATH/tmux.conf ~/.tmux.conf
 ln -sf $SCRIPT_PATH/pathogenrc ~/.pathogenrc
 ln -sf $SCRIPT_PATH/bashrc ~/.bashrc
 ln -sf $SCRIPT_PATH/zshrc ~/.zshrc
