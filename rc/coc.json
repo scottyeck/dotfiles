@@ -2,10 +2,9 @@
   "dependencies": {
     "coc-eslint": ">=1.2.7",
     "coc-json": ">=1.2.4",
-    "coc-markdownlint": ">=1.4.0",
     "coc-pairs": ">=1.2.18",
     "coc-tasks": ">=0.0.7",
     "coc-tslint-plugin": ">=1.1.1",
-    "coc-tsserver": ">=1.4.6"
+    "coc-tsserver": ">=1.5.2"
   }
 }

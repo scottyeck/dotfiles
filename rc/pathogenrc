@@ -17,7 +17,7 @@
   },
   "coc.nvim": {
     "url": "git@github.com:neoclide/coc.nvim.git",
-    "revision": "705f94fdd3e9919b6f3c69e4dd44bf3bb5167f60"
+    "revision": "84e3e4968a096c7ac3620f08f7172c94fe581e63"
   },
   "fzf": {
     "url": "git@github.com:junegunn/fzf.git",
