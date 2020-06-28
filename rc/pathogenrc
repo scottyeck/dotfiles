@@ -83,6 +83,10 @@
     "url": "git@github.com:tpope/vim-fugitive.git",
     "revision": "27a5c3abd211c2784513dab4db082fa414ad0967"
   },
+  "vim-gitgutter": {
+    "url": "git@github.com:airblade/vim-gitgutter.git",
+    "revision": "c27bfab8c51e77419ee0c4a9c4e3ba359dbc2ad4"
+  },
   "vim-github-hub": {
     "url": "git@github.com:jez/vim-github-hub.git",
     "revision": "158551fa56e019774b6aed7084c0802c4db88436"
