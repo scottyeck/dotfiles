@@ -135,6 +135,10 @@
     "url": "git@github.com:kana/vim-textobj-user.git",
     "revision": "41a675ddbeefd6a93664a4dc52f302fe3086a933"
   },
+  "vim-tmux-navigator": {
+    "url": "git@github.com:christoomey/vim-tmux-navigator.git",
+    "revision": "44ba6fbe45895cd541ebfc87606add5c76e3829b"
+  },
   "vim-vinegar": {
     "url": "git@github.com:tpope/vim-vinegar.git",
     "revision": "fcce70f1403ba4101668a4c960c577bddbd00f06"
