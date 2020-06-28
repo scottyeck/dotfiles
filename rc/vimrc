@@ -91,9 +91,20 @@ nnoremap <C-p> :FilesMru<Cr>
 " @see https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
+" Some helpful window mgmt with fzf search results
+" @see https://github.com/JesseLeite/dotfiles/commit/e1e1cee2f11c26ad22b6e021bbdb62fc8aa07aec
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 " Make :Ag not match file names, only the file content
 " @see https://github.com/junegunn/fzf.vim/issues/346
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+" Define :Rag command to allow for search in subdir
+" @see https://github.com/junegunn/fzf.vim/issues/413#issuecomment-320197362
+command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " Sort branches by recency via :GCheckout
 let g:fzf_checkout_git_options = '--sort=-committerdate'

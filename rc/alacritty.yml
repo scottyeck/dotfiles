@@ -81,3 +81,6 @@ colors:
   #
   indexed_colors: []
 
+key_bindings:
+  - { key: A, mods: Alt, chars: "\x1ba"}
+
