@@ -12,8 +12,8 @@
     "revision": "58d23e70569994b36208ed2a653f0a2d75c24fbc"
   },
   "asynctasks.vim": {
-    "url": "git@github.com:skywind3000/asynctasks.vim.git",
-    "revision": "0211dcedaade257f9ae4b9e155c41328b647ca5d"
+    "url": "git@github.com:scottyeck/asynctasks.vim.git",
+    "revision": "20f12c473ac9d4ebe4308bc8d3737b7e3a763007"
   },
   "coc.nvim": {
     "url": "git@github.com:neoclide/coc.nvim.git",
