@@ -8,6 +8,7 @@
   "dependencies": {
     "csvtojson": "exact2.0.10",
     "hbs-cli": "1.4.0",
+    "jira-cli": "exact2.1.0",
     "json-minify": "exact1.0.0",
     "neovim": "exact4.8.0",
     "pomd": "2.3.4",
