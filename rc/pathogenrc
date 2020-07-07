@@ -119,6 +119,10 @@
     "url": "git@github.com:tpope/vim-rhubarb.git",
     "revision": "5130596a65330a4e8523d3ac1582f6c31ea6bc63"
   },
+  "vim-rsi": {
+    "url": "git@github.com:tpope/vim-rsi.git",
+    "revision": "ad8ba6beae8e82339479104b914214a868c9f1fe"
+  },
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
