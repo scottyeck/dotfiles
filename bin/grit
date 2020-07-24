@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# A greppy git. For fun but can serve as a demo
+# when discussing CLI one-liners.
+grit () {
+  COMMAND=$1
+  shift
+  QUERY=$@
+
+  git branch | grep "$QUERY" | xargs git $COMMAND
+}
+
+grit "$@"
