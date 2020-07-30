@@ -21,6 +21,7 @@
   - Skitch
   - Slack
     - https://slack.com/downloads/instructions/mac
+    - Configure security settings to allow for screen-sharing (via [/r/slack](https://www.reddit.com/r/Slack/comments/dfeg37/coworker_has_slack_screen_sharing_issues_on_macos/fdotj8p/))
   - Figma
   - Vs Code
     - Prettier / eslint / quit thing / project manager
