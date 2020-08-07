@@ -50,6 +50,10 @@ then
     export VIMRUNTIME=/usr/share/vim/vim81
 fi
 
+# Set default base branch for PR review using aliases
+# @see https://blog.jez.io/cli-code-review/
+export PR_REVIEW_BASE=master
+
 LOCAL_CONFIG_FILE="/Users/$USER/.localrc"
 
 if [ -f "$LOCAL_CONFIG_FILE" ]; then

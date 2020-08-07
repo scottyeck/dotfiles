@@ -71,6 +71,10 @@
     "url": "git@github.com:qpkorr/vim-bufkill.git",
     "revision": "1bcdcb4a03a6ac1de06bc84b7f94ca08f4485f42"
   },
+  "vim-codereview": {
+    "url": "git@github.com:google/vim-codereview.git",
+    "revision": "3259748e1375aba1c847201555207a6ac7a00649"
+  },
   "vim-commentary": {
     "url": "git@github.com:tpope/vim-commentary.git",
     "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
@@ -94,6 +98,10 @@
   "vim-jsx-typescript": {
     "url": "git@github.com:peitalin/vim-jsx-typescript.git",
     "revision": "f84b2c9796016206051e14b9d5c7a0ab7e2bde2c"
+  },
+  "vim-maktaba": {
+    "url": "git@github.com:google/vim-maktaba.git",
+    "revision": "5c49c44be62e595d3d1d81a15259cd1bfc722825"
   },
   "vim-markdown": {
     "url": "git@github.com:gabrielelana/vim-markdown.git",
@@ -146,5 +154,9 @@
   "vim-vinegar": {
     "url": "git@github.com:tpope/vim-vinegar.git",
     "revision": "fcce70f1403ba4101668a4c960c577bddbd00f06"
+  },
+  "w3m.vim": {
+    "url": "git@github.com:yuratomo/w3m.vim.git",
+    "revision": "228a852b188f1a62ecea55fa48b0ec892fa6bad7"
   }
 }
