@@ -17,6 +17,7 @@ maybeUnlink ~/.bashrc
 maybeUnlink ~/.zshrc
 maybeUnlink ~/.zshenv
 maybeUnlink ~/.gitconfig
+maybeUnlink ~/start
 maybeUnlink $CONFIG_PATH/nvim/init.vim
 maybeUnlink $CONFIG_PATH/coc/extensions/package.json
 maybeUnlink $CONFIG_PATH/alacritty/alacritty.yml

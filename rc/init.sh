@@ -11,6 +11,9 @@ ln -sf $SCRIPT_PATH/zshrc ~/.zshrc
 ln -sf $SCRIPT_PATH/zshenv ~/.zshenv
 ln -sf $SCRIPT_PATH/gitconfig ~/.gitconfig
 
+# Tmux session configs
+ln -sf $SCRIPT_PATH/start ~/start
+
 # Setup homedir config rc's
 mkdir -p $CONFIG_PATH/nvim
 ln -sf $SCRIPT_PATH/init.vim $CONFIG_PATH/nvim/init.vim
