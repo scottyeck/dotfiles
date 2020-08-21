@@ -63,6 +63,10 @@
     "url": "git@github.com:dracula/vim.git",
     "revision": "494dbe9d4effff140ffe6743b614d900a0f34dd7"
   },
+  "vim-abolish": {
+    "url": "git@github.com:tpope/vim-abolish.git",
+    "revision": "7e4da6e78002344d499af9b6d8d5d6fcd7c92125"
+  },
   "vim-airline": {
     "url": "https://github.com/vim-airline/vim-airline",
     "revision": "6c8d0f5e6af878db71b2dc44ccf1d1417381d6a0"
