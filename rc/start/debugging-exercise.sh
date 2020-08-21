@@ -13,12 +13,13 @@ if [ "$SESSION_EXISTS" = "" ]; then
 tmux new-session -d -s $SESSION
 
 tmux rename-window -t 0 'home'
+tmux send-keys -t 'home' 'cd debugging-exercise' C-m
 
-tmux new-window -t $SESSION:1 -n 'app'
-tmux send-keys -t 'app' 'cd debugging-exercise' C-m 'yarn dev' C-m
+tmux new-window -t $SESSION:1 -n 'express'
+tmux send-keys -t 'express' 'cd debugging-exercise' C-m 'yarn dev'
 
 tmux new-window -t $SESSION:2 -n 'tunnel'
-tmux send-keys -t 'tunnel' 'cd debugging-exercise' C-m '' C-m
+tmux send-keys -t 'tunnel' 'cd debugging-exercise' C-m 'ngrok http 3000 --host-header="localhost:3000"'
 
 # Specify the window to which we want to attach
 SESSION_TARGET="$SESSION_TARGET:0"
