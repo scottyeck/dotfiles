@@ -56,8 +56,8 @@
     "revision": "ba4854e3659348cedaede9340ac93280134b079e"
   },
   "typescript-vim": {
-    "url": "https://github.com/leafgarland/typescript-vim",
-    "revision": "5a319ea5504e18215d155576c78d1b7fb8e22c8f"
+    "url": "git@github.com:leafgarland/typescript-vim.git",
+    "revision": "17d85d8051ba21283e62a9101734981e10b732fd"
   },
   "vim": {
     "url": "git@github.com:dracula/vim.git",
@@ -97,7 +97,7 @@
   },
   "vim-jsx-typescript": {
     "url": "git@github.com:peitalin/vim-jsx-typescript.git",
-    "revision": "f84b2c9796016206051e14b9d5c7a0ab7e2bde2c"
+    "revision": "07370d48c605ec027543b52762930165b1b27779"
   },
   "vim-markdown": {
     "url": "git@github.com:gabrielelana/vim-markdown.git",

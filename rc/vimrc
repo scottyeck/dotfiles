@@ -64,6 +64,10 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " @see https://stackoverflow.com/a/19877212
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
+" Set filetypes as typescript.tsx
+" @see https://github.com/peitalin/vim-jsx-typescript
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
 " ------------------------------
 " ## Mappings
 " ------------------------------
