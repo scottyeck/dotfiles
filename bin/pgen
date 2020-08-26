@@ -4,6 +4,7 @@
 
 add="add"
 remove="remove"
+update="update"
 list="list"
 install="install"
 sync="sync"
@@ -111,6 +112,13 @@ remove () {
     fi
 }
 
+update () {
+  local name=$1
+  local url=$(getInstalledPluginUrl $name)
+  remove $name
+  add $url
+}
+
 list () {
     ls $bundle
 }
@@ -151,6 +159,8 @@ pgen () {
         add "$2" "$3"
     elif [ $cmd = $remove ] ; then
         remove "$2"
+    elif [ $cmd = $update ] ; then
+        update "$2"
     elif [ $cmd = $list ] ; then
         list
     elif [ $cmd = $install ] ; then
