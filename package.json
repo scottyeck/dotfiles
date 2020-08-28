@@ -9,6 +9,7 @@
     "csvtojson": "exact2.0.10",
     "dts-gen": "exact0.6.0",
     "hbs-cli": "1.4.0",
+    "http-server": "exact0.12.3",
     "jira-cli": "exact2.1.0",
     "json-minify": "exact1.0.0",
     "neovim": "exact4.8.0",
