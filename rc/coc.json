@@ -5,6 +5,6 @@
     "coc-pairs": ">=1.2.18",
     "coc-tasks": ">=0.0.7",
     "coc-tslint-plugin": ">=1.1.1",
-    "coc-tsserver": ">=1.5.2"
+    "coc-tsserver": ">=1.5.5"
   }
 }
