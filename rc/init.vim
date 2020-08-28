@@ -1,4 +1,8 @@
 if !exists('g:vscode')
+  
+  " Uncomment for debugging to increase log-level
+  " let $NVIM_COC_LOG_LEVEL = 'debug'
+
   set runtimepath^=~/.vim runtimepath+=~/.vim/after
   let &packpath = &runtimepath
   source ~/.vimrc
