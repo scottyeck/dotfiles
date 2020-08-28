@@ -92,8 +92,7 @@ nnoremap <C-j> :vs\|:te<Cr>
 nnoremap <C-p> :FilesMru<Cr>
 
 " Respect gitignore / prefer ag
-" @see https://github.com/junegunn/fzf#respecting-gitignore-hgignore-and-svnignore
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --ignore-case --ignore ".git" --hidden --filename-pattern ""'
 
 " Some helpful window mgmt with fzf search results
 " @see https://github.com/JesseLeite/dotfiles/commit/e1e1cee2f11c26ad22b6e021bbdb62fc8aa07aec
