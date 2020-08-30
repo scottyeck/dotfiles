@@ -21,7 +21,7 @@
   },
   "fzf": {
     "url": "git@github.com:junegunn/fzf.git",
-    "revision": "e6d33f77da8cc36786c814f499f6cb3405e8c4c1"
+    "revision": "f2d44ab5a793906457f3d3384f09af085096138d"
   },
   "fzf-checkout.vim": {
     "url": "git@github.com:scottyeck/fzf-checkout.vim.git",
@@ -33,11 +33,15 @@
   },
   "fzf.vim": {
     "url": "git@github.com:junegunn/fzf.vim.git",
-    "revision": "3925db8307ed3ed102eefdebfa4073396c2c347b"
+    "revision": "4145f53f3d343c389ff974b1f1a68eeb39fba18b"
   },
   "goyo.vim": {
     "url": "https://github.com/junegunn/goyo.vim",
     "revision": "6b6ed2734084fdbb6315357ddcaecf9c8e6f143d"
+  },
+  "gruvbox": {
+    "url": "git@github.com:morhetz/gruvbox.git",
+    "revision": "bf2885a95efdad7bd5e4794dd0213917770d79b7"
   },
   "gv.vim": {
     "url": "git@github.com:junegunn/gv.vim.git",
