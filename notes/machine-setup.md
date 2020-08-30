@@ -37,6 +37,10 @@
   - VLC
     - https://get.videolan.org/
 
+- System
+  - Python
+    - Install > Python 3.4 using [pyenv](https://opensource.com/article/19/5/python-3-default-mac#what-to-do).
+
 - System Prefs
   - Dock
     - Shrink Size.
