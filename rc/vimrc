@@ -13,8 +13,12 @@ filetype plugin indent on
 " ------------------------------
 
 " Note that colorscheme matches alacritty config
-" @see https://draculatheme.com/vim
-colorscheme dracula
+" @see https://github.com/morhetz/gruvbox
+colorscheme gruvbox
+set background=light
+" Enabled to prevent extra-yellow bg color in light mode
+" @see https://github.com/morhetz/gruvbox/issues/300
+set termguicolors
 
 " Use zsh as shell inside vim
 set shell=/bin/zsh
