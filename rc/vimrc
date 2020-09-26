@@ -15,7 +15,7 @@ filetype plugin indent on
 " Note that colorscheme matches alacritty config
 " @see https://github.com/morhetz/gruvbox
 colorscheme gruvbox
-set background=light
+set background=dark
 " Enabled to prevent extra-yellow bg color in light mode
 " @see https://github.com/morhetz/gruvbox/issues/300
 set termguicolors
@@ -94,9 +94,14 @@ nnoremap <C-j> :vs\|:te<Cr>
 
 " Re-map fzf to Ctrl-p with MRU bindings
 nnoremap <C-p> :FilesMru<Cr>
+" Another ctrl-p-esque helper
+nnoremap <C-space> :Buffers<Cr>
 
 " Respect gitignore / prefer ag
 let $FZF_DEFAULT_COMMAND = 'ag --ignore-case --ignore ".git" --hidden --filename-pattern ""'
+
+" Floating window
+let g:fzf_layout = { 'window': { 'width': 0.8 , 'height': 0.8 } }
 
 " Some helpful window mgmt with fzf search results
 " @see https://github.com/JesseLeite/dotfiles/commit/e1e1cee2f11c26ad22b6e021bbdb62fc8aa07aec
@@ -116,11 +121,39 @@ command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, {'option
 " Sort branches by recency via :GCheckout
 let g:fzf_checkout_git_options = '--sort=-committerdate'
 
+" ### goyo.vim
+
+
+" Show / hide tmux status line in zen mode
+" @see https://github.com/junegunn/goyo.vim#callbacks
+
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+  endif
+endfunction
+
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+  endif
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 " ### vim-prettier
 
 " Enable vim-prettier to run (async) in files without requiring the "@format" doc tag
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" ### linepulse.vim
+" Used to find cursor
+" @see https://github.com/maddisoj/linepulse
+
+let g:linepulse_steps = 5
+let g:linepulse_time = 150
 
 " ### CamelCaseMotion.vim
 
@@ -154,6 +187,8 @@ command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git co
 " Open quickfix window automatically
 let g:asyncrun_open = 6
 
+" ### vim-asynctasks
+
 " Open an internal terminal
 let g:asynctasks_term_pos = 'right'
 
@@ -162,12 +197,10 @@ let g:asynctasks_term_pos = 'right'
 " Shortcut to pop Task list
 nnoremap <C-r><C-t> :CocList tasks<Cr>
 
-
 " Support gx inside vim terminal buffers
-
 function! Open(url)
   silent execute '!open ' . a:url
   redraw!
 endfunction
-
 autocmd BufEnter term://* nnoremap <buffer> gx viW"xy \| :call Open(@x)<CR>
+

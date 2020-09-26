@@ -47,6 +47,14 @@
     "url": "git@github.com:junegunn/gv.vim.git",
     "revision": "61d877d23caaad9009d672f90fe2ab576ab93d2d"
   },
+  "limelight.vim": {
+    "url": "git@github.com:junegunn/limelight.vim.git",
+    "revision": "815c6122504361d52e10172601471b416d040ca8"
+  },
+  "linepulse": {
+    "url": "git@github.com:maddisoj/linepulse.git",
+    "revision": "0117658ca34b5fa9f3e09c8c332e4b1954275d0d"
+  },
   "nerdtree-git-plugin": {
     "url": "https://github.com/Xuyuanp/nerdtree-git-plugin",
     "revision": "0501cdfbe3064d1f2d0987929565bccee5f5a6a5"
@@ -54,6 +62,10 @@
   "sonicpi.vim": {
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
     "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
+  },
+  "taboo.vim": {
+    "url": "git@github.com:gcmt/taboo.vim.git",
+    "revision": "caf948187694d3f1374913d36f947b3f9fa1c22f"
   },
   "todo.txt-vim": {
     "url": "https://gitlab.com/dbeniamine/todo.txt-vim.git",
