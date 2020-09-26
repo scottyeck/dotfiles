@@ -180,6 +180,8 @@ endif
 
 " Defines a git WIP command meant to mimic the zsh `gwip` alias
 command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"
+" Shorthands
+command! Gco GCheckout
 
 " ### async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
