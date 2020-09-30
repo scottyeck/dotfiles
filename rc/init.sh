@@ -21,6 +21,9 @@ ln -sf $SCRIPT_PATH/init.vim $CONFIG_PATH/nvim/init.vim
 mkdir -p $CONFIG_PATH/alacritty
 ln -sf $SCRIPT_PATH/alacritty.yml $ALACRITTY_CONFIG_PATH/alacritty.yml
 
+mkdir -p $CONFIG_PATH/karabiner
+ln -sf $SCRIPT_PATH/karabiner.json $KARABINER_CONFIG_PATH/karabiner.json
+
 # Setup todo.txt config
 mkdir -p $TODO_CONFIG_PATH
 ln -sf $SCRIPT_PATH/todo.cfg $TODO_CONFIG_PATH/todo.cfg
