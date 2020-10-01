@@ -182,6 +182,7 @@ endif
 command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"
 " Shorthands
 command! Gco GCheckout
+command! Gf Gfetch
 
 " ### async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
