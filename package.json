@@ -14,6 +14,7 @@
     "json-minify": "exact1.0.0",
     "neovim": "exact4.8.0",
     "pomd": "2.3.4",
+    "react-native-cli": "^2.0.1",
     "serve": "exact11.3.2",
     "tinypng-cli": "exact0.0.7",
     "tldr": "^3.3.2",
