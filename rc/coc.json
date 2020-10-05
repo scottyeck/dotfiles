@@ -3,8 +3,9 @@
     "coc-eslint": ">=1.2.7",
     "coc-json": ">=1.2.4",
     "coc-pairs": ">=1.2.18",
+    "coc-spell-checker": ">=1.2.0",
     "coc-tasks": ">=0.1.0",
     "coc-tslint-plugin": ">=1.1.1",
-    "coc-tsserver": ">=1.5.5"
+    "coc-tsserver": ">=1.5.8"
   }
 }
