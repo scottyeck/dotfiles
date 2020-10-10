@@ -178,10 +178,12 @@ if &diff
     set diffopt+=vertical
 endif
 
-" Defines a git WIP command meant to mimic the zsh `gwip` alias
+" Mimic zsh aliases
 command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"
-" Shorthands
+command! Gunwip !git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1
 command! Gco GCheckout
+command! Gf Gfetch
+command! Ggsup :exec printf('!git branch --set-upstream-to=origin/%s %s', g:fugitive#head(), g:fugitive#head())
 
 " ### async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
