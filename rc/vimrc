@@ -185,6 +185,8 @@ command! Gco GCheckout
 command! Gf Gfetch
 command! Ggsup :exec printf('!git branch --set-upstream-to=origin/%s %s', g:fugitive#head(), g:fugitive#head())
 
+command! Gcobak :exec printf('!git checkout -b %s-bak', g:fugitive#head())
+
 " ### async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
 
