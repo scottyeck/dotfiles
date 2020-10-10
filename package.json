@@ -8,6 +8,7 @@
   "dependencies": {
     "csvtojson": "exact2.0.10",
     "dts-gen": "exact0.6.0",
+    "gatsby": "^2.24.73",
     "hbs-cli": "1.4.0",
     "http-server": "exact0.12.3",
     "jira-cli": "exact2.1.0",
