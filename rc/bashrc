@@ -21,6 +21,9 @@ PATH="$PATH:$DOTFILES_PATH/node_modules/.bin"
 # cargo
 PATH="$PATH:$HOME/.cargo/bin"
 
+# go
+PATH="$PATH:/usr/local/go/bin"
+
 # sqlite, via brew
 # > sqlite is keg-only, which means it was not symlinked into /usr/local,
 # > because macOS provides an older sqlite3.
