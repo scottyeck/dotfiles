@@ -95,6 +95,10 @@
     "url": "git@github.com:tpope/vim-commentary.git",
     "revision": "141d9d32a9fb58fe474fcc89cd7221eb2dd57b3a"
   },
+  "vim-dispatch": {
+    "url": "git@github.com:tpope/vim-dispatch.git",
+    "revision": "fe6a34322829e466a7e8ce710a6ac5eabddff9fd"
+  },
   "vim-eunuch": {
     "url": "git@github.com:tpope/vim-eunuch.git",
     "revision": "75efe06ccc63b7cd50b193b99cce83e3ad3e60cb"
