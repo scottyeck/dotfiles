@@ -39,6 +39,9 @@ cdpath=($HOME/git/fabric $HOME/git/me)
 # Mimics existing gcn! but without amend
 alias gcn='git commit -v --no-edit'
 
+# Shortcut to meme
+alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
+
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html
 
