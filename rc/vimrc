@@ -44,6 +44,10 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " @see https://stackoverflow.com/a/19485184
 autocmd FileType gitcommit setlocal spell
 
+" Activate Colorizer
+" @see https://github.com/chrisbra/Colorizer/issues/56
+let g:colorizer_auto_color = 1
+
 " Highlight line in insert mode
 " https://stackoverflow.com/a/6489348/2423549
 " :autocmd InsertEnter * set cul
@@ -183,6 +187,7 @@ command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git co
 command! Gunwip !git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1
 command! Gco GCheckout
 command! Gf Gfetch
+command! Gyank .Gbrowse!
 command! Ggsup :exec printf('!git branch --set-upstream-to=origin/%s %s', g:fugitive#head(), g:fugitive#head())
 
 command! Gcobak :exec printf('!git checkout -b %s-bak', g:fugitive#head())

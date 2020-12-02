@@ -7,6 +7,10 @@
     "url": "git@github.com:bkad/CamelCaseMotion.git",
     "revision": "de439d7c06cffd0839a29045a103fe4b44b15cdc"
   },
+  "Colorizer": {
+    "url": "git@github.com:chrisbra/Colorizer.git",
+    "revision": "879e6c69c0c02c4ef0f08b3955c60de16efd8fb8"
+  },
   "asyncrun.vim": {
     "url": "git@github.com:skywind3000/asyncrun.vim.git",
     "revision": "58d23e70569994b36208ed2a653f0a2d75c24fbc"
@@ -59,6 +63,10 @@
     "url": "https://github.com/Xuyuanp/nerdtree-git-plugin",
     "revision": "0501cdfbe3064d1f2d0987929565bccee5f5a6a5"
   },
+  "rainbow_csv": {
+    "url": "https://github.com/mechatroner/rainbow_csv.git",
+    "revision": "1ec17c93e7b3b51c1ac3e3715d6cac111eff5261"
+  },
   "sonicpi.vim": {
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
     "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
@@ -69,7 +77,7 @@
   },
   "todo.txt-vim": {
     "url": "https://gitlab.com/dbeniamine/todo.txt-vim.git",
-    "revision": "ba4854e3659348cedaede9340ac93280134b079e"
+    "revision": "37d46d4cf8e4abaa5a7f9d1b098003a5dd485ed8"
   },
   "typescript-vim": {
     "url": "git@github.com:leafgarland/typescript-vim.git",
