@@ -88,6 +88,11 @@ zle-line-init() { zle -K viins; _set_beam_cursor }
 
 source ~/.bashrc
 
+# Log bash history
+# @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
+mkdir -p ~/.logs
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -E 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+
 # Zsh execution of bash prompt helper
 # @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
 # @see https://superuser.com/questions/735660/whats-the-zsh-equivalent-of-bashs-prompt-command
@@ -96,3 +101,4 @@ precmd_functions=(prmptcmd)
 
 echo "Successfully loaded zsh configuration"
 echo "..."
+
