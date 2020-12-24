@@ -23,6 +23,10 @@
     "url": "https://github.com/neoclide/coc.nvim.git",
     "revision": "705f94fdd3e9919b6f3c69e4dd44bf3bb5167f60"
   },
+  "critiq.vim": {
+    "url": "git@github.com:AGhost-7/critiq.vim.git",
+    "revision": "fc00d5568f50293797a107e5070955d1f82db4c5"
+  },
   "fzf": {
     "url": "git@github.com:junegunn/fzf.git",
     "revision": "f2d44ab5a793906457f3d3384f09af085096138d"
