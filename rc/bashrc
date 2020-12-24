@@ -32,6 +32,9 @@ PATH="$PATH:/usr/local/opt/sqlite/bin"
 # todo.txt
 export TODOTXT_CFG_FILE=$DOTFILES_PATH/rc/todo.cfg
 
+# note.sh
+export NOTE_DIR=$HOME/notes/daily
+
 # Ensure we're using the corect ctags
 # @see https://www.freecodecamp.org/news/make-your-vim-smarter-using-ctrlp-and-ctags-846fc12178a4/
 alias ctags="$(brew --prefix)/bin/ctags"

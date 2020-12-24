@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# note.sh, written and maintained by @hachibu
+# Source copied + pasted from...
+# https://github.com/hachibu/note.sh/blob/main/src/note.sh
+#
+# @see https://hachibu.net/posts/2020/how-i-manage-my-random-daily-notes/
+
+set -euo pipefail
+
+if [ -z ${NOTE_DIR+x} ]; then
+  echo "Error: Please configure and export NOTE_DIR environment variable."
+  exit 1
+fi
+
+function usage() {
+  echo "Usage: note.sh [action]"
+  echo
+  echo "  actions:"
+  echo "    grep [pattern]"
+}
+
+mkdir -p "$NOTE_DIR"
+
+if [ $# -eq 0 ]; then
+    TODAY="$(date +'%Y-%m-%d')"
+    TODAY_NOTE="$NOTE_DIR/$TODAY.md"
+    if [ ! -f "$TODAY_NOTE" ]; then
+      echo "Initializing $TODAY_NOTE"
+      printf "%s\n\n\n" "# $TODAY" > $TODAY_NOTE
+    else
+      echo "Fetching today's note..."
+    fi
+
+    if [ "$EDITOR" = "vim" ]; then
+      # Pass start command to open in insert mode at the end of the file
+      # https://edunham.net/2015/01/29/vim_open_file_with_cursor_at_the_end.html
+      nvim "+normal G" +startinsert $TODAY_NOTE
+    else
+      $EDITOR $TODAY_NOTE
+    fi
+else
+  case $1 in
+    grep)
+      grep -i -r --color "$2" "$NOTE_DIR"
+      ;;
+    *)
+      usage
+      ;;
+  esac
+fi
