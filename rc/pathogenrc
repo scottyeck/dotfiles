@@ -73,7 +73,7 @@
   },
   "sonicpi.vim": {
     "url": "https://github.com/dermusikman/sonicpi.vim.git",
-    "revision": "befd848a2ac2c9cdfb5447c3ef4dc8b73c23eb74"
+    "revision": "716b5d47c75ec66e38b0c3233e1f93dbed9771e6"
   },
   "taboo.vim": {
     "url": "git@github.com:gcmt/taboo.vim.git",

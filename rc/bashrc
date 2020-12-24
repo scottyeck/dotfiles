@@ -24,6 +24,10 @@ PATH="$PATH:$HOME/.cargo/bin"
 # go
 PATH="$PATH:/usr/local/go/bin"
 
+PATH="$PATH:/usr/local/opt/ruby/bin"
+
+source "$HOME/.cargo/env"
+
 # sqlite, via brew
 # > sqlite is keg-only, which means it was not symlinked into /usr/local,
 # > because macOS provides an older sqlite3.
@@ -67,3 +71,4 @@ fi
 
 echo "Successfully loaded remote bash configuration"
 echo "..."
+source "$HOME/.cargo/env"
