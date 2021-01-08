@@ -30,6 +30,7 @@ alias gsha="git log --oneline | fzf | awk '{print \$1}' | pbcopy"
 
 # Initialize bitwarden and expose session as env var
 alias bwi='eval $(bw login | grep export | sed "s/^$ //")'
+alias bwu='eval $(bw unlock | grep export | sed "s/^$ //")'
 
 # Allows for cd'ing to frequently used directories
 # https://thoughtbot.com/blog/cding-to-frequently-used-directories-in-zsh
