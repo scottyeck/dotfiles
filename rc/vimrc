@@ -193,6 +193,8 @@ command! Gcn :exec printf('!git commit --amend -v --no-edit')
 
 command! Gcobak :exec printf('!git checkout -b %s-bak', g:fugitive#head())
 
+command! Note :exec printf(':edit %s', system('note --file'))
+
 " ### async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
 
