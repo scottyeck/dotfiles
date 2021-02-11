@@ -20,6 +20,7 @@ Read up on these CLI helpers I use:
 ## TODO
 
 - [ ] Explore [better vi mode in tmux](https://sanctum.geek.nz/arabesque/vi-mode-in-tmux/).
+- [ ] Document installation of [pynvim](https://github.com/neovim/pynvim).
 - [ ] Add various configs that are currently missing
   - [ ] Karabiner elements
 - [ ] Add pre-commit hook that alphabetizes spells

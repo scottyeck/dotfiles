@@ -79,6 +79,10 @@
     "url": "git@github.com:gcmt/taboo.vim.git",
     "revision": "caf948187694d3f1374913d36f947b3f9fa1c22f"
   },
+  "thesaurus_query.vim": {
+    "url": "git@github.com:Ron89/thesaurus_query.vim.git",
+    "revision": "830a20ec77780ebfe8d2a7e8c740ca4abb079f89"
+  },
   "todo.txt-vim": {
     "url": "https://gitlab.com/dbeniamine/todo.txt-vim.git",
     "revision": "37d46d4cf8e4abaa5a7f9d1b098003a5dd485ed8"
