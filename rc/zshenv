@@ -7,6 +7,7 @@ plugins=(
   copyfile
   git
   osx
+  tmux
   yarn
   zsh-syntax-highlighting
 )
