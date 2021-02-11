@@ -90,15 +90,23 @@ zle-line-init() { zle -K viins; _set_beam_cursor }
 source ~/.bashrc
 
 # Log bash history
+#
+# Temporarily disabling this as it's untenable as history grows in
+# size. There is prior art to resolving this, likely involving a
+# regular CRON that backs up history in schedules batches rather
+# than via a continuous stream, thus avoiding the bottleneck.
+# @see relevant prior art:
+# https://lukas.zapletalovi.com/2013/03/never-lost-your-bash-history-again.html
+# 
 # @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
-mkdir -p ~/.logs
-export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -E 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+# mkdir -p ~/.logs
+# export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -E 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
-# Zsh execution of bash prompt helper
-# @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
-# @see https://superuser.com/questions/735660/whats-the-zsh-equivalent-of-bashs-prompt-command
-prmptcmd() { eval "$PROMPT_COMMAND" }
-precmd_functions=(prmptcmd)
+# # Zsh execution of bash prompt helper
+# # @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
+# # @see https://superuser.com/questions/735660/whats-the-zsh-equivalent-of-bashs-prompt-command
+# prmptcmd() { eval "$PROMPT_COMMAND" }
+# precmd_functions=(prmptcmd)
 
 echo "Successfully loaded zsh configuration"
 echo "..."
