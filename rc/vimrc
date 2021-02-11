@@ -44,6 +44,13 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " @see https://stackoverflow.com/a/19485184
 autocmd FileType gitcommit setlocal spell
 
+" thesaurus-query.vim
+" Note that in order to use mthesaur_txt, you need to
+" fetch a local copy of the Moby Thesaurus.
+" curl http://www.gutenberg.org/files/3202/files/mthesaur.txt -O ~/.config/nvim/thesaurus/
+" @see https://en.wikipedia.org/wiki/Moby_Project#Thesaurus
+let g:tq_enabled_backends=["mthesaur_txt", "datamuse_com"]
+
 " Activate Colorizer
 " @see https://github.com/chrisbra/Colorizer/issues/56
 let g:colorizer_auto_color = 1
