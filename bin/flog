@@ -9,8 +9,10 @@ flog () {
 
   # ensure dir exists
   mkdir -p ~/tmp/logs/$LAMBDA
+  FILENAME=~/tmp/logs/$LAMBDA/$(now).txt
 
-  awslogs get /aws/lambda/$LAMBDA $@ > ~/tmp/logs/$LAMBDA/$(now).txt
+  awslogs get /aws/lambda/$LAMBDA $@ > $FILENAME
+  vim $FILENAME
 }
 
 flog $@
