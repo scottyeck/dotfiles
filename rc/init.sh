@@ -10,6 +10,8 @@ ln -sf $SCRIPT_PATH/bashrc ~/.bashrc
 ln -sf $SCRIPT_PATH/zshrc ~/.zshrc
 ln -sf $SCRIPT_PATH/zshenv ~/.zshenv
 ln -sf $SCRIPT_PATH/gitconfig ~/.gitconfig
+ln -sf $SCRIPT_PATH/gemrc ~/.gemrc
+ln -sf $SCRIPT_PATH/irbrc ~/.irbrc
 
 # Tmux session configs
 ln -sf $SCRIPT_PATH/start ~/start

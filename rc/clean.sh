@@ -17,6 +17,8 @@ maybeUnlink ~/.bashrc
 maybeUnlink ~/.zshrc
 maybeUnlink ~/.zshenv
 maybeUnlink ~/.gitconfig
+maybeUnlink ~/.gemrc
+maybeUnlink ~/.irbrc
 maybeUnlink ~/start
 maybeUnlink $CONFIG_PATH/nvim/init.vim
 maybeUnlink $CONFIG_PATH/coc/extensions/package.json
