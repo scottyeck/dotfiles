@@ -19,6 +19,10 @@ Read up on these CLI helpers I use:
 
 ## TODO
 
+- [ ] Update git config default branch name to `main`
+  - [ ] [Upgrade `git`](https://medium.com/@katopz/how-to-upgrade-git-ff00ea12be18)
+  - [ ] [Unrestrict `/usr/bin/git`](https://apple.stackexchange.com/questions/193368/what-is-the-rootless-feature-in-el-capitan-really)
+- [ ] Render zsh prompt with newline
 - [ ] Explore [better vi mode in tmux](https://sanctum.geek.nz/arabesque/vi-mode-in-tmux/).
 - [ ] Document installation of [pynvim](https://github.com/neovim/pynvim).
 - [ ] Add various configs that are currently missing
