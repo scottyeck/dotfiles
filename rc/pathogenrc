@@ -19,6 +19,10 @@
     "url": "git@github.com:scottyeck/asynctasks.vim.git",
     "revision": "20f12c473ac9d4ebe4308bc8d3737b7e3a763007"
   },
+  "bullets.vim": {
+    "url": "git@github.com:dkarter/bullets.vim.git",
+    "revision": "b71d5dd068a61f61365d5853af1386a4f74f429d"
+  },
   "coc.nvim": {
     "url": "https://github.com/neoclide/coc.nvim.git",
     "revision": "705f94fdd3e9919b6f3c69e4dd44bf3bb5167f60"
