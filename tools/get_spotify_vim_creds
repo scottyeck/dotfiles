@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source ~/.shpotify.cfg
+
+PLAIN_SPOTIFY_TOKEN="$CLIENT_ID:$CLIENT_SECRET"
+ENCODED_SPOTIFY_TOKEN="$(echo $PLAIN_SPOTIFY_TOKEN | base64)"
+
+echo $ENCODED_SPOTIFY_TOKEN | pbcopy
+
+echo "Your 'vimify' token is:"
+echo $ENCODED_SPOTIFY_TOKEN
+echo "This token has been copied to your clipboard. You did it!"
+

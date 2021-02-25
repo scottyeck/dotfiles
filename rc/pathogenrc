@@ -190,5 +190,9 @@
   "vim-vinegar": {
     "url": "git@github.com:tpope/vim-vinegar.git",
     "revision": "fcce70f1403ba4101668a4c960c577bddbd00f06"
+  },
+  "vimify": {
+    "url": "git@github.com:HendrikPetertje/vimify.git",
+    "revision": "ecf940499192970228fbf2ca3f0ea5e499baacc9"
   }
 }

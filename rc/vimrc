@@ -87,6 +87,8 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 " @see https://github.com/peitalin/vim-jsx-typescript
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
+let g:spotify_token=$SPOTIFY_VIM_TOKEN
+
 " ------------------------------
 " ## Mappings
 " ------------------------------
