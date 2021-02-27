@@ -75,10 +75,6 @@ let g:netrw_browse_split = 0
 " @see https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Make hover pop-ups scrollable
-" https://github.com/neoclide/coc.nvim/issues/609#issuecomment-478177267
-autocmd CursorHold * if ! coc#util#has_float() | call CocActionAsync('doHover') | endif 
-
 " Make double-<Esc> clear search highlights
 " @see https://stackoverflow.com/a/19877212
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
