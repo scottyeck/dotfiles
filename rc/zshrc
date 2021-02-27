@@ -33,11 +33,6 @@ alias gsha="git log --oneline | fzf | awk '{print \$1}' | pbcopy"
 alias bwi='eval $(bw login | grep export | sed "s/^$ //")'
 alias bwu='eval $(bw unlock | grep export | sed "s/^$ //")'
 
-# Allows for cd'ing to frequently used directories
-# https://thoughtbot.com/blog/cding-to-frequently-used-directories-in-zsh
-setopt auto_cd
-cdpath=($HOME/git/fabric $HOME/git/me)
-
 # Mimics existing gcn! but without amend
 alias gcn='git commit -v --no-edit'
 
