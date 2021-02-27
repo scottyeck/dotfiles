@@ -18,6 +18,7 @@ alias gcur='echo $(git_current_branch)'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 alias vim='nvim'
+alias python='python3'
 
 # Render an interactive git branch picker sorted by most recent commit,
 # and checkout the selection.
@@ -111,6 +112,8 @@ source ~/.bashrc
 echo "Successfully loaded zsh configuration"
 echo "..."
 
+# Initialize pyenv
+eval "$(pyenv init -)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

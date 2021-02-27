@@ -21,6 +21,10 @@ PATH="$PATH:$DOTFILES_PATH/node_modules/.bin"
 # cargo
 PATH="$PATH:$HOME/.cargo/bin"
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+PATH="$PATH:$PYENV_ROOT/bin"
+
 # go
 PATH="$PATH:/usr/local/go/bin"
 
