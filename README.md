@@ -25,6 +25,9 @@ Read up on these CLI helpers I use:
 - [ ] Render zsh prompt with newline
 - [ ] Explore [better vi mode in tmux](https://sanctum.geek.nz/arabesque/vi-mode-in-tmux/).
 - [ ] Document installation of [pynvim](https://github.com/neovim/pynvim).
+- [ ] Add `do` step support for `pgen`, similar to `plug`
+  - (For example, `markdown-preview.nvim` requires a `yarn install` post-clone step)
+  - (Alternatively, just switch to plug)
 - [ ] Add various configs that are currently missing
   - [ ] Karabiner elements
 - [ ] Add pre-commit hook that alphabetizes spells
