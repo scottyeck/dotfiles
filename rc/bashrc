@@ -18,6 +18,9 @@ PATH="$PATH:$DOTFILES_PATH/bin"
 # node_modules
 PATH="$PATH:$DOTFILES_PATH/node_modules/.bin"
 
+# Provide node some more memory
+export NODE_OPTIONS="--max-old-space-size=4096"
+
 # cargo
 PATH="$PATH:$HOME/.cargo/bin"
 
