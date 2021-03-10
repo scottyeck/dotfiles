@@ -25,7 +25,7 @@
   },
   "coc.nvim": {
     "url": "https://github.com/neoclide/coc.nvim.git",
-    "revision": "70e5a383cd1c5e39505ef016e8507e7daa4bc7dc"
+    "revision": "ab4f3f5797754334def047466a998b92f3076db9"
   },
   "critiq.vim": {
     "url": "git@github.com:AGhost-7/critiq.vim.git",
