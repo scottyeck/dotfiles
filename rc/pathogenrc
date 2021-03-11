@@ -11,6 +11,10 @@
     "url": "git@github.com:chrisbra/Colorizer.git",
     "revision": "879e6c69c0c02c4ef0f08b3955c60de16efd8fb8"
   },
+  "asyncrun.extra": {
+    "url": "git@github.com:skywind3000/asyncrun.extra.git",
+    "revision": "85da2eec23148eab2cd892c3ccd52d4e422afe36"
+  },
   "asyncrun.vim": {
     "url": "git@github.com:skywind3000/asyncrun.vim.git",
     "revision": "58d23e70569994b36208ed2a653f0a2d75c24fbc"
@@ -198,5 +202,9 @@
   "vim-vinegar": {
     "url": "git@github.com:tpope/vim-vinegar.git",
     "revision": "fcce70f1403ba4101668a4c960c577bddbd00f06"
+  },
+  "vimux": {
+    "url": "git@github.com:preservim/vimux.git",
+    "revision": "29d46f6bc158c28b85ae540dc29459ff41211233"
   }
 }

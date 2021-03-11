@@ -210,10 +210,20 @@ command! Note :exec printf(':edit %s', system('note --file'))
 " Open quickfix window automatically
 let g:asyncrun_open = 6
 
-" ### vim-asynctasks
+" Open in a tmux pane
+let g:asynctasks_term_pos = 'tmux'
 
-" Open an internal terminal
-let g:asynctasks_term_pos = 'right'
+" ### vimux
+" FYI The 'tmux' asynctasks_term_pos setting above executes
+" using Vimux via asynctasks.extra.
+
+" Orientation corresponds to the direction the panes flow. In
+" this case, a 'horizontal' orientation creates a 'vertical'
+" pane split.
+let g:VimuxOrientation = "h"
+" Height is generic for 'size' - percentage of screen the
+" tmux pane should occupy.
+let g:VimuxHeight = 33
 
 " ### sonicpi.vim
 
