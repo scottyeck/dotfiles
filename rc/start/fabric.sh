@@ -16,19 +16,19 @@ tmux rename-window -t 0 'home'
 tmux send-keys -t 'home' 'cd ~'
 
 tmux new-window -t $SESSION:1 -n 'linen'
-tmux send-keys -t 'linen' 'cd ~/git/fabric/linen' C-m 'vim' C-m
+tmux send-keys -t 'linen' 'cd ~/git/fabric/linen' C-m
 
 tmux new-window -t $SESSION:2 -n 'cashmere'
-tmux send-keys -t 'cashmere' 'cd ~/git/fabric/cashmere' C-m 'vim' C-m
+tmux send-keys -t 'cashmere' 'cd ~/git/fabric/cashmere' C-m
 
 tmux new-window -t $SESSION:3 -n 'www'
-tmux send-keys -t 'www' 'cd ~/git/fabric/cashmere' C-m 'yw www local'
+tmux send-keys -t 'www' 'cd ~/git/fabric/cashmere' C-m
 
 tmux new-window -t $SESSION:4 -n 'quilt'
 tmux send-keys -t 'quilt' 'cd ~/git/fabric/cashmere/apps/quilt' C-m
 
 tmux new-window -t $SESSION:5 -n 'notes'
-tmux send-keys -t 'notes' 'cd ~/notes' C-m 'vim' C-m
+tmux send-keys -t 'notes' 'cd ~/notes' C-m
 
 # Specify the window to which we want to attach
 SESSION_TARGET="$SESSION_TARGET:0"
