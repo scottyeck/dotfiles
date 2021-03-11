@@ -11,7 +11,7 @@
     "gatsby": "^2.24.73",
     "hbs-cli": "1.4.0",
     "http-server": "exact0.12.3",
-    "jira-cli": "exact2.1.0",
+    "jira-cli": "2.4.0",
     "json-minify": "exact1.0.0",
     "json2csv": "^5.0.5",
     "neovim": "exact4.8.0",
