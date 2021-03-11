@@ -27,6 +27,10 @@
     "url": "https://github.com/neoclide/coc.nvim.git",
     "revision": "ab4f3f5797754334def047466a998b92f3076db9"
   },
+  "confirm_quit.vim": {
+    "url": "git@github.com:arp242/confirm_quit.vim.git",
+    "revision": "5d959ae2ef72e12c25f90af35928321f2210ad9c"
+  },
   "critiq.vim": {
     "url": "git@github.com:AGhost-7/critiq.vim.git",
     "revision": "fc00d5568f50293797a107e5070955d1f82db4c5"
@@ -66,6 +70,10 @@
   "linepulse": {
     "url": "git@github.com:maddisoj/linepulse.git",
     "revision": "0117658ca34b5fa9f3e09c8c332e4b1954275d0d"
+  },
+  "markdown-preview.nvim": {
+    "url": "git@github.com:iamcco/markdown-preview.nvim.git",
+    "revision": "9e11912fd1edb48c95865c817d2841972b6722c2"
   },
   "nerdtree-git-plugin": {
     "url": "https://github.com/Xuyuanp/nerdtree-git-plugin",
@@ -190,9 +198,5 @@
   "vim-vinegar": {
     "url": "git@github.com:tpope/vim-vinegar.git",
     "revision": "fcce70f1403ba4101668a4c960c577bddbd00f06"
-  },
-  "vimify": {
-    "url": "git@github.com:HendrikPetertje/vimify.git",
-    "revision": "ecf940499192970228fbf2ca3f0ea5e499baacc9"
   }
 }
