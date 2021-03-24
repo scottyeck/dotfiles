@@ -103,10 +103,6 @@
     "url": "https://gitlab.com/dbeniamine/todo.txt-vim.git",
     "revision": "37d46d4cf8e4abaa5a7f9d1b098003a5dd485ed8"
   },
-  "todoist.nvim": {
-    "url": "git@github.com:romgrk/todoist.nvim.git",
-    "revision": "bb73aab647e8cd2720491bf53c89684ab8dc9442"
-  },
   "typescript-vim": {
     "url": "git@github.com:leafgarland/typescript-vim.git",
     "revision": "17d85d8051ba21283e62a9101734981e10b732fd"
