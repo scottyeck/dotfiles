@@ -14,7 +14,7 @@
     "jira-cli": "2.4.0",
     "json-minify": "exact1.0.0",
     "json2csv": "^5.0.5",
-    "neovim": "^4.9.0",
+    "neovim": "exact4.8.0",
     "npx": "^10.2.2",
     "pomd": "2.3.4",
     "react-native-cli": "^2.0.1",

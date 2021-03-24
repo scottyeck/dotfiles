@@ -1,9 +1,4 @@
 if !exists('g:vscode')
-
-  let g:node_host_prog = expand('~/git/me/dotfiles/node_modules/.bin/neovim-node-host')
-
-  " Specify custom node version
-  let $PATH = $HOME . '/.nvm/versions/node/v14.16.0/bin:' . $PATH
   
   " Uncomment for debugging to increase log-level
   " let $NVIM_COC_LOG_LEVEL = 'debug'
