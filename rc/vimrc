@@ -23,8 +23,10 @@ set termguicolors
 " Use zsh as shell inside vim
 set shell=/bin/zsh
 
-" Line numbers
+" Support relative & absolute numbers simultaneously.
+" @see https://stackoverflow.com/a/61681958
 set relativenumber
+set number
 
 " Tab size
 set tabstop=2
