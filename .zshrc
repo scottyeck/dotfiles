@@ -39,6 +39,8 @@ alias gcn='git commit -v --no-edit'
 # Shortcut to meme
 alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
 
+alias brb='brew_bundle'
+
 alias tp='tmuxproj'
 
 # Base vi mode configuration
