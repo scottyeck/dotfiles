@@ -2,7 +2,8 @@
 
 EXEC_NAME="tmuxproj"
 
-source $HOME/bin/common.sh
+SCRIPT_PATH="$( cd "$( dirname $0 )" ; pwd )"
+source $SCRIPT_PATH/common.sh
 
 startTmuxProject () {
   if [ -z "$TMUX_PROJ_DIR" ]; then
