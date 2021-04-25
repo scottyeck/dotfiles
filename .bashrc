@@ -13,10 +13,10 @@ unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # dotfiles
-PATH="$PATH:$DOTFILES_PATH/bin"
+PATH="$PATH:$HOME/bin"
 
 # node_modules
-PATH="$PATH:$DOTFILES_PATH/node_modules/.bin"
+PATH="$PATH:$HOME/node_modules/.bin"
 
 # Provide node some more memory
 export NODE_OPTIONS="--max-old-space-size=4096"
@@ -35,13 +35,12 @@ PATH="$PATH:/usr/local/opt/ruby/bin"
 
 source "$HOME/.cargo/env"
 
+export TMUX_PROJ_DIR="$HOME/.tmuxproj"
+
 # sqlite, via brew
 # > sqlite is keg-only, which means it was not symlinked into /usr/local,
 # > because macOS provides an older sqlite3.
 PATH="$PATH:/usr/local/opt/sqlite/bin"
-
-# todo.txt
-export TODOTXT_CFG_FILE=$DOTFILES_PATH/rc/todo.cfg
 
 # note.sh
 export NOTE_DIR=$HOME/notes/daily
