@@ -1,16 +1,10 @@
-#/bin/bash
+#!/bin/bash
 
 EXEC_NAME="tmuxproj"
 
-function logGeneric () {
-  echo "$EXEC_NAME: $@"
-}
+source $HOME/bin/common.sh
 
-function logError () {
-  logGeneric "ERROR" $@
-}
-
-function startTmuxProject () {
+startTmuxProject () {
   if [ -z "$TMUX_PROJ_DIR" ]; then
     logError 'Config var $TMUX_PROJ_DIR unset'
     return 1
@@ -22,15 +16,15 @@ function startTmuxProject () {
   fi
 
   local PROJ_NAME="$1"
-  local EXEC_NAME="$TMUX_PROJ_DIR/$PROJ_NAME"
+  local PROJ_EXEC_NAME="$TMUX_PROJ_DIR/$PROJ_NAME"
 
-  if [[ ! -x "$EXEC_NAME" ]]; then
+  if [[ ! -x "$PROJ_EXEC_NAME" ]]; then
     logError "Could not find tmux project executable with name \"$PROJ_NAME\""
-    logError "> Start a new one with \"$EDITOR $TMUX_PROJ_DIR/$PROJ_NAME\""
+    logError "> Start a new one with \"$EDITOR $PROJ_EXEC_NAME\""
     return 1
   fi
-  
-  eval $EXEC_NAME
+
+  eval "$PROJ_EXEC_NAME"
 }
 
 startTmuxProject "$@"
