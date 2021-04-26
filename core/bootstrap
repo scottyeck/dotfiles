@@ -55,11 +55,55 @@ maybeSetShellToZsh () {
   fi
 }
 
+maybeInstallPathogen () {
+  if [ ! -f "$HOME/autoload/pathogen.vim" ]; then
+    logAnnounce "installing pathogen"
+    mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
+    curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    logSuccess "successfully installed pathogen"
+  else
+    logNoop "pathogen already installed"
+  fi
+}
+
+installOrUpdateCocExtensions () {
+  logAnnounce "installing / updating coc extensions"
+  cd $HOME/coc/extensions && npm install && cd $HOME
+  logSuccess "coc extensions up-to-date"
+}
+
+maybeSetUpDropboxSymlinks () {
+  if [ ! -d $HOME/notes ]; then
+    logAnnounce "setting up dropbox symlinks"
+    mkdir -p ~/Dropbox/notes
+    ln -sf $HOME/Dropbox/notes $HOME/notes
+    logSuccess "successfully set up Dropbox symlinks"
+  else
+    logNoop "dropbox symlinks already setup"
+  fi
+}
+
+#
+# Bootstraps a machine. All the operations here should be idempotent.
+#
 bootstrap () {
   maybeInstallBrew
+
+  # Must be run after brew but before zsh since it may install zsh 
+  brew bundle install
+
   maybeSetShellToZsh
   maybeInstallOhMyZsh
   maybeInstallNvm
+  maybeInstallPathogen
+
+  # In case it hasn't yet been sourced.
+  source ~/.zshrc
+
+  # Sets up vim/nvim plugins via pathogen.
+  pgen install
+
+  installOrUpdateCocExtensions
 }
 
 bootstrap
