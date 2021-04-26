@@ -6,3 +6,4 @@ yarn-error.log
 # Vim spellchecker dict binaries
 *.spl
 
+.dotfiles

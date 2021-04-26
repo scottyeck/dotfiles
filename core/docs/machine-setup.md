@@ -1,66 +1,21 @@
 # machine setup
 
-## Install homebrew
-
-See [here](https://brew.sh/). We'll use `brew cask` to install a whole buncha stuff.
-
-```bash
-$ # Install brew & brew cask (included) - see above.
-$ #
-$ # Then, verify everything's all good.
-$ brew doctor
 ```
+# 1. install dotfiles
 
-## Install Password Manager
+cd $HOME
+curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/install" | bash
+
+# 2. bootstrap system
+
+./core/bootstrap
+
+```
+…
+
+## Install Password Manager(s)
 
 (Instructions omitted on purpose.)
-
-## GUI App Install
-
-Use `brew cask` to install a million GUIs so we don't have to do it manually.
-
-```
-$ brew cask install \
-  google-chrome \
-  slack \
-  alacritty \
-  sonic-pi \
-  spotify \
-  alfred \
-  karabiner-elements \
-  figma \
-  visual-studio-code \
-  vlc \
-  selfcontrol \
-  flux \
-  divvy
-```
-
-## zsh
-
-Install `zsh`.
-
-```
-# brew install zsh
-```
-
-Then install [ `oh-my-zsh` ](https://github.com/ohmyzsh/ohmyzsh). (The install will set `zsh` as the default login shell.)
-
-## Node tooling
-
-* yarn
-* nvm
-
-## Dotfiles setup
-
-1. Clone.
-2. Install brew leaves via `brew bundle`
-3. Run `sh init.sh` to initialize dots. - Follow steps following to Update Coc extensions.
-4. Run `pgen install` to install vim plugins.
-
-## Git Config
-
-1. Set up 
 
 ## System Preferences
 
@@ -102,20 +57,10 @@ Then install [ `oh-my-zsh` ](https://github.com/ohmyzsh/ohmyzsh). (The install w
   - Slack
     - https://slack.com/downloads/instructions/mac
     - Configure security settings to allow for screen-sharing (via [/r/slack](https://www.reddit.com/r/Slack/comments/dfeg37/coworker_has_slack_screen_sharing_issues_on_macos/fdotj8p/))
-  - Figma
   - Vs Code
     - Prettier / eslint / quit thing / project manager
-  - iTerm 2
-      - Enable _Scroll wheel sends arrow keys when in alternate screen mode_ (via [StackOverflow](https://stackoverflow.com/a/37879399))
-    - TODO: Install oh-my-zsh
-    - TODO: Change to zsh
-  - Spotify
   - Fl.ux
     - https://justgetflux.com/news/pages/macquickstart/
-  - SelfControl
-    - https://selfcontrolapp.com/
-  - VLC
-    - https://get.videolan.org/
 
 - System
   - Python
@@ -135,3 +80,4 @@ Then install [ `oh-my-zsh` ](https://github.com/ohmyzsh/ohmyzsh). (The install w
   - Bluetooth
     - Add external trackpad
     - Add headphones
+

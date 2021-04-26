@@ -1,0 +1,17 @@
+#!/bin/bash
+
+EXEC_NAME="brew_bundle"
+
+SCRIPT_PATH=$(cd $( dirname $0 ); pwd )
+source $SCRIPT_PATH/common.sh
+
+brewBundle () {
+  if [ -z "~/Brewfile" ]; then
+    logError 'Cannot invoke "brew bundle" against non-existing Brewfile.'
+    return 1
+  fi
+
+  brew "$@" && brew bundle dump --force
+}
+
+brewBundle "$@"

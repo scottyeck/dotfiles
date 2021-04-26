@@ -1,0 +1,31 @@
+#!/bin/bash
+
+EXEC_NAME="tmuxproj"
+
+SCRIPT_PATH="$( cd "$( dirname $0 )" ; pwd )"
+source $SCRIPT_PATH/common.sh
+
+startTmuxProject () {
+  if [ -z "$TMUX_PROJ_DIR" ]; then
+    logError 'Config var $TMUX_PROJ_DIR unset'
+    return 1
+  fi
+
+  if [ ! -d "$TMUX_PROJ_DIR" ]; then
+    logError "Could not find \$TMUX_PROJ_DIR: \"$TMUX_PROJ_DIR\"" 
+    return 1
+  fi
+
+  local PROJ_NAME="$1"
+  local PROJ_EXEC_NAME="$TMUX_PROJ_DIR/$PROJ_NAME"
+
+  if [[ ! -x "$PROJ_EXEC_NAME" ]]; then
+    logError "Could not find tmux project executable with name \"$PROJ_NAME\""
+    logError "> Start a new one with \"$EDITOR $PROJ_EXEC_NAME\""
+    return 1
+  fi
+
+  eval "$PROJ_EXEC_NAME"
+}
+
+startTmuxProject "$@"

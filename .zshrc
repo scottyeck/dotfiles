@@ -3,7 +3,6 @@ echo "..."
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
-export DOTFILES_PATH="$HOME/git/me/dotfiles"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -11,7 +10,6 @@ export DOTFILES_PATH="$HOME/git/me/dotfiles"
 ZSH_THEME="simple"
 
 source $ZSH/oh-my-zsh.sh
-source $DOTFILES_PATH/rc/todo.cfg 
 # Custom zsh configuration
 
 alias gcur='echo $(git_current_branch)'
@@ -24,6 +22,8 @@ alias python='python3'
 # and checkout the selection.
 # @via https://github.com/liamfd
 alias gbrecent='git checkout $(git branch --sort=-committerdate | fzf)'
+
+alias dots="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # Render an interactive git commit log sorted by recency and copy
 # the sha of the selection the clipboard.
@@ -38,6 +38,10 @@ alias gcn='git commit -v --no-edit'
 
 # Shortcut to meme
 alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
+
+alias brb='brew_bundle'
+
+alias tp='tmuxproj'
 
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+install () {
+  if [ "$(pwd)" != "$HOME" ]; then
+    echo "⚠️ Cannot install dotfiles outside home directory."
+    exit 1
+  fi
+
+  if [ -d "$HOME/.dotfiles" ]; then
+    echo "⚠️ Dotfiles dir already exists. Please cleanup prior to install."
+    exit 1
+  fi
+
+  # https://www.atlassian.com/git/tutorials/dotfiles
+  mkdir -p $HOME/.dotfiles
+  alias dots="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+  echo ".dotfiles" >> $HOME/.gitignore
+  git clone --bare git@github.com:scottyeck/dotfiles.git $HOME/.dotfiles
+}
+
+install

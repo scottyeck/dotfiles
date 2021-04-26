@@ -1,0 +1,5 @@
+# .dotsrc
+
+target: /Users/scottyeck/git/me/dotfiles/home
+links:
+ - .examplerc
