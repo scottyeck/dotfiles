@@ -1,39 +1,30 @@
 # dotfiles
 
-> My dotfiles / various scripts repo..
+> My dotfiles repo.
 
-Set up:
+Here I store my dotfiles and other miscellanea regarding machine configuration. For the most part this comprises of: 
 
-```bash
-$ sh init.sh
+* runtime configurations, primarily for my regular `zsh` / `tmux` / `neovim` workflows.
+* many tools I've written to make my life easier.
+* notes on manual OSX settings. Hopefully someday I can automate these.
+
+I've not built much here with consideration for needs beyond my own, so if you _somehow_ find yourself (1) reading this and (2) considering for some reason installing my dotfiles, proceed at your own peril.
+
+## Install
+
+These dotfiles are intended to be installed via a [bare git repository](https://www.atlassian.com/git/tutorials/dotfiles) - thank you to @liamfd for the [recommendation](https://github.com/liamfd/dotfiles/blob/master/README_DOTFILES.md).
+
+```
+# install dotfiles
+cd $HOME
+curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/install" | bash
+
+# bootstrap system
+./core/bootstrap
 ```
 
-## Docs
+## Further reading
 
-Read up on these CLI helpers I use:
-
-- [`flog`](./docs/README.flog.md)
-- [`now`](./docs/README.now.md)
-- [`nth`](./docs/README.nth.md)
-- [`pgen`](./docs/README.pgen.md)
-
-## TODO
-
-- [ ] Update git config default branch name to `main`
-  - [ ] [Upgrade `git`](https://medium.com/@katopz/how-to-upgrade-git-ff00ea12be18)
-  - [ ] [Unrestrict `/usr/bin/git`](https://apple.stackexchange.com/questions/193368/what-is-the-rootless-feature-in-el-capitan-really)
-- [ ] Render zsh prompt with newline
-- [ ] Explore [better vi mode in tmux](https://sanctum.geek.nz/arabesque/vi-mode-in-tmux/).
-- [ ] Document installation of [pynvim](https://github.com/neovim/pynvim).
-- [ ] Add `do` step support for `pgen`, similar to `plug`
-  - (For example, `markdown-preview.nvim` requires a `yarn install` post-clone step)
-  - (Alternatively, just switch to plug)
-- [ ] Add various configs that are currently missing
-  - [ ] Karabiner elements
-- [ ] Add pre-commit hook that alphabetizes spells
-  - _Alternatively_, just put the spells in Dropbox because this is annoying.
-- [ ] Add `brew-leaves` to init.
-- [ ] Add notes about [shpotify](https://github.com/hnarayanan/shpotify) _somewhere_.
-- [ ] Complete CLI tool docs.
-- [ ] Tool-specific setup / teardown functions.
-- [ ] Deal with relative paths internal to setup / teardown.
+- [Machine Setup](./core/docs/machine-setup.md)
+- [TODOs](./core/docs/todo.md)
+- [CLI Helper Docs](./core/docs/readme)

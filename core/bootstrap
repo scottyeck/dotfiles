@@ -1,0 +1,65 @@
+#!/bin/bash
+
+set -e
+
+logAnnounce () {
+  echo "🚦 $@"
+}
+
+logSuccess () {
+  echo "✅ $@"
+}
+
+logNoop () {
+  echo "👍 $@"
+}
+
+maybeInstallBrew () {
+  if [ -z "$(command -v brew)" ]; then
+    logAnnounce "installing homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    logSuccess "successfully installed homebrew"
+  else
+    logNoop "homebrew already installed"
+  fi
+}
+
+maybeInstallNvm () {
+  if [ ! -d "$HOME/.nvm" ]; then
+    logAnnounce "installing nvm..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+    logSuccess "successfully installed nvm"
+  else
+    logNoop "nvm already installed"
+  fi
+}
+
+maybeInstallOhMyZsh () {
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    logAnnounce "installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    logSuccess "successfully installed oh-my-zsh"
+  else
+    logNoop "oh-my-zsh already installed"
+  fi
+
+}
+
+maybeSetShellToZsh () {
+  if [ "$(basename $SHELL)" != "zsh" ]; then
+    logAnnounce "setting shell to zsh" 
+    chsh -s "$(which zsh)"
+    logSuccess "successfully set shell to zsh"
+  else
+    logNoop "shell already set to zsh"
+  fi
+}
+
+bootstrap () {
+  maybeInstallBrew
+  maybeSetShellToZsh
+  maybeInstallOhMyZsh
+  maybeInstallNvm
+}
+
+bootstrap
