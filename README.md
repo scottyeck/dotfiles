@@ -17,7 +17,7 @@ These dotfiles are intended to be installed via a [bare git repository](https://
 ```
 # install dotfiles
 cd $HOME
-curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/master/core/install" | bash
+curl "https://raw.githubusercontent.com/scottyeck/dotfiles/master/core/install" | bash
 
 # bootstrap system
 ./core/bootstrap

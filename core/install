@@ -17,7 +17,7 @@ install () {
   mkdir -p $HOME/.dotfiles
   alias dots="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
   echo ".dotfiles" >> $HOME/.gitignore
-  git clone --bare git@github.com:scottyeck/dotfiles.git $HOME/.dotfiles
+  git clone --bare https://github.com/scottyeck/dotfiles.git $HOME/.dotfiles
 }
 
 install
