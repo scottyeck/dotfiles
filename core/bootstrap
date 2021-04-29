@@ -68,7 +68,7 @@ maybeInstallPathogen () {
 
 installOrUpdateCocExtensions () {
   logAnnounce "installing / updating coc extensions"
-  cd $HOME/coc/extensions && npm install && cd $HOME
+  cd $HOME/.config/coc/extensions && npm install && cd $HOME
   logSuccess "coc extensions up-to-date"
 }
 
@@ -80,6 +80,16 @@ maybeSetUpDropboxSymlinks () {
     logSuccess "successfully set up Dropbox symlinks"
   else
     logNoop "dropbox symlinks already setup"
+  fi
+}
+
+maybeInstallTpm () {
+  if [ ! -d $HOME/.tmux/plugins/tpm ]; then
+    logAnnounce "installing tpm"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    logSuccess "successfully installed tpm"
+  else
+    logNoop "tpm already installed"
   fi
 }
 

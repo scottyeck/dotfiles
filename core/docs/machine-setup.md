@@ -61,23 +61,12 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
     - Prettier / eslint / quit thing / project manager
   - Fl.ux
     - https://justgetflux.com/news/pages/macquickstart/
-
 - System
   - Python
     - Install > Python 3.4 using [pyenv](https://opensource.com/article/19/5/python-3-default-mac#what-to-do).
 
-- System Prefs
-  - Dock
-    - Shrink Size.
-    - Check "Automatically hide and show the Dock"
-  - Trackpad
-    - Tap to click
-  - Three-finger drag
-    - Accessibility > Mouse & Trackpad > Trackpad Options > Enable Dragging - Select "three finger drag"
-    - @see https://www.makeuseof.com/tag/three-finger-drag-mac/
-  - Resolution
-    - Displays > Display > Scaled - Choose "More space"
-  - Bluetooth
-    - Add external trackpad
-    - Add headphones
+## Manual Installs
 
+These are applications whose installations I don't currently automate because manual installation is simpler.
+
+* [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
