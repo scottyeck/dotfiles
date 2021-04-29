@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# So we can access settings below
+source $HOME/.todo/config
+
+SESSION="coa"
+SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
+
+# Default session target, specifying no active window, which
+# will return us to the previously active window.
+SESSION_TARGET="$SESSION"
+
+# If session doesn't exist, we'll create a new one.
+if [ "$SESSION_EXISTS" = "" ]; then
+
+tmux new-session -d -s $SESSION
+
+tmux rename-window -t 0 'home'
+tmux send-keys -t 'home' 'cd ~'
+
+tmux new-window -t $SESSION:1 -n 'vim'
+tmux send-keys -t 'vim' 'cd ~/git/coa/coa' C-m
+
+tmux new-window -t $SESSION:2 -n 'server'
+tmux send-keys -t 'server' 'cd ~/git/coa/coa' C-m
+tmux select-window -t $SESSION:2
+tmux split-window -h
+tmux send-keys -t 'server' 'cd ~/git/coa/coa' C-m
+tmux select-window -t $SESSION:0
+
+tmux new-window -t $SESSION:3 -n 'todo'
+tmux send-keys -t 'todo' "vim $TODO_DIR/todo.txt" C-m
+
+# Specify the window to which we want to attach
+SESSION_TARGET="$SESSION_TARGET:0"
+
+fi # // if session exists
+
+echo $SESSION_TARGET
+
+# Now that we know the session (either new or existing)
+# exists, attach to it.
+tmux attach-session -t "$SESSION_TARGET"
+
