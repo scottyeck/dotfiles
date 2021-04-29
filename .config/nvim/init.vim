@@ -156,4 +156,19 @@ if !exists('g:vscode')
   nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
   nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+  let g:my_non_coc_file_types = ['txt']
+
+  " Disable coc for .txt files
+  " Frankly we're only using this for todo.txt so this should likely be
+  " further constrained, it will do for the time being.
+  function! s:disable_coc_for_type()
+    if index(g:my_non_coc_file_types, &filetype) == -1
+            let b:coc_enabled = 1
+    endif
+  endfunction
+  augroup CocGroup
+    autocmd!
+    autocmd BufNew,BufEnter * call s:disable_coc_for_type()
+  augroup end
 endif
