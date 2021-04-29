@@ -21,8 +21,9 @@ PATH="$PATH:$HOME/node_modules/.bin"
 # Provide node some more memory
 export NODE_OPTIONS="--max-old-space-size=4096"
 
-# cargo
-PATH="$PATH:$HOME/.cargo/bin"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export GEM_HOME="$HOME/.gem"
+eval "$(rbenv init -)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -33,7 +34,7 @@ PATH="$PATH:/usr/local/go/bin"
 
 PATH="$PATH:/usr/local/opt/ruby/bin"
 
-source "$HOME/.cargo/env"
+# source "$HOME/.cargo/env"
 
 export TMUX_PROJ_DIR="$HOME/.tmuxproj"
 
@@ -77,4 +78,3 @@ fi
 
 echo "Successfully loaded remote bash configuration"
 echo "..."
-source "$HOME/.cargo/env"
