@@ -15,12 +15,29 @@ I've not built much here with consideration for needs beyond my own, so if you _
 These dotfiles are intended to be installed via a [bare git repository](https://www.atlassian.com/git/tutorials/dotfiles) - thank you to @liamfd for the [recommendation](https://github.com/liamfd/dotfiles/blob/master/README_DOTFILES.md).
 
 ```
-# install dotfiles
-cd $HOME
-curl "https://raw.githubusercontent.com/scottyeck/dotfiles/master/core/install" | bash
+# in $HOME
 
-# bootstrap system
-./core/bootstrap
+# clone this repo (explicitly using https to avoid auth issues)
+$ git clone --bare https://github.com/scottyeck/dotfiles.git $HOME/.dotfiles
+
+# add a temporary "dots" alias to this git repo
+$ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# copy the files
+$ dots checkout
+
+# ignore untracked (non dotfiles) files
+$ dotfiles config --local status.showUntrackedFiles no
+
+# if there is a merge conflict, rename the conflicting files and try again
+```
+
+## System Bootstrap
+
+This bootstrap script will (in theory) install all of the stuff I usually install.
+
+```
+$ ./core/bootstrap
 ```
 
 ## Further reading
