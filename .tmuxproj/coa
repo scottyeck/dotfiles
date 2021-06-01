@@ -15,21 +15,23 @@ if [ "$SESSION_EXISTS" = "" ]; then
 
 tmux new-session -d -s $SESSION
 
-tmux rename-window -t 0 'home'
-tmux send-keys -t 'home' 'cd ~'
+tmux rename-window -t 0 -n 'code'
+tmux send-keys -t $SESSION:0 'cd ~/git/coa/coa' C-m
+tmux send-keys -t $SESSION:0 'vim' C-m
 
-tmux new-window -t $SESSION:1 -n 'vim'
-tmux send-keys -t 'vim' 'cd ~/git/coa/coa' C-m
-
-tmux new-window -t $SESSION:2 -n 'server'
-tmux send-keys -t 'server' 'cd ~/git/coa/coa' C-m
-tmux select-window -t $SESSION:2
+tmux new-window -t $SESSION:1 -n 'server'
+tmux select-window -t $SESSION:1
+tmux send-keys -t $SESSION:1 'cd ~/git/coa/coa' C-m
+tmux send-keys -t $SESSION:1 'yarn storybook' C-m
 tmux split-window -h
-tmux send-keys -t 'server' 'cd ~/git/coa/coa' C-m
-tmux select-window -t $SESSION:0
+tmux send-keys -t $SESSION:1 'cd ~/git/coa/coa' C-m
+tmux select-pane -L
+tmux split-window -v
+tmux send-keys -t $SESSION:1 'cd ~/git/coa/coa' C-m
+tmux send-keys -t $SESSION:1 'bundle exec heroku local -f Procfile.dev' C-m
 
-tmux new-window -t $SESSION:3 -n 'todo'
-tmux send-keys -t 'todo' "vim $TODO_DIR/todo.txt" C-m
+tmux new-window -t $SESSION:2 -n 'todo'
+tmux send-keys -t $SESSION:2 "vim $TODO_DIR/todo.txt"
 
 # Specify the window to which we want to attach
 SESSION_TARGET="$SESSION_TARGET:0"
