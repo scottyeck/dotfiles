@@ -35,10 +35,6 @@
     "url": "git@github.com:arp242/confirm_quit.vim.git",
     "revision": "5d959ae2ef72e12c25f90af35928321f2210ad9c"
   },
-  "critiq.vim": {
-    "url": "git@github.com:AGhost-7/critiq.vim.git",
-    "revision": "fc00d5568f50293797a107e5070955d1f82db4c5"
-  },
   "fzf": {
     "url": "git@github.com:junegunn/fzf.git",
     "revision": "f2d44ab5a793906457f3d3384f09af085096138d"

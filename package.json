@@ -6,6 +6,7 @@
   "author": "Scotty Eckenthal <scott.eckenthal@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bars": "https://github.com/jez/bars.git",
     "csvtojson": "exact2.0.10",
     "dts-gen": "exact0.6.0",
     "gatsby": "^2.24.73",

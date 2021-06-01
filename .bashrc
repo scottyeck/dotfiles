@@ -53,6 +53,10 @@ alias ctags="$(brew --prefix)/bin/ctags"
 export PATH
 export EDITOR='vim'
 
+# Default PR review base branch
+# @see https://blog.jez.io/cli-code-review/
+export REVIEW_BASE='master'
+
 # If vim is launched inside a Neovim terminal, launch
 # vanilla vim and not neovim.
 # @see https://github.com/neovim/neovim/issues/9960#issuecomment-488269954
