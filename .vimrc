@@ -200,7 +200,8 @@ command! Gco GCheckout
 command! Gf Gfetch
 command! Gyank .Gbrowse!
 command! Ggsup :exec printf('!git branch --set-upstream-to=origin/%s %s', g:fugitive#head(), g:fugitive#head())
-command! Gcn :exec printf('!git commit --amend -v --no-edit')
+command! Gcn :exec printf('!git commit --amend --verbose --no-edit')
+command! Gcan :exec printf('!git commit --amend --verbose --no-edit --all')
 
 command! Gcobak :exec printf('!git checkout -b %s-bak', g:fugitive#head())
 
