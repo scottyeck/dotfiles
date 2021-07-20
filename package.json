@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "bars": "https://github.com/jez/bars.git",
+    "create-react-app": "^4.0.3",
     "csvtojson": "exact2.0.10",
     "dts-gen": "exact0.6.0",
     "gatsby": "^2.24.73",
@@ -20,6 +21,8 @@
     "pomd": "2.3.4",
     "react-native-cli": "^2.0.1",
     "serve": "exact11.3.2",
+    "sql-formatter": "^4.0.2",
+    "svgo": "^2.3.0",
     "tinypng-cli": "exact0.0.7",
     "tldr": "^3.3.2",
     "tree-cli": "0.4.12",
