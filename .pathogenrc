@@ -83,10 +83,6 @@
     "url": "https://github.com/mechatroner/rainbow_csv.git",
     "revision": "1ec17c93e7b3b51c1ac3e3715d6cac111eff5261"
   },
-  "sonicpi.vim": {
-    "url": "https://github.com/dermusikman/sonicpi.vim.git",
-    "revision": "716b5d47c75ec66e38b0c3233e1f93dbed9771e6"
-  },
   "taboo.vim": {
     "url": "git@github.com:gcmt/taboo.vim.git",
     "revision": "caf948187694d3f1374913d36f947b3f9fa1c22f"
@@ -178,6 +174,10 @@
   "vim-sensible": {
     "url": "https://github.com/tpope/vim-sensible.git",
     "revision": "49ee364222dc2a5a00dddf89fd61880e3e39d46a"
+  },
+  "vim-sonic-pi": {
+    "url": "git@github.com:lilyinstarlight/vim-sonic-pi.git",
+    "revision": "02e947d377b757c541750ee2101022b460053cb2"
   },
   "vim-surround": {
     "url": "git@github.com:tpope/vim-surround.git",
