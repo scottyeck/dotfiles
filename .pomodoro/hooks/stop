@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -exo pipefail
+
+terminal-notifier -title Pomodoro -message "Session complete" -appIcon "/Users/scottyeck/Desktop/tomato.png" -sound "blow"
+

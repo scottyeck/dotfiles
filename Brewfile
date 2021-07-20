@@ -53,6 +53,7 @@ brew "rbenv"
 brew "redis", restart_service: true
 brew "rust"
 brew "shpotify"
+brew "terminal-notifier"
 brew "the_silver_searcher"
 brew "tig"
 brew "tldr"
