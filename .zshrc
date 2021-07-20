@@ -42,6 +42,7 @@ alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
 alias brb='brew_bundle'
 
 alias tp='tmuxproj'
+alias pomo='pomodoro'
 
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html
