@@ -27,10 +27,6 @@
     "url": "git@github.com:dkarter/bullets.vim.git",
     "revision": "b71d5dd068a61f61365d5853af1386a4f74f429d"
   },
-  "coc.nvim": {
-    "url": "https://github.com/neoclide/coc.nvim.git",
-    "revision": "ab4f3f5797754334def047466a998b92f3076db9"
-  },
   "confirm_quit.vim": {
     "url": "git@github.com:arp242/confirm_quit.vim.git",
     "revision": "5d959ae2ef72e12c25f90af35928321f2210ad9c"
