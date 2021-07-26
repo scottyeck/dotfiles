@@ -83,6 +83,9 @@ Plug 'skywind3000/asyncrun.extra'
 Plug 'scottyeck/asynctasks.vim'
 Plug 'preservim/vimux'
 
+" Misc
+Plug 'dbeniamine/todo.txt-vim'
+
 call plug#end()
 
 " Colors
@@ -121,6 +124,11 @@ command! Gcobak :exec printf('!git checkout -b %s-bak', g:fugitive#head())
 
 " Sort branches by recency via :GCheckout
 let g:fzf_checkout_git_options = '--sort=-committerdate'
+
+" Support for hub was dropped in vim-rhubarb as gh becomes the
+" primary GitHub CLI, so we override this functionality manually.
+" @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
+let g:fugitive_git_command = 'hub'
 
 " Fzf
 " ====================================================================
