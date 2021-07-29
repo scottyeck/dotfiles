@@ -92,6 +92,7 @@ call plug#end()
 " ====================================================================
 
 colorscheme gruvbox
+set background=light
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
