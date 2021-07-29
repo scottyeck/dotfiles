@@ -28,7 +28,7 @@ tmux send-keys -t $SESSION:1 'cd ~/git/coa/coa' C-m
 tmux select-pane -L
 tmux split-window -v
 tmux send-keys -t $SESSION:1 'cd ~/git/coa/coa' C-m
-tmux send-keys -t $SESSION:1 'bundle exec heroku local -f Procfile.dev' C-m
+tmux send-keys -t $SESSION:1 'y develop' C-m
 
 tmux new-window -t $SESSION:2 -n 'todo'
 tmux send-keys -t $SESSION:2 "vim $TODO_DIR/todo.txt"
