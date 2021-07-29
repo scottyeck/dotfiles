@@ -56,6 +56,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'bkad/CamelCaseMotion'
+Plug 'jiangmiao/auto-pairs'
 
 " Zen mode
 Plug 'junegunn/goyo.vim'
@@ -67,15 +68,25 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 
-" Telescope
+" Deps for Telescope and Spectre
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+
+" Telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" Spectre
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'windwp/nvim-spectre'
 
 " Treesitter
 " Maintainers recommend updating parsers on update
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
 
 " Tasks
 Plug 'skywind3000/asyncrun.vim'
@@ -325,6 +336,17 @@ inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" # spectre
+" @see https://github.com/windwp/nvim-spectre
+" ====================================================================
+nnoremap <leader>S :lua require('spectre').open()<CR>
+
+"search current word
+nnoremap <leader>sw :lua require('spectre').open_visual({select_word=true})<CR>
+vnoremap <leader>s :lua require('spectre').open_visual()<CR>
+"  search in current file
+nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
 
 " # async-run / async-tasks
 " @see https://github.com/skywind3000/asynctasks.vim#get-started
