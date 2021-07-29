@@ -1,0 +1,34 @@
+snippet fctet "function component type export top"
+import React from 'react';
+
+export type $1Props = {};
+
+export const ${1:`!v expand('%:t:r')`} = (${2:props}: $1Props) => {
+	return ${4:<></>}$0
+}
+endsnippet
+
+snippet fcte "function component type"
+export type $1Props = {};
+
+export const $1 = (${2:props}: $1Props) => {
+	return ${4:<></>}$0
+}
+endsnippet
+
+snippet cuc "chakra use context"
+import { createContext } from '@chakra-ui/react'
+
+type $1Context = {};
+
+const [${1:`!v expand('%:t:r')`}Provider, use$1StyleConfig] = createContext<$1Context>(
+  {
+    strict: true,
+    name: '$1Context',
+    errorMessage:
+      'use$1StyleConfig: `context` is undefined. Seems you forgot to wrap modal components in `<$1Provder />`',
+  }
+);
+endsnippet
+
+
