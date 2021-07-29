@@ -53,6 +53,7 @@ brew "pyenv"
 brew "python@3.8"
 brew "rbenv"
 brew "redis", restart_service: true
+brew "ripgrep"
 brew "rust"
 brew "shpotify"
 brew "terminal-notifier"
