@@ -86,6 +86,10 @@ precmd_functions+=(_set_beam_cursor) #
 # ensure insert mode and beam cursor when exiting vim
 zle-line-init() { zle -K viins; _set_beam_cursor }
 
+# Overload system pallette with precise gruvbox colors in nvim.
+# @see https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific
+source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+
 # Bash configuration
 
 source ~/.bashrc

@@ -74,7 +74,7 @@ schemes:
       cyan:    '#8ec07c'
       white:   '#ebdbb2'
 
-colors: *dark
+colors: *light
 
 key_bindings:
   - { key: A, mods: Alt, chars: "\x1ba"}
