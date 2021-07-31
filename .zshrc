@@ -24,6 +24,7 @@ alias python='python3'
 alias gbrecent='git checkout $(git branch --sort=-committerdate | fzf)'
 
 alias dots="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias dotsv="GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME vim"
 
 # Render an interactive git commit log sorted by recency and copy
 # the sha of the selection the clipboard.
