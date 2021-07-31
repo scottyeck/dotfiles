@@ -32,7 +32,7 @@ PATH="$PATH:$PYENV_ROOT/bin"
 # go
 PATH="$PATH:/usr/local/go/bin"
 
-PATH="$PATH:/usr/local/opt/ruby/bin"
+PATH="$PATH:$HOME/.gem/bin"
 
 # source "$HOME/.cargo/env"
 
