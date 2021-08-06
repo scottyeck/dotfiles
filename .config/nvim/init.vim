@@ -58,7 +58,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'bkad/CamelCaseMotion'
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 
 " Zen mode
 Plug 'junegunn/goyo.vim'
@@ -331,6 +331,12 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" Autopairs
+
+lua <<EOF
+require("nvim-autopairs").setup{}
+EOF
+
 " Nvim compe
 " ====================================================================
 
@@ -364,7 +370,7 @@ let g:compe.source.luasnip = v:true
 let g:compe.source.emoji = v:true
 
 inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <CR>      compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
