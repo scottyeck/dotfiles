@@ -15,9 +15,11 @@ set noswapfile
 " Background buffers
 set hidden
 
+" Open vertical splits to the right, not left
+set splitright
+
 " Search
 set incsearch
-set nohlsearch
 
 set signcolumn=yes
 
