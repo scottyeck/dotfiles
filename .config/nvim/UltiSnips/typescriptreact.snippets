@@ -31,4 +31,29 @@ const [${1:`!v expand('%:t:r')`}Provider, use$1StyleConfig] = createContext<$1Co
 );
 endsnippet
 
+snippet cud "chakra use disclosure"
+const { isOpen, onOpen, onClose } = useDisclosure();
+
+$0
+endsnippet
+
+snippet cudr "chakra use disclosure rename"
+const {
+	isOpen: is$1Open,
+	onOpen: on$1Open,
+	onClose: on$1Close,
+} = useDisclosure();
+
+$0
+endsnippet
+
+snippet ccmr "chakra component modal rename"
+<$1
+	isOpen={is$1Open}
+	onOpen={on$1Open}
+	onClose={on$1Close}
+>
+	$0
+</$1>
+endsnippet
 
