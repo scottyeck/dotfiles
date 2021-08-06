@@ -444,8 +444,52 @@ let g:VimuxOrientation = "h"
 " tmux pane should occupy.
 let g:VimuxHeight = 33
 
+" ### CamelCaseMotion
+" ====================================================================
+
+let g:camelcasemotion_key = '<localleader>'
+
 " Misc
 " ====================================================================
 
 command! Note :exec printf(':edit %s', system('note --file'))
 
+" QOL
+" ====================================================================
+
+" THIS IS MORE TEXT
+" THIS IS TEXT
+
+" Make Y behave like C / D
+nnoremap Y y$
+
+" Make double-<Esc> clear search highlights
+" @see https://stackoverflow.com/a/19877212
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
+" Assume use of JSONC format for syntax highlighting
+" @see https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Center buffer on / search result
+" NB: May wish to open folds
+" NB: May wish to implement for quickfix
+nnoremap n nzz
+nnoremap N Nzz
+
+" Maintain cursor position on linewise Join
+nnoremap J mzJ`z
+
+" Move visual selections
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Move current line
+nnoremap <leader>j :m .+1
+
+function! Open(url)
+  silent execute '!open ' . a:url
+  redraw!
+endfunction
+
+nnoremap gx viW"xy \| :call Open(@x)<CR>
