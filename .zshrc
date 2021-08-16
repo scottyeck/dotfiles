@@ -22,6 +22,7 @@ alias python='python3'
 # and checkout the selection.
 # @via https://github.com/liamfd
 alias gbrecent='git checkout $(git branch --sort=-committerdate | fzf)'
+alias gbyank='git branch --sort=-committerdate | fzf | pbcopy'
 
 alias dots="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias dotsv="GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME vim"
