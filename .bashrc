@@ -57,6 +57,10 @@ export EDITOR='vim'
 # @see https://blog.jez.io/cli-code-review/
 export REVIEW_BASE='master'
 
+# Pointing Cypress towards local React Devtools
+# @see https://www.cypress.io/blog/2020/01/07/how-to-load-the-react-devtools-extension-in-cypress/
+export CY_REACT_DEVTOOL_DIR="$HOME/Library/Application Support/Google/Chrome Canary/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.15.0_0"
+
 # If vim is launched inside a Neovim terminal, launch
 # vanilla vim and not neovim.
 # @see https://github.com/neovim/neovim/issues/9960#issuecomment-488269954
