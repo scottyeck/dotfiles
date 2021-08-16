@@ -57,3 +57,29 @@ snippet ccmr "chakra component modal rename"
 </$1>
 endsnippet
 
+snippet cm "chakra modal"
+
+<Modal isOpen={isOpen} onClose={handleClose}>
+	<ModalOverlay />
+	<ModalContent>
+		<ModalHeader>
+			<Heading>$1</Heading>
+		</ModalHeader>
+		<ModalCloseButton variant="coa-main" />
+		<ModalBody>
+		</ModalBody>
+		<ModalFooter>
+			<ButtonGroup>
+				<Button variant="secondary" onClick={handleClose}>
+					Cancel
+				</Button>
+				<Button variant="primary">Primary</Button>
+			</ButtonGroup>
+		</ModalFooter>
+	</ModalContent>
+</Modal>
+endsnippet
+
+snippet cut "chakra use toast"
+const toast = useToast();
+endsnippet
