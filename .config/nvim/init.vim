@@ -97,8 +97,6 @@ Plug 'skywind3000/asyncrun.extra'
 Plug 'scottyeck/asynctasks.vim'
 Plug 'preservim/vimux'
 
-Plug 'megalithic/zk.nvim'
-
 " Misc
 Plug 'dbeniamine/todo.txt-vim'
 
@@ -475,39 +473,6 @@ endfunction
 
 command! -nargs=0 AsyncTaskFzf call s:fzf_task()
 nnoremap <C-r><C-t> :AsyncTaskFzf<Cr>
-
-" ### zk.nvim
-" ====================================================================
-
-lua<<EOF
-require("zk").setup({
-  debug = false,
-  log = true,
-  default_keymaps = true,
-  default_notebook_path = vim.env.ZK_NOTEBOOK_DIR or "",
-  fuzzy_finder = "telescope", -- or "fzf"
-  link_format = "markdown" -- or "wiki"
-})
-
-local lspconfig = require('lspconfig')
-local configs = require('lspconfig/configs')
-
-configs.zk = {
-  default_config = {
-    cmd = {'zk', 'lsp', '--log', '/tmp/zk-lsp.log'},
-    filetypes = {'markdown'},
-    root_dir = function()
-      return vim.loop.cwd()
-    end,
-    settings = {}
-  };
-}
-
-lspconfig.zk.setup({ on_attach = function(client, buffer) 
-  -- some custom on_attach function for doing keybindings and other things..
-  -- see: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-end })
-EOF
 
 " ### vimux
 " ====================================================================
