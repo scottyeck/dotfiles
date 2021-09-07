@@ -291,7 +291,7 @@ local filetypes = {
   typescriptreact = "eslint",
   javascript = "eslint",
   javascriptreact = "eslint",
-  json = 'eslint',
+  --json = 'eslint',
   ruby = "rubocop"
 }
 
