@@ -77,42 +77,6 @@ then
     export VIMRUNTIME=/usr/share/vim/vim81
 fi
 
-# ==============================
-# zk
-# ==============================
-# @see https://github.com/sirupsen/zk
-
-PATH=$PATH:$HOME/zk/bin
-export ZK_PATH="$HOME/zet"
-
-# Technically not zk-specific, but that's where we primarily use it.
-# List all themes using `bat --list-themes`
-export BAT_THEME="gruvbox-light"
-
-# recommended zk fzf config
-export FZF_DEFAULT_OPTS="--height=40% --multi --tiebreak=begin \
-  --bind 'ctrl-y:execute-silent(echo {} | pbcopy)' \
-  --bind 'alt-down:preview-down,alt-up:preview-up' \
-  --bind \"ctrl-v:execute-silent[ \
-    tmux send-keys -t \{left\} Escape :vs Space && \
-    tmux send-keys -t \{left\} -l {} && \
-    tmux send-keys -t \{left\} Enter \
-  ]\"
-  --bind \"ctrl-x:execute-silent[ \
-    tmux send-keys -t \{left\} Escape :sp Space && \
-    tmux send-keys -t \{left\} -l {} && \
-    tmux send-keys -t \{left\} Enter \
-  ]\"
-  --bind \"ctrl-o:execute-silent[ \
-    tmux send-keys -t \{left\} Escape :read Space ! Space echo Space && \
-    tmux send-keys -t \{left\} -l \\\"{}\\\" && \
-    tmux send-keys -t \{left\} Enter \
-  ]\""
-
-# ==============================
-# Load all RCs
-# ==============================
-
 LOCAL_CONFIG_FILE="/Users/$USER/.localrc"
 
 if [ -f "$LOCAL_CONFIG_FILE" ]; then
