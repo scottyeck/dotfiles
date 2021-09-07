@@ -9,6 +9,8 @@ export ZSH=/Users/$USER/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simple"
 
+COLORTERM="truecolor"
+
 source $ZSH/oh-my-zsh.sh
 # Custom zsh configuration
 
