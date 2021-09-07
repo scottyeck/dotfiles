@@ -32,7 +32,11 @@ PATH="$PATH:$PYENV_ROOT/bin"
 # go
 PATH="$PATH:/usr/local/go/bin"
 
+# gems
 PATH="$PATH:$HOME/.gem/bin"
+
+# java
+PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 # source "$HOME/.cargo/env"
 
@@ -43,6 +47,9 @@ export TMUX_PROJ_DIR="$HOME/.tmuxproj"
 # > because macOS provides an older sqlite3.
 PATH="$PATH:/usr/local/opt/sqlite/bin"
 
+# Source nix - added by nix installer
+. $HOME/.nix-profile/etc/profile.d/nix.sh
+
 # note.sh
 export NOTE_DIR=$HOME/notes/daily
 
@@ -51,7 +58,7 @@ export NOTE_DIR=$HOME/notes/daily
 alias ctags="$(brew --prefix)/bin/ctags"
 
 export PATH
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Default PR review base branch
 # @see https://blog.jez.io/cli-code-review/
