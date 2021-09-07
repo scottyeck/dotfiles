@@ -92,6 +92,10 @@ zle-line-init() { zle -K viins; _set_beam_cursor }
 # @see https://github.com/gruvbox-community/gruvbox/wiki/Terminal-specific
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 
+# Remove latency when pasting large commands
+# @see https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
 # Bash configuration
 
 source ~/.bashrc
