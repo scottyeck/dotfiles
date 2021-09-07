@@ -57,6 +57,9 @@ export NOTE_DIR=$HOME/notes/daily
 # @see https://www.freecodecamp.org/news/make-your-vim-smarter-using-ctrlp-and-ctags-846fc12178a4/
 alias ctags="$(brew --prefix)/bin/ctags"
 
+PATH="$PATH:$HOME/zk/bin"
+export ZK_NOTEBOOK_DIR="$HOME/zet"
+
 export PATH
 export EDITOR='nvim'
 
