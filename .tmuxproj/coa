@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# So we can access settings below
-source $HOME/.todo/config
-
 SESSION="coa"
 SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
 
@@ -30,8 +27,8 @@ tmux split-window -v
 tmux send-keys -t $SESSION:1 'cd ~/git/coa/coa' C-m
 tmux send-keys -t $SESSION:1 'y develop' C-m
 
-tmux new-window -t $SESSION:2 -n 'todo'
-tmux send-keys -t $SESSION:2 "vim $TODO_DIR/todo.txt"
+tmux new-window -t $SESSION:2 -n 'notes'
+tmux send-keys -t $SESSION:2 "note"
 
 # Specify the window to which we want to attach
 SESSION_TARGET="$SESSION_TARGET:0"
