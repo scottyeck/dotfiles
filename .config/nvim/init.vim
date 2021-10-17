@@ -516,9 +516,6 @@ command! Note :exec printf(':edit %s', system('note --file'))
 " QOL
 " ====================================================================
 
-" THIS IS MORE TEXT
-" THIS IS TEXT
-
 " Make Y behave like C / D
 nnoremap Y y$
 
