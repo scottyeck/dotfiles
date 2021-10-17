@@ -97,6 +97,9 @@ Plug 'skywind3000/asyncrun.extra'
 Plug 'scottyeck/asynctasks.vim'
 Plug 'preservim/vimux'
 
+" Vimwiki
+Plug 'vimwiki/vimwiki'
+
 " Misc
 Plug 'dbeniamine/todo.txt-vim'
 
@@ -487,6 +490,18 @@ let g:VimuxOrientation = "h"
 " Height is generic for 'size' - percentage of screen the
 " tmux pane should occupy.
 let g:VimuxHeight = 33
+
+" ### Vimwiki
+" ====================================================================
+
+let g:vimwiki_list = [{ 'path': '~/wiki/',
+                      \ 'syntax': 'markdown',
+                      \ 'ext': '.md',
+                      \ 'links_space_char': '-'}]
+
+" Vim-wiki uses "-" to remove header levels, interfering with vim-vinegar,
+" so we don't map.
+nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 
 " ### CamelCaseMotion
 " ====================================================================
