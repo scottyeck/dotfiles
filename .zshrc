@@ -17,6 +17,7 @@ alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 alias vim='nvim'
 alias python='python3'
+alias pip="pip3"
 
 # Render an interactive git branch picker sorted by most recent commit,
 # and checkout the selection.
