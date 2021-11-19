@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+
+EXEC_NAME="brew_bundle"
 BREWFILE_DIR=$HOME
 SCRIPT_PATH=$(cd $( dirname $0 ); pwd )
 source $SCRIPT_PATH/common.sh
