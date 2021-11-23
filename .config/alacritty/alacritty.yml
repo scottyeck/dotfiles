@@ -14,6 +14,9 @@ font:
     x: 0 # letter-spacing
     y: 5 # line-spacing
 
+window:
+  decorations: none
+
 # Colors (Gruvbox light)
 schemes:
   gruvbox_light: &light
