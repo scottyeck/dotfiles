@@ -1,4 +1,41 @@
-source ~/.config/nvim/sets.vim
+" Personal nvim config
+" @scottyeck - <scott.eckenthal@gmail.com>
+
+" ==========================================================
+" Sets
+" ==========================================================
+
+set expandtab
+set tabstop=2 softtabstop=2
+set shiftwidth=2
+set smartindent
+set hidden
+set signcolumn=yes
+set relativenumber
+set nu
+set title
+set list
+set ignorecase
+set smartcase
+set noswapfile
+set splitright
+set incsearch
+set termguicolors
+set completeopt=menuone,noselect " Required for usage of nvim-compe
+
+set wildignore+=**/.git/*
+set wildignore+=**/node_modules/*
+
+" Prefer Vertical split for Gdiff (not fugitive-specific)
+" @see https://github.com/tpope/vim-fugitive/issues/510
+" @see https://github.com/thoughtbot/dotfiles/issues/655#issuecomment-605019271
+set diffopt+=vertical
+
+let mapleader="\<space>"
+
+" ==========================================================
+" Plugins
+" ==========================================================
 
 call plug#begin('~/.vim/plugged')
 
@@ -34,15 +71,9 @@ source ~/.config/nvim/plugins/vinegar.vim
 call plug#end()
 doautocmd User PlugLoaded
 
-
-
-" Misc
-" ====================================================================
-
-command! Note :exec printf(':edit %s', system('note --file'))
-
-" QOL
-" ====================================================================
+" ==========================================================
+" Keymaps
+" ==========================================================
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -62,10 +93,6 @@ nnoremap Y y$
 " Make double-<Esc> clear search highlights
 " @see https://stackoverflow.com/a/19877212
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
-
-" Assume use of JSONC format for syntax highlighting
-" @see https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
-autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Center buffer on / search result
 " NB: May wish to open folds
@@ -88,4 +115,19 @@ function! Open(url)
   redraw!
 endfunction
 
+" Open a URL
 nnoremap gx viW"xy \| :call Open(@x)<CR>
+
+" ==========================================================
+" Misc
+" ==========================================================
+
+augroup FileTypeOverrides
+  autocmd!
+  " Assume use of JSONC format for syntax highlighting
+  " @see https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
+  autocmd FileType json syntax match Comment +\/\/.\+$+
+augroup END
+
+command! Note :exec printf(':edit %s', system('note --file'))
+
