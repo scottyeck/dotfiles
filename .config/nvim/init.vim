@@ -1,7 +1,5 @@
 source ~/.config/nvim/sets.vim
 
-let mapleader="\<space>"
-
 call plug#begin('~/.vim/plugged')
 
 source ~/.config/nvim/plugins/lib.vim
@@ -34,13 +32,7 @@ source ~/.config/nvim/plugins/vinegar.vim
 call plug#end()
 doautocmd User PlugLoaded
 
-" Git
-" ====================================================================
 
-" Prefer Vertical split for Gdiff (not fugitive-specific)
-" @see https://github.com/tpope/vim-fugitive/issues/510
-" @see https://github.com/thoughtbot/dotfiles/issues/655#issuecomment-605019271
-set diffopt+=vertical
 
 " Misc
 " ====================================================================
