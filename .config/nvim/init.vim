@@ -35,56 +35,33 @@ set completeopt=menuone,noselect
 let mapleader="\<space>"
 
 call plug#begin('~/.vim/plugged')
-source ~/.config/nvim/plugins/gruvbox.vim
 
-" Explore
-source ~/.config/nvim/plugins/vinegar.vim
+source ~/.config/nvim/plugins/lib.vim
 
-" Git
-source ~/.config/nvim/plugins/fugitive.vim
-source ~/.config/nvim/plugins/gv.vim
-source ~/.config/nvim/plugins/gitgutter.vim
-
-source ~/.config/nvim/plugins/fzf.vim
-
-" Qol
 source ~/.config/nvim/plugins/abolish.vim
+source ~/.config/nvim/plugins/asynctasks.vim
+source ~/.config/nvim/plugins/autopairs.vim
 source ~/.config/nvim/plugins/commentary.vim
+source ~/.config/nvim/plugins/compe.vim
 source ~/.config/nvim/plugins/dispatch.vim
 source ~/.config/nvim/plugins/eunuch.vim
+source ~/.config/nvim/plugins/gruvbox.vim
+source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/fzf.vim
+source ~/.config/nvim/plugins/goyo.vim
+source ~/.config/nvim/plugins/gv.vim
+source ~/.config/nvim/plugins/gitgutter.vim
+source ~/.config/nvim/plugins/lspconfig.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/sensible.vim
-source ~/.config/nvim/plugins/autopairs.vim
-
-" Zen mode
-source ~/.config/nvim/plugins/goyo.vim
-
-" Tmux
 source ~/.config/nvim/plugins/tmux-navigator.vim
-
-" Lsp
-source ~/.config/nvim/plugins/lspconfig.vim
-source ~/.config/nvim/plugins/compe.vim
-
-" Deps for Telescope and Spectre
-source ~/.config/nvim/plugins/lib.vim
-
-" Treesitter
-source ~/.config/nvim/plugins/treesitter.vim
-
-" Snippets
-source ~/.config/nvim/plugins/ultisnips.vim
-
-" Tasks
-source ~/.config/nvim/plugins/asynctasks.vim
-
-" Vimwiki
-source ~/.config/nvim/plugins/vimwiki.vim
-
-" Misc
 source ~/.config/nvim/plugins/todo.txt.vim
+source ~/.config/nvim/plugins/treesitter.vim
+source ~/.config/nvim/plugins/ultisnips.vim
+source ~/.config/nvim/plugins/vimwiki.vim
+source ~/.config/nvim/plugins/vinegar.vim
 
 call plug#end()
 doautocmd User PlugLoaded
