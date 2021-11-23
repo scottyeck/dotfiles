@@ -10,6 +10,9 @@ font:
     family: "Hack"
     style: "Italic"
   size: 14.0
+  offset:
+    x: 0 # letter-spacing
+    y: 5 # line-spacing
 
 # Colors (Gruvbox light)
 schemes:
