@@ -1,36 +1,4 @@
-" Line numbers
-set relativenumber
-set nu
-
-" Tabs
-" (May wish to set this to be file-dependent)
-set tabstop=2 softtabstop=2
-set shiftwidth=2
-set expandtab
-set smartindent
-
-" Disable swap
-set noswapfile
-
-" Background buffers
-set hidden
-
-" Open vertical splits to the right, not left
-set splitright
-
-" Search
-set incsearch
-
-set signcolumn=yes
-
-" Ignores
-set wildignore+=**/.git/*
-set wildignore+=**/node_modules/*
-
-set termguicolors
-
-" Required for usage of nvim-compe
-set completeopt=menuone,noselect
+source ~/.config/nvim/sets.vim
 
 let mapleader="\<space>"
 
