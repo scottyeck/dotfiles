@@ -20,8 +20,9 @@ source ~/.config/nvim/plugins/gitgutter.vim
 source ~/.config/nvim/plugins/lspconfig.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
-source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/sensible.vim
+source ~/.config/nvim/plugins/spectre.vim
+source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/tmux-navigator.vim
 source ~/.config/nvim/plugins/todo.txt.vim
