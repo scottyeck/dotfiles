@@ -44,6 +44,18 @@ command! Note :exec printf(':edit %s', system('note --file'))
 " QOL
 " ====================================================================
 
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
+
+nmap <leader>ve :edit ~/.config/nvim/init.vim<CR>
+nmap <leader>vs :source ~/.config/nvim/init.vim<CR>
+
+nmap <leader>Q :bufdo bdelete<CR>
+
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+
 " Make Y behave like C / D
 nnoremap Y y$
 
