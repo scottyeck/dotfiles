@@ -1,0 +1,2 @@
+Plug 'windwp/nvim-autopairs'
+

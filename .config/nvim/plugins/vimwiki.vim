@@ -1,0 +1,2 @@
+Plug 'vimwiki/vimwiki'
+

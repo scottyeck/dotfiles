@@ -35,73 +35,56 @@ set completeopt=menuone,noselect
 let mapleader="\<space>"
 
 call plug#begin('~/.vim/plugged')
-Plug 'gruvbox-community/gruvbox'
+source ~/.config/nvim/plugins/gruvbox.vim
 
 " Explore
-Plug 'tpope/vim-vinegar'
+source ~/.config/nvim/plugins/vinegar.vim
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/gv.vim'
-Plug 'junegunn/fzf'
-Plug 'scottyeck/fzf-checkout.vim'
+source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/gv.vim
+source ~/.config/nvim/plugins/gitgutter.vim
+
+source ~/.config/nvim/plugins/fzf.vim
 
 " Qol
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-sensible'
-Plug 'bkad/CamelCaseMotion'
-Plug 'windwp/nvim-autopairs'
+source ~/.config/nvim/plugins/abolish.vim
+source ~/.config/nvim/plugins/commentary.vim
+source ~/.config/nvim/plugins/dispatch.vim
+source ~/.config/nvim/plugins/eunuch.vim
+source ~/.config/nvim/plugins/repeat.vim
+source ~/.config/nvim/plugins/rsi.vim
+source ~/.config/nvim/plugins/surround.vim
+source ~/.config/nvim/plugins/sensible.vim
+source ~/.config/nvim/plugins/autopairs.vim
 
 " Zen mode
-Plug 'junegunn/goyo.vim'
+source ~/.config/nvim/plugins/goyo.vim
 
 " Tmux
-Plug 'christoomey/vim-tmux-navigator'
+source ~/.config/nvim/plugins/tmux-navigator.vim
 
 " Lsp
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+source ~/.config/nvim/plugins/lspconfig.vim
+source ~/.config/nvim/plugins/compe.vim
 
 " Deps for Telescope and Spectre
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-
-" Telescope
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
-" Spectre
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'windwp/nvim-spectre'
+source ~/.config/nvim/plugins/lib.vim
 
 " Treesitter
-" Maintainers recommend updating parsers on update
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+source ~/.config/nvim/plugins/treesitter.vim
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'mlaursen/vim-react-snippets'
+source ~/.config/nvim/plugins/ultisnips.vim
 
 " Tasks
-Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/asyncrun.extra'
-Plug 'scottyeck/asynctasks.vim'
-Plug 'preservim/vimux'
+source ~/.config/nvim/plugins/asynctasks.vim
 
 " Vimwiki
-Plug 'vimwiki/vimwiki'
+source ~/.config/nvim/plugins/vimwiki.vim
 
 " Misc
-Plug 'dbeniamine/todo.txt-vim'
+source ~/.config/nvim/plugins/todo.txt.vim
 
 call plug#end()
 
@@ -123,10 +106,7 @@ let g:gruvbox_invert_selection='0'
 " Prefer Vertical split for Gdiff (not fugitive-specific)
 " @see https://github.com/tpope/vim-fugitive/issues/510
 " @see https://github.com/thoughtbot/dotfiles/issues/655#issuecomment-605019271
-if &diff
-    set diffopt-=internal
-    set diffopt+=vertical
-endif
+set diffopt+=vertical
 
 " Mimic zsh aliases
 command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"

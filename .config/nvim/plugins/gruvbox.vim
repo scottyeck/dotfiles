@@ -1,0 +1,2 @@
+Plug 'gruvbox-community/gruvbox'
+

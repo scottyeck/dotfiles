@@ -1,0 +1,2 @@
+Plug 'junegunn/gv.vim'
+
