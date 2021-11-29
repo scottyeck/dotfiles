@@ -1,6 +1,7 @@
 " Spectre
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'windwp/nvim-spectre'
+IdempotentPlug 'nvim-lua/plenary.nvim'
+IdempotentPlug 'kyazdani42/nvim-web-devicons'
+IdempotentPlug 'windwp/nvim-spectre'
 
 " # spectre
 " @see https://github.com/windwp/nvim-spectre
