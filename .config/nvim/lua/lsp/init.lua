@@ -12,6 +12,7 @@ local on_attach = function(client, bufnr)
   -- commands
   u.lua_command("LspDef", "vim.lsp.buf.definition()")
   u.lua_command("LspFormatting", "vim.lsp.buf.formatting()")
+  u.lua_command("LspCodeAction", "vim.lsp.buf.code_action()")
   u.lua_command("LspHover", "vim.lsp.buf.hover()")
   u.lua_command("LspRename", "vim.lsp.buf.rename()")
   u.lua_command("LspDiagPrev", "vim.diagnostic.goto_prev()")
@@ -20,11 +21,12 @@ local on_attach = function(client, bufnr)
   u.lua_command("LspSignatureHelp", "vim.lsp.buf.signature_help()")
   u.lua_command("LspTypeDef", "vim.lsp.buf.type_definition()")
 
-    -- bindings
+  -- bindings
   u.buf_map("n", "gd", ":LspDef<CR>", nil, bufnr)
   u.buf_map("n", "gr", ":LspRename<CR>", nil, bufnr)
   u.buf_map("n", "gy", ":LspTypeDef<CR>", nil, bufnr)
   u.buf_map("n", "K", ":LspHover<CR>", nil, bufnr)
+  u.buf_map("n", "ga", ":LspCodeAction<CR>", nil, bufnr)
   u.buf_map("n", "[a", ":LspDiagPrev<CR>", nil, bufnr)
   u.buf_map("n", "]a", ":LspDiagNext<CR>", nil, bufnr)
   u.buf_map("n", "<Leader>a", ":LspDiagLine<CR>", nil, bufnr)
