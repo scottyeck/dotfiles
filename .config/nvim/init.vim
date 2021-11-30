@@ -91,6 +91,8 @@ nmap <leader>vs :source ~/.config/nvim/init.vim<CR>
 
 nmap <leader>Q :bufdo bdelete<CR>
 
+nmap <leader>o :only<CR>
+
 " Reselect visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
