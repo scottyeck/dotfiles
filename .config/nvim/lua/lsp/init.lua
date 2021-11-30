@@ -2,6 +2,7 @@ local u = require("utils")
 
 local lsp = vim.lsp
 
+-- TODO: This relies on Neovim 0.6 (head)
 -- vim.diagnostic.config({ virtual_text = false, float = border_opts })
 
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, border_opts)
@@ -35,3 +36,5 @@ local on_attach = function(client, bufnr)
 end
 
 require("lsp.tsserver").setup(on_attach)
+require("lsp.null-ls").setup(on_attach)
+

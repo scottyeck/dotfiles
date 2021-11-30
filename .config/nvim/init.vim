@@ -71,6 +71,7 @@ source ~/.config/nvim/plugins/vinegar.vim
 " TODO: Move this
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 call plug#end()
 doautocmd User PlugLoaded
