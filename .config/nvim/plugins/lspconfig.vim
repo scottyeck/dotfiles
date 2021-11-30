@@ -49,6 +49,15 @@ local on_attach = function(client, bufnr)
         local_files = 2, -- git files or files with relative path markers
         same_file = 1, -- add to existing import statement
     },
+
+    -- filter diagnostics
+    filter_out_diagnostics_by_severity = {},
+    filter_out_diagnostics_by_code = {},
+
+    -- inlay hints
+    auto_inlay_hints = true,
+    inlay_hints_highlight = "Comment",
+
     import_all_scan_buffers = 100,
     import_all_select_source = false,
 
@@ -58,6 +67,7 @@ local on_attach = function(client, bufnr)
     watch_dir = nil,
   }
 
+  -- required to fix code action ranges and filter diagnostics
   ts_utils.setup_client(client)
 
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
@@ -91,7 +101,7 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", opts)
   -- LSP TS Utils
   buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
-  buf_map(bufnr, "n", "qq", ":TSLspFixCurrent<CR>", opts)
+  -- buf_map(bufnr, "n", "qq", ":TSLspFixCurrent<CR>", opts) DEPRECATED
   buf_map(bufnr, "n", "<Leader>R", ":TSLspRenameFile<CR>", opts)
   buf_map(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
 
@@ -199,7 +209,7 @@ lspconfig.diagnosticls.setup {
 }
 
 EOF
-endfunction
+endfunction "/LspConfigSetup
 
 augroup LspConfigSetup
   autocmd!
