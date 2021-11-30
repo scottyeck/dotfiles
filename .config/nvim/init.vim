@@ -54,7 +54,7 @@ source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/goyo.vim
 source ~/.config/nvim/plugins/gv.vim
 source ~/.config/nvim/plugins/gitgutter.vim
-source ~/.config/nvim/plugins/lspconfig.vim
+" source ~/.config/nvim/plugins/lspconfig.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
 source ~/.config/nvim/plugins/sensible.vim
@@ -68,8 +68,15 @@ source ~/.config/nvim/plugins/ultisnips.vim
 source ~/.config/nvim/plugins/vimwiki.vim
 source ~/.config/nvim/plugins/vinegar.vim
 
+" TODO: Move this
+Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+
 call plug#end()
 doautocmd User PlugLoaded
+
+" TODO: Move this
+source ~/.config/nvim/lua/lsp/init.lua
 
 " ==========================================================
 " Keymaps
