@@ -3,6 +3,6 @@
     "ajv": "^6.9.1",
     "diagnostic-languageserver": "^1.14.0",
     "typescript": "^4.3.5",
-    "typescript-language-server": "0.8.0"
+    "typescript-language-server": "0.8.1"
   }
 }
