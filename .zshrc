@@ -99,6 +99,9 @@ source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 # @see https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+setopt auto_cd
+cdpath=($HOME/git/coa)
+
 # Bash configuration
 
 source ~/.bashrc
