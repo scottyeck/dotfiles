@@ -15,6 +15,8 @@ source $ZSH/oh-my-zsh.sh
 alias gcur='echo $(git_current_branch)'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
+# TODO: Uninstall nvim via brew and extend $PATH
+alias nvim="~/.local/bin/nvim"
 alias vim='nvim'
 alias python='python3'
 alias pip="pip3"
@@ -109,7 +111,7 @@ source ~/.bashrc
 # than via a continuous stream, thus avoiding the bottleneck.
 # @see relevant prior art:
 # https://lukas.zapletalovi.com/2013/03/never-lost-your-bash-history-again.html
-# 
+#
 # @see https://spin.atomicobject.com/2016/05/28/log-bash-history/
 # mkdir -p ~/.logs
 # export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -E 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
