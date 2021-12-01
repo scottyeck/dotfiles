@@ -7,7 +7,7 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
 function LspConfigSetup()
 lua << EOF
-local lspconfig = require'lspconfig'
+local lspconfig = require('lspconfig')
 
 local format_async = function(err, _, result, _, bufnr)
   if err ~= nil or result == nil then return end
