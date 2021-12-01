@@ -14,7 +14,7 @@ local sources = {
     }),
     builtins.diagnostics.eslint_d.with(eslint_opts),
     builtins.formatting.eslint_d.with(eslint_opts),
-    builtins.code_actions.eslint_d.with(eslint_opts),
+    -- builtins.code_actions.eslint_d.with(eslint_opts),
     -- builtins.formatting.stylua.with({
     --     condition = function(utils)
     --         return utils.root_has_file("stylua.toml")
