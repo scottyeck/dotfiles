@@ -2,8 +2,7 @@ local u = require("utils")
 
 local lsp = vim.lsp
 
--- TODO: This relies on Neovim 0.6 (head)
--- vim.diagnostic.config({ virtual_text = false, float = border_opts })
+vim.diagnostic.config({ virtual_text = false, float = border_opts })
 
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, border_opts)
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
