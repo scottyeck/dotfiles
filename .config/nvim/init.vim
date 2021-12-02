@@ -47,8 +47,9 @@ source ~/.config/nvim/plugins/autopairs.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/compe.vim
 source ~/.config/nvim/plugins/dispatch.vim
+source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/eunuch.vim
-source ~/.config/nvim/plugins/gruvbox.vim
+" source ~/.config/nvim/plugins/gruvbox.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/goyo.vim
