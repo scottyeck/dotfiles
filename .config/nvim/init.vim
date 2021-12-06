@@ -65,6 +65,7 @@ source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/tmux-navigator.vim
 source ~/.config/nvim/plugins/todo.txt.vim
 source ~/.config/nvim/plugins/treesitter.vim
+source ~/.config/nvim/plugins/trouble.vim
 source ~/.config/nvim/plugins/ultisnips.vim
 source ~/.config/nvim/plugins/vimwiki.vim
 source ~/.config/nvim/plugins/vinegar.vim
