@@ -38,4 +38,5 @@ end
 
 require("lsp.tsserver").setup(on_attach)
 require("lsp.null-ls").setup(on_attach)
+require("lsp.solargraph").setup(on_attach)
 

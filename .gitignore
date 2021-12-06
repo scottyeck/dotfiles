@@ -7,3 +7,7 @@ yarn-error.log
 *.spl
 
 .dotfiles
+
+# Project-centric solargraph config, since other devs may not rely on it.
+.solargraph.yml
+**/*/definitions.rb

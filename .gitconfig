@@ -3,6 +3,8 @@
   email = scott.eckenthal@gmail.com
 [push]
 	default = current
+[core]
+  excludesfile = ~/.gitignore
 
 
 [alias]
