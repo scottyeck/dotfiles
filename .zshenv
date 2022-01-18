@@ -4,10 +4,9 @@
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   bundler
-  copydir
-  copyfile
   git
   macos
+  rake
   tmux
   yarn
   zsh-syntax-highlighting
