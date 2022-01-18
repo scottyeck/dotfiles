@@ -91,7 +91,9 @@ map gf :edit <cfile><cr>
 nmap <leader>ve :edit ~/.config/nvim/init.vim<CR>
 nmap <leader>vs :source ~/.config/nvim/init.vim<CR>
 
-nmap <leader>Q :bufdo bdelete<CR>
+" Exit all buffers except the current one
+" @see https://stackoverflow.com/a/67698150
+nmap <leader>Q :execute "%bd\|e#"<CR>
 
 nmap <leader>o :only<CR>
 

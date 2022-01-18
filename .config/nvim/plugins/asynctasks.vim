@@ -43,7 +43,7 @@ function! s:fzf_task()
 endfunction
 
 command! -nargs=0 AsyncTaskFzf call s:fzf_task()
-nnoremap <C-r><C-t> :AsyncTaskFzf<Cr>
+nnoremap <leader>rt :AsyncTaskFzf<Cr>
 
 " FYI The 'tmux' asynctasks_term_pos setting above executes
 " using Vimux via asynctasks.extra.
