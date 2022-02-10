@@ -1,0 +1,4 @@
+# Configure vi-like bindings for irb
+# @see https://stackoverflow.com/a/69317267
+set editing-mode vi
+set keymap vi-command
