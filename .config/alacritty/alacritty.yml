@@ -4,10 +4,13 @@ font:
     style: "ExtraLight"
   bold:
     family: "JetBrains Mono"
-    style: "Bold"
+    style: "SemiBold"
   italic:
     family: "JetBrains Mono"
-    style: "Italic"
+    style: "ExtraLight Italic"
+  bold_italic:
+    family: "JetBrains Mono"
+    style: "SemiBold Italic"
   size: 14.0
   offset:
     x: 0 # letter-spacing
