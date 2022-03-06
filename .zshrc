@@ -4,6 +4,16 @@ echo "..."
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
 
+# Need to override and explicitly specify $TERM in order to use true
+# RGB color with Alacritty / tmux / Neovim. See "Machine Setup" notes.
+# This is likely overly restrictive, but given the value it will provide
+# in the short term I'm okay with it.
+if [[ -n $TMUX ]]; then
+  export TERM="alacritty"
+else
+  export TERM="alacritty-direct"
+fi
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes

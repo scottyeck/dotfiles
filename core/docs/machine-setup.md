@@ -70,3 +70,52 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
 These are applications whose installations I don't currently automate because manual installation is simpler.
 
 * [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
+
+### True Color w/ Alacritty / Tmux / Nvim
+
+In order to properly use true color, we need to install `tmux-256color` so we can specify it as our `TERM` in `tmux`. This is non-trivial so even though others have written about this (extensively), steps are consolidated below.
+
+#### Install `tmux-256color`
+
+(Via [bbqtd](https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95#the-right-way))
+
+First, ensure ncurses `tic` is installed.
+
+```
+$ which tic
+/usr/bin/tic
+```
+
+Download and unpack the latest nucurses terminal descriptions:
+
+```
+$ curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz && gunzip terminfo.src.gz
+```
+
+And compile `tmux-256color` terminal info. (This will place its result into `~/.terminfo`):
+
+```
+$ /usr/bin/tic -xe tmux-256color terminfo.src
+```
+
+Then verify
+
+```
+$ infocmp tmux-256color
+```
+
+Settings in `.zshrc` / `tmux.conf` will now work as intended.
+
+### Enable RGB colors
+
+(Via [Niing](https://unix.stackexchange.com/a/678901), self-proclaimed _"Neovim master"_ but hey this is helpful so maybe the proclamation is valid.)
+
+Assuming _alacritty_ was installed using Homebrew, clone [`alacritty/alacritty`](https://github.com/alacritty/alacritty) and place it anywhere. Then...
+
+```
+$ cd path/to/cloned-alacritty-repo
+$ sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+```
+
+Again, `TERM` settings in `.zshrc` will now work as intended.
+
