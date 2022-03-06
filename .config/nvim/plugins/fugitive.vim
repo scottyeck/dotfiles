@@ -7,6 +7,7 @@ command! Gunwip !git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1
 command! Gco GCheckout
 command! Gf Gfetch
 command! Gyank .Gbrowse!
+command! Glo Git log --oneline
 command! Gcob :exec printf('!git checkout -b %s', input('Enter new branch name: '))
 command! Ggsup :exec printf('!git branch --set-upstream-to=origin/%s %s', g:fugitive#head(), g:fugitive#head())
 command! Gcn :exec printf('!git commit --amend --verbose --no-edit')
