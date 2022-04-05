@@ -29,3 +29,8 @@
   # instead of opening all files:
   # git reviewone foo.js bar.js
   reviewone = !vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+
+  # Allow for greppable stash items
+  # @see https://stackoverflow.com/a/57601163
+  stashgrep = "!f() { for i in `git stash list --format=\"%gd\"` ; \
+            do git stash show -p $i | grep -H --label=\"$i\" \"$@\" ; done ; }; f"
