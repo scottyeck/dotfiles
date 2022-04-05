@@ -74,6 +74,7 @@ source ~/.config/nvim/plugins/vinegar.vim
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/typescript.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 source ~/.config/nvim/lua/plugins/telescope.lua
 
