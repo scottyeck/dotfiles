@@ -85,6 +85,7 @@ brew "redis", restart_service: true
 brew "ripgrep"
 brew "ruby"
 brew "rust"
+brew "shfmt"
 brew "shpotify"
 brew "terminal-notifier"
 brew "the_silver_searcher"
