@@ -1,5 +1,3 @@
-local M = {}
-
 local api = vim.api
 
 local get_map_options = function(custom_options)
@@ -10,12 +8,26 @@ local get_map_options = function(custom_options)
     return options
 end
 
-M.buf_map = function(mode, target, source, opts, bufnr)
-    api.nvim_buf_set_keymap(bufnr or 0, mode, target, source, get_map_options(opts))
+local M = {}
+
+M.map = function(mode, target, source, opts)
+    vim.keymap.set(mode, target, source, get_map_options(opts))
+end
+
+for _, mode in ipairs({ "n", "o", "i", "x", "t", "c" }) do
+    M[mode .. "map"] = function(...)
+        M.map(mode, ...)
+    end
+end
+
+M.buf_map = function(bufnr, mode, target, source, opts)
+  opts = opts or {}
+  opts.buffer = bufnr
+  M.map(mode, target, source, get_map_options(opts))
 end
 
 M.command = function(name, fn)
-    vim.cmd(string.format("command! %s %s", name, fn))
+  api.nvim_add_user_command(name, fn, opts or {})
 end
 
 M.lua_command = function(name, fn)

@@ -39,6 +39,8 @@ let mapleader="\<space>"
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'jose-elias-alvarez/typescript.nvim'
+
 source ~/.config/nvim/plugins/lib.vim
 
 source ~/.config/nvim/plugins/abolish.vim
@@ -55,13 +57,11 @@ source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/goyo.vim
 source ~/.config/nvim/plugins/gv.vim
 source ~/.config/nvim/plugins/gitgutter.vim
-" source ~/.config/nvim/plugins/lspconfig.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
 source ~/.config/nvim/plugins/sensible.vim
 source ~/.config/nvim/plugins/spectre.vim
 source ~/.config/nvim/plugins/surround.vim
-source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/tmux-navigator.vim
 source ~/.config/nvim/plugins/todo.txt.vim
 source ~/.config/nvim/plugins/treesitter.vim
@@ -72,8 +72,10 @@ source ~/.config/nvim/plugins/vinegar.vim
 
 " TODO: Move this
 Plug 'neovim/nvim-lspconfig'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'jose-elias-alvarez/typescript.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+
+source ~/.config/nvim/lua/plugins/telescope.lua
 
 call plug#end()
 doautocmd User PlugLoaded
