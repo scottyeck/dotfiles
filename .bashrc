@@ -38,7 +38,8 @@ PATH="$PATH:$HOME/.gem/bin"
 # java
 PATH="/usr/local/opt/openjdk/bin:$PATH"
 
-# source "$HOME/.cargo/env"
+# cargo
+PATH="$PATH:$HOME/.cargo/bin"
 
 export TMUX_PROJ_DIR="$HOME/.tmuxproj"
 
