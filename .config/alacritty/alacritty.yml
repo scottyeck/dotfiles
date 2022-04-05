@@ -1,20 +1,21 @@
 font:
+  use_thin_strokes: true
   normal:
     family: "JetBrains Mono"
-    style: "ExtraLight"
+    style: "Thin"
   bold:
     family: "JetBrains Mono"
     style: "SemiBold"
   italic:
     family: "JetBrains Mono"
-    style: "ExtraLight Italic"
+    style: "Thin Italic"
   bold_italic:
     family: "JetBrains Mono"
     style: "SemiBold Italic"
   size: 14.0
   offset:
     x: 0 # letter-spacing
-    y: 5 # line-spacing
+    y: 12 # line-spacing
 
 window:
   decorations: none
