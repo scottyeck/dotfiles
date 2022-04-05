@@ -29,6 +29,7 @@
     "tldr": "^3.3.2",
     "tree-cli": "0.4.12",
     "urlencode-cli": "2.0.0",
-    "useragent-cli": "https://github.com/hjmeijer/useragent-cli.git"
+    "useragent-cli": "https://github.com/hjmeijer/useragent-cli.git",
+    "vscode-langservers-extracted": "^4.1.0"
   }
 }

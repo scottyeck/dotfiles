@@ -50,11 +50,12 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- TODO: Update capabilities with use of cmp_nvim_lsp
 
 for _, server in
-    ipairs({
-        "null-ls",
-        "solargraph",
-        "tsserver",
-    })
+  ipairs({
+    "eslint",
+    "null-ls",
+    "solargraph",
+    "tsserver",
+  })
 do
   require("lsp." .. server).setup(on_attach, capabilities)
 end
