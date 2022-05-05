@@ -1,0 +1,89 @@
+#!/bin/bash
+
+DURATION=17
+GDATE_DURATION="+$DURATION minutes"
+AT_DURATION="+${DURATION}minute"
+if [ "$DURATION" -gt "1" ]; then
+	AT_DURATION="${AT_DURATION}s"
+fi
+
+status() {
+	SERIALIZED_CURRENT=$(cat ~/.pomox/current)
+	if [[ $SERIALIZED_CURRENT = "" ]]; then
+		echo "🍅 - 🧘 Ready"
+		exit 0
+	fi
+
+	START_TIME=$(echo $SERIALIZED_CURRENT | awk '{print $1}')
+
+	END_TIME=$(gdate --date "${START_TIME} ${GDATE_DURATION}" --iso-8601="seconds")
+	NOW=$(gdate --iso-8601="seconds")
+
+	NOW_S=$(gdate --date "${NOW}" '+%s')
+	END_S=$(gdate --date "${END_TIME}" '+%s')
+	DIFF_S=$(($END_S - $NOW_S))
+	TIMESTAMP=$(gdate -u -d @${DIFF_S} +"%M:%S")
+	echo "🍅 - ⏱  $TIMESTAMP"
+}
+
+start() {
+	SERIALIZED_CURRENT=$(cat ~/.pomox/current)
+	if [[ ! $SERIALIZED_CURRENT = "" ]]; then
+		echo "Pomodoro active - please clear before starting."
+		status
+		exit 1
+	fi
+
+	START_TIME=$(gdate --iso-8601="seconds")
+	END_TIME=$(gdate --date "$START_TIME $GDATE_DURATION" --iso-8601="seconds")
+	echo "$START_TIME duration=$DURATION" >~/.pomox/current
+
+	# echo "pomox end" | at $(gdate --date "$END_TIME" +"%H:%M %D")
+	echo "pomox end && reattach-to-user-namespace terminal-notifier -title \"Test\" -message \"🍅 Pomodoro test\" -sound \"glass\"" | at $(gdate --date "$END_TIME" +"%H:%M %D")
+
+	status
+}
+
+stop() {
+	truncate -s 0 ~/.pomox/current
+	status
+}
+
+end() {
+	truncate -s 0 ~/.pomox/current
+	echo "🍅 - Pomodoro complete!"
+}
+
+debug() {
+	echo "DURATION: $DURATION"
+	echo "AT DURATION: $AT_DURATION"
+	echo "GDATE DURATION: $GDATE_DURATION"
+}
+
+pomox() {
+	while getopts d:D: flag; do
+		case "${flag}" in
+		d)
+			DURATION=${OPTARG}
+			;;
+		D)
+			DESCRIPTION=${OPTARG}
+			;;
+		esac
+	done
+
+	local cmd=$1
+	if [ $cmd = "start" ]; then
+		start
+	elif [ $cmd = "status" ]; then
+		status
+	elif [ $cmd = "stop" ]; then
+		stop
+	elif [ $cmd = "end" ]; then
+		end
+	elif [ $cmd = "debug" ]; then
+		debug
+	fi
+}
+
+pomox "$@"
