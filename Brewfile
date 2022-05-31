@@ -81,6 +81,7 @@ brew "tcl-tk"
 brew "python@3.8"
 brew "ruby-build"
 brew "rbenv"
+brew "reattach-to-user-namespace"
 brew "redis", restart_service: true
 brew "ripgrep"
 brew "ruby"
