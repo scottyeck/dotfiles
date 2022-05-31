@@ -37,10 +37,14 @@ let mapleader="\<space>"
 " Plugins
 " ==========================================================
 
+" TODO implement lockfile
+" TODO change dir
 call plug#begin('~/.vim/plugged')
 
 Plug 'jose-elias-alvarez/typescript.nvim'
 
+
+source ~/.config/nvim/plugins/seal.vim
 source ~/.config/nvim/plugins/lib.vim
 
 source ~/.config/nvim/plugins/abolish.vim
@@ -57,6 +61,8 @@ source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/goyo.vim
 source ~/.config/nvim/plugins/gv.vim
 source ~/.config/nvim/plugins/gitgutter.vim
+source ~/.config/nvim/plugins/markdown-preview.vim
+" source ~/.config/nvim/plugins/rails.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
 source ~/.config/nvim/plugins/sensible.vim
@@ -76,10 +82,10 @@ Plug 'jose-elias-alvarez/typescript.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-source ~/.config/nvim/lua/plugins/telescope.lua
-
 call plug#end()
 doautocmd User PlugLoaded
+
+source ~/.config/nvim/lua/plugins/telescope.lua
 
 " TODO: Move this
 source ~/.config/nvim/lua/lsp/init.lua
@@ -125,7 +131,8 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Move current line
-nnoremap <leader>j :m .+1
+nnoremap <leader>j :m .+1<CR>
+nnoremap <leader>k :m .-2<CR>
 
 function! Open(url)
   silent execute '!open ' . a:url
