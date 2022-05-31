@@ -11,7 +11,6 @@
     "csvtojson": "exact2.0.10",
     "dts-gen": "exact0.6.0",
     "eslint_d": "^10.1.3",
-    "gatsby": "^2.24.73",
     "hbs-cli": "1.4.0",
     "http-server": "exact0.12.3",
     "jira-cli": "2.4.0",
