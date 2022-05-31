@@ -2,30 +2,41 @@
 
 EXEC_NAME="tmuxproj"
 
-SCRIPT_PATH="$( cd "$( dirname $0 )" ; pwd )"
+SCRIPT_PATH="$(
+	cd "$(dirname $0)"
+	pwd
+)"
 source $SCRIPT_PATH/common.sh
 
-startTmuxProject () {
-  if [ -z "$TMUX_PROJ_DIR" ]; then
-    logError 'Config var $TMUX_PROJ_DIR unset'
-    return 1
-  fi
+startTmuxProject() {
+	if [ -z "$TMUX_PROJ_DIR" ]; then
+		logError 'Config var $TMUX_PROJ_DIR unset'
+		return 1
+	fi
 
-  if [ ! -d "$TMUX_PROJ_DIR" ]; then
-    logError "Could not find \$TMUX_PROJ_DIR: \"$TMUX_PROJ_DIR\"" 
-    return 1
-  fi
+	if [ ! -d "$TMUX_PROJ_DIR" ]; then
+		logError "Could not find \$TMUX_PROJ_DIR: \"$TMUX_PROJ_DIR\""
+		return 1
+	fi
 
-  local PROJ_NAME="$1"
-  local PROJ_EXEC_NAME="$TMUX_PROJ_DIR/$PROJ_NAME"
+	local PROJ_NAME="$1"
+	# TODO: This won't help if there are multiple matches
+	local SESSION_EXISTS=$(tmux list-sessions | grep $PROJ_NAME)
 
-  if [[ ! -x "$PROJ_EXEC_NAME" ]]; then
-    logError "Could not find tmux project executable with name \"$PROJ_NAME\""
-    logError "> Start a new one with \"$EDITOR $PROJ_EXEC_NAME\""
-    return 1
-  fi
+	if [[ ! "$SESSION_EXISTS" = "" ]]; then
+		tmux attach-session -t "$PROJ_NAME"
+		return 0
+	fi
 
-  eval "$PROJ_EXEC_NAME"
+	local PROJ_EXEC_NAME="$TMUX_PROJ_DIR/$PROJ_NAME"
+	if [[ ! -x "$PROJ_EXEC_NAME" ]]; then
+		logGeneric "Could not find tmux project executable with name \"$PROJ_NAME\""
+		logGeneric "> Starting a new empty session instead."
+		tmux new-session -s "$PROJ_NAME"
+		return 0
+	fi
+
+	eval "$PROJ_EXEC_NAME"
 }
 
 startTmuxProject "$@"

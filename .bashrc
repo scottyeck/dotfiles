@@ -31,6 +31,7 @@ PATH="$PATH:$PYENV_ROOT/bin"
 
 # go
 PATH="$PATH:/usr/local/go/bin"
+PATH="$PATH:$HOME/go/bin"
 
 # gems
 PATH="$PATH:$HOME/.gem/bin"
@@ -38,7 +39,8 @@ PATH="$PATH:$HOME/.gem/bin"
 # java
 PATH="/usr/local/opt/openjdk/bin:$PATH"
 
-# source "$HOME/.cargo/env"
+# cargo
+PATH="$PATH:$HOME/.cargo/bin"
 
 export TMUX_PROJ_DIR="$HOME/.tmuxproj"
 

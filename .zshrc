@@ -4,15 +4,18 @@ echo "..."
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
 
+# export PYTHON='/usr/local/bin/python3'
+# export NODE_GYP_FORCE_PYTHON=$PYTHON
+
 # Need to override and explicitly specify $TERM in order to use true
 # RGB color with Alacritty / tmux / Neovim. See "Machine Setup" notes.
 # This is likely overly restrictive, but given the value it will provide
 # in the short term I'm okay with it.
-if [[ -n $TMUX ]]; then
-  export TERM="alacritty"
-else
-  export TERM="alacritty-direct"
-fi
+# if [[ -n $TMUX ]]; then
+#   export TERM="alacritty"
+# else
+#   export TERM="alacritty-direct"
+# fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -57,7 +60,7 @@ alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
 alias brb='brew_bundle'
 
 alias tp='tmuxproj'
-alias pomo='pomodoro'
+# alias pomo='pomodoro'
 
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html

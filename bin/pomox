@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# TODO:
+
+# - [ ] chmod +x currentfile
+
+status() {
+	source ~/.pomox/current
+	if [[ $START_TIME = "" ]]; then
+		echo "🍅 - 🧘 Ready"
+		exit 0
+	fi
+
+	# START_TIME=$(echo $SERIALIZED_CURRENT | awk '{print $1}')
+
+	GDATE_DURATION="+$DURATION minutes"
+	END_TIME=$(gdate --date "${START_TIME} ${GDATE_DURATION}" --iso-8601="seconds")
+	NOW=$(gdate --iso-8601="seconds")
+
+	NOW_S=$(gdate --date "${NOW}" '+%s')
+	END_S=$(gdate --date "${END_TIME}" '+%s')
+	DIFF_S=$(($END_S - $NOW_S))
+	TIMESTAMP=$(gdate -u -d @${DIFF_S} +"%M:%S")
+	echo "🍅 - ⏱  $TIMESTAMP"
+}
+
+start() {
+	SERIALIZED_CURRENT=$(cat ~/.pomox/current)
+	if [[ ! $SERIALIZED_CURRENT = "" ]]; then
+		echo "Pomodoro active - please clear before starting."
+		status
+		exit 1
+	fi
+
+	START_TIME=$(gdate --iso-8601="seconds")
+	GDATE_DURATION="+$DURATION minutes"
+	END_TIME=$(gdate --date "$START_TIME $GDATE_DURATION" --iso-8601="seconds")
+
+	RESULT="$(echo "pomox end && reattach-to-user-namespace terminal-notifier -title \"Test\" -message \"🍅 Pomodoro complete\" -sound \"glass\"" | at $(gdate --date "$END_TIME" +"%H:%M %D"))"
+	# This is currently not working, so I can't recover the index to cancel outstanding jobs.
+	AT_INDEX="$(echo "$RESULT" | awk '{print $2}')"
+	printf "START_TIME=%s\nDURATION=%s\nAT_INDEX=%s\n" "$START_TIME" "$DURATION" "$AT_INDEX" >~/.pomox/current
+
+	status
+}
+
+stop() {
+	truncate -s 0 ~/.pomox/current
+	status
+}
+
+end() {
+	truncate -s 0 ~/.pomox/current
+	echo "🍅 - Pomodoro complete!"
+}
+
+debug() {
+	echo "DURATION: $DURATION"
+	echo "START_TIME: $START_TIME"
+}
+
+pomox() {
+	local cmd=$1
+	shift
+
+	while getopts d:D: flag; do
+		case "${flag}" in
+		d)
+			DURATION="${OPTARG}"
+			;;
+		D)
+			DESCRIPTION="${OPTARG}"
+			;;
+		esac
+	done
+
+	DURATION="${DURATION:-25}"
+
+	if [ $cmd = "start" ]; then
+		start
+	elif [ $cmd = "status" ]; then
+		status
+	elif [ $cmd = "stop" ]; then
+		stop
+	elif [ $cmd = "end" ]; then
+		end
+	elif [ $cmd = "debug" ]; then
+		debug
+	fi
+}
+
+pomox "$@"
