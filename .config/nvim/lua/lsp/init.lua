@@ -11,7 +11,11 @@ lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
 
 -- use lsp formatting if it's available (and if it's good)
 -- otherwise, fall back to null-ls
-local preferred_formatting_clients = { "eslint" }
+local preferred_formatting_clients = {
+  -- Formatting using eslint is not working consistently so we avoid use.
+  -- "eslint",
+  "null-ls"
+}
 local fallback_formatting_client = "null-ls"
 
 -- prevent repeated lookups
@@ -75,6 +79,9 @@ local on_attach = function(client, bufnr)
   utils.command("LspSignatureHelp", vim.lsp.buf.signature_help)
   utils.command("LspTypeDef", vim.lsp.buf.type_definition)
   utils.command("LspRangeAct", vim.lsp.buf.range_code_action)
+  utils.command("LspRename", function()
+    vim.lsp.buf.rename()
+  end)
 
   -- bindings
   utils.buf_map(bufnr, "n", "gr", ":LspRename<CR>")
@@ -86,6 +93,7 @@ local on_attach = function(client, bufnr)
   utils.buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>")
 
   utils.buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+  utils.buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
   utils.buf_map(bufnr, "n", "gR", ":LspRef<CR>")
   utils.buf_map(bufnr, "n", "ga", ":LspAct<CR>")
   utils.buf_map(bufnr, "v", "ga", "<Esc><cmd> LspRangeAct<CR>")
