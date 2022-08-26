@@ -1,6 +1,9 @@
 echo "Loading zsh configuration"
 echo "..."
 
+# https://apple.stackexchange.com/questions/148901/why-does-my-brew-installation-not-work
+eval $(/opt/homebrew/bin/brew shellenv)
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
 
