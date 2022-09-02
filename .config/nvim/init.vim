@@ -43,8 +43,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'jose-elias-alvarez/typescript.nvim'
 
-
-source ~/.config/nvim/plugins/seal.vim
+" source ~/.config/nvim/plugins/seal.vim
 source ~/.config/nvim/plugins/lib.vim
 
 source ~/.config/nvim/plugins/abolish.vim
