@@ -4,7 +4,6 @@
     "create-react-app": "^5.0.0",
     "diagnostic-languageserver": "^1.14.0",
     "eas-cli": "^0.55.1",
-    "expo-cli": "^5.4.4",
     "gatsby-cli": "^4.14.0",
     "hbs-cli": "^1.4.1",
     "http-server": "^14.1.1",
