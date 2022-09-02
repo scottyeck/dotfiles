@@ -31,45 +31,47 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
     - (In older versions, the _Pointer Control_ section was titled _Mouse & Trackpad_)
 - _Displays_
   - Increase resolution: _Display_ > _Scaled_ - Choose _"More space"_
-- Bluetooth
+- _Bluetooth_
   - Check _Show Bluetooth in menu bar_
   - Add external trackpad
   - Add headphones
-
-- Download
-  - Chrome
-    - Login w/ personal email. Extensions will follow.
-    - Settings > Default Browser > Make default
-  - Divvy
-    - License from email
-    - Register name as "Scott Eckenthal"
-    - Settings > General 
-      - Check Start Divvy at Login
-      - Use global shortcut: Cmd+Shift+Space
-    - System Prefs > Security & Privacy > Privacy > Accessibility > Allow Divvy access
-    - L / R / A / F shortcuts
-  - Alfred
-    - TODO: Maybe not?
-  - Karabiner Elements
-    - Remaps Caps Lock to Escape
-    - Remaps Option / Cmd keys for external keyboard
-    - TODO: Add karabiner rc to dotfiles
-  - Slack
-    - https://slack.com/downloads/instructions/mac
-    - Configure security settings to allow for screen-sharing (via [/r/slack](https://www.reddit.com/r/Slack/comments/dfeg37/coworker_has_slack_screen_sharing_issues_on_macos/fdotj8p/))
-  - Vs Code
-    - Prettier / eslint / quit thing / project manager
-  - Fl.ux
-    - https://justgetflux.com/news/pages/macquickstart/
-- System
-  - Python
-    - Install > Python 3.4 using [pyenv](https://opensource.com/article/19/5/python-3-default-mac#what-to-do).
+- _Security & Privacy_
+  - _Privacy_ > _Screen Recording_
+    - Add videoconferencing apps (Zoom, [Slack](https://slack.com/downloads/instructions/mac), Meet via Chrome) to allow perms for screen-sharing.
+  - _Privacy_ > _Accessibility_
+    - Add window management apps (Divvy)
 
 ## Manual Installs
 
 These are applications whose installations I don't currently automate because manual installation is simpler.
 
 * [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
+
+## Manual Settings Configuration
+
+These are settings that I don't currently automate.
+
+### Divvy Window Management
+
+I've used [Divvy](https://mizage.com/windivvy/) for the past 10 years or so, and although I've tried other window managers, I just can't quit this one. Blame muscle memory.
+
+_Unfortunately_, OSX [no longer lets me configure my Divvy settings the way I want to](https://apple.stackexchange.com/a/430456), so I have to [manually migrate my settings](https://andrew.hawker.io/dailies/2021/03/01/migrate-divvy-configuration/) from one machine to another.
+
+Long story short, we do this with an `export` + `import` using OSX defaults.
+
+First, export settings into `com.mizage.direct.Divvy.plist` with:
+
+```
+defaults export com.mizage.direct.Divvy com.mizage.direct.Divvy.plist
+```
+
+Copy this binary plist to your the machine (Airdrop works here) and import settings with:
+
+```
+defaults import com.mizage.direct.Divvy com.mizage.direct.Divvy.plist
+```
+
+Note: These settings contain the Divvy license key so treat accordingly.
 
 ### True Color w/ Alacritty / Tmux / Nvim
 
