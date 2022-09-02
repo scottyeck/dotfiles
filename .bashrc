@@ -15,9 +15,6 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # dotfiles
 PATH="$PATH:$HOME/bin"
 
-# node_modules
-PATH="$PATH:$HOME/node_modules/.bin"
-
 # Provide node some more memory
 export NODE_OPTIONS="--max-old-space-size=4096"
 
