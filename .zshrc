@@ -78,34 +78,7 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
-# Override cursor behavior to detect mode
-# http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
-
-function _set_cursor() {
-    if [[ $TMUX = '' ]]; then
-      echo -ne $1
-    else
-      echo -ne "\ePtmux;\e\e$1\e\\"
-    fi
-}
-
-function _set_block_cursor() { _set_cursor '\e[2 q' }
-function _set_beam_cursor() { _set_cursor '\e[6 q' }
-
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-      _set_block_cursor
-  else
-      _set_beam_cursor
-  fi
-}
-
-zle -N zle-keymap-select
-
-# ensure beam cursor when starting new terminal
-precmd_functions+=(_set_beam_cursor) #
-# ensure insert mode and beam cursor when exiting vim
-zle-line-init() { zle -K viins; _set_beam_cursor }
+export VI_MODE_SET_CURSOR=true
 
 # Remove latency when pasting large commands
 # @see https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607

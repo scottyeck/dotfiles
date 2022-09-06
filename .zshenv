@@ -8,6 +8,7 @@ plugins=(
   macos
   rake
   tmux
+  vi-mode
   yarn
   zsh-syntax-highlighting
 )
