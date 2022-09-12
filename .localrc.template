@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Generate a Github Personal Access Token so that `hub` can
+# authenticate when authoring PRs.
+# @goto https://github.com/settings/tokens
+# @see  https://hub.github.com/hub.1.html#github-oauth-authentication
+export GITHUB_TOKEN="**nope**"
