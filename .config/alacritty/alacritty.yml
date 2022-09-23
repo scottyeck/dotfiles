@@ -18,7 +18,10 @@ font:
     y: 12 # line-spacing
 
 window:
-  decorations: none
+  # Prefer use of "buttonless" rather than "none" to preserve the ability to move
+  # the window, particularly with Moom.
+  # @see https://github.com/alacritty/alacritty/issues/4825#issuecomment-1176246534
+  decorations: buttonless
 
 import:
   - ~/.config/alacritty/dracula/dracula.yml
