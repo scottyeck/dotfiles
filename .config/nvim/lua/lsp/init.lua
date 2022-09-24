@@ -6,71 +6,53 @@ local api = vim.api
 local border_opts = { border = "single", focusable = false, scope = "line" }
 vim.diagnostic.config({ virtual_text = false, float = border_opts })
 
+-- TODO: What is this for?
+local eslint_disabled_buffers = {}
+
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, border_opts)
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
 
--- use lsp formatting if it's available (and if it's good)
--- otherwise, fall back to null-ls
-local preferred_formatting_clients = {
-  -- Formatting using eslint is not working consistently so we avoid use.
-  -- "eslint",
-  "null-ls"
-}
-local fallback_formatting_client = "null-ls"
+-- track buffers that eslint can't format to use prettier instead
+lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+  local client = lsp.get_client_by_id(ctx.client_id)
+  if not (client and client.name == "eslint") then
+    goto done
+  end
 
--- prevent repeated lookups
-local buffer_client_ids = {}
-
-_G.formatting = function(bufnr)
-  bufnr = tonumber(bufnr) or api.nvim_get_current_buf()
-
-  local selected_client
-  if buffer_client_ids[bufnr] then
-    selected_client = lsp.get_client_by_id(buffer_client_ids[bufnr])
-  else
-    for _, client in pairs(lsp.buf_get_clients(bufnr)) do
-      if vim.tbl_contains(preferred_formatting_clients, client.name) then
-        selected_client = client
-        break
-      end
-
-      if client.name == fallback_formatting_client then
-        selected_client = client
-      end
+  for _, diagnostic in ipairs(result.diagnostics) do
+    if diagnostic.message:find("The file does not match your project config") then
+      local bufnr = vim.uri_to_bufnr(result.uri)
+      eslint_disabled_buffers[bufnr] = true
     end
   end
 
-  if not selected_client then
-    return
-  end
-
-  buffer_client_ids[bufnr] = selected_client.id
-
-  local params = lsp.util.make_formatting_params()
-  selected_client.request("textDocument/formatting", params, function(err, res)
-    if err then
-      local err_msg = type(err) == "string" and err or err.message
-      vim.notify("global.lsp.formatting: " .. err_msg, vim.log.levels.WARN)
-      return
-    end
-
-    if not api.nvim_buf_is_loaded(bufnr) or api.nvim_buf_get_option(bufnr, "modified") then
-      return
-    end
-
-    if res then
-      lsp.util.apply_text_edits(res, bufnr, selected_client.offset_encoding or "utf-16")
-      api.nvim_buf_call(bufnr, function()
-        vim.cmd("silent noautocmd update")
-      end)
-    end
-  end, bufnr)
+  ::done::
+  return lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+local lsp_formatting = function(bufnr)
+  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+  lsp.buf.format({
+    bufnr = bufnr,
+    filter = function(client)
+      if client.name == "eslint" then
+        return not eslint_disabled_buffers[bufnr]
+      end
+
+      if client.name == "null-ls" then
+        return not utils.table.some(clients, function(_, other_client)
+          return other_client.name == "eslint" and not eslint_disabled_buffers[bufnr]
+        end)
+      end
+    end,
+  })
+end
 
 local on_attach = function(client, bufnr)
   -- commands
-  utils.command("LspFormatting", vim.lsp.buf.formatting)
+  utils.command("LspFormatting", vim.lsp.buf.format)
   utils.command("LspHover", vim.lsp.buf.hover)
   utils.command("LspDiagPrev", vim.diagnostic.goto_prev)
   utils.command("LspDiagNext", vim.diagnostic.goto_next)
@@ -98,15 +80,13 @@ local on_attach = function(client, bufnr)
   utils.buf_map(bufnr, "n", "ga", ":LspAct<CR>")
   utils.buf_map(bufnr, "v", "ga", "<Esc><cmd> LspRangeAct<CR>")
 
-  -- TODO: Formatting is currently broken
   if client.supports_method("textDocument/formatting") then
-    -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-    vim.cmd([[
-    augroup LspFormatting
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua formatting(vim.fn.expand("<abuf>"))
-    augroup END
-    ]])
+    utils.buf_command(bufnr, "LspFormatting", function()
+      lsp_formatting(bufnr)
+    end)
+
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", { group = augroup, buffer = bufnr, command = "LspFormatting" })
   end
 end
 
