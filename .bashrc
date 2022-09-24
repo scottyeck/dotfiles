@@ -46,9 +46,6 @@ export TMUX_PROJ_DIR="$HOME/.tmuxproj"
 # > because macOS provides an older sqlite3.
 PATH="$PATH:/usr/local/opt/sqlite/bin"
 
-# Source nix - added by nix installer
-. $HOME/.nix-profile/etc/profile.d/nix.sh
-
 # note.sh
 export NOTE_DIR=$HOME/notes/daily
 
