@@ -4,7 +4,7 @@ Plug 'tpope/vim-rhubarb'
 " Mimic zsh aliases
 command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"
 command! Gunwip !git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1
-command! Gco GCheckout
+command! Gcho GCheckout
 command! Gf Gfetch
 command! Gyank .Gbrowse!
 command! Glo Git log --oneline

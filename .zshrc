@@ -29,6 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # Custom zsh configuration
 
 alias gcur='echo $(git_current_branch)'
+alias gcobak='git checkout -b $(git_current_branch)-bak'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 # TODO: Uninstall nvim via brew and extend $PATH
@@ -40,7 +41,7 @@ alias pip="pip3"
 # Render an interactive git branch picker sorted by most recent commit,
 # and checkout the selection.
 # @via https://github.com/liamfd
-alias gbrecent='git checkout $(git branch --sort=-committerdate | fzf)'
+alias gcho='git checkout $(git branch --sort=-committerdate | fzf)'
 alias gbyank='git branch --sort=-committerdate | fzf | pbcopy'
 
 alias dots="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
