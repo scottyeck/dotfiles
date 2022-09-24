@@ -46,6 +46,7 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
 These are applications whose installations I don't currently automate because manual installation is simpler.
 
 * [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
+* [Rust / Rustup](https://www.rust-lang.org/learn/get-started)
 
 ## Manual Settings Configuration
 
