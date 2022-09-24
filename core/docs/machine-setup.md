@@ -48,6 +48,20 @@ These are applications whose installations I don't currently automate because ma
 * [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
 * [Rust / Rustup](https://www.rust-lang.org/learn/get-started)
 
+### `nvim`
+
+I've played around with various automated installation mechanisms for `nvim` - [nvenv](https://github.com/NTBBloodbath/nvenv) is written in _v_ and thus requires an esoteric toolchain, while [bob](https://github.com/MordechaiHadad/bob) doesn't currently support M1 macs. Ultimately this isn't that complicated so I'll script up a tool that does this, but in the meantime...
+
+[Visit the neovim releases page on GitHub](https://github.com/neovim/neovim/releases) and download the latest universal _macos_ release. Then...
+
+```
+# (to avoid "unknown developer" warning)
+$ xattr -c ./nvim-macos.tar.gz
+$ tar xzvf nvim-macos.tar.gz
+$ mv nvim-macos ./local/share/nvim-versions/{version-name}
+$ ln -s ~/.local/share/nvim-versions/{version-name}/bin/nvim ~/.local/bin/nvim
+```
+
 ## Manual Settings Configuration
 
 These are settings that I don't currently automate.
