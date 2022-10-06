@@ -16,7 +16,7 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 PATH="$PATH:$HOME/bin"
 
 # Provide node some more memory
-export NODE_OPTIONS="--max-old-space-size=4096"
+export NODE_OPTIONS="--max-old-space-size=8192"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export GEM_HOME="$HOME/.gem"
