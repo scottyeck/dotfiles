@@ -14,9 +14,9 @@ end
 local sources = {
     -- formatting
     builtins.formatting.prettier,
-    -- builtins.formatting.prettier.with({
-    --   condition = with_root_file(".prettierrc") or with_root_file(".prettierrc.json"),
-    -- }),
+    builtins.formatting.prettier.with({
+      condition = with_root_file(".prettierrc") or with_root_file(".prettierrc.json"),
+    }),
     builtins.formatting.shfmt,
     builtins.formatting.trim_whitespace.with({ filetypes = { "tmux", "teal" } }),
     builtins.diagnostics.shellcheck.with({
