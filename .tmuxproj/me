@@ -10,7 +10,9 @@ SESSION_TARGET="$SESSION"
 # If session doesn't exist, we'll create a new one.
 if [ "$SESSION_EXISTS" = "" ]; then
 
-	tmux new-session -d -s $SESSION
+	# Specify session size so that splits are even on attach.
+	# @see https://unix.stackexchange.com/a/569731
+	tmux new-session -d -s $SESSION -x "$(tput cols)" -y "$(tput lines)"
 
 	tmux rename-window -t 0 'home'
 
