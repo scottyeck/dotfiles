@@ -1,0 +1,47 @@
+#!/bin/bash
+
+SESSION="comp"
+SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
+
+# Default session target, specifying no active window, which
+# will return us to the previously active window.
+SESSION_TARGET="$SESSION"
+
+# If session doesn't exist, we'll create a new one.
+if [ "$SESSION_EXISTS" = "" ]; then
+
+	# Specify session size so that splits are even on attach.
+	# @see https://unix.stackexchange.com/a/569731
+	tmux new-session -d -s $SESSION -x "$(tput cols)" -y "$(tput lines)"
+
+	tmux rename-window -t 0 -n 'code'
+	tmux send-keys -t $SESSION:0 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:0 'vim' C-m
+
+	tmux new-window -t $SESSION:1 -n 'server'
+	tmux select-window -t $SESSION:1
+	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:1 'yarn osx:up' C-m
+	tmux split-window -h
+	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux select-pane -L
+	tmux split-window -v
+	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:1 'yarn workspace frontend start' C-m
+	tmux split-window -h -p 50
+	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:1 'yarn workspace frontend storybook' C-m
+
+	tmux new-window -t $SESSION:2 -n 'notes'
+	tmux send-keys -t $SESSION:2 "note"
+
+	# Specify the window to which we want to attach
+	SESSION_TARGET="$SESSION_TARGET:0"
+
+fi # // if session exists
+
+echo $SESSION_TARGET
+
+# Now that we know the session (either new or existing)
+# exists, attach to it.
+tmux attach-session -t "$SESSION_TARGET"
