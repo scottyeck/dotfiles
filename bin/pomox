@@ -3,9 +3,20 @@
 # TODO:
 
 # - [ ] chmod +x currentfile
+# - [ ] specify pre-requisites in notes
+#   - we need to start the atrun launch daemon
+#     - @see https://unix.stackexchange.com/a/478840
+#   - we need to give System Prefs permissions to terminal-notifier to show notifications
+#   - we also need to give Disk Access to `atrun`
+#     - @see https://unix.stackexchange.com/a/478840
+# - [ ] leave notes about working with at
+#   - @see https://developercoach.com/using-at-for-command-scheduling-under-mac-os-x/
+#   - use `atq` to look at current jobs
+#   - use `atrm` to remove dangling jobs
 
 status() {
 	source ~/.pomox/current
+	# This time is wrong - it terminates on the minute rather than being granular to the second
 	if [[ $START_TIME = "" ]]; then
 		echo "🍅 - 🧘 Ready"
 		exit 0
