@@ -1,0 +1,9 @@
+#!/bin/bash
+
+terminal-notifier -title "Test" -message "🍅 Pomodoro beginning" -sound "glass"
+
+SLACK_PID=$(ps -ef | grep Slack | grep "Contents/MacOS/Slack$" | awk '{print $2}')
+kill -9 $SLACK_PID
+
+$HOME/git/oss/slack_status_updater/slack_status.sh pomo
+$HOME/git/oss/slack_status_updater/awayback.sh away

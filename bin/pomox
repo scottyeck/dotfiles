@@ -13,6 +13,8 @@
 #   - @see https://developercoach.com/using-at-for-command-scheduling-under-mac-os-x/
 #   - use `atq` to look at current jobs
 #   - use `atrm` to remove dangling jobs
+# - [ ] make pomox hooks optional - only execute if they exist
+# - [ ] recover index to fix outstanding jobs
 
 status() {
 	source ~/.pomox/current
@@ -47,7 +49,9 @@ start() {
 	GDATE_DURATION="+$DURATION minutes"
 	END_TIME=$(gdate --date "$START_TIME $GDATE_DURATION" --iso-8601="seconds")
 
-	RESULT="$(echo "pomox end && reattach-to-user-namespace terminal-notifier -title \"Test\" -message \"🍅 Pomodoro complete\" -sound \"glass\"" | at $(gdate --date "$END_TIME" +"%H:%M %D"))"
+	# TODO: Make start / end hooks optional.
+	~/.pomox/hooks/start
+	RESULT="$(echo "pomox end && reattach-to-user-namespace ~/.pomox/hooks/end" | at $(gdate --date "$END_TIME" +"%H:%M %D"))"
 	# This is currently not working, so I can't recover the index to cancel outstanding jobs.
 	AT_INDEX="$(echo "$RESULT" | awk '{print $2}')"
 	printf "START_TIME=%s\nDURATION=%s\nAT_INDEX=%s\n" "$START_TIME" "$DURATION" "$AT_INDEX" >~/.pomox/current
