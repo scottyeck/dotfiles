@@ -3532,6 +3532,13 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+macos-focus-mode@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/macos-focus-mode/-/macos-focus-mode-1.0.0.tgz#f8bb98abb0596ee46bad8fe2883a1938115a8ca6"
+  integrity sha512-Zkzw1ecjuIdtVX3OgxpZsessr9JXdQHNZJ/NTHRp4akxHROMGTbGLQf/791PqTz4x8tjsvSYlAHzMAu4OvMSRw==
+  dependencies:
+    minimist "^1.2.5"
+
 make-dir@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"

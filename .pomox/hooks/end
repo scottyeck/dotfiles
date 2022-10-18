@@ -1,6 +1,7 @@
 #!/bin/bash
 
 terminal-notifier -title "Test" -message "🍅 Pomodoro complete" -sound "glass"
+macos-focus-mode disable
 
 $HOME/git/oss/slack_status_updater/slack_status.sh none
 $HOME/git/oss/slack_status_updater/awayback.sh back

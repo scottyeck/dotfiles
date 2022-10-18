@@ -1,6 +1,7 @@
 #!/bin/bash
 
 terminal-notifier -title "Test" -message "🍅 Pomodoro beginning" -sound "glass"
+macos-focus-mode enable
 
 SLACK_PID=$(ps -ef | grep Slack | grep "Contents/MacOS/Slack$" | awk '{print $2}')
 kill -9 $SLACK_PID
