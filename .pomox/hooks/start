@@ -3,8 +3,10 @@
 terminal-notifier -title "Test" -message "🍅 Pomodoro beginning" -sound "glass"
 macos-focus-mode enable
 
-SLACK_PID=$(ps -ef | grep Slack | grep "Contents/MacOS/Slack$" | awk '{print $2}')
+SLACK_PID=$(ps -ef | grep "Contents/MacOS/Slack$" | awk '{print $2}')
 kill -9 $SLACK_PID
+MESSAGES_PID=$(ps -ef | grep "Contents/MacOS/Messages$" | awk '{print $2}')
+kill -9 $MESSAGES_PID
 
 $HOME/git/oss/slack_status_updater/slack_status.sh pomo
 $HOME/git/oss/slack_status_updater/awayback.sh away

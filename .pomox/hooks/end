@@ -6,3 +6,4 @@ macos-focus-mode disable
 $HOME/git/oss/slack_status_updater/slack_status.sh none
 $HOME/git/oss/slack_status_updater/awayback.sh back
 open -a Slack
+open -a Messages
