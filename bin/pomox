@@ -59,13 +59,9 @@ start() {
 	status
 }
 
-stop() {
-	truncate -s 0 ~/.pomox/current
-	status
-}
-
 end() {
 	truncate -s 0 ~/.pomox/current
+	~/.pomox/hooks/end
 	echo "🍅 - Pomodoro complete!"
 }
 
@@ -95,8 +91,6 @@ pomox() {
 		start
 	elif [ $cmd = "status" ]; then
 		status
-	elif [ $cmd = "stop" ]; then
-		stop
 	elif [ $cmd = "end" ]; then
 		end
 	elif [ $cmd = "debug" ]; then
