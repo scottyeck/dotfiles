@@ -50,8 +50,8 @@ start() {
 	END_TIME=$(gdate --date "$START_TIME $GDATE_DURATION" --iso-8601="seconds")
 
 	# TODO: Make start / end hooks optional.
-	~/.pomox/hooks/start
-	RESULT="$(echo "pomox end && reattach-to-user-namespace ~/.pomox/hooks/end" | at $(gdate --date "$END_TIME" +"%H:%M %D"))"
+	$HOME/.pomox/hooks/start
+	RESULT="$(echo "reattach-to-user-namespace pomox end" | at $(gdate --date "$END_TIME" +"%H:%M %D"))"
 	# This is currently not working, so I can't recover the index to cancel outstanding jobs.
 	AT_INDEX="$(echo "$RESULT" | awk '{print $2}')"
 	printf "START_TIME=%s\nDURATION=%s\nAT_INDEX=%s\n" "$START_TIME" "$DURATION" "$AT_INDEX" >~/.pomox/current
@@ -60,8 +60,8 @@ start() {
 }
 
 end() {
-	truncate -s 0 ~/.pomox/current
-	~/.pomox/hooks/end
+	truncate -s 0 $HOME/.pomox/current
+	$HOME/.pomox/hooks/end
 	echo "🍅 - Pomodoro complete!"
 }
 
