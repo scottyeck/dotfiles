@@ -15,6 +15,8 @@
 #   - use `atrm` to remove dangling jobs
 # - [ ] make pomox hooks optional - only execute if they exist
 # - [ ] recover index to fix outstanding jobs
+# - [ ] update docs because Alacritty needs full disk access (or at the very least elevated
+#       perms) to suppress the confirmation on run.
 
 status() {
 	source ~/.pomox/current
@@ -95,6 +97,9 @@ pomox() {
 		end
 	elif [ $cmd = "debug" ]; then
 		debug
+	else
+		echo "pomox - command \"$cmd\" not found"
+		exit 1
 	fi
 }
 
