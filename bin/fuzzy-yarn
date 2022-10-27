@@ -19,6 +19,10 @@ get_yarn_cmd() {
     exit 1
   elif [[ "$cmd" == "workspace" ]]; then
     local workspace=$2
+    if [[ "$workspace" == "" ]]; then
+      >&2 echo "you must specify a workspace"
+      exit 1
+    fi
     yarn_cmd="yarn workspace $workspace"
   else
     yarn_cmd="yarn"

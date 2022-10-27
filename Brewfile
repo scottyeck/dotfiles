@@ -64,6 +64,7 @@ brew "libksba"
 brew "libssh2"
 brew "libyaml"
 brew "luarocks"
+brew "mas"
 brew "openjdk"
 brew "maven"
 brew "mdp"
@@ -116,6 +117,7 @@ cask "figma"
 cask "flux"
 cask "font-hack"
 cask "font-jetbrains-mono"
+cask "grandperspective"
 cask "hammerspoon"
 cask "keycastr"
 cask "kitty"
@@ -132,3 +134,8 @@ cask "usb-overdrive"
 cask "visual-studio-code"
 cask "vlc"
 cask "vsee"
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
