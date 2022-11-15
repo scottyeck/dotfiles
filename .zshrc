@@ -32,8 +32,6 @@ alias gcur='echo $(git_current_branch)'
 alias gcobak='git checkout -b $(git_current_branch)-bak'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
-# TODO: Uninstall nvim via brew and extend $PATH
-alias nvim="~/.local/bin/nvim"
 alias vim='nvim'
 alias python='python3'
 alias pip="pip3"
