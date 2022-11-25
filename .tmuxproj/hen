@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SESSION="comp"
+SESSION="hen"
 SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
 
 # Default session target, specifying no active window, which
@@ -15,21 +15,21 @@ if [ "$SESSION_EXISTS" = "" ]; then
 	tmux new-session -d -s $SESSION -x "$(tput cols)" -y "$(tput lines)"
 
 	tmux rename-window -t 0 -n 'code'
-	tmux send-keys -t $SESSION:0 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:0 'cd ~/git/hen/mvp' C-m
 	tmux send-keys -t $SESSION:0 'vim' C-m
 
 	tmux new-window -t $SESSION:1 -n 'server'
 	tmux select-window -t $SESSION:1
-	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
-	tmux send-keys -t $SESSION:1 'yarn osx:up' C-m
+	tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
+	tmux send-keys -t $SESSION:1 'yarn osx:up:prefix-docker-check' C-m
 	tmux split-window -h
-	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
 	tmux select-pane -L
 	tmux split-window -v
-	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
 	tmux send-keys -t $SESSION:1 'yarn workspace frontend start' C-m
 	tmux split-window -h -p 50
-	tmux send-keys -t $SESSION:1 'cd ~/git/comp/mvp' C-m
+	tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
 	tmux send-keys -t $SESSION:1 'yarn workspace frontend storybook' C-m
 
 	tmux new-window -t $SESSION:2 -n 'notes'
