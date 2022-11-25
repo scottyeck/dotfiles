@@ -21,7 +21,6 @@ set noswapfile
 set splitright
 set incsearch
 set termguicolors
-set completeopt=menuone,noselect " Required for usage of nvim-compe
 
 set wildignore+=**/.git/*
 set wildignore+=**/node_modules/*
@@ -50,7 +49,6 @@ source ~/.config/nvim/plugins/abolish.vim
 source ~/.config/nvim/plugins/asynctasks.vim
 source ~/.config/nvim/plugins/autopairs.vim
 source ~/.config/nvim/plugins/commentary.vim
-source ~/.config/nvim/plugins/compe.vim
 source ~/.config/nvim/plugins/dispatch.vim
 source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/eunuch.vim
@@ -80,11 +78,16 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/typescript.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 call plug#end()
 doautocmd User PlugLoaded
 
 source ~/.config/nvim/lua/plugins/telescope.lua
+source ~/.config/nvim/lua/plugins/cmp.lua
 
 " TODO: Move this
 source ~/.config/nvim/lua/lsp/init.lua
