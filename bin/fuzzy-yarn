@@ -44,7 +44,7 @@ main() {
   # echo "yarn_cmd:     $yarn_cmd"
 
   # This sed garbage is terrible but is fine for now.
-  local script_name=$(cat $package_json | jq -r '.scripts' | fzf | awk '{print $1}' | sed 's/^\"//' | sed 's/\":$//')
+  local script_name=$(cat $package_json | jq -r '.scripts | keys[]' | fzf)
   eval "$yarn_cmd $script_name"
 }
 
