@@ -36,6 +36,9 @@ alias vim='nvim'
 alias python='python3'
 alias pip="pip3"
 
+alias yf="fuzzy-yarn"
+alias yfw="fuzzy-yarn workspace"
+
 # Render an interactive git branch picker sorted by most recent commit,
 # and checkout the selection.
 # @via https://github.com/liamfd
