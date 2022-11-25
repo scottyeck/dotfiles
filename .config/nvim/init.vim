@@ -52,19 +52,18 @@ source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/dispatch.vim
 source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/eunuch.vim
-" source ~/.config/nvim/plugins/gruvbox.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/goyo.vim
 source ~/.config/nvim/plugins/gv.vim
 source ~/.config/nvim/plugins/gitgutter.vim
 source ~/.config/nvim/plugins/markdown-preview.vim
-" source ~/.config/nvim/plugins/rails.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
 source ~/.config/nvim/plugins/sensible.vim
 source ~/.config/nvim/plugins/spectre.vim
 source ~/.config/nvim/plugins/surround.vim
+source ~/.config/nvim/plugins/tagalong.vim
 source ~/.config/nvim/plugins/tmux-navigator.vim
 source ~/.config/nvim/plugins/todo.txt.vim
 source ~/.config/nvim/plugins/treesitter.vim
