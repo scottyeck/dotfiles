@@ -51,6 +51,6 @@ utils.nmap("<Leader>gb", "<cmd>Branches<CR>")
 utils.command("LspRef", "Telescope lsp_references")
 utils.command("LspDef", "Telescope lsp_definitions")
 utils.command("LspSym", "Telescope lsp_workspace_symbols")
-utils.command("LspAct", "Telescope lsp_code_actions")
-utils.command("LspRangeAct", "Telescope lsp_range_code_actions")
+utils.command("LspAct", vim.lsp.buf.code_action)
+utils.command("LspRangeAct", vim.lsp.buf.range_code_action)
 

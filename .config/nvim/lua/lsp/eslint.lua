@@ -14,6 +14,8 @@ local M = {
         format = {
           enable = true,
         },
+        -- TODO: Could make this dynamic based on presence of package-lock.json or yarn.lock
+        packageManager = "yarn",
       },
       handlers = {
         -- this error shows up occasionally when formatting
