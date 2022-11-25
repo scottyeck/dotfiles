@@ -101,7 +101,8 @@ nmap <leader>vs :source ~/.config/nvim/init.vim<CR>
 
 " Exit all buffers except the current one
 " @see https://stackoverflow.com/a/67698150
-nmap <leader>Q :execute "%bd\|e#"<CR>
+nmap <leader>q :execute "%bd\|e#"<CR>
+nmap <leader>Q :execute "%bd!\|e#"<CR>
 
 nmap <leader>o :only<CR>
 
