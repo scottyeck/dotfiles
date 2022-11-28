@@ -50,7 +50,7 @@ source ~/.config/nvim/plugins/asynctasks.vim
 source ~/.config/nvim/plugins/autopairs.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/dispatch.vim
-source ~/.config/nvim/plugins/dracula.vim
+" source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/eunuch.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/fzf.vim
@@ -58,6 +58,7 @@ source ~/.config/nvim/plugins/goyo.vim
 source ~/.config/nvim/plugins/gv.vim
 source ~/.config/nvim/plugins/gitgutter.vim
 source ~/.config/nvim/plugins/markdown-preview.vim
+source ~/.config/nvim/plugins/night-owl.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rsi.vim
 source ~/.config/nvim/plugins/sensible.vim

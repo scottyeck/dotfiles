@@ -1,16 +1,16 @@
 font:
   use_thin_strokes: true
   normal:
-    family: "JetBrains Mono"
-    style: "Thin"
+    family: "Cascadia Code"
+    style: "ExtraLight"
   bold:
-    family: "JetBrains Mono"
+    family: "Cascadia Code"
     style: "SemiBold"
   italic:
-    family: "JetBrains Mono"
-    style: "Thin Italic"
+    family: "Cascadia Code"
+    style: "ExtraLight Italic"
   bold_italic:
-    family: "JetBrains Mono"
+    family: "Cascadia Code"
     style: "SemiBold Italic"
   size: 14.0
   offset:
@@ -24,7 +24,7 @@ window:
   decorations: buttonless
 
 import:
-  - ~/.config/alacritty/dracula/dracula.yml
+  - ~/.config/alacritty/night-owl/night-owl.yml
 
 # schemes:
 #   gruvbox_light: &light
