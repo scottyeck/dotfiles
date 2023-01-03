@@ -111,13 +111,24 @@ local on_attach = function(client, bufnr)
   utils.buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
   utils.buf_map(bufnr, "n", "gR", ":LspRef<CR>")
   utils.buf_map(bufnr, "n", "ga", ":LspAct<CR>")
+  utils.buf_map(bufnr, "x", "ga", function()
+     vim.lsp.buf.code_action() -- range
+  end)
   utils.buf_map(bufnr, "v", "ga", "<Esc><cmd> LspRangeAct<CR>")
 
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePost", { group = augroup, buffer = bufnr, callback = function()
-      async_formatting(bufnr)
-    end})
+    -- Temporarily preferring use of eslint-language-server for formatting
+    -- rather than relying on null-ls / prettier for ease-of-use.
+    vim.cmd(string.format([[
+      augroup __eslint_autofix
+        autocmd!
+        autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+      augroup END
+    ]], tostring(bufnr)))
+    -- vim.api.nvim_create_autocmd("BufWritePost", { group = augroup, buffer = bufnr, callback = function()
+    --   async_formatting(bufnr)
+    -- end})
  end
 end
 
@@ -126,7 +137,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 for _, server in
   ipairs({
     "eslint",
-    "null-ls",
+    -- "null-ls",
     "solargraph",
     "tsserver",
   })
