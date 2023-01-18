@@ -34,3 +34,5 @@
   # @see https://stackoverflow.com/a/57601163
   stashgrep = "!f() { for i in `git stash list --format=\"%gd\"` ; \
             do git stash show -p $i | grep -H --label=\"$i\" \"$@\" ; done ; }; f"
+[init]
+	defaultBranch = main
