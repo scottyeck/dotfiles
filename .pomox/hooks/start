@@ -3,10 +3,17 @@
 terminal-notifier -title "Test" -message "🍅 Pomodoro beginning" -sound "glass"
 macos-focus-mode enable
 
+# Quit Slack
 SLACK_PID=$(ps -ef | grep "Contents/MacOS/Slack$" | awk '{print $2}')
 kill -9 $SLACK_PID
+# Quit Messages
 MESSAGES_PID=$(ps -ef | grep "Contents/MacOS/Messages$" | awk '{print $2}')
 kill -9 $MESSAGES_PID
+# Quit Discord
+DISCORD_PID=$(ps -ef | grep "Contents/MacOS/Discord$" | awk '{print $2}')
+kill -9 $DISCORD_PID
 
+# Manage Slack Status / Set as away
 $HOME/git/oss/slack_status_updater/slack_status.sh pomo
 $HOME/git/oss/slack_status_updater/awayback.sh away
+
