@@ -1,2 +1,0 @@
-Plug 'tpope/vim-sensible'
-

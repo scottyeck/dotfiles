@@ -87,7 +87,7 @@ call plug#end()
 doautocmd User PlugLoaded
 
 source ~/.config/nvim/lua/plugins/telescope.lua
-source ~/.config/nvim/lua/plugins/cmp.lua
+" source ~/.config/nvim/lua/plugins/cmp.lua
 
 " TODO: Move this
 source ~/.config/nvim/lua/lsp/init.lua
