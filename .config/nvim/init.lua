@@ -134,6 +134,7 @@ require('lazy').setup({
   'tpope/vim-surround',
   'tpope/vim-vinegar',
 
+  -- Editing enhancements
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
   {
@@ -148,6 +149,7 @@ require('lazy').setup({
       require("nvim-ts-autotag").setup({})
     end
   },
+
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -175,6 +177,8 @@ require('lazy').setup({
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
 
+  -- Git enhancements
+  'junegunn/gv.vim',
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
