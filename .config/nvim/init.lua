@@ -132,6 +132,19 @@ require('lazy').setup({
   'tpope/vim-vinegar',
 
   'christoomey/vim-tmux-navigator',
+  'AndrewRadev/tagalong.vim',
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require("nvim-autopairs").setup({})
+    end
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    config = function ()
+      require("nvim-ts-autotag").setup({})
+    end
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
