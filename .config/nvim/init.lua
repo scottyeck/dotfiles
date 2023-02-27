@@ -1,8 +1,90 @@
+-- ========================================================================== --
+-- ==                           EDITOR SETTINGS                            == --
+-- ========================================================================== --
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+-- [[ Setting options ]]
+-- See `:help vim.o`
+
+-- Set highlight on search
+vim.opt.hlsearch = false
+
+-- Make line numbers default
+vim.wo.relativenumber = true
+
+-- Enable mouse mode
+vim.opt.mouse = 'a'
+
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Save undo history
+-- vim.o.undofile = true
+-- vim.wo.noswapfile = true
+
+vim.opt.splitright = true
+vim.opt.incsearch = true
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Keep signcolumn on by default
+vim.wo.signcolumn = 'yes'
+
+-- Decrease update time
+vim.opt.updatetime = 250
+vim.opt.timeout = true
+vim.opt.timeoutlen = 300
+
+-- Set completeopt to have a better completion experience
+vim.opt.completeopt = 'menuone,noselect'
+
+-- NOTE: You should make sure your terminal supports this
+vim.opt.termguicolors = true
+
+vim.opt.title = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
+
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- ========================================================================== --
+-- ==                               COMMANDS                               == --
+-- ========================================================================== --
+
+vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {})
+
+local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
+-- ========================================================================== --
+-- ==                               PLUGINS                                == --
+-- ========================================================================== --
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -151,74 +233,6 @@ require('lazy').setup({
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
   -- { import = 'custom.plugins' },
 }, {})
-
--- [[ Setting options ]]
--- See `:help vim.o`
-
--- Set highlight on search
-vim.opt.hlsearch = false
-
--- Make line numbers default
-vim.wo.relativenumber = true
-
--- Enable mouse mode
-vim.opt.mouse = 'a'
-
--- Enable break indent
-vim.opt.breakindent = true
-
--- Save undo history
--- vim.o.undofile = true
--- vim.wo.noswapfile = true
-
-vim.opt.splitright = true
-vim.opt.incsearch = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-
--- Decrease update time
-vim.opt.updatetime = 250
-vim.opt.timeout = true
-vim.opt.timeoutlen = 300
-
--- Set completeopt to have a better completion experience
-vim.opt.completeopt = 'menuone,noselect'
-
--- NOTE: You should make sure your terminal supports this
-vim.opt.termguicolors = true
-
-vim.opt.title = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.smartindent = true
-
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
