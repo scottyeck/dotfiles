@@ -143,6 +143,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       "jose-elias-alvarez/null-ls.nvim",
+      "jose-elias-alvarez/typescript.nvim",
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -436,7 +437,7 @@ null_ls.setup({
   debug = false,
   sources = {
     formatting.prettier,
-    formatting.stylua
+    -- formatting.stylua
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -477,7 +478,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
     bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
     bufmap('n', '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
-    bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
     bufmap('n', '[a', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
@@ -495,7 +496,10 @@ require('mason-lspconfig').setup_handlers({
     lspconfig[server].setup({})
   end,
   ['tsserver'] = function()
-    lspconfig.tsserver.setup({
+    -- Note that we're configuring typescript.nvim here as it will
+    -- intercept and handle tsserver for us.
+    -- @see https://github.com/jose-elias-alvarez/typescript.nvim/issues/21#issuecomment-1344435540
+    require("typescript").setup({
       settings = {
         completions = {
           completeFunctionCalls = true
