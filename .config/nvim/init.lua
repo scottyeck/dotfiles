@@ -590,5 +590,26 @@ cmp.setup {
   },
 }
 
+---
+-- Git customization
+---
+
+-- command! Gwip !git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"
+-- command! Gunwip !git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1
+-- command! Gyank .GBrowse!
+-- command! Gcob :exec printf('!git checkout -b %s', input('Enter new branch name: '))
+-- command! Ggsup :exec printf('!git branch --set-upstream-to=origin/%s %s', g:fugitive#head(), g:fugitive#head())
+-- command! Gcobak :exec printf('!git checkout -b %s-bak', g:fugitive#head())
+
+vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
+vim.api.nvim_create_user_command('Gwip', '!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"', {})
+vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
+
+-- Support for hub was dropped in vim-rhubarb as gh becomes the
+-- primary GitHub CLI, so we override this functionality manually.
+-- @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
+vim.g.fugitive_git_command = "hub"
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
