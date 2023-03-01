@@ -76,9 +76,9 @@ brew "node"
 brew "oq"
 brew "pandoc"
 brew "pgweb"
-brew "postgresql@14"
+brew "postgresql@14", restart_service: true
 brew "pyenv"
-brew "tcl-tk"
+brew "tcl-tk", link: false
 brew "python@3.8"
 brew "ruby-build"
 brew "rbenv"
@@ -113,6 +113,7 @@ cask "appcleaner"
 cask "browserstacklocal"
 cask "dash"
 cask "datagrip"
+cask "dbeaver-community"
 cask "discord"
 cask "divvy"
 cask "dropbox"
@@ -144,4 +145,6 @@ mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
+mas "OK JSON", id: 1576121509
 mas "Pages", id: 409201541
+mas "Smart JSON Editor", id: 1268962404
