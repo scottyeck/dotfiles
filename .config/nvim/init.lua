@@ -135,6 +135,7 @@ require('lazy').setup({
   'tpope/vim-vinegar',
 
   -- Editing enhancements
+  'nvim-pack/nvim-spectre',
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
   {
@@ -297,12 +298,27 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = 'Ctrl-p' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+
+vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = '[G]it checkout [B]ranch ' })
+
+vim.api.nvim_create_user_command('Gco', 'Git log --oneline', {})
+
+-- [[ Configure Spectre ]]
+
+vim.keymap.set('n', '<leader>S', require('spectre').open, { desc = '[S]pectre' })
+vim.keymap.set('n', '<leader>sw', function ()
+  require('spectre').open_visual({ select_word = true })
+end, { desc = '[S]pectre [W]ord'})
+-- TODO: Add these missing maps
+-- vnoremap <leader>s <esc>:lua require('spectre').open_visual()<CR>
+-- "  search in current file
+-- nnoremap <leader>sp viw:lua require('spectre').open_file_search()<cr>
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
