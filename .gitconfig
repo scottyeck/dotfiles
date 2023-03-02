@@ -30,6 +30,10 @@
   # git reviewone foo.js bar.js
   reviewone = !vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
 
+  # Finds the most common ancestor between the current branch and a
+  # target and rebases onto that ancestor.
+  remergebase = "!f() { git rebase --onto $1 $(git merge-base HEAD $1) ; }; f"
+
   # Allow for greppable stash items
   # @see https://stackoverflow.com/a/57601163
   stashgrep = "!f() { for i in `git stash list --format=\"%gd\"` ; \
