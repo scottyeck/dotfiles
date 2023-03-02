@@ -32,7 +32,8 @@
 
   # Finds the most common ancestor between the current branch and a
   # target and rebases onto that ancestor.
-  remergebase = "!f() { git rebase --onto $1 $(git merge-base HEAD $1) ; }; f"
+  # "rem(erge)base"
+  rembase = "!f() { git rebase --onto $1 $(git merge-base HEAD $1) ; }; f"
 
   # Allow for greppable stash items
   # @see https://stackoverflow.com/a/57601163
