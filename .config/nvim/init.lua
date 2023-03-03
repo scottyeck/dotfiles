@@ -473,6 +473,9 @@ null_ls.setup({
   debug = false,
   sources = {
     formatting.prettier,
+    formatting.shfmt.with({
+      extra_args = { "-i", "2" }
+    }),
     -- formatting.stylua
   },
   on_attach = function(client, bufnr)
