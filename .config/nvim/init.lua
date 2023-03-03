@@ -254,6 +254,13 @@ require('lazy').setup({
     end,
   },
 
+  -- asynctasks
+  'scottyeck/asynctasks.vim',
+  'skywind3000/asyncrun.vim',
+  'skywind3000/asyncrun.extra',
+  'preservim/vimux',
+  'GustavoKatel/telescope-asynctasks.nvim'
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -307,7 +314,8 @@ vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { de
 
 vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = '[G]it checkout [B]ranch ' })
 
-vim.api.nvim_create_user_command('Gco', 'Git log --oneline', {})
+vim.keymap.set('n', '<leader>ft', require('telescope').extensions.asynctasks.all, { desc = '[F]ind [T]asks' })
+
 
 -- [[ Configure Spectre ]]
 
@@ -612,6 +620,22 @@ vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
 -- primary GitHub CLI, so we override this functionality manually.
 -- @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
 vim.g.fugitive_git_command = "hub"
+
+---
+-- asynctasks
+---
+
+-- Open quickfix window automatically
+vim.g.asyncrun_open = 6
+-- Open in a tmux pane
+vim.g.asynctasks_term_pos = 'tmux'
+-- Orientation corresponds to the direction the panes flow. In
+-- this case, a 'horizontal' orientation creates a 'vertical'
+-- pane split.
+vim.g.VimuxOrientation = 'h'
+-- Height is generic for 'size' - percentage of screen the
+-- tmux pane should occupy.
+vim.g.VimuxHeight = 33
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
