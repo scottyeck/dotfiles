@@ -66,6 +66,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Close all other open panes
 vim.keymap.set('n', '<leader>o', ":only<CR>")
 
 -- Center buffer on / search result
@@ -532,6 +533,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', ']a', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
+
+vim.keymap.set('n', '<leader>af', ':EslintFixAll<CR>')
 
 ---
 -- LSP servers
