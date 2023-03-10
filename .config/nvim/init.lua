@@ -128,6 +128,7 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Tpope altar
+  'tpope/vim-abolish',
   'tpope/vim-eunuch',
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
