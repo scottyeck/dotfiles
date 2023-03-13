@@ -319,10 +319,40 @@ vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 
-vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = '[G]it checkout [B]ranch ' })
 
 vim.keymap.set('n', '<leader>ft', require('telescope').extensions.asynctasks.all, { desc = '[F]ind [T]asks' })
 
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local sorters = require("telescope.sorters")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+local function checkout_recency()
+  pickers.new({
+    results_title = "Git Checkout, <CR> to Checkout",
+    finder = finders.new_oneshot_job({ "git", "branch", "--sort=-committerdate" }),
+    sorter = sorters.get_fuzzy_file(),
+    attach_mappings = function(_, map)
+      map("i", "<CR>", function(prompt_bufnr)
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+        local branch_name = ""
+        for segment in selection.value:gmatch("%S+") do
+          if (segment ~= "*") then
+            branch_name = segment
+          end
+        end
+        vim.api.nvim_command(
+          ":!git checkout " .. branch_name
+        )
+      end)
+      return true
+    end
+  }):find()
+end
+
+vim.keymap.set('n', '<leader>gb', checkout_recency, { desc = '[G]it checkout [B]ranch ' })
 
 -- [[ Configure Spectre ]]
 
