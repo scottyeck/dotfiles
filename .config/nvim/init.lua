@@ -17,8 +17,9 @@ vim.g.maplocalleader = ' '
 -- Set highlight on search
 vim.opt.hlsearch = false
 
--- Make line numbers default
+-- Hybrid line nums (relative with absolute at anchor)
 vim.wo.relativenumber = true
+vim.wo.number = true
 
 -- Enable mouse mode
 vim.opt.mouse = 'a'
