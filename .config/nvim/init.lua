@@ -197,6 +197,25 @@ require('lazy').setup({
     },
   },
 
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
+
   { -- Theme
     'haishanh/night-owl.vim',
     priority = 1000,
@@ -636,6 +655,8 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+        -- Copilot Source
+    { name = "copilot", group_index = 2 },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
