@@ -13,7 +13,16 @@ kill -9 $MESSAGES_PID
 DISCORD_PID=$(ps -ef | grep "Contents/MacOS/Discord$" | awk '{print $2}')
 kill -9 $DISCORD_PID
 
+HEN_SLACK_CONFIG=$HOME/.slack_status.hen.conf
+ECK_SLACK_CONFIG=$HOME/.slack_status.eck.conf
+APP_SLACK_CONFIG=$HOME/.slack_status.conf
+
 # Manage Slack Status / Set as away
+cp $HEN_SLACK_CONFIG $APP_SLACK_CONFIG
 $HOME/git/oss/slack_status_updater/slack_status.sh pomo
 $HOME/git/oss/slack_status_updater/awayback.sh away
 
+# Manage Slack Status / Set as away
+cp $ECK_SLACK_CONFIG $APP_SLACK_CONFIG
+$HOME/git/oss/slack_status_updater/slack_status.sh pomo
+$HOME/git/oss/slack_status_updater/awayback.sh away

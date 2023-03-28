@@ -3,8 +3,18 @@
 terminal-notifier -title "Test" -message "🍅 Pomodoro complete" -sound "glass"
 macos-focus-mode disable
 
+HEN_SLACK_CONFIG=$HOME/.slack_status.hen.conf
+ECK_SLACK_CONFIG=$HOME/.slack_status.eck.conf
+APP_SLACK_CONFIG=$HOME/.slack_status.conf
+
+cp $HEN_SLACK_CONFIG $APP_SLACK_CONFIG
 $HOME/git/oss/slack_status_updater/slack_status.sh none
 $HOME/git/oss/slack_status_updater/awayback.sh back
+
+cp $ECK_SLACK_CONFIG $APP_SLACK_CONFIG
+$HOME/git/oss/slack_status_updater/slack_status.sh none
+$HOME/git/oss/slack_status_updater/awayback.sh back
+
 open -a Slack
 open -a Messages
 open -a Discord
