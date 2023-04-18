@@ -10,7 +10,7 @@ module.exports = {
   defaultBrowser: "Google Chrome",
   handlers: [
     {
-      match: /github.com\/comprehensiveio/,
+      match: [/github.com\/comprehensiveio/, /linear.app/, /loom.com/],
       browser: {
         name: "Google Chrome",
         profile: profileNames.hen,
