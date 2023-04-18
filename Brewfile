@@ -76,6 +76,7 @@ brew "node"
 brew "oq"
 brew "pandoc"
 brew "pgweb"
+brew "pnpm", link: false
 brew "postgresql@14", restart_service: true
 brew "pyenv"
 brew "tcl-tk", link: false
