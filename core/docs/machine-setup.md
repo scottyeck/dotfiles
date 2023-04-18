@@ -11,6 +11,7 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
 ./core/bootstrap
 
 ```
+
 …
 
 ## Install Password Manager(s)
@@ -45,8 +46,8 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
 
 These are applications whose installations I don't currently automate because manual installation is simpler.
 
-* [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
-* [Rust / Rustup](https://www.rust-lang.org/learn/get-started)
+- [Karabiner Elements](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)
+- [Rust / Rustup](https://www.rust-lang.org/learn/get-started)
 
 ### `nvim`
 
@@ -77,19 +78,19 @@ I've used [Divvy](https://mizage.com/windivvy/) for the past 10 years or so, and
 _Unfortunately_, OSX [no longer lets me configure my Divvy settings the way I want to](https://apple.stackexchange.com/a/430456), so I have to [manually migrate my settings](https://andrew.hawker.io/dailies/2021/03/01/migrate-divvy-configuration/) from one machine to another.
 
 > Long story short, we do this with an `export` + `import` using OSX defaults.
-> 
+>
 > First, export settings into `com.mizage.direct.Divvy.plist` with:
-> 
+>
 > ```
 > defaults export com.mizage.direct.Divvy com.mizage.direct.Divvy.plist
 > ```
-> 
+>
 > Copy this binary plist to your the machine (Airdrop works here) and import settings with:
 >
 > ```
 > defaults import com.mizage.direct.Divvy com.mizage.direct.Divvy.plist
 > ```
-> 
+>
 > Note: These settings contain the Divvy license key so treat accordingly.
 
 ### True Color w/ Alacritty / Tmux / Nvim
@@ -139,4 +140,3 @@ $ sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
 ```
 
 Again, `TERM` settings in `.zshrc` will now work as intended.
-
