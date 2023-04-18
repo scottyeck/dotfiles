@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-set -exo pipefail
-
-terminal-notifier -title Pomodoro -message "🍅 Pomodoro Stopped" -sound "glass"
