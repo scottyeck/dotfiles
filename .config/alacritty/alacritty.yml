@@ -24,7 +24,7 @@ window:
   decorations: buttonless
 
 import:
-  - ~/.config/alacritty/night-owl/night-owl.yml
+  - ~/.config/alacritty/github/github-light.yml
 
 # schemes:
 #   gruvbox_light: &light

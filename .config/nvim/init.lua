@@ -198,10 +198,10 @@ require('lazy').setup({
   },
 
   { -- Theme
-    'haishanh/night-owl.vim',
+    'romgrk/github-light.vim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'night-owl'
+      vim.cmd.colorscheme 'github-light'
     end,
   },
 
@@ -211,7 +211,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
