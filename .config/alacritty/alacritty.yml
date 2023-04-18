@@ -1,16 +1,19 @@
+# Note - CascaydiaCove is currently installed manually through:
+# https://github.com/ryanoasis/nerd-fonts
+
 font:
   use_thin_strokes: true
   normal:
-    family: "Cascadia Code"
+    family: "CaskaydiaCove Nerd Font Mono"
     style: "ExtraLight"
   bold:
-    family: "Cascadia Code"
+    family: "CaskaydiaCove Nerd Font Mono"
     style: "SemiBold"
   italic:
-    family: "Cascadia Code"
+    family: "CaskaydiaCove Nerd Font Mono"
     style: "ExtraLight Italic"
   bold_italic:
-    family: "Cascadia Code"
+    family: "CaskaydiaCove Nerd Font Mono"
     style: "SemiBold Italic"
   size: 14.0
   offset:
