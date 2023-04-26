@@ -154,7 +154,25 @@ require('lazy').setup({
     end
   },
 
-
+  {
+    'folke/zen-mode.nvim',
+    config = function()
+      require("zen-mode").setup({
+        window = {
+          height = .8,
+          options = {
+            number = false,
+            relativenumber = false
+          }
+        },
+        plugins = {
+          tmux = {
+            enabled = true
+          }
+        }
+      })
+    end
+  },
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   { -- LSP Configuration & Plugins
