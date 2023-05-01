@@ -165,6 +165,11 @@ require('lazy').setup({
             relativenumber = false
           }
         },
+        options = {
+          enabled = true,
+          ruler = true, -- disables the ruler text in the cmd line area
+          showcmd = true, -- disables the command in the last line of the screen
+        },
         plugins = {
           tmux = {
             enabled = true
