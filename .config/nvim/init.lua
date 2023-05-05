@@ -290,8 +290,15 @@ require('lazy').setup({
   'skywind3000/asyncrun.vim',
   'skywind3000/asyncrun.extra',
   'preservim/vimux',
-  'GustavoKatel/telescope-asynctasks.nvim'
+  'GustavoKatel/telescope-asynctasks.nvim',
 
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
