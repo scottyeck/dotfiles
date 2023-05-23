@@ -1,0 +1,11 @@
+snippet manud "mantine useDisclosure"
+	const [opened, handlers] = useDisclosure(false);
+	${0}
+snippet manmo "mantine modal"
+	export function ${1}Modal(modalProps: ModalProps) {
+		return (
+			<Modal title="${2}" {...modalProps}>
+				${0}
+			</Modal>
+		)
+	}
