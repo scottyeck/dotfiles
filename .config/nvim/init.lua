@@ -360,6 +360,7 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'luasnip')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -659,7 +660,10 @@ require('mason-lspconfig').setup_handlers({
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-luasnip.config.setup {}
+luasnip.filetype_extend("typescriptreact", { "typescript" })
+
+-- Because no path is specified, the "/snippets" dir will be use.
+require('luasnip.loaders.from_snipmate').lazy_load()
 
 cmp.setup {
   snippet = {
