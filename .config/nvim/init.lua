@@ -199,6 +199,11 @@ require('lazy').setup({
     },
   },
 
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp"
+  },
+
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
@@ -328,6 +333,9 @@ require('lazy').setup({
       vim.fn["mkdp#util#install"]()
     end,
   },
+  {
+    "benfowler/telescope-luasnip.nvim",
+  }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -382,6 +390,7 @@ vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { de
 
 
 vim.keymap.set('n', '<leader>ft', require('telescope').extensions.asynctasks.all, { desc = '[F]ind [T]asks' })
+vim.keymap.set('n', '<leader>fs', require('telescope').extensions.luasnip.luasnip, { desc = '[F]ind [S]nippets' })
 
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
