@@ -18,7 +18,7 @@ font:
   size: 14.0
   offset:
     x: 0 # letter-spacing
-    y: 6 # line-spacing
+    y: 2 # line-spacing
 
 window:
   # Prefer use of "buttonless" rather than "none" to preserve the ability to move
