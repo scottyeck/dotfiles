@@ -1,11 +1,28 @@
-snippet manud "mantine useDisclosure"
+extends typescript
+
+snippet mantineUseDisclosureSnippet "mantine useDisclosure"
 	const [opened, handlers] = useDisclosure(false);
 	${0}
-snippet manmo "mantine modal"
-	export function ${1}Modal(modalProps: ModalProps) {
+
+snippet mantineModalSnippet "mantine modal"
+	import { Modal, ModalProps } from "@mantine/core";
+
+	export function ${TM_FILENAME_BASE}(modalProps: ModalProps) {
 		return (
 			<Modal title="${2}" {...modalProps}>
 				${0}
 			</Modal>
 		)
 	}
+
+snippet mantineMenuTargetSnippet "mantine menu target"
+	<Menu>
+		<Menu.Target>
+			${1}
+		</Menu.Target>
+		<Menu.Dropdown>
+			<Menu.Item>
+				${0}
+			</Menu.Item>
+		</Menu.Dropdown>
+	</Menu>

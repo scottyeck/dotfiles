@@ -201,7 +201,8 @@ require('lazy').setup({
 
   {
     "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp"
+    build = "make install_jsregexp",
+    dependencies = { "rafamadriz/friendly-snippets" },
   },
 
   { -- Autocompletion
@@ -673,6 +674,8 @@ luasnip.filetype_extend("typescriptreact", { "typescript" })
 
 -- Because no path is specified, the "/snippets" dir will be use.
 require('luasnip.loaders.from_snipmate').lazy_load()
+-- To support friendly-snippets
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup {
   snippet = {
