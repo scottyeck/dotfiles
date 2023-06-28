@@ -11,3 +11,6 @@ yarn-error.log
 # Project-centric solargraph config, since other devs may not rely on it.
 .solargraph.yml
 **/*/definitions.rb
+
+# Project-specific repl dump
+**/*/.repl
