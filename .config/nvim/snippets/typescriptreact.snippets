@@ -1,5 +1,22 @@
 extends typescript
 
+snippet createContextSnippet "react createContext"
+	type T${1}ContextValue = {
+		${2}: ${3}
+	};
+
+	export const ${1}Context = createContext<T${1}ContextValue>({} as T${1}ContextValue);
+	export function use${1}Context() {
+		return useContext(${1}Context);
+	}
+
+	export function ${1}ContextProvider({ children }: { children?: React.ReactNode }) {
+		const value = {
+			// ${4}
+		};
+		return <${1}Context.Provider value={value}>{children}</${1}Context.Provider>;
+	}
+
 snippet mantineUseDisclosureSnippet "mantine useDisclosure"
 	const [opened, handlers] = useDisclosure(false);
 	${0}
