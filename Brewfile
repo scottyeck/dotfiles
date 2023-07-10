@@ -156,3 +156,14 @@ mas "Numbers", id: 409203825
 mas "OK JSON", id: 1576121509
 mas "Pages", id: 409201541
 mas "Smart JSON Editor", id: 1268962404
+vscode "dbaeumer.vscode-eslint"
+vscode "eamodio.gitlens"
+vscode "esbenp.prettier-vscode"
+vscode "kahole.magit"
+vscode "me-dutour-mathieu.vscode-github-actions"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "Prisma.prisma"
+vscode "redhat.vscode-yaml"
+vscode "rohit-gohri.format-code-action"
+vscode "vscodevim.vim"
+vscode "yoavbls.pretty-ts-errors"
