@@ -21,16 +21,12 @@ if [ "$SESSION_EXISTS" = "" ]; then
   tmux new-window -t $SESSION:1 -n 'server'
   tmux select-window -t $SESSION:1
   tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
-  tmux send-keys -t $SESSION:1 'yarn osx:up:skip-migrate' C-m
+  tmux send-keys -t $SESSION:1 'yarn dev:skip-migrate' C-m
   tmux split-window -h
   tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
   tmux select-pane -L
   tmux split-window -v
   tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
-  tmux send-keys -t $SESSION:1 'yarn workspace frontend start' C-m
-  tmux split-window -h -p 50
-  tmux send-keys -t $SESSION:1 'cd ~/git/hen/mvp' C-m
-  tmux send-keys -t $SESSION:1 'yarn workspace frontend storybook' C-m
 
   tmux new-window -t $SESSION:2 -n 'notes'
   tmux send-keys -t $SESSION:2 "note"
