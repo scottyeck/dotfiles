@@ -1,6 +1,6 @@
 extends typescript
 
-snippet createContextSnippet "react createContext"
+snippet reactCreateContextSnippet "react createContext"
 	type T${1}ContextValue = {
 		${2}: ${3}
 	};
@@ -15,6 +15,32 @@ snippet createContextSnippet "react createContext"
 			// ${4}
 		};
 		return <${1}Context.Provider value={value}>{children}</${1}Context.Provider>;
+	}
+
+snippet reactParentComponentSnippet "react parent component"
+	function ${1}({ children }: { children: React.ReactNode }) {
+		return (
+			${2}
+		);
+	}
+
+snippet reactFileComponentSnippet "react file component"
+	type ${TM_FILENAME_BASE}Props = {
+		${1}
+	};
+
+	export function ${TM_FILENAME_BASE}(props: ${TM_FILENAME_BASE}Props) {
+		${2}
+	}
+
+
+snippet reactComponentSnippet "react component"
+	type ${1}Props = {
+		${2}
+	};
+
+	export function ${1}(props: ${1}Props) {
+
 	}
 
 snippet mantineUseDisclosureSnippet "mantine useDisclosure"
