@@ -11,6 +11,7 @@
     "http-server": "^14.1.1",
     "json-analyzer": "^1.2.2",
     "macos-focus-mode": "^1.0.0",
+    "node-gyp": "^9.4.0",
     "organize-imports-cli": "^0.9.0",
     "package-json-validator": "^0.6.3",
     "pnpm": "^7.25.0",
