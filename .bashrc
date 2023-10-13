@@ -17,7 +17,6 @@ PATH="$PATH:$HOME/bin"
 PATH="$PATH:$HOME/.local/bin"
 
 # Provide node some more memory
-# export NODE_OPTIONS="--max-old-space-size=12288"
 export NODE_OPTIONS="--max-old-space-size=16198"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
@@ -47,6 +46,9 @@ export TMUX_PROJ_DIR="$HOME/.tmuxproj"
 # > sqlite is keg-only, which means it was not symlinked into /usr/local,
 # > because macOS provides an older sqlite3.
 PATH="$PATH:/usr/local/opt/sqlite/bin"
+
+# ... and postgresql@15 is ALSO keg-only
+PATH="$PATH:$HOMEBREW_PREFIX/opt/postgresql@15/bin"
 
 # note.sh
 export NOTE_DIR=$HOME/notes/daily
