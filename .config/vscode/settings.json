@@ -112,6 +112,31 @@
       "commands": ["workbench.action.showAllEditors"]
     },
 
+    // vim-abolish
+    {
+      "before": ["c", "r", "c"],
+      "commands": ["editor.action.transformToCamelcase"]
+    },
+    {
+      "before": ["c", "r", "s"],
+      "commands": ["editor.action.transformToSnakecase"]
+    },
+    {
+      // Abolish calls for this rather than typical "Uppercase",
+      // but because Vim natively supports uppercase in normal
+      // mode via `U`, we'll default to Abolish's defaults.
+      "before": ["c", "r", "u"],
+      "commands": [
+        "editor.action.transformToSnakecase",
+        "editor.action.transformToUppercase"
+      ]
+    },
+    {
+      "before": ["c", "r", "-"],
+      "commands": ["editor.action.transformToKebabcase"]
+    },
+    // There are others here that are untouched.
+
     {
       // TODO: Consider moving this out of vim settings (where editor-centric
       // settings are) and into keybindings.json (for application-centric settings)
