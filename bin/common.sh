@@ -12,6 +12,5 @@ log_generic () {
 }
 
 log_error () {
-  logGeneric "ERROR" "$@"
+  log_generic "ERROR" "$@" >&2
 }
-

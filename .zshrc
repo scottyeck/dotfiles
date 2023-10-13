@@ -63,6 +63,7 @@ alias gcn='git commit -v --no-edit'
 alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
 
 alias brb='brew_bundle'
+alias cb='code_bundle'
 
 alias tp='tmuxproj'
 # alias pomo='pomodoro'

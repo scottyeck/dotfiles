@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+EXEC_NAME="code_bundle"
+BREWFILE_DIR=$HOME
+SCRIPT_PATH=$(cd $( dirname $0 ); pwd )
+source $SCRIPT_PATH/common.sh
+
+# TODO: Replace this with a checkhealth or something
+# exported by brew_bundle to make DRYer.
+verify_brew_bundle () {
+  if [ -z "$BREWFILE_DIR/Brewfile" ]; then
+    log_error 'Cannot invoke "brew bundle" against non-existing Brewfile.'
+    return 1
+  fi
+}
+
+code_bundle_install() {
+    local ext_name=$1
+
+    if [ $ext_name = "" ]; then
+        log_error "no extension name provided"
+        exit 1
+    fi
+
+    code --install-extension $ext_name
+    # TODO: Replace with a cmd from brew_bundle so that it's DRYER
+    brew bundle dump --force
+}
+
+code_bundle() {
+	local cmd=$1
+	shift
+
+	if [ $cmd = "install" ]; then
+		code_bundle_install "$@"
+	else
+		echo "code_bundle - command \"$cmd\" not found"
+		exit 1
+	fi
+}
+
+code_bundle "$@"
