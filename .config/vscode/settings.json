@@ -1,0 +1,146 @@
+{
+  "editor.lineNumbers": "relative",
+  // "prettier.documentSelectors": ["*.js", "*.ts", "*.jsx", "*.tsx", "*.json"],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.largeFileOptimizations": false,
+  "redhat.telemetry.enabled": false,
+  // "eslint.nodePath": "./node_modules/",
+  "git.openRepositoryInParentFolders": "never",
+  "eslint.validate": ["javascript", "javascriptreact"],
+
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.formatOnSave": false,
+  // "editor.codeActionsOnSave": [
+  //   "source.formatModified",
+  //   "source.fixAll.eslint"
+  // ],
+
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll": true,
+  //   "source.fixAll.eslint": true
+  // },
+  // "editor.formatOnSave": true,
+  // "javascript.format.enable": false,
+
+  // Make breadcrumbs work more like vim-vinegar
+  // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
+  "breadcrumbs.enabled": true,
+  "workbench.editor.showTabs": false,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["K"],
+      "commands": [
+        {
+          "when": "editorTextFocus && !editorReadOnly",
+          "command": "editor.action.moveLinesUpAction"
+        }
+      ]
+    },
+    {
+      "before": ["J"],
+      "commands": [
+        {
+          "when": "editorTextFocus && !editorReadOnly",
+          "command": "editor.action.moveLinesDownAction"
+        }
+      ]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // More vinegar emulation
+    {
+      "before": ["-"],
+      "commands": [
+        {
+          "command": "breadcrumbs.toggleToOn",
+          "when": "!config.breadcrumbs.enabled"
+        },
+        {
+          "command": "breadcrumbs.focusAndSelect",
+          "when": "breadcrumbsPossible"
+        }
+      ]
+    },
+    {
+      "before": ["<leader>", "%"],
+      "commands": ["workbench.action.tasks.runTask"],
+      "args": "newFile",
+      "when": "editorFocus"
+    },
+    // Next / prev problem
+    {
+      "before": ["]", "a"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
+      "before": ["[", "a"],
+      "commands": ["editor.action.marker.prev"]
+    },
+
+    // "LSP-like"
+    {
+      "before": ["K"],
+      "commands": [
+        { "command": "editor.action.showHover", "when": "editorTextFocus" }
+      ]
+    },
+    {
+      "before": ["g", "r"],
+      "commands": [
+        {
+          "command": "editor.action.rename",
+          "when": "editorHasRenameProvider && editorTextFocus && !editorReadOnly"
+        }
+      ]
+    },
+    {
+      "before": ["g", "a"],
+      "commands": [
+        {
+          "command": "editor.action.quickFix",
+          "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadOnly"
+        }
+      ]
+    },
+
+    // Telescope
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": ["workbench.action.showAllEditors"]
+    },
+
+    {
+      // TODO: Consider moving this out of vim settings (where editor-centric
+      // settings are) and into keybindings.json (for application-centric settings)
+      "before": ["<leader>", "o"],
+      "commands": ["workbench.action.joinAllGroups"]
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["revealInExplorer"]
+    },
+
+    // Git
+    {
+      "before": ["<leader>", "g", "b"],
+      "commands": ["git.checkout"]
+    },
+
+    // Edamagit
+    {
+      "before": ["<leader>", "G"],
+      "commands": ["magit.status"]
+    }
+  ],
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.activityBar.visible": false,
+  "editor.minimap.enabled": false
+}
