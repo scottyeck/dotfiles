@@ -75,22 +75,22 @@ export CY_REACT_DEVTOOL_DIR="$HOME/Library/Application Support/Google/Chrome Can
 # vanilla vim and not neovim.
 # @see https://github.com/neovim/neovim/issues/9960#issuecomment-488269954
 if [[ -n "${NVIM_LISTEN_ADDRESS}" ]]; then
-	# TODO update the path each time Vim has a major upgrade
-	export VIMRUNTIME=/usr/share/vim/vim81
+  # TODO update the path each time Vim has a major upgrade
+  export VIMRUNTIME=/usr/share/vim/vim81
 fi
 
 LOCAL_CONFIG_FILE="/Users/$USER/.localrc"
 
 if [ -f "$LOCAL_CONFIG_FILE" ]; then
-	echo "Loading local bash configuration"
-	echo '...'
-	source $LOCAL_CONFIG_FILE
-	echo "Successfully loaded local bash configuration"
-	echo '...'
+  echo "Loading local bash configuration"
+  echo '...'
+  source $LOCAL_CONFIG_FILE
+  echo "Successfully loaded local bash configuration"
+  echo '...'
 else
-	echo "Warning - No local bash configuration found. You may be missing important environment settings."
-	echo "Please ensure the existence of /Users/$USER/.localrc"
-	echo "..."
+  echo "Warning - No local bash configuration found. You may be missing important environment settings."
+  echo "Please ensure the existence of /Users/$USER/.localrc"
+  echo "..."
 fi
 
 echo "Successfully loaded remote bash configuration"
