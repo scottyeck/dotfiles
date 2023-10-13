@@ -81,6 +81,9 @@ vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+vim.keymap.set('n', '<leader>qj', '<cmd>cnext<CR>')
+vim.keymap.set('n', '<leader>qk', '<cmd>cprev<CR>')
+
 -- ========================================================================== --
 -- ==                               COMMANDS                               == --
 -- ========================================================================== --
@@ -356,10 +359,12 @@ require('lazy').setup({
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local telescope_actions = require "telescope.actions"
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
+        ['<C-q>'] = telescope_actions.smart_add_to_qflist + telescope_actions.open_qflist,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
