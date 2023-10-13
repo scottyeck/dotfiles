@@ -7,11 +7,11 @@ if [ -z "$EXEC_NAME" ]; then
   return 1
 fi
 
-logGeneric () {
+log_generic () {
   echo "$EXEC_NAME: $@"
 }
 
-logError () {
+log_error () {
   logGeneric "ERROR" "$@"
 }
 

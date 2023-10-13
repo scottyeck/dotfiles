@@ -8,14 +8,14 @@ SCRIPT_PATH="$(
 )"
 source $SCRIPT_PATH/common.sh
 
-startTmuxProject() {
+start_tmux_project() {
 	if [ -z "$TMUX_PROJ_DIR" ]; then
-		logError 'Config var $TMUX_PROJ_DIR unset'
+		log_error 'Config var $TMUX_PROJ_DIR unset'
 		return 1
 	fi
 
 	if [ ! -d "$TMUX_PROJ_DIR" ]; then
-		logError "Could not find \$TMUX_PROJ_DIR: \"$TMUX_PROJ_DIR\""
+		log_error "Could not find \$TMUX_PROJ_DIR: \"$TMUX_PROJ_DIR\""
 		return 1
 	fi
 
@@ -30,8 +30,8 @@ startTmuxProject() {
 
 	local PROJ_EXEC_NAME="$TMUX_PROJ_DIR/$PROJ_NAME"
 	if [[ ! -x "$PROJ_EXEC_NAME" ]]; then
-		logGeneric "Could not find tmux project executable with name \"$PROJ_NAME\""
-		logGeneric "> Starting a new empty session instead."
+		log_generic "Could not find tmux project executable with name \"$PROJ_NAME\""
+		log_generic "> Starting a new empty session instead."
 		tmux new-session -s "$PROJ_NAME"
 		return 0
 	fi
@@ -39,4 +39,4 @@ startTmuxProject() {
 	eval "$PROJ_EXEC_NAME"
 }
 
-startTmuxProject "$@"
+start_tmux_project "$@"

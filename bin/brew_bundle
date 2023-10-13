@@ -2,14 +2,13 @@
 
 set -e
 
-EXEC_NAME="brew_bundle"
 BREWFILE_DIR=$HOME
 SCRIPT_PATH=$(cd $( dirname $0 ); pwd )
 source $SCRIPT_PATH/common.sh
 
-brewBundle () {
+brew_bundle () {
   if [ -z "$BREWFILE_DIR/Brewfile" ]; then
-    logError 'Cannot invoke "brew bundle" against non-existing Brewfile.'
+    log_error 'Cannot invoke "brew bundle" against non-existing Brewfile.'
     return 1
   fi
 
@@ -17,4 +16,4 @@ brewBundle () {
   brew "$@" && brew bundle dump --force
 }
 
-brewBundle "$@"
+brew_bundle "$@"
