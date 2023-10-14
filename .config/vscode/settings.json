@@ -5,6 +5,21 @@
   "workbench.activityBar.visible": false,
   "editor.minimap.enabled": false,
 
+  "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
+  "editor.fontLigatures": false,
+
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "comment",
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "workbench.colorTheme": "Night Owl",
+
   "javascript.updateImportsOnFileMove.enabled": "always",
   "security.workspace.trust.untrustedFiles": "open",
   "editor.largeFileOptimizations": false,
