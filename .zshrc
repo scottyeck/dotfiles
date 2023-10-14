@@ -65,6 +65,9 @@ alias meme='go run ~/go/src/github.com/nomad-software/meme/main.go'
 alias brb='brew_bundle'
 alias cb='code_bundle'
 
+# First attempt - try to open the Linear issue corresponding to the current branch
+alias gci="echo $(git_current_branch) | sed -r 's/[^\/]*\/([^0-9]*-[0-9]+).*/\1/' | xargs -I {} lr issue {} --open"
+
 alias tp='tmuxproj'
 # alias pomo='pomodoro'
 
