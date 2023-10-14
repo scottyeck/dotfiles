@@ -1,34 +1,57 @@
 {
   "editor.lineNumbers": "relative",
-  // "prettier.documentSelectors": ["*.js", "*.ts", "*.jsx", "*.tsx", "*.json"],
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.activityBar.visible": false,
+  "editor.minimap.enabled": false,
+
   "javascript.updateImportsOnFileMove.enabled": "always",
   "security.workspace.trust.untrustedFiles": "open",
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
-  // "eslint.nodePath": "./node_modules/",
   "git.openRepositoryInParentFolders": "never",
   "eslint.validate": ["javascript", "javascriptreact"],
-
-  // "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // "editor.formatOnSave": false,
-  // "editor.codeActionsOnSave": [
-  //   "source.formatModified",
-  //   "source.fixAll.eslint"
-  // ],
-
-  // "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll": true,
-  //   "source.fixAll.eslint": true
-  // },
-  // "editor.formatOnSave": true,
-  // "javascript.format.enable": false,
 
   // Make breadcrumbs work more like vim-vinegar
   // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
   "breadcrumbs.enabled": true,
   "workbench.editor.showTabs": false,
+  // Pare back the breadcrumbs so that they only show (and allow navigation
+  // along) the file-path, a la traversal in netrw with vinegar.
+  "breadcrumbs.showVariables": false,
+  "breadcrumbs.showTypeParameters": false,
+  "breadcrumbs.showStructs": false,
+  "breadcrumbs.showStrings": false,
+  "breadcrumbs.showProperties": false,
+  "breadcrumbs.showPackages": false,
+  "breadcrumbs.showOperators": false,
+  "breadcrumbs.showObjects": false,
+  "breadcrumbs.showNumbers": false,
+  "breadcrumbs.showNull": false,
+  "breadcrumbs.showNamespaces": false,
+  "breadcrumbs.showModules": false,
+  "breadcrumbs.showMethods": false,
+  "breadcrumbs.showKeys": false,
+  "breadcrumbs.showInterfaces": false,
+  "breadcrumbs.showFunctions": false,
+  "breadcrumbs.showFiles": false,
+  "breadcrumbs.showFields": false,
+  "breadcrumbs.showEvents": false,
+  "breadcrumbs.showEnums": false,
+  "breadcrumbs.showEnumMembers": false,
+  "breadcrumbs.showConstructors": false,
+  "breadcrumbs.showConstants": false,
+  "breadcrumbs.showClasses": false,
+  "breadcrumbs.showBooleans": false,
+  "breadcrumbs.showArrays": false,
+  "breadcrumbs.icons": false,
+  "breadcrumbs.symbolPath": "off",
+
+
+  "vim.leader": "<space>",
+
   "vim.visualModeKeyBindingsNonRecursive": [
+    // Move selection vertically
     {
       "before": ["K"],
       "commands": [
@@ -48,9 +71,9 @@
       ]
     }
   ],
-  "vim.leader": "<space>",
+
   "vim.normalModeKeyBindingsNonRecursive": [
-    // More vinegar emulation
+    // Trigger emulated vinegar traversal
     {
       "before": ["-"],
       "commands": [
@@ -67,9 +90,10 @@
     {
       "before": ["<leader>", "%"],
       "commands": ["workbench.action.tasks.runTask"],
-      "args": "newFile",
+      "args": "newFile", // Need to improve this
       "when": "editorFocus"
     },
+
     // Next / prev problem
     {
       "before": ["]", "a"],
@@ -106,7 +130,7 @@
       ]
     },
 
-    // Telescope
+    // "Telescope-like"
     {
       "before": ["<leader>", "<leader>"],
       "commands": ["workbench.action.showAllEditors"]
@@ -117,10 +141,10 @@
       // overload the existing tmux-keybinds and instead will learn this
       // new one.
       "before": ["<leader>", "f", "p"], // "find project"
-      "commands": ["projectManager.listProjects"]
+      "commands": ["projectManager.listProjectsNewWindow"]
     },
 
-    // vim-abolish
+    // vim-abolish emulation
     {
       "before": ["c", "r", "c"],
       "commands": ["editor.action.transformToCamelcase"]
@@ -143,17 +167,14 @@
       "before": ["c", "r", "-"],
       "commands": ["editor.action.transformToKebabcase"]
     },
-    // There are others here that are untouched.
+    // There are others here that we're not replicating.
 
     {
+      // "Only" - implements "close (not delete) all other buffers"
       // TODO: Consider moving this out of vim settings (where editor-centric
       // settings are) and into keybindings.json (for application-centric settings)
       "before": ["<leader>", "o"],
       "commands": ["workbench.action.joinAllGroups"]
-    },
-    {
-      "before": ["<leader>", "t"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
     },
     {
       "before": ["<leader>", "f"],
@@ -163,6 +184,8 @@
     // Git
     {
       "before": ["<leader>", "g", "b"],
+      // List branches for checkout - sorts by committerdate by default... but then
+      // unsorts when you start searching? Likely can be improved.
       "commands": ["git.checkout"]
     },
 
@@ -172,8 +195,13 @@
       "commands": ["magit.status"]
     }
   ],
-  "window.commandCenter": false,
-  "workbench.layoutControl.enabled": false,
-  "workbench.activityBar.visible": false,
-  "editor.minimap.enabled": false
+
+  "command-runner.commands": {
+    // Some examples (feel free to remove)
+    "echo workspaceFolder": "echo ${workspaceFolder}",
+    "echo file": "echo ${file}",
+
+    "gwip": "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- [skip ci]\""
+  },
+
 }
