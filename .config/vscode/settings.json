@@ -111,6 +111,14 @@
       "before": ["<leader>", "<leader>"],
       "commands": ["workbench.action.showAllEditors"]
     },
+    {
+      // This is more "tmux-like" than anything else, but because I use
+      // tmux inside the VS Code integrated terminal, I'd prefer not to
+      // overload the existing tmux-keybinds and instead will learn this
+      // new one.
+      "before": ["<leader>", "f", "p"], // "find project"
+      "commands": ["projectManager.listProjects"]
+    },
 
     // vim-abolish
     {

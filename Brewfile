@@ -161,11 +161,13 @@ mas "Numbers", id: 409203825
 mas "OK JSON", id: 1576121509
 mas "Pages", id: 409201541
 mas "Smart JSON Editor", id: 1268962404
+vscode "alefragnani.project-manager"
 vscode "dbaeumer.vscode-eslint"
 vscode "devine-davies.make-hidden"
 vscode "eamodio.gitlens"
 vscode "edonet.vscode-command-runner"
 vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-rename-tag"
 vscode "GitHub.copilot"
 vscode "GitHub.copilot-chat"
 vscode "GitHub.vscode-pull-request-github"
@@ -177,4 +179,5 @@ vscode "redhat.vscode-yaml"
 vscode "rohit-gohri.format-code-action"
 vscode "rvest.vs-code-prettier-eslint"
 vscode "vscodevim.vim"
+vscode "WallabyJs.quokka-vscode"
 vscode "yoavbls.pretty-ts-errors"
