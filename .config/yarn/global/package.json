@@ -7,6 +7,7 @@
     "diagnostic-languageserver": "^1.14.0",
     "eas-cli": "^0.55.1",
     "gatsby-cli": "^4.14.0",
+    "generator-code": "^1.7.9",
     "hbs-cli": "^1.4.1",
     "http-server": "^14.1.1",
     "json-analyzer": "^1.2.2",
@@ -23,6 +24,7 @@
     "turbo": "1.9.3",
     "typescript": "^4.3.5",
     "typescript-language-server": "0.8.1",
-    "vscode-langservers-extracted": "^4.4.0"
+    "vscode-langservers-extracted": "^4.4.0",
+    "yo": "^4.3.1"
   }
 }
