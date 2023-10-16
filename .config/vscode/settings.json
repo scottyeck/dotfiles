@@ -219,8 +219,41 @@
     {
       "before": ["<leader>", "J"],
       "commands": ["workbench.action.terminal.focus"]
-    }
+    },
+
+    // Git
+    {
+      "before": ["<leader>", "g", "y"], // "git yank"
+      "commands": ["gitlens.copyRemoteFileUrlToClipboard"]
+    },
+
+    // Spectre-like
+    {
+      "before": ["<leader>", "S"],
+      "commands": ["search.action.openNewEditorToSide"]
+    },
+
+    // // Git
+    // {
+    //   "before": ["<leader>", "g", "b"],
+    //   // List branches for checkout - sorts by committerdate by default... but then
+    //   // unsorts when you start searching? Likely can be improved.
+    //   "commands": ["git.checkout"]
+    // },
+    // {
+    //   "before": ["<leader>", "g", "g"],
+    //   "commands": [
+    //     {
+    //       "command": "command-runner.run",
+    //       "args": {
+    //         "command": "echo \"hello world\"",
+    //         "terminal": "runCommand"
+    //       }
+    //     }
+    //   ]
+    // }
   ],
+
 
   //   // Edamagit
   //   {

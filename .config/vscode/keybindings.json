@@ -78,6 +78,25 @@
     "when": "inQuickOpen"
   },
 
+  // Search ("Spectre-like")
+  {
+    "key": "ctrl+j",
+    "command": "search.action.focusNextSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "search.action.focusPreviousSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "enter",
+    // Sorta counter-intuitive, but the Search Editor uses "Go-to-Definition"
+    // for result-navigation rather than exposing a "Go to result file" or something.
+    "command": "editor.action.revealDefinition",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+
   // Edamagit
   // @see https://github.com/kahole/edamagit#vim-support-vscodevim
 
