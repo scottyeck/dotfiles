@@ -191,26 +191,39 @@
       "before": ["<leader>", "o"],
       "commands": ["workbench.action.joinAllGroups"]
     },
+    // In vim (at least in my workflows), when I quit a buffer (via :q), the
+    // corresponding pane disappears and the remaining splits even out. It's
+    // not yet clear to me whether VSCode vim will allow for me to override
+    // :q (which appears to just close the "buffer" but persist the "pane",
+    // loading up the next buffer in that pane's stack - VSCode uses the
+    // terms "Editor" and "Group" but the principles remain the same), so in
+    // the meantime I'm binding a custom one that I'll learn instead.
+    {
+      "before": ["<leader>", "q"],
+      "commands": ["workbench.action.closeEditorsInGroup"]
+    },
+
+    // Git
     {
       "before": ["<leader>", "f"],
       "commands": ["revealInExplorer"]
     },
 
-    // Git
     {
-      "before": ["<leader>", "g", "b"],
-      // List branches for checkout - sorts by committerdate by default... but then
-      // unsorts when you start searching? Likely can be improved.
-      "commands": ["git.checkout"]
-    },
-
-    // Edamagit
-    {
-      "before": ["<leader>", "G"],
-      "commands": ["magit.status"]
+      "before": ["<leader>", "J"],
+      "commands": ["workbench.action.terminal.focus"]
     }
   ],
 
+  //   // Edamagit
+  //   {
+  //     "before": ["<leader>", "G"],
+  //     "commands": ["magit.status"]
+  //   }
+  // ],
+
+  "command-runner.terminal.name": "runCommand",
+  "command-runner.terminal.autoClear": true,
   "command-runner.commands": {
     // Some examples (feel free to remove)
     "echo workspaceFolder": "echo ${workspaceFolder}",
