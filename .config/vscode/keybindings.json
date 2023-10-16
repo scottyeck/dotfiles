@@ -78,7 +78,26 @@
     "when": "inQuickOpen"
   },
 
+  // References list
+  {
+    "key": "ctrl+j",
+    "command": "goToNextReference",
+    "when": "inReferenceSearchEditor || referenceSearchVisible"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "goToPreviousReference",
+    "when": "inReferenceSearchEditor || referenceSearchVisible"
+  },
+
   // Search ("Spectre-like")
+  {
+    "key": "enter",
+    // Sorta counter-intuitive, but the Search Editor uses "Go-to-Definition"
+    // for result-navigation rather than exposing a "Go to result file" or something.
+    "command": "editor.action.revealDefinition",
+    "when": "hasSearchResult || inSearchEditor"
+  },
   {
     "key": "ctrl+j",
     "command": "search.action.focusNextSearchResult",
@@ -90,12 +109,16 @@
     "when": "hasSearchResult || inSearchEditor"
   },
   {
-    "key": "enter",
-    // Sorta counter-intuitive, but the Search Editor uses "Go-to-Definition"
-    // for result-navigation rather than exposing a "Go to result file" or something.
-    "command": "editor.action.revealDefinition",
+    "key": "ctrl+u",
+    "command": "extension.vim_ctrl+u",
     "when": "hasSearchResult || inSearchEditor"
   },
+  {
+    "key": "ctrl+d",
+    "command": "extension.vim_ctrl+d",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+
 
   // Edamagit
   // @see https://github.com/kahole/edamagit#vim-support-vscodevim

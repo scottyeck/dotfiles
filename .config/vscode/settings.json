@@ -135,6 +135,15 @@
       ]
     },
     {
+      "before": ["g", "R"],
+      "commands": [
+        {
+          "command": "editor.action.goToReferences",
+          "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+        }
+      ]
+    },
+    {
       "before": ["g", "a"],
       "commands": [
         {
@@ -229,21 +238,32 @@
     // Spectre-like
     {
       "before": ["<leader>", "S"],
-      // Because the Search Editor isn't a buffer (as in Spectre / nvim),
-      // it's not included in the location stack, so "ctrl+o" / "ctrl+i"
-      // doesn't work here. Instead I'll try to use cmd+w to close it,
-      // and because I'm using "openEditor" (rather than "openNewEditor"),
-      // re-launching using "<leader>s" will re-open the same search.
-      "commands": ["search.action.openEditor"]
+      "commands": [
+        // Because the Search Editor isn't a buffer (as in Spectre / nvim),
+        // it's not included in the location stack, so "ctrl+o" / "ctrl+i"
+        // doesn't work here. Instead I'll try to use cmd+w to close it,
+        // and because I'm using "openEditor" (rather than "openNewEditor"),
+        // re-launching using "<leader>s" will re-open the same search.
+        // "commands": ["search.action.openEditor"]
+        {
+          "command": "search.action.openEditor",
+          "when": "!inSearchEditor"
+        },
+        // Return to the search input if you're already in there
+        {
+          "command": "search.action.focusQueryEditorWidget",
+          "when": "inSearchEditor"
+        }
+      ]
     },
-
-    // // Git
-    // {
-    //   "before": ["<leader>", "g", "b"],
-    //   // List branches for checkout - sorts by committerdate by default... but then
-    //   // unsorts when you start searching? Likely can be improved.
-    //   "commands": ["git.checkout"]
-    // },
+    
+    // Git
+    {
+      "before": ["<leader>", "g", "b"],
+      // List branches for checkout - sorts by committerdate by default... but then
+      // unsorts when you start searching? Likely can be improved.
+      "commands": ["git.checkout"]
+    },
     // {
     //   "before": ["<leader>", "g", "g"],
     //   "commands": [
