@@ -210,7 +210,6 @@
       "commands": ["workbench.action.closeEditorsInGroup"]
     },
 
-    // Git
     {
       "before": ["<leader>", "f"],
       "commands": ["revealInExplorer"]
@@ -230,7 +229,12 @@
     // Spectre-like
     {
       "before": ["<leader>", "S"],
-      "commands": ["search.action.openNewEditorToSide"]
+      // Because the Search Editor isn't a buffer (as in Spectre / nvim),
+      // it's not included in the location stack, so "ctrl+o" / "ctrl+i"
+      // doesn't work here. Instead I'll try to use cmd+w to close it,
+      // and because I'm using "openEditor" (rather than "openNewEditor"),
+      // re-launching using "<leader>s" will re-open the same search.
+      "commands": ["search.action.openEditor"]
     },
 
     // // Git
@@ -270,6 +274,5 @@
     "echo file": "echo ${file}",
 
     "gwip": "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- [skip ci]\""
-  },
-
+  }
 }
