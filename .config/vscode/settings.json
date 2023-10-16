@@ -62,7 +62,6 @@
   "breadcrumbs.icons": false,
   "breadcrumbs.symbolPath": "off",
 
-
   "vim.leader": "<space>",
 
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -147,8 +146,16 @@
 
     // "Telescope-like"
     {
-      "before": ["<leader>", "<leader>"],
+      "before": ["<leader>", "<leader>"], // "find buffer"
       "commands": ["workbench.action.showAllEditors"]
+    },
+    {
+      "before": ["<leader>", "f", "t"], // "find task",
+      "commands": ["workbench.action.tasks.runTask"]
+    },
+    {
+      "before": ["<leader>", "f", "c"], // "find command",
+      "commands": ["command-runner.run"]
     },
     {
       // This is more "tmux-like" than anything else, but because I use
