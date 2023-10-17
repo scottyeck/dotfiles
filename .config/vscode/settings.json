@@ -118,6 +118,17 @@
       "before": ["[", "a"],
       "commands": ["editor.action.marker.prev"]
     },
+    {
+      "before": ["]", "c"],
+      "commands": ["workbench.action.editor.nextChange"],
+      "when": "editorTextFocus && !textCompareEditorActive"
+    },
+    {
+      "before": ["[", "c"],
+      "commands": ["workbench.action.editor.previousChange"],
+      "when": "editorTextFocus && !textCompareEditorActive"
+    },
+
 
     // "LSP-like"
     {
