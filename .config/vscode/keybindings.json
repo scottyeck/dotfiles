@@ -45,6 +45,10 @@
     "command": "workbench.action.navigateDown",
     "when": "!inQuickOpen"
   },
+  {
+    "key": "ctrl+w =",
+    "command": "workbench.action.evenEditorWidths"
+  },
   // Move up and down in a list in the sidebar
   {
     "key": "j",
