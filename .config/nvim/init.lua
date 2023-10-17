@@ -736,6 +736,19 @@ vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
 vim.api.nvim_create_user_command('Gwip', '!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"', {})
 vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
 
+-- In fugitive, open file in on line under cursor in VSCode
+vim.api.nvim_create_user_command('Gcode',
+  function(opts)
+    current_line = vim.api.nvim_get_current_line()
+    filename = current_line:gsub("M ", "")
+    vim.api.nvim_command(":!code " .. filename)
+  end,
+  {}
+)
+
+vim.keymap.set('n', '<leader>gv', ':Gcode<CR>')
+
+
 -- Support for hub was dropped in vim-rhubarb as gh becomes the
 -- primary GitHub CLI, so we override this functionality manually.
 -- @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
