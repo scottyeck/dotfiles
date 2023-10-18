@@ -25,8 +25,21 @@
   "security.workspace.trust.untrustedFiles": "open",
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
-  "git.openRepositoryInParentFolders": "never",
   "eslint.validate": ["javascript", "javascriptreact"],
+
+  // Git
+  "git.openRepositoryInParentFolders": "never",
+  // By default, hitting <enter> will open the diff view for the file
+  // rather than the file itself.
+  "git.openDiffOnClick": false,
+  // Because j/k will help navigate up and down, not having the commit
+  // input / action buttons is preferable.
+  "git.showCommitInput": false,
+  "git.showActionButton": {
+    "commit": false,
+    "publish": false,
+    "sync": false
+  },
 
   // Make breadcrumbs work more like vim-vinegar
   // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
@@ -271,10 +284,20 @@
     
     // Git
     {
+
+      "before": ["<leader>", "G"],
+      "commands": ["workbench.scm.focus"],
+    },
+    {
       "before": ["<leader>", "g", "b"],
       // List branches for checkout - sorts by committerdate by default... but then
       // unsorts when you start searching? Likely can be improved.
       "commands": ["git.checkout"]
+    },
+    {
+      "before": ["<leader>", "g", "c"],
+      // Checkout new branch (This VSCode command name is very misleading.)
+      "commands": ["git.branch"]
     },
     // {
     //   "before": ["<leader>", "g", "g"],
