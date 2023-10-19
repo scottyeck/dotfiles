@@ -1,6 +1,3 @@
-echo "Loading zsh configuration"
-echo "..."
-
 # https://apple.stackexchange.com/questions/148901/why-does-my-brew-installation-not-work
 eval $(/opt/homebrew/bin/brew shellenv)
 
@@ -91,7 +88,7 @@ export VI_MODE_SET_CURSOR=true
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 setopt auto_cd
-cdpath=($HOME/git/coa)
+cdpath=($HOME/git/hen/mvp)
 
 # Bash configuration
 
@@ -116,11 +113,14 @@ source ~/.bashrc
 # prmptcmd() { eval "$PROMPT_COMMAND" }
 # precmd_functions=(prmptcmd)
 
-echo "Successfully loaded zsh configuration"
-echo "..."
-
 # Initialize pyenv
-eval "$(pyenv init -)"
+# don't need pyenv either
+# eval "$(pyenv init -)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 3); do /usr/bin/time $shell -i -c exit; done
+}

@@ -1,9 +1,6 @@
-echo "Loading remote bash configuration"
-echo "..."
-
 # npm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvmCKAGES="${HOME}/.npm-packages"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvmCKAGES="${HOME}/.npm-packages"
 
 # yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -21,7 +18,8 @@ export NODE_OPTIONS="--max-old-space-size=16198"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export GEM_HOME="$HOME/.gem"
-eval "$(rbenv init -)"
+# I don't need rbenv right now
+# eval "$(rbenv init -)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -82,16 +80,10 @@ fi
 LOCAL_CONFIG_FILE="/Users/$USER/.localrc"
 
 if [ -f "$LOCAL_CONFIG_FILE" ]; then
-  echo "Loading local bash configuration"
-  echo '...'
   source $LOCAL_CONFIG_FILE
-  echo "Successfully loaded local bash configuration"
-  echo '...'
 else
   echo "Warning - No local bash configuration found. You may be missing important environment settings."
   echo "Please ensure the existence of /Users/$USER/.localrc"
   echo "..."
 fi
 
-echo "Successfully loaded remote bash configuration"
-echo "..."
