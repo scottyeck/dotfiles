@@ -740,13 +740,14 @@ vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
 vim.api.nvim_create_user_command('Gcode',
   function(opts)
     current_line = vim.api.nvim_get_current_line()
-    filename = current_line:gsub("M ", "")
-    vim.api.nvim_command(":!code " .. filename)
+    fugitive_char = current_line:sub(1, 1)
+    filename = current_line:gsub(fugitive_char, "")
+    vim.api.nvim_command(":!code " .. filename .. '&')
   end,
   {}
 )
 
-vim.keymap.set('n', '<leader>gv', ':Gcode<CR>')
+vim.keymap.set('n', '<leader>gv', ':Gcode<CR> :qa<CR>')
 
 
 -- Support for hub was dropped in vim-rhubarb as gh becomes the
