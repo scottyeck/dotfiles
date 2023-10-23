@@ -353,5 +353,14 @@
   // process" which makes it faster.
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
-  }
+  },
+  "githubPullRequests.pullBranch": "never",
+
+
+  "peacock.favoriteColors": [
+    { "name": "Just Gray", "value": "#444" }
+  ],
+  "vscode_custom_css.imports": [
+    "file:///Users/scottyeck/.config/vscode/custom.css"
+  ]
 }
