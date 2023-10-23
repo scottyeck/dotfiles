@@ -1,0 +1,12 @@
+/*
+ * Explicitly selecting the .overflow-guard results in JUST the background
+ * editor contents being dimmed while not focused, and not the entire editor.
+ * This is important to avoid dimming foreground elements like the rename
+ * input, etc.
+ */
+.terminal, .monaco-editor > .overflow-guard {
+  opacity: 1;
+}
+.terminal:not(.focus), .monaco-editor:not(.focused) > .overflow-guard {
+  opacity: 0.7;
+}
