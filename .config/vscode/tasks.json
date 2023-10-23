@@ -8,6 +8,20 @@
       "command": "touch '${fileDirname}/${input:fileName}' && code '${fileDirname}/${input:fileName}'",
       "type": "shell",
       "problemMatcher": []
+    },
+    {
+      "label": "fugitive",
+      "command": "nvim -c ':G | only' && exit 0",
+      "type": "shell",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": false,
+        "showReuseMessage": false,
+        "focus": true,
+        "reveal": "always",
+        "panel": "dedicated",
+        "close": true
+      }
     }
   ],
 

@@ -41,6 +41,10 @@
     "sync": false
   },
 
+  "terminal.integrated.shellArgs.osx": ["-l"],
+  "terminal.integrated.tabs.enabled": false,
+
+
   // Make breadcrumbs work more like vim-vinegar
   // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
   "breadcrumbs.enabled": true,
@@ -77,6 +81,7 @@
   "breadcrumbs.symbolPath": "off",
 
   "vim.leader": "<space>",
+  "vim.overrideCopy": true,
 
   "vim.visualModeKeyBindingsNonRecursive": [
     // Move selection vertically
@@ -192,6 +197,10 @@
       "commands": ["command-runner.run"]
     },
     {
+      "before": ["<leader>", "f", "g"], // "find with grep"
+      "commands": ["find-it-faster.findWithinFiles"]
+    },
+    {
       // This is more "tmux-like" than anything else, but because I use
       // tmux inside the VS Code integrated terminal, I'd prefer not to
       // overload the existing tmux-keybinds and instead will learn this
@@ -230,7 +239,13 @@
       // TODO: Consider moving this out of vim settings (where editor-centric
       // settings are) and into keybindings.json (for application-centric settings)
       "before": ["<leader>", "o"],
-      "commands": ["workbench.action.joinAllGroups"]
+      "commands": [
+        "workbench.action.joinAllGroups",
+        "workbench.action.closePanel",
+         // Close primary / secondary sidebars
+        "workbench.action.closeSidebar",
+        "workbench.action.closeAuxiliaryBar"
+      ]
     },
     // In vim (at least in my workflows), when I quit a buffer (via :q), the
     // corresponding pane disappears and the remaining splits even out. It's
@@ -247,11 +262,6 @@
     {
       "before": ["<leader>", "f"],
       "commands": ["revealInExplorer"]
-    },
-
-    {
-      "before": ["<leader>", "J"],
-      "commands": ["workbench.action.terminal.focus"]
     },
 
     // Git
@@ -281,12 +291,20 @@
         }
       ]
     },
+    {
+      "before": ["<leader>", ":"],
+      "commands": [
+        {
+          "command": "workbench.action.terminal.focus",
+        }
+      ]
+    },
     
     // Git
     {
 
       "before": ["<leader>", "G"],
-      "commands": ["workbench.scm.focus"],
+      "commands": [{"command": "workbench.action.tasks.runTask", "args": "fugitive"}],
     },
     {
       "before": ["<leader>", "g", "b"],

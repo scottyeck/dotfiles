@@ -123,6 +123,56 @@
     "when": "hasSearchResult || inSearchEditor"
   },
 
+  {
+    "key": "cmd+j cmd+j",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.terminal.focus"
+      ]
+    },
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "cmd+j cmd+j",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.togglePanel",
+        "workbench.action.focusActiveEditorGroup"
+      ]
+    },
+    "when": "terminalFocus"
+  },
+
+  {
+    "key": "cmd+j cmd+r",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.positionPanelRight",
+        "workbench.action.terminal.focus"
+      ]
+    },
+    "when": "panelPosition == 'bottom'"
+  },
+  {
+    "key": "cmd+j cmd+r",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.positionPanelBottom",
+        "workbench.action.terminal.focus"
+      ]
+    },
+    "when": "panelPosition == 'right'"
+  },
+  {
+    "key": "cmd+j cmd+f",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+
+
 
   // Edamagit
   // @see https://github.com/kahole/edamagit#vim-support-vscodevim
