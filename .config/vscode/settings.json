@@ -269,6 +269,14 @@
       "before": ["<leader>", "g", "y"], // "git yank"
       "commands": ["gitlens.copyRemoteFileUrlToClipboard"]
     },
+    {
+      "before": ["<leader>", "c", "i"], // resolve Conflict with Incoming
+      "commands": ["merge-conflict.accept.incoming"]
+    },
+    {
+      "before": ["<leader>", "c", "c"], // resolve Conflict with Current
+      "commands": ["merge-conflict.accept.current"]
+    },
 
     // Spectre-like
     {
