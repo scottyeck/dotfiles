@@ -144,6 +144,15 @@
     },
     "when": "terminalFocus"
   },
+  {
+    "key": "cmd+j cmd+q",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.closePanel",
+      ]
+    }
+  },
 
   {
     "key": "cmd+j cmd+r",

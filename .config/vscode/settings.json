@@ -6,6 +6,12 @@
   "editor.minimap.enabled": false,
   "editor.tabSize": 2,
 
+  // Set font-size discretely so it's closer in size to the status bar, which
+  // VSCode has made extremely small by default for some reason.
+  "editor.fontSize": 11,
+  "terminal.integrated.fontSize": 11,
+
+
   "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "editor.fontLigatures": false,
 
@@ -20,6 +26,7 @@
     ]
   },
   "workbench.colorTheme": "Night Owl",
+  "typescript.updateImportsOnFileMove.enabled": "always",
 
   "javascript.updateImportsOnFileMove.enabled": "always",
   "security.workspace.trust.untrustedFiles": "open",

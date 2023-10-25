@@ -23,7 +23,7 @@
     },
     {
       "label": "deleteFile",
-      "command": "echo ${input:confirm}",
+      "command": "if [ '${input:confirm}' = 'y' ]; then rm '${fileDirname}/${fileBasename}'; fi",
       "type": "shell",
       "problemMatcher": []
     },
