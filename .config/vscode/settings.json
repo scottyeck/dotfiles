@@ -121,10 +121,54 @@
       ]
     },
     {
-      "before": ["<leader>", "%"],
-      "commands": ["workbench.action.tasks.runTask"],
-      "args": "newFile", // Need to improve this
-      "when": "editorFocus"
+      "before": ["<leader>", "v", "%"], // "vinegar new-file"
+      "commands": [
+        {
+          "command": "workbench.action.tasks.runTask",
+          "args": "newFile", // Need to improve this
+          "when": "editorFocus"
+        }
+      ]
+    },
+    {
+      "before": ["<leader>", "v", "d"], // "vinegar new-dir"
+      "commands": [
+        {
+          "command": "workbench.action.tasks.runTask",
+          "args": "newDir", // Need to improve this
+          "when": "editorFocus"
+        }
+      ]
+    },
+    {
+      "before": ["<leader>", "v", "x"], // "vinegar delete"
+      "commands": [
+        {
+          "command": "workbench.action.tasks.runTask",
+          "args": "deleteFile", // Need to improve this
+          "when": "editorFocus"
+        }
+      ]
+    },
+    {
+      "before": ["<leader>", "v", "X"], // "vinegar force-delete"
+      "commands": [
+        {
+          "command": "workbench.action.tasks.runTask",
+          "args": "deleteFileForce", // Need to improve this
+          "when": "editorFocus"
+        }
+      ]
+    },
+    {
+      "before": ["<leader>", "v", "r"], // "vinegar rename"
+      "commands": [
+        {
+          "command": "workbench.action.tasks.runTask",
+          "args": "renameFile", // Need to improve this
+          "when": "editorFocus"
+        }
+      ]
     },
 
     // Next / prev problem
@@ -370,5 +414,7 @@
   ],
   "vscode_custom_css.imports": [
     "file:///Users/scottyeck/.config/vscode/custom.css"
-  ]
+  ],
+  "workbench.editor.labelFormat": "medium",
+  "window.zoomLevel": 0
 }

@@ -172,6 +172,28 @@
     "command": "workbench.action.toggleMaximizedPanel"
   },
 
+  {
+    "key": "ctrl+a n",
+    "command": "workbench.action.terminal.focusNext"
+  },
+  {
+    "key": "ctrl+a p",
+    "command": "workbench.action.terminal.focusPrevious"
+  },
+  {
+    "key": "ctrl+a d",
+    "command": "workbench.action.terminal.kill"
+  },
+
+  // Remap to more granular zoom controls
+  {
+    "key": "cmd+=",
+    "command": "zoombar-vscode.zoomIn"
+  },
+  {
+    "key": "cmd+-",
+    "command": "zoombar-vscode.zoomOut"
+  },
 
 
   // Edamagit

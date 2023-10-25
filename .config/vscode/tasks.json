@@ -10,6 +10,30 @@
       "problemMatcher": []
     },
     {
+      "label": "newDir",
+      "command": "mkdir '${fileDirname}/${input:dirName}' && code '${fileDirname}/${input:dirName}'",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "label": "renameFile",
+      "command": "mv '${fileDirname}/${fileBasename}' '${fileDirname}/${input:fileName}' && code '${fileDirname}/${input:fileName}'",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "label": "deleteFile",
+      "command": "echo ${input:confirm}",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "label": "deleteFileForce",
+      "command": "rm '${fileDirname}/${fileBasename}'",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
       "label": "fugitive",
       "command": "nvim -c ':G | only' && exit 0",
       "type": "shell",
@@ -29,8 +53,21 @@
     {
       "type": "promptString",
       "id": "fileName",
-      "description": "Complete my file name.",
+      "description": "New file name:",
       "default": "new file name"
+    },
+    {
+      "type": "promptString",
+      "id": "dirName",
+      "description": "New dir name:",
+      "default": "new dir name"
+    },
+    {
+      "type": "pickString",
+      "id": "confirm",
+      "description": "Confirm? (y/n)",
+      "options": ["y", "n"],
+      "default": "n"
     }
   ]
 }
