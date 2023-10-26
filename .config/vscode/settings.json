@@ -1,19 +1,25 @@
 {
   "editor.lineNumbers": "relative",
+  
+  // Hide everything we can.
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
   "workbench.activityBar.visible": false,
   "editor.minimap.enabled": false,
+
   "editor.tabSize": 2,
+  "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
+  "editor.fontLigatures": false,
+
 
   // Set font-size discretely so it's closer in size to the status bar, which
   // VSCode has made extremely small by default for some reason.
   "editor.fontSize": 11,
   "terminal.integrated.fontSize": 11,
 
-
-  "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
-  "editor.fontLigatures": false,
+  // FYI these values have different denominators. Don't shoot the messenger.
+  "editor.lineHeight": 16,
+  "terminal.integrated.lineHeight": 1.3,
 
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -25,10 +31,12 @@
       }
     ]
   },
-  "workbench.colorTheme": "Night Owl",
-  "typescript.updateImportsOnFileMove.enabled": "always",
 
+  "workbench.colorTheme": "Night Owl",
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
+
   "security.workspace.trust.untrustedFiles": "open",
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
@@ -50,7 +58,6 @@
 
   "terminal.integrated.shellArgs.osx": ["-l"],
   "terminal.integrated.tabs.enabled": false,
-
 
   // Make breadcrumbs work more like vim-vinegar
   // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
@@ -171,7 +178,7 @@
       "before": ["<leader>", "v", "r"], // "vinegar rename"
       "commands": [
         {
-          "command": "workbench.action.tasks.runTask",
+          "command": "renameFile",
           "args": "renameFile", // Need to improve this
           "when": "editorFocus"
         }
@@ -197,7 +204,6 @@
       "commands": ["workbench.action.editor.previousChange"],
       "when": "editorTextFocus && !textCompareEditorActive"
     },
-
 
     // "LSP-like"
     {
@@ -293,7 +299,7 @@
       "commands": [
         "workbench.action.joinAllGroups",
         "workbench.action.closePanel",
-         // Close primary / secondary sidebars
+        // Close primary / secondary sidebars
         "workbench.action.closeSidebar",
         "workbench.action.closeAuxiliaryBar"
       ]
@@ -354,16 +360,17 @@
       "before": ["<leader>", ":"],
       "commands": [
         {
-          "command": "workbench.action.terminal.focus",
+          "command": "workbench.action.terminal.focus"
         }
       ]
     },
-    
+
     // Git
     {
-
       "before": ["<leader>", "G"],
-      "commands": [{"command": "workbench.action.tasks.runTask", "args": "fugitive"}],
+      "commands": [
+        { "command": "workbench.action.tasks.runTask", "args": "fugitive" }
+      ]
     },
     {
       "before": ["<leader>", "g", "b"],
@@ -375,7 +382,7 @@
       "before": ["<leader>", "g", "c"],
       // Checkout new branch (This VSCode command name is very misleading.)
       "commands": ["git.branch"]
-    },
+    }
     // {
     //   "before": ["<leader>", "g", "g"],
     //   "commands": [
@@ -389,7 +396,6 @@
     //   ]
     // }
   ],
-
 
   //   // Edamagit
   //   {
@@ -415,13 +421,20 @@
   },
   "githubPullRequests.pullBranch": "never",
 
-
-  "peacock.favoriteColors": [
-    { "name": "Just Gray", "value": "#444" }
-  ],
+  "peacock.favoriteColors": [{ "name": "Just Gray", "value": "#444" }],
   "vscode_custom_css.imports": [
     "file:///Users/scottyeck/.config/vscode/custom.css"
   ],
   "workbench.editor.labelFormat": "medium",
-  "window.zoomLevel": 0
+  "window.zoomLevel": 1.0455173977264463,
+
+  "foam.openDailyNote.directory": "/Users/scottyeck/notes/daily",
+  "foam.openDailyNote.filenameFormat": "yyyy-mm-dd",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "diffEditor.renderSideBySide": false
 }

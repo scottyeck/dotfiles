@@ -3,6 +3,8 @@
   // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
+    // Filesystem - I'd like to swap these out for methods exposed by an extension
+    // so we can take advantage of some native sugar. (i.e. rename side-effects, etc.)
     {
       "label": "newFile",
       "command": "touch '${fileDirname}/${input:fileName}' && code '${fileDirname}/${input:fileName}'",
@@ -27,12 +29,37 @@
       "type": "shell",
       "problemMatcher": []
     },
+    
     {
-      "label": "deleteFileForce",
-      "command": "rm '${fileDirname}/${fileBasename}'",
+      "label": "Pomodoro start",
+      "command": "pomox start -d ${input:pomoDuration}",
       "type": "shell",
+      "presentation": {
+        "echo": false,
+        "showReuseMessage": false,
+        "focus": false,
+        "reveal": "silent",
+        "panel": "new",
+        "close": true
+      },
       "problemMatcher": []
     },
+    {
+      "label": "Pomodoro end",
+      "command": "pomox end",
+      "type": "shell",
+      "presentation": {
+        "echo": false,
+        "showReuseMessage": false,
+        "focus": false,
+        "reveal": "silent",
+        "panel": "new",
+        "close": true
+      },
+      "problemMatcher": []
+    },
+
+    // Git
     {
       "label": "fugitive",
       "command": "nvim -c ':G | only' && exit 0",
@@ -46,6 +73,21 @@
         "panel": "dedicated",
         "close": true
       }
+    },
+    {
+      "label": "grep files",
+      "command": "nvim -c ':G | only' && exit 0",
+      "type": "shell",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": false,
+        "showReuseMessage": false,
+        "focus": true,
+        "reveal": "always",
+        "panel": "dedicated",
+        "close": true
+      }
+
     }
   ],
 
@@ -68,6 +110,12 @@
       "description": "Confirm? (y/n)",
       "options": ["y", "n"],
       "default": "n"
+    },
+    {
+      "type": "promptString",
+      "id": "pomoDuration",
+      "description": "Pomodoro duration? (mins)",
+      "default": "25"
     }
   ]
 }
