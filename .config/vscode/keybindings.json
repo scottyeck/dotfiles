@@ -193,6 +193,14 @@
     "key": "ctrl+a d",
     "command": "workbench.action.terminal.kill"
   },
+  {
+    "key": "ctrl+a ,",
+    "command": "workbench.action.terminal.rename"
+  },
+  {
+    "key": "ctrl+a c",
+    "command": "workbench.action.terminal.new"
+  },
 
   // Remap to more granular zoom controls
   {
