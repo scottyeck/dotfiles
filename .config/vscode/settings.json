@@ -205,6 +205,15 @@
       "when": "editorTextFocus && !textCompareEditorActive"
     },
 
+    {
+      "before": ["<leader>", "c", "i"], // "conflict incoming"
+      "commands": ["merge-conflict.accept.incoming"]
+    },
+    {
+      "before": ["<leader>", "c", "c"], // "conflict incoming"
+      "commands": ["merge-conflict.accept.current"]
+    },
+
     // "LSP-like"
     {
       "before": ["K"],

@@ -180,6 +180,11 @@
     "key": "cmd+j cmd+f",
     "command": "workbench.action.toggleMaximizedPanel"
   },
+  {
+    "key": "cmd+alt+i",
+    "command": "workbench.action.toggleDevTools"
+    // Technically same as system without "when: isDevelopment" clause
+  },
 
   {
     "key": "ctrl+a n",
