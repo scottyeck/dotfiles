@@ -82,6 +82,19 @@
     "when": "inQuickOpen"
   },
 
+  // In quick fix
+  // @see https://stackoverflow.com/a/68686750
+  {
+    "key": "ctrl+k",
+    "command": "selectPrevCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "selectNextCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+
   // References list
   {
     "key": "ctrl+j",
