@@ -185,6 +185,11 @@
       ]
     },
 
+    {
+      "before": [":", "e", "<CR>"],
+      "commands": ["workbench.action.files.revert"]
+    },
+
     // Next / prev problem
     {
       "before": ["]", "a"],
