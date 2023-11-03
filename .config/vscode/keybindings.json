@@ -136,6 +136,19 @@
     "when": "hasSearchResult || inSearchEditor"
   },
 
+  // Autocomplete window (aka "Suggest Widget")
+  // @see https://stackoverflow.com/a/48098133
+  {
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+
   {
     "key": "cmd+j cmd+j",
     "command": "runCommands",
