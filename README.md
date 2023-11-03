@@ -43,5 +43,6 @@ $ ./core/bootstrap
 ## Further reading
 
 - [Machine Setup](./core/docs/machine-setup.md)
+- [VSCode Usage](./core/docs/vscode-usage.md)
 - [TODOs](./core/docs/todo.md)
 - [CLI Helper Docs](./core/docs/readme)
