@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# I didn't write this.
+# @see https://stackoverflow.com/a/70726657
+
+touchp() {
+  for arg
+  do
+    # Get base directory
+    baseDir=${arg%/*}
+
+    # If whole path is not equal to the baseDire (sole element)
+    # AND baseDir is not a directory (or does not exist)
+    if ! { [ "$arg" = "$baseDir" ] || [ -d "$baseDir" ];}; then
+      # Creates leading directories
+      mkdir -p "${arg%/*}"
+    fi
+
+    # Touch file in-place without cd into dir
+    touch "$arg"
+  done
+}
