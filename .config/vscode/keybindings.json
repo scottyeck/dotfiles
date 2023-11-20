@@ -49,6 +49,14 @@
     "key": "ctrl+w =",
     "command": "workbench.action.evenEditorWidths"
   },
+  {
+    "key": "ctrl+w j",
+    "command": "workbench.action.increaseViewSize"
+  },
+  {
+    "key": "ctrl+w k",
+    "command": "workbench.action.decreaseViewSize"
+  },
   // Move up and down in a list in the sidebar
   {
     "key": "j",
@@ -233,15 +241,28 @@
     "command": "workbench.action.terminal.new"
   },
 
+  {
+    "key": "cmd+escape",
+    "command": "notifications.hideToasts",
+    "when": "notificationToastsVisible"
+  },
+
   // Remap to more granular zoom controls
-  {
-    "key": "cmd+=",
-    "command": "zoombar-vscode.zoomIn"
-  },
-  {
-    "key": "cmd+-",
-    "command": "zoombar-vscode.zoomOut"
-  },
+  // {
+  //   "key": "cmd+=",
+  //   "command": "zoombar-vscode.zoomIn"
+  // },
+  // {
+  //   "key": "cmd+-",
+  //   "command": "zoombar-vscode.zoomOut"
+  // },
+
+  // Unbind cmd+w to prefer :q
+  // {
+  //   "key": "cmd+w",
+  //   "command": "workbench.action.closeWindow",
+  //   "when": "!editorTextFocus && !editorIsOpen && !multipleEditorGroups"
+  // },
 
 
   // Edamagit
