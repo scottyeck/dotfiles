@@ -61,18 +61,34 @@
   {
     "key": "j",
     "command": "list.focusDown",
-    "when": "listFocus"
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "k",
     "command": "list.focusUp",
-    "when": "listFocus"
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "enter",
     "command": "list.select",
     "when": "explorerViewletVisible && filesExplorerFocus"
   },
+  {
+    "key": "ctrl+e n",
+    "command": "welcome.showNewFileEntries",
+    "when": "explorerViewletVisible && filesExplorerFocus"
+  },
+  {
+    "key": "ctrl+e r",
+    "command": "renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus"
+  },
+  // {
+  //   "key": "ctrl+e D",
+  //   "command": "deleteFile",
+  //   "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+  // },
+
   // Move up and down in a list in the pop-up menu
   {
     "key": "ctrl+j",

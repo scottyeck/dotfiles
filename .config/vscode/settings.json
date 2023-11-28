@@ -4,13 +4,14 @@
   // Hide everything we can.
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
-  "workbench.activityBar.visible": false,
   "editor.minimap.enabled": false,
 
   "editor.tabSize": 2,
   "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "editor.fontLigatures": false,
 
+  // Hide the "Open Editors" section of the explorer sidebar
+  "explorer.openEditors.visible": 0,
 
   // Set font-size discretely so it's closer in size to the status bar, which
   // VSCode has made extremely small by default for some reason.
@@ -31,6 +32,15 @@
       }
     ]
   },
+
+  "terminal.integrated.scrollback": 100000,
+  // "terminal.integrated.profiles.osx": {
+  //   "tmux-shell": {
+  //     "path": "tmux",
+  //     "args": ["new-session", "-A", "-s", "vscode:${workspaceFolder}"]
+  //   }
+  // },
+  // "terminal.integrated.defaultProfile.osx": "tmux-shell",
 
   "workbench.colorTheme": "Night Owl",
 
@@ -62,7 +72,7 @@
   // Make breadcrumbs work more like vim-vinegar
   // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
   "breadcrumbs.enabled": true,
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   // Pare back the breadcrumbs so that they only show (and allow navigation
   // along) the file-path, a la traversal in netrw with vinegar.
   "breadcrumbs.showVariables": false,
@@ -96,6 +106,7 @@
 
   "vim.leader": "<space>",
   "vim.overrideCopy": true,
+  "vim.ignorecase": true,
 
   "vim.visualModeKeyBindingsNonRecursive": [
     // Move selection vertically
@@ -209,7 +220,15 @@
       "commands": ["workbench.action.editor.previousChange"],
       "when": "editorTextFocus && !textCompareEditorActive"
     },
-
+    // {
+    //   "before": ["]", "c"],
+    //   "commands": ["merge-conflict.next"],
+    //   "when": "editorTextFocus && textCompareEditorActive"
+    // },
+    // {
+    //   "before": ["[", "c"],
+    //   "commands": ["merge-conflict.previous"],
+    //   "when": "editorTextFocus && textCompareEditorActive"
     {
       "before": ["<leader>", "c", "i"], // "conflict incoming"
       "commands": ["merge-conflict.accept.incoming"]
@@ -253,7 +272,6 @@
         }
       ]
     },
-
     // "Telescope-like"
     {
       "before": ["<leader>", "<leader>"], // "find buffer"
@@ -440,7 +458,6 @@
     "file:///Users/scottyeck/.config/vscode/custom.css"
   ],
   "workbench.editor.labelFormat": "medium",
-  "window.zoomLevel": 1.0455173977264463,
 
   "foam.openDailyNote.directory": "/Users/scottyeck/notes/daily",
   "foam.openDailyNote.filenameFormat": "yyyy-mm-dd",
@@ -450,5 +467,7 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "diffEditor.renderSideBySide": false
+  "diffEditor.renderSideBySide": false,
+  "workbench.activityBar.location": "hidden",
+  "window.zoomLevel": 1,
 }
