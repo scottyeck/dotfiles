@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+function mkcp() {
+  local FILE=$1
+  local TARGET=$2
+
+  local DIRNAME=$(dirname $FILE)
+  local BASENAME=$(basename $FILE)
+
+  mkdir -p $TARGET/$DIRNAME
+  cp $FILE $TARGET/$DIRNAME/$BASENAME
+}
+
+mkcp "$@"
