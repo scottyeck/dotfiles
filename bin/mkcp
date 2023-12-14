@@ -7,8 +7,15 @@ function mkcp() {
   local DIRNAME=$(dirname $FILE)
   local BASENAME=$(basename $FILE)
 
-  mkdir -p $TARGET/$DIRNAME
-  cp $FILE $TARGET/$DIRNAME/$BASENAME
+  INPUT="$FILE"
+  OUTPUT="$TARGET/$DIRNAME/$BASENAME"
+
+  echo "INPUT: $INPUT"
+  echo "OUTPUT: $OUTPUT"
+
+  # FYI I never got this to work :shrug:
+  # mkdir -p $TARGET/$DIRNAME
+  # cp $FILE $TARGET/$DIRNAME/$BASENAME
 }
 
 mkcp "$@"
