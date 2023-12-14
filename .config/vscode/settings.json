@@ -332,10 +332,15 @@
         "workbench.action.joinAllGroups",
         "workbench.action.closePanel",
         // Close primary / secondary sidebars
-        "workbench.action.closeSidebar",
+        // "workbench.action.closeSidebar",
         "workbench.action.closeAuxiliaryBar"
       ]
     },
+    {
+      "before": ["<leader>", "i"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+
     // In vim (at least in my workflows), when I quit a buffer (via :q), the
     // corresponding pane disappears and the remaining splits even out. It's
     // not yet clear to me whether VSCode vim will allow for me to override
