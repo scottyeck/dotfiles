@@ -237,23 +237,23 @@
   },
 
   {
-    "key": "ctrl+a n",
+    "key": "ctrl+g n",
     "command": "workbench.action.terminal.focusNext"
   },
   {
-    "key": "ctrl+a p",
+    "key": "ctrl+g p",
     "command": "workbench.action.terminal.focusPrevious"
   },
   {
-    "key": "ctrl+a d",
+    "key": "ctrl+g d",
     "command": "workbench.action.terminal.kill"
   },
   {
-    "key": "ctrl+a ,",
+    "key": "ctrl+g ,",
     "command": "workbench.action.terminal.rename"
   },
   {
-    "key": "ctrl+a c",
+    "key": "ctrl+g c",
     "command": "workbench.action.terminal.new"
   },
 
