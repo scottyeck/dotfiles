@@ -83,11 +83,11 @@
     "command": "renameFile",
     "when": "explorerViewletVisible && filesExplorerFocus"
   },
-  // {
-  //   "key": "ctrl+e D",
-  //   "command": "deleteFile",
-  //   "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
-  // },
+  {
+    "key": "ctrl+e d",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+  },
 
   // Move up and down in a list in the pop-up menu
   {
