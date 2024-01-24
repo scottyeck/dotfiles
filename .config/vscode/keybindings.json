@@ -74,7 +74,7 @@
     "when": "explorerViewletVisible && filesExplorerFocus"
   },
   {
-    "key": "ctrl+e n",
+    "key": "ctrl+e c",
     "command": "welcome.showNewFileEntries",
     "when": "explorerViewletVisible && filesExplorerFocus"
   },
@@ -86,7 +86,7 @@
   {
     "key": "ctrl+e d",
     "command": "explorer.newFolder",
-    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
   },
 
   // Move up and down in a list in the pop-up menu
@@ -174,7 +174,7 @@
   },
 
   {
-    "key": "cmd+j cmd+j",
+    "key": "ctrl+g g",
     "command": "runCommands",
     "args": {
       "commands": [
@@ -184,7 +184,7 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "cmd+j cmd+j",
+    "key": "ctrl+g g",
     "command": "runCommands",
     "args": {
       "commands": [
@@ -227,7 +227,7 @@
     "when": "panelPosition == 'right'"
   },
   {
-    "key": "cmd+j cmd+f",
+    "key": "ctrl+g f",
     "command": "workbench.action.toggleMaximizedPanel"
   },
   {
@@ -357,5 +357,30 @@
   {
     "key": "ctrl+u x",
     "command": "-magit.reset-hard"
+  },
+  // end magit - need to organize these.
+  {
+    "key": "ctrl+cmd+t",
+    "command": "workbench.action.tasks.runTask"
+  },
+  {
+    "key": "ctrl+cmd+g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "-workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+cmd+g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "-workbench.view.scm",
+    "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
   }
 ]

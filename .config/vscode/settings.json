@@ -1,14 +1,17 @@
 {
   "editor.lineNumbers": "relative",
-  
+
   // Hide everything we can.
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
   "editor.minimap.enabled": false,
 
   "editor.tabSize": 2,
-  "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "editor.fontLigatures": false,
+
+  "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
+  "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
+  "debug.console.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
 
   // Hide the "Open Editors" section of the explorer sidebar
   "explorer.openEditors.visible": 0,
@@ -17,6 +20,7 @@
   // VSCode has made extremely small by default for some reason.
   "editor.fontSize": 11,
   "terminal.integrated.fontSize": 11,
+  "debug.console.fontSize": 11, 
 
   // FYI these values have different denominators. Don't shoot the messenger.
   "editor.lineHeight": 16,
@@ -332,7 +336,7 @@
         "workbench.action.joinAllGroups",
         "workbench.action.closePanel",
         // Close primary / secondary sidebars
-        // "workbench.action.closeSidebar",
+        "workbench.action.closeSidebar",
         "workbench.action.closeAuxiliaryBar"
       ]
     },
@@ -453,6 +457,7 @@
 
   // Move VSCode Vim extension execution to a "dedicated host extension
   // process" which makes it faster.
+  // @see https://github.com/microsoft/vscode/issues/75627#issuecomment-1078827311
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
   },
@@ -474,5 +479,16 @@
   },
   "diffEditor.renderSideBySide": false,
   "workbench.activityBar.location": "hidden",
-  "window.zoomLevel": 1,
+  "zenMode.showTabs": "none",
+  "zenMode.restore": false,
+  "zenMode.hideStatusBar": false,
+  "zenMode.fullScreen": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "window.confirmBeforeClose": "always",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  }
 }
