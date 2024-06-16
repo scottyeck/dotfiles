@@ -11,7 +11,7 @@
 
   "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
-  "debug.console.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
+  "debug.console.fontFamily": "\"CaskaydiaCove Nerd Font Mono Light\"",
 
   // Hide the "Open Editors" section of the explorer sidebar
   "explorer.openEditors.visible": 0,
@@ -47,6 +47,9 @@
   // "terminal.integrated.defaultProfile.osx": "tmux-shell",
 
   "workbench.colorTheme": "Night Owl",
+  // "workbench.preferredDarkColorTheme": "Night Owl",
+  // "workbench.preferredLightColorTheme": "Default Light+",
+  // "window.autoDetectColorScheme": true,
 
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -54,7 +57,7 @@
   "security.workspace.trust.untrustedFiles": "open",
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
-  "eslint.validate": ["javascript", "javascriptreact"],
+  // "eslint.validate": ["javascript", "javascriptreact"],
 
   // Git
   "git.openRepositoryInParentFolders": "never",
@@ -135,6 +138,25 @@
   ],
 
   "vim.normalModeKeyBindingsNonRecursive": [
+
+    // Get around issues with undo / redo
+    {
+        "before": ["u"],
+        "after": [],
+        "commands": [{
+            "command": "undo",
+            "args": []
+        }]
+    },
+    {
+        "before": ["<C-r>"],
+        "after": [],
+        "commands": [{
+            "command": "redo",
+            "args": []
+        }]
+    },
+
     // Trigger emulated vinegar traversal
     {
       "before": ["-"],
@@ -300,6 +322,17 @@
       // new one.
       "before": ["<leader>", "f", "p"], // "find project"
       "commands": ["projectManager.listProjectsNewWindow"]
+    },
+
+    // % doesn't work on tags, so we add a special override
+    // @see https://github.com/VSCodeVim/Vim/issues/3872
+    {
+      "before": ["<leader>", "%"],
+      "commands": [
+        {
+          "command": "editor.emmet.action.matchTag"
+        }
+      ]
     },
 
     // vim-abolish emulation
@@ -477,6 +510,11 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[markdown]": {
+    // Currently experiencing an issue where prettier isn't preserving spacing in lists
+    // with mixed orderings, so we'll just disable for now because that is a PAIN.
+    "editor.codeActionsOnSave": []
+  },
   "diffEditor.renderSideBySide": false,
   "workbench.activityBar.location": "hidden",
   "zenMode.showTabs": "none",
@@ -490,5 +528,15 @@
     "plaintext": false,
     "markdown": false,
     "scminput": false
-  }
+  },
+  "markdown.updateLinksOnFileMove.enabled": "always",
+  "debug.hideLauncherWhileDebugging": true,
+  "debug.toolBarLocation": "docked",
+  "editor.stickyScroll.enabled": false,
+  "workbench.startupEditor": "none",
+  "prisma.showPrismaDataPlatformNotification": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "github.copilot.editor.enableAutoCompletions": true
 }

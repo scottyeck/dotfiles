@@ -24,6 +24,16 @@
     "command": "workbench.action.quickOpen"
   },
 
+  // Disabling defaults to encourage use of vim analogs where possible
+  {
+    "key": "cmd+s",
+    "command": "-workbench.action.files.save",
+  },
+  // {
+  //   "key": "cmd+w",
+  //   "command": "-workbench.action.closeActiveEditor",
+  // },
+
   // Tmux / Vim style pane-navigation
   {
     "key": "ctrl+h",
@@ -178,28 +188,27 @@
     "command": "runCommands",
     "args": {
       "commands": [
-        "workbench.action.terminal.focus"
+        "workbench.action.terminal.toggleTerminal"
       ]
-    },
-    "when": "!terminalFocus"
+    }
   },
-  {
-    "key": "ctrl+g g",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        "workbench.action.togglePanel",
-        "workbench.action.focusActiveEditorGroup"
-      ]
-    },
-    "when": "terminalFocus"
-  },
+  // {
+  //   "key": "ctrl+g g",
+  //   "command": "runCommands",
+  //   "args": {
+  //     "commands": [
+  //       "workbench.action.openPanel",
+  //       "workbench.action.focusActiveEditorGroup"
+  //     ]
+  //   },
+  //   "when": "terminalFocus"
+  // },
   {
     "key": "cmd+j cmd+q",
     "command": "runCommands",
     "args": {
       "commands": [
-        "workbench.action.closePanel",
+        "workbench.action.togglePanel",
       ]
     }
   },
@@ -279,6 +288,30 @@
   //   "command": "workbench.action.closeWindow",
   //   "when": "!editorTextFocus && !editorIsOpen && !multipleEditorGroups"
   // },
+
+  // Sonic Pi
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.tasks.runTask",
+    "args": "sonic-pi-play",
+    "when": "editorLangId == ruby"
+  },
+  {
+    "key": "ctrl+alt+a", // customize the shortcut
+    "command": "workbench.action.tasks.runTask",
+    "args": "sonic-pi-stop",
+    "when": "editorLangId == ruby"
+  },
+
+  {
+    "key": "cmd+alt+ctrl+g",
+    "command": "workbench.action.tasks.runTask",
+    "args": "fugitive"
+  },
+  {
+    "key": "cmd+g b",
+    "command": "git.checkout",
+  },
 
 
   // Edamagit
