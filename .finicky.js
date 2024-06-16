@@ -10,14 +10,20 @@ module.exports = {
   defaultBrowser: "Google Chrome",
   handlers: [
     {
-      match: [/github.com\/comprehensiveio/, /linear.app/, /loom.com/],
+      match: [
+        /github.com\/comprehensiveio/,
+        /linear.app/,
+        /loom.com/,
+        /range.co/,
+        /render.com/,
+      ],
       browser: {
         name: "Google Chrome",
         profile: profileNames.hen,
       },
     },
     {
-      match: /github.com\/scottyeck/,
+      match: [/github.com\/scottyeck/, /focusmate.com/],
       browser: {
         name: "Google Chrome",
         profile: profileNames.personal,
