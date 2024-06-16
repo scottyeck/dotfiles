@@ -736,18 +736,19 @@ vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
 vim.api.nvim_create_user_command('Gwip', '!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"', {})
 vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
 
--- In fugitive, open file in on line under cursor in VSCode
-vim.api.nvim_create_user_command('Gcode',
-  function(opts)
-    current_line = vim.api.nvim_get_current_line()
-    fugitive_char = current_line:sub(1, 1)
-    filename = current_line:gsub(fugitive_char, "")
-    vim.api.nvim_command(":!code " .. filename .. '&')
-  end,
-  {}
-)
-
-vim.keymap.set('n', '<leader>gv', ':Gcode<CR> :qa<CR>')
+if os.getenv("TERM_PROGRAM") == "vscode" then
+  -- In fugitive, open file in on line under cursor in VSCode
+  vim.api.nvim_create_user_command('Gcode',
+    function(opts)
+      current_line = vim.api.nvim_get_current_line()
+      fugitive_char = current_line:sub(1, 1)
+      filename = current_line:gsub(fugitive_char, "")
+      vim.api.nvim_command(":!code " .. filename .. '&')
+    end,
+    {}
+  )
+  vim.keymap.set('n', '<leader><CR>', ':Gcode<CR> :qa<CR>')
+end
 
 
 -- Support for hub was dropped in vim-rhubarb as gh becomes the
