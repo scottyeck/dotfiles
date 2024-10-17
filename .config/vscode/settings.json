@@ -37,6 +37,14 @@
     ]
   },
 
+  // Disable "Peek" previews
+  // https://calebporzio.com/6-annoying-things-in-vs-code-you-can-fix-right-now
+  // "editor.gotoLocation.multipleReferences": "goto",
+  // "editor.gotoLocation.multipleDefinitions": "goto",
+  // "editor.gotoLocation.multipleDeclarations": "goto",
+  // "editor.gotoLocation.multipleImplementations": "goto",
+  // "editor.gotoLocation.multipleTypeDefinitions": "goto",
+
   "terminal.integrated.scrollback": 100000,
   // "terminal.integrated.profiles.osx": {
   //   "tmux-shell": {
