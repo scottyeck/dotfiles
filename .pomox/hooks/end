@@ -17,4 +17,4 @@ $HOME/git/oss/slack_status_updater/awayback.sh back
 
 open -a Slack
 open -a Messages
-open -a Discord
+# open -a Discord
