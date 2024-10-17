@@ -20,7 +20,7 @@
   // VSCode has made extremely small by default for some reason.
   "editor.fontSize": 11,
   "terminal.integrated.fontSize": 11,
-  "debug.console.fontSize": 11, 
+  "debug.console.fontSize": 11,
 
   // FYI these values have different denominators. Don't shoot the messenger.
   "editor.lineHeight": 16,
@@ -138,23 +138,26 @@
   ],
 
   "vim.normalModeKeyBindingsNonRecursive": [
-
     // Get around issues with undo / redo
     {
-        "before": ["u"],
-        "after": [],
-        "commands": [{
-            "command": "undo",
-            "args": []
-        }]
+      "before": ["u"],
+      "after": [],
+      "commands": [
+        {
+          "command": "undo",
+          "args": []
+        }
+      ]
     },
     {
-        "before": ["<C-r>"],
-        "after": [],
-        "commands": [{
-            "command": "redo",
-            "args": []
-        }]
+      "before": ["<C-r>"],
+      "after": [],
+      "commands": [
+        {
+          "command": "redo",
+          "args": []
+        }
+      ]
     },
 
     // Trigger emulated vinegar traversal
