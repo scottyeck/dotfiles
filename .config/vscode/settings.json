@@ -488,6 +488,32 @@
   //   }
   // ],
 
+  // GH Pull Request View 
+  "githubPullRequests.queries": [
+    {
+      "label": "My Active Pull Requests",
+      "query": "is:open assignee:${user}",
+    },
+
+    // Defaults
+    {
+      "label": "Waiting For My Review",
+      "query": "is:open review-requested:${user}"
+    },
+    {
+      "label": "Assigned To Me",
+      "query": "is:open assignee:${user}"
+    },
+    {
+      "label": "Created By Me",
+      "query": "is:open author:${user}"
+    },
+    {
+      "label": "Mentioned Me",
+      "query": "is:open mentions:${user}"
+    }
+  ],
+
   "command-runner.terminal.name": "runCommand",
   "command-runner.terminal.autoClear": true,
   "command-runner.commands": {

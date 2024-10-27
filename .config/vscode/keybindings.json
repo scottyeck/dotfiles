@@ -415,5 +415,9 @@
     "key": "ctrl+shift+g",
     "command": "-workbench.view.scm",
     "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+  },
+  {
+    "key": "cmd+g cmd+v",
+    "command": "workbench.panel.chat.view.copilot.focus"
   }
 ]
