@@ -115,6 +115,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+--   pattern = "*.tsx",
+--   command = "set filetype=typescriptreact"
+-- })
+
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -132,7 +137,17 @@ require('lazy').setup({
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
 
-{ -- Fuzzy Finder (files, lsp, etc)
+
+  { -- Theme
+    'haishanh/night-owl.vim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'night-owl'
+    end,
+  },
+
+
+  { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
@@ -154,7 +169,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -263,7 +278,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
@@ -527,7 +542,7 @@ require('lazy').setup({
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-b>'] = cmp.mapping.scroll_docs( -4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
           -- Accept ([y]es) the completion.
@@ -560,8 +575,8 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
           ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
+            if luasnip.locally_jumpable( -1) then
+              luasnip.jump( -1)
             end
           end, { 'i', 's' }),
 
@@ -581,4 +596,153 @@ require('lazy').setup({
       }
     end,
   },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+    },
+    opts = {
+      ensure_installed = {
+        'c',
+        'cpp',
+        'cmake',
+        'lua',
+        'luadoc',
+        'python',
+        'html',
+        'rust',
+        'toml',
+        'javascript',
+        'typescript',
+        'json',
+        'yaml',
+        'markdown',
+        'bash',
+      },
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      indent = { enable = true },
+      autotag = { enable = true },
+      rainbow = { enable = true },
+      fold = { enable = true, disable = {} },
+    },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  -- {
+  --   'mfussenegger/nvim-lint',
+  --   config = function()
+  --     require('lint').linters_by_ft = {
+  --       lua = { 'luacheck' },
+  --       javascript = { 'eslint' },
+  --       javascriptreact = { 'eslint' },
+  --       typescript = { 'eslint' },
+  --       typescriptreact = { 'eslint' },
+  --       typescript.tx
+  --     }
+  --     require('lint').linters.eslint.args = {
+  --       '--fix'
+  --     }
+  --     vim.api.nvim_create_autocmd('BufWritePost', {
+  --       callback = function()
+  --         require('lint').try_lint()
+  --         -- check if filetype is lua
+  --         -- if vim.bo.filetype == 'lua' then
+  --         --   require('lint').try_lint('luacheck')
+  --         -- end
+  --       end,
+  --     })
+  --     -- You can set up an autocmd to run linting automatically
+  --     -- vim.cmd([[
+  --     --   augroup Linting
+  --     --     autocmd!
+  --     --     autocmd BufWritePost * lua require('lint').try_lint()
+  --     --   augroup END
+  --     -- ]])
+  --   end
+  -- },
+
+  {
+    'stevearc/conform.nvim',
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          html = { "prettier" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          markdown = { "prettierd" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          ["*"] = { "trim_whitespace" },
+        },
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
+        },
+        formatters = {
+          prettierd = {
+            condition = function()
+              return vim.loop.fs_realpath(".prettierrc.js") ~= nil or vim.loop.fs_realpath(".prettierrc.mjs") ~= nil or
+                  vim.loop.fs_realpath(".prettierrc.json")
+            end,
+          },
+        },
+      })
+    end,
+  },
+
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  --   config = function()
+  --     require("typescript-tools").setup {
+  --       on_attach =
+  --       function(client, bufnr)
+  --         client.server_capabilities.documentFormattingProvider = false
+  --         client.server_capabilities.documentRangeFormattingProvider = false
+  --       end,
+  --       settings = {
+  --         jsx_close_tag = {
+  --           enable = true,
+  --           filetypes = { "javascriptreact", "typescriptreact" },
+  --         }
+  --       }
+  --     }
+  --   end
+  -- },
 })
+
+--
+-- vim.treesitter.language.register('typescriptreact', 'tsx')
+
+vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
+vim.api.nvim_create_user_command('Gwip', '!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"', {})
+vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
+
+if os.getenv("TERM_PROGRAM") == "vscode" then
+  -- In fugitive, open file in on line under cursor in VSCode
+  vim.api.nvim_create_user_command('Gcode',
+    function(opts)
+      current_line = vim.api.nvim_get_current_line()
+      fugitive_char = current_line:sub(1, 1)
+      filename = current_line:gsub(fugitive_char, "")
+      vim.api.nvim_command(":!code -r" .. filename .. '&')
+    end,
+    {}
+  )
+  vim.keymap.set('n', '<leader><CR>', ':Gcode<CR> :qa<CR>')
+end
+
+
+-- Support for hub was dropped in vim-rhubarb as gh becomes the
+-- primary GitHub CLI, so we override this functionality manually.
+-- @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
+vim.g.fugitive_git_command = "hub"
