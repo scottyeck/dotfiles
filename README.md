@@ -27,7 +27,7 @@ $ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 $ dots checkout
 
 # ignore untracked (non dotfiles) files
-$ dotfiles config --local status.showUntrackedFiles no
+$ dots config --local status.showUntrackedFiles no
 
 # if there is a merge conflict, rename the conflicting files and try again
 ```
