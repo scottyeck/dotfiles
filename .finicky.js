@@ -2,8 +2,11 @@
 // Learn more about configuration options: https://github.com/johnste/finicky/wiki/Configuration
 
 const profileNames = {
-  personal: "Default",
-  hen: "Profile 2",
+  // The profile name you supply to Finicky must match the folder name of the profile. For Chrome,
+  // the folders are located at ~/Library/Application Support/Google/Chrome. Folder names are called
+  // "Profile 1", "Profile 2", etc.
+  personal: "Profile 2",
+  hen: "Profile 3"
 };
 
 module.exports = {

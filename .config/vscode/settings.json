@@ -273,6 +273,10 @@
       "before": ["<leader>", "c", "c"], // "conflict incoming"
       "commands": ["merge-conflict.accept.current"]
     },
+    {
+      "before": ["<leader>", "c", "b"], // "conflict both"
+      "commands": ["merge-conflict.accept.both"]
+    },
 
     // "LSP-like"
     {
@@ -488,7 +492,7 @@
   //   }
   // ],
 
-  // GH Pull Request View 
+  // GH Pull Request View
   "githubPullRequests.queries": [
     {
       "label": "My Active Pull Requests",

@@ -71,6 +71,10 @@ These are settings that I don't currently automate.
 
 I use a local RC file containing env settings that should differ across machines and not live in source control. See `.localrc.template`
 
+### Headphones
+
+Set up an ["Aggregate Audio Device"](https://www.reddit.com/r/MacOS/comments/n6trw3/how_do_i_make_mac_not_connect_to_my_bluetooth/) that uses headphones for audio input and laptop microphone for audio output. (This way when headphones are connected, the microphone is not changed and audio is not disrupted.)
+
 ### Divvy Window Management
 
 I've used [Divvy](https://mizage.com/windivvy/) for the past 10 years or so, and although I've tried other window managers, I just can't quit this one. Blame muscle memory.
