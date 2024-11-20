@@ -16,7 +16,7 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
 
 ## Install Password Manager(s)
 
-(Instructions omitted on purpose.)
+...
 
 ## System Preferences
 
@@ -41,6 +41,9 @@ curl -o "https://raw.githubusercontent.com/scottyeck/dotfiles/tree/master/core/i
     - Add videoconferencing apps (Zoom, [Slack](https://slack.com/downloads/instructions/mac), Meet via Chrome) to allow perms for screen-sharing.
   - _Privacy_ > _Accessibility_
     - Add window management apps (Divvy)
+  - _Privacy_ > _Full Disk Access_
+    - Grant to apps that are running terminal emulators (Alacritty, VSCode).
+    - Grant to apps that allow search (Raycast).
 
 ## Manual Installs
 
