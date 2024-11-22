@@ -1,0 +1,7 @@
+.quick-input-widget {
+  --input-widget-height: 300px;
+  --input-widget-offset: 28px;
+
+  top: 50% !important;
+  margin-top: calc(-1 * var(--input-widget-height) + var(--input-widget-offset));
+}

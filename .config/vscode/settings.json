@@ -538,7 +538,8 @@
 
   "peacock.favoriteColors": [{ "name": "Just Gray", "value": "#444" }],
   "vscode_custom_css.imports": [
-    "file:///Users/scottyeck/.config/vscode/custom.css"
+    "file:///Users/scottyeck/.config/vscode/custom.css",
+    "file:///Users/scottyeck/.config/vscode/quickopen.css"
   ],
   "workbench.editor.labelFormat": "medium",
 
