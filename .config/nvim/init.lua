@@ -542,7 +542,7 @@ require('lazy').setup({
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
           -- Accept ([y]es) the completion.
@@ -575,8 +575,8 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
           ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable( -1) then
-              luasnip.jump( -1)
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
             end
           end, { 'i', 's' }),
 
@@ -724,7 +724,9 @@ require('lazy').setup({
 -- vim.treesitter.language.register('typescriptreact', 'tsx')
 
 vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
-vim.api.nvim_create_user_command('Gwip', '!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"', {})
+vim.api.nvim_create_user_command('Gwip',
+  '!git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"',
+  {})
 vim.api.nvim_create_user_command('Gyank', '.GBrowse!', {})
 
 if os.getenv("TERM_PROGRAM") == "vscode" then
