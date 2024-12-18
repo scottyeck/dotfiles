@@ -74,31 +74,17 @@ These are settings that I don't currently automate.
 
 I use a local RC file containing env settings that should differ across machines and not live in source control. See `.localrc.template`
 
-### Headphones
+### `atrun`
 
-Set up an ["Aggregate Audio Device"](https://www.reddit.com/r/MacOS/comments/n6trw3/how_do_i_make_mac_not_connect_to_my_bluetooth/) that uses headphones for audio input and laptop microphone for audio output. (This way when headphones are connected, the microphone is not changed and audio is not disrupted.)
+I use `at` to power the job scheduling behind `pomox`, a very utility that I use to enforce focus during pomodoros. When switching to a new machine, this setup doesn't work out of the box. We need to tell the machine that we wish for `at` to be available and enabled I guess? Unclear.
 
-### Divvy Window Management
+Regardless, most recently with Sequoia, simply running the following resolved my issues:
 
-I've used [Divvy](https://mizage.com/windivvy/) for the past 10 years or so, and although I've tried other window managers, I just can't quit this one. Blame muscle memory.
+```
+sudo launchctl load -F /System/Library/LaunchDaemons/com.apple.atrun.plist
+```
 
-_Unfortunately_, OSX [no longer lets me configure my Divvy settings the way I want to](https://apple.stackexchange.com/a/430456), so I have to [manually migrate my settings](https://andrew.hawker.io/dailies/2021/03/01/migrate-divvy-configuration/) from one machine to another.
-
-> Long story short, we do this with an `export` + `import` using OSX defaults.
->
-> First, export settings into `com.mizage.direct.Divvy.plist` with:
->
-> ```
-> defaults export com.mizage.direct.Divvy com.mizage.direct.Divvy.plist
-> ```
->
-> Copy this binary plist to your the machine (Airdrop works here) and import settings with:
->
-> ```
-> defaults import com.mizage.direct.Divvy com.mizage.direct.Divvy.plist
-> ```
->
-> Note: These settings contain the Divvy license key so treat accordingly.
+(It's possible that I may need to call `unload` similarly prior to `load`, though I truly have not bothered to investigate this at all, so who knows. All I care about is that it works and I can use `pomox`.)
 
 ### True Color w/ Alacritty / Tmux / Nvim
 
