@@ -277,6 +277,10 @@
       "before": ["<leader>", "c", "b"], // "conflict both"
       "commands": ["merge-conflict.accept.both"]
     },
+    {
+      "before": ["<leader">, "x"],
+      "commands": ["markdown.extension.checkTaskList"]
+    },
 
     // "LSP-like"
     {
@@ -552,9 +556,11 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    // Currently experiencing an issue where prettier isn't preserving spacing in lists
-    // with mixed orderings, so we'll just disable for now because that is a PAIN.
-    "editor.codeActionsOnSave": []
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "diffEditor.renderSideBySide": true,
   "workbench.activityBar.location": "hidden",
@@ -576,12 +582,10 @@
   "editor.stickyScroll.enabled": false,
   "workbench.startupEditor": "none",
   "prisma.showPrismaDataPlatformNotification": false,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "github.copilot.editor.enableAutoCompletions": true,
   "datadog.staticAnalysis.setup.onboarding.excludedLanguages": ["TYPESCRIPT"],
   "datadog.telemetry.setup.enableTelemetry": "disabled",
   "datadog.staticAnalysis.notification.suppressOnboarding": true,
-  "workbench.editor.showTabs": "none"
+  "workbench.editor.showTabs": "none",
+  "workbench.panel.defaultLocation": "right"
 }
