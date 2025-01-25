@@ -1,7 +1,6 @@
 {
-  "editor.lineNumbers": "relative",
+  "editor.accessibilitySupport": "off",
 
-  // Hide everything we can.
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
   "editor.minimap.enabled": false,
@@ -11,7 +10,7 @@
 
   "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
-  "debug.console.fontFamily": "\"CaskaydiaCove Nerd Font Mono Light\"",
+  "debug.console.fontFamily": "\"CaskaydiaCove Nerd Font Mono\"",
 
   // Hide the "Open Editors" section of the explorer sidebar
   "explorer.openEditors.visible": 0,
@@ -270,16 +269,12 @@
       "commands": ["merge-conflict.accept.incoming"]
     },
     {
-      "before": ["<leader>", "c", "c"], // "conflict incoming"
+      "before": ["<leader>", "c", "c"], // "conflict current"
       "commands": ["merge-conflict.accept.current"]
     },
     {
       "before": ["<leader>", "c", "b"], // "conflict both"
       "commands": ["merge-conflict.accept.both"]
-    },
-    {
-      "before": ["<leader">, "x"],
-      "commands": ["markdown.extension.checkTaskList"]
     },
 
     // "LSP-like"
@@ -500,7 +495,7 @@
   "githubPullRequests.queries": [
     {
       "label": "My Active Pull Requests",
-      "query": "is:open assignee:${user}",
+      "query": "is:open assignee:${user}"
     },
 
     // Defaults
@@ -556,11 +551,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // Currently experiencing an issue where prettier isn't preserving spacing in lists
+    // with mixed orderings, so we'll just disable for now because that is a PAIN.
+    "editor.codeActionsOnSave": []
   },
   "diffEditor.renderSideBySide": true,
   "workbench.activityBar.location": "hidden",
@@ -582,10 +575,21 @@
   "editor.stickyScroll.enabled": false,
   "workbench.startupEditor": "none",
   "prisma.showPrismaDataPlatformNotification": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "github.copilot.editor.enableAutoCompletions": true,
   "datadog.staticAnalysis.setup.onboarding.excludedLanguages": ["TYPESCRIPT"],
   "datadog.telemetry.setup.enableTelemetry": "disabled",
   "datadog.staticAnalysis.notification.suppressOnboarding": true,
   "workbench.editor.showTabs": "none",
-  "workbench.panel.defaultLocation": "right"
+  "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "extensions.ignoreRecommendations": true,
+  "workbench.panel.defaultLocation": "right",
+  "scm.diffDecorationsGutterPattern": {
+    "added": true
+  },
+  "editor.lineNumbers": "relative",
+  "debug.console.acceptSuggestionOnEnter": "on"
 }

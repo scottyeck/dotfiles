@@ -85,7 +85,8 @@
   },
   {
     "key": "ctrl+e c",
-    "command": "welcome.showNewFileEntries",
+    // "command": "welcome.showNewFileEntries",
+    "command": "explorer.newFile",
     "when": "explorerViewletVisible && filesExplorerFocus"
   },
   {
@@ -203,7 +204,6 @@
   //   },
   //   "when": "terminalFocus"
   // },
-
   {
     "key": "cmd+j cmd+q",
     "command": "runCommands",
@@ -265,10 +265,6 @@
   {
     "key": "ctrl+g c",
     "command": "workbench.action.terminal.new"
-  },
-  {
-    "key": "ctrl+g r",
-    "command": "workbench.debug.action.focusRepl"
   },
 
   {
