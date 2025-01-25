@@ -99,6 +99,11 @@
     "command": "explorer.newFolder",
     "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
   },
+  {
+    "key": "ctrl+e x",
+    "command": "fileutils.removeFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
 
   // Move up and down in a list in the pop-up menu
   {
