@@ -1,4 +1,17 @@
+/* non-editor fonts, broadly... match settings from editor */
+.mac {
+  font-family: "CaskaydiaCove Nerd Font Mono Light", Menlo, Monaco, "Courier New", monospace;
+  font-size: 11px;
+}
+
+/* title bar */
+.monaco-workbench .part.titlebar>.titlebar-container>.titlebar-center>.window-title {
+  font-size: 11px;
+}
+
 /*
+ * Dim non-active editor pane
+ *
  * Explicitly selecting the .overflow-guard results in JUST the background
  * editor contents being dimmed while not focused, and not the entire editor.
  * This is important to avoid dimming foreground elements like the rename
