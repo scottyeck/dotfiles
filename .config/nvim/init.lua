@@ -736,7 +736,7 @@ if os.getenv("TERM_PROGRAM") == "vscode" then
       current_line = vim.api.nvim_get_current_line()
       fugitive_char = current_line:sub(1, 1)
       filename = current_line:gsub(fugitive_char, "")
-      vim.api.nvim_command(":!code -r" .. filename .. '&')
+      vim.api.nvim_command(":!ide -r" .. filename .. '&')
     end,
     {}
   )

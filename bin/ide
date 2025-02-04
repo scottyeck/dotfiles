@@ -1,0 +1,37 @@
+#!/bin/bash
+
+function ide() {
+  IS_VSCODE=false
+  IS_CURSOR=false
+
+  # These matches work for me right now but could be way wrong.
+  VSCODE_MATCH=$(echo $VSCODE_GIT_ASKPASS_NODE | grep "Visual Studio Code")
+  CURSOR_MATCH=$(echo $VSCODE_GIT_ASKPASS_NODE | grep "Cursor")
+
+  if [ -n "$VSCODE_MATCH" ]; then
+      IS_VSCODE=true
+  fi
+
+  if [ -n "$CURSOR_MATCH" ]; then
+      IS_CURSOR=true
+  fi
+
+  if [ "$IS_VSCODE" = false ] && [ "$IS_CURSOR" = false ]; then
+      if [ "$IDE" = "code" ]; then
+          IS_VSCODE=true
+      elif [ "$IDE" = "cursor" ]; then
+          IS_CURSOR=true
+      else
+          echo "No IDE found"
+          exit 1
+      fi
+  fi
+
+  if [ "$IS_VSCODE" = true ]; then
+      code $@
+  elif [ "$IS_CURSOR" = true ]; then
+      cursor $@
+  fi
+}
+
+ide $@
