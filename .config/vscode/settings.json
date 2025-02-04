@@ -20,6 +20,7 @@
   "editor.fontSize": 11,
   "terminal.integrated.fontSize": 11,
   "debug.console.fontSize": 11,
+  "debug.console.internalConsoleOptions": "openOnSessionStart",
 
   // FYI these values have different denominators. Don't shoot the messenger.
   "editor.lineHeight": 16,
@@ -557,6 +558,11 @@
   },
   "diffEditor.renderSideBySide": true,
   "workbench.activityBar.location": "hidden",
+
+  // Maybe resolves an issue in cursor with moving to / from the sidebar?
+  // @see https://github.com/getcursor/cursor/issues/1570
+  "workbench.activityBar.orientation": "vertical",
+
   "zenMode.showTabs": "none",
   "zenMode.restore": false,
   "zenMode.hideStatusBar": false,
@@ -591,5 +597,6 @@
     "added": true
   },
   "editor.lineNumbers": "relative",
-  "debug.console.acceptSuggestionOnEnter": "on"
+  "debug.console.acceptSuggestionOnEnter": "on",
+  "workbench.editor.editorActionsLocation": "hidden"
 }
