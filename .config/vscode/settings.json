@@ -567,6 +567,8 @@
   "zenMode.restore": false,
   "zenMode.hideStatusBar": false,
   "zenMode.fullScreen": false,
+  "zenMode.centerLayout": true,
+  "zenMode.hideLineNumbers": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "window.confirmBeforeClose": "always",
   "github.copilot.enable": {
