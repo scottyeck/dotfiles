@@ -38,12 +38,10 @@
   {
     "key": "ctrl+h",
     "command": "workbench.action.navigateLeft",
-    "when": "!inQuickOpen"
   },
   {
     "key": "ctrl+l",
     "command": "workbench.action.navigateRight",
-    "when": "!inQuickOpen"
   },
   {
     "key": "ctrl+k",
@@ -278,6 +276,11 @@
     "when": "notificationToastsVisible"
   },
 
+  {
+    "key": "cmd+shift+d",
+    "command": "workbench.panel.repl.view.focus"
+  },
+
   // Remap to more granular zoom controls
   // {
   //   "key": "cmd+=",
@@ -425,5 +428,13 @@
   {
     "key": "cmd+g cmd+v",
     "command": "workbench.panel.chat.view.copilot.focus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
   }
 ]

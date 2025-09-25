@@ -1,7 +1,7 @@
 {
   "editor.accessibilitySupport": "off",
 
-  "window.commandCenter": false,
+  "window.commandCenter": true,
   "workbench.layoutControl.enabled": false,
   "editor.minimap.enabled": false,
 
@@ -81,8 +81,9 @@
     "sync": false
   },
 
-  "terminal.integrated.shellArgs.osx": ["-l"],
-  "terminal.integrated.tabs.enabled": false,
+  "terminal.integrated.shellArgs.osx": [
+    "-l"
+  ],
 
   // Make breadcrumbs work more like vim-vinegar
   // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
@@ -384,7 +385,10 @@
         "workbench.action.closePanel",
         // Close primary / secondary sidebars
         "workbench.action.closeSidebar",
-        "workbench.action.closeAuxiliaryBar"
+        "workbench.action.closeAuxiliaryBar",
+
+        // cursor specific
+        "composer.closeComposerTab"
       ]
     },
     {
@@ -495,26 +499,32 @@
   // GH Pull Request View
   "githubPullRequests.queries": [
     {
-      "label": "My Active Pull Requests",
-      "query": "is:open assignee:${user}"
+      "label": "Local Pull Request Branches",
+      "query": "default"
     },
-
-    // Defaults
+    {
+      "label": "My Active Pull Requests",
+      "query": "repo:${owner}/${repository} is:open assignee:${user}"
+    },
     {
       "label": "Waiting For My Review",
-      "query": "is:open review-requested:${user}"
+      "query": "repo:${owner}/${repository} is:open review-requested:${user}"
     },
     {
       "label": "Assigned To Me",
-      "query": "is:open assignee:${user}"
+      "query": "repo:${owner}/${repository} is:open assignee:${user}"
     },
     {
       "label": "Created By Me",
-      "query": "is:open author:${user}"
+      "query": "repo:${owner}/${repository} is:open author:${user}"
     },
     {
       "label": "Mentioned Me",
-      "query": "is:open mentions:${user}"
+      "query": "repo:${owner}/${repository} is:open mentions:${user}"
+    },
+    {
+      "label": "All Open",
+      "query": "default"
     }
   ],
 
@@ -557,7 +567,6 @@
     "editor.codeActionsOnSave": []
   },
   "diffEditor.renderSideBySide": true,
-  "workbench.activityBar.location": "hidden",
 
   // Maybe resolves an issue in cursor with moving to / from the sidebar?
   // @see https://github.com/getcursor/cursor/issues/1570
@@ -600,5 +609,14 @@
   },
   "editor.lineNumbers": "relative",
   "debug.console.acceptSuggestionOnEnter": "on",
-  "workbench.editor.editorActionsLocation": "hidden"
+  "workbench.editor.editorActionsLocation": "hidden",
+  "cursor.cpp.disabledLanguages": [
+    "plaintext",
+    "markdown",
+    "scminput"
+  ],
+  "workbench.activityBar.location": "hidden",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "remote.autoForwardPortsSource": "hybrid",
+  "terminal.integrated.tabs.enabled": false
 }
