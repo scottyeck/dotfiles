@@ -14,7 +14,7 @@
 # ```
 
 gbhist () {
-  local LASTWORKS="$(git for-each-ref --count=10 --sort=-committerdate refs/heads/ | awk '{print $3}' | sed 's/refs\/heads\///')"
+  local LASTWORKS="$(git for-each-ref --count=100 --sort=-committerdate refs/heads/ | awk '{print $3}' | sed 's/refs\/heads\///')"
   echo $LASTWORKS | tr ' ' '\n'
 }
 
