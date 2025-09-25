@@ -49,6 +49,8 @@ alias dotsv="GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME vim"
 # the sha of the selection the clipboard.
 alias gsha="git log --oneline | fzf | awk '{print \$1}' | pbcopy"
 
+alias gpmas="gh pr merge --auto --squash"
+
 # Initialize bitwarden and expose session as env var
 alias bwi='eval $(bw login | grep export | sed "s/^$ //")'
 alias bwu='eval $(bw unlock | grep export | sed "s/^$ //")'
@@ -66,6 +68,8 @@ alias cb='code_bundle'
 alias gci="echo $(git_current_branch) | sed -r 's/[^\/]*\/([^0-9]*-[0-9]+).*/\1/' | xargs -I {} lr issue {} --open"
 
 alias tp='tmuxproj'
+alias grit="gbhist | fzf | xargs git checkout"
+alias grho="git reset --hard origin/$(gcur)"
 # alias pomo='pomodoro'
 
 # Base vi mode configuration
