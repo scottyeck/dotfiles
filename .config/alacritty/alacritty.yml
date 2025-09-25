@@ -5,13 +5,13 @@ font:
   use_thin_strokes: true
   normal:
     family: "CaskaydiaCove Nerd Font Mono"
-    style: "ExtraLight"
+    style: "Light"
   bold:
     family: "CaskaydiaCove Nerd Font Mono"
     style: "SemiBold"
   italic:
     family: "CaskaydiaCove Nerd Font Mono"
-    style: "ExtraLight Italic"
+    style: "Light Italic"
   bold_italic:
     family: "CaskaydiaCove Nerd Font Mono"
     style: "SemiBold Italic"

@@ -1,0 +1,39 @@
+
+[[keyboard.bindings]]
+chars = "\u001Ba"
+key = "A"
+mods = "Alt"
+
+[general]
+import = ["/Users/scottyeck/.config/alacritty/night-owl/night-owl.yml"]
+
+[font]
+size = 14.0
+# DEPRECATED
+# @see https://github.com/alacritty/alacritty/issues/4616#issuecomment-1236413444
+# use_thin_strokes = true
+
+[font.bold]
+family = "CaskaydiaCove Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "CaskaydiaCove Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "CaskaydiaCove Nerd Font Mono"
+style = "Light Italic"
+
+[font.normal]
+family = "CaskaydiaCove Nerd Font Mono"
+style = "Light"
+
+[font.offset]
+x = 0
+y = 2
+
+[window]
+decorations = "buttonless"
+
+[keyboard]
