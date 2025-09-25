@@ -27,7 +27,7 @@
   // Disabling defaults to encourage use of vim analogs where possible
   {
     "key": "cmd+s",
-    "command": "-workbench.action.files.save",
+    "command": "-workbench.action.files.save"
   },
   // {
   //   "key": "cmd+w",
@@ -38,10 +38,12 @@
   {
     "key": "ctrl+h",
     "command": "workbench.action.navigateLeft",
+    "when": "!inQuickOpen"
   },
   {
     "key": "ctrl+l",
     "command": "workbench.action.navigateRight",
+    "when": "!inQuickOpen"
   },
   {
     "key": "ctrl+k",
@@ -191,9 +193,7 @@
     "key": "ctrl+g g",
     "command": "runCommands",
     "args": {
-      "commands": [
-        "workbench.action.terminal.toggleTerminal"
-      ]
+      "commands": ["workbench.action.terminal.toggleTerminal"]
     }
   },
   // {
@@ -211,9 +211,7 @@
     "key": "cmd+j cmd+q",
     "command": "runCommands",
     "args": {
-      "commands": [
-        "workbench.action.togglePanel",
-      ]
+      "commands": ["workbench.action.togglePanel"]
     }
   },
 
@@ -276,11 +274,6 @@
     "when": "notificationToastsVisible"
   },
 
-  {
-    "key": "cmd+shift+d",
-    "command": "workbench.panel.repl.view.focus"
-  },
-
   // Remap to more granular zoom controls
   // {
   //   "key": "cmd+=",
@@ -319,9 +312,8 @@
   },
   {
     "key": "cmd+g b",
-    "command": "git.checkout",
+    "command": "git.checkout"
   },
-
 
   // Edamagit
   // @see https://github.com/kahole/edamagit#vim-support-vscodevim
@@ -428,6 +420,10 @@
   {
     "key": "cmd+g cmd+v",
     "command": "workbench.panel.chat.view.copilot.focus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
   },
   {
     "key": "cmd+i",

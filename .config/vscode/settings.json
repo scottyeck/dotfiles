@@ -1,31 +1,19 @@
 {
   "editor.accessibilitySupport": "off",
-
   "window.commandCenter": true,
-  "workbench.layoutControl.enabled": false,
   "editor.minimap.enabled": false,
-
   "editor.tabSize": 2,
   "editor.fontLigatures": false,
-
   "editor.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono Light",
   "debug.console.fontFamily": "\"CaskaydiaCove Nerd Font Mono\"",
-
-  // Hide the "Open Editors" section of the explorer sidebar
   "explorer.openEditors.visible": 0,
-
-  // Set font-size discretely so it's closer in size to the status bar, which
-  // VSCode has made extremely small by default for some reason.
   "editor.fontSize": 11,
   "terminal.integrated.fontSize": 11,
   "debug.console.fontSize": 11,
   "debug.console.internalConsoleOptions": "openOnSessionStart",
-
-  // FYI these values have different denominators. Don't shoot the messenger.
   "editor.lineHeight": 16,
   "terminal.integrated.lineHeight": 1.3,
-
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -36,60 +24,23 @@
       }
     ]
   },
-
-  // Disable "Peek" previews
-  // https://calebporzio.com/6-annoying-things-in-vs-code-you-can-fix-right-now
-  // "editor.gotoLocation.multipleReferences": "goto",
-  // "editor.gotoLocation.multipleDefinitions": "goto",
-  // "editor.gotoLocation.multipleDeclarations": "goto",
-  // "editor.gotoLocation.multipleImplementations": "goto",
-  // "editor.gotoLocation.multipleTypeDefinitions": "goto",
-
   "terminal.integrated.scrollback": 100000,
-  // "terminal.integrated.profiles.osx": {
-  //   "tmux-shell": {
-  //     "path": "tmux",
-  //     "args": ["new-session", "-A", "-s", "vscode:${workspaceFolder}"]
-  //   }
-  // },
-  // "terminal.integrated.defaultProfile.osx": "tmux-shell",
-
   "workbench.colorTheme": "Night Owl",
-  // "workbench.preferredDarkColorTheme": "Night Owl",
-  // "workbench.preferredLightColorTheme": "Default Light+",
-  // "window.autoDetectColorScheme": true,
-
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
-
   "security.workspace.trust.untrustedFiles": "open",
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
-  // "eslint.validate": ["javascript", "javascriptreact"],
-
-  // Git
   "git.openRepositoryInParentFolders": "never",
-  // By default, hitting <enter> will open the diff view for the file
-  // rather than the file itself.
   "git.openDiffOnClick": false,
-  // Because j/k will help navigate up and down, not having the commit
-  // input / action buttons is preferable.
   "git.showCommitInput": false,
   "git.showActionButton": {
     "commit": false,
     "publish": false,
     "sync": false
   },
-
-  "terminal.integrated.shellArgs.osx": [
-    "-l"
-  ],
-
-  // Make breadcrumbs work more like vim-vinegar
-  // @see https://stackoverflow.com/questions/54834068/replacement-for-vim-vinegar-in-vs-code
+  "terminal.integrated.shellArgs.osx": ["-l"],
   "breadcrumbs.enabled": true,
-  // Pare back the breadcrumbs so that they only show (and allow navigation
-  // along) the file-path, a la traversal in netrw with vinegar.
   "breadcrumbs.showVariables": false,
   "breadcrumbs.showTypeParameters": false,
   "breadcrumbs.showStructs": false,
@@ -118,13 +69,10 @@
   "breadcrumbs.showArrays": false,
   "breadcrumbs.icons": false,
   "breadcrumbs.symbolPath": "off",
-
   "vim.leader": "<space>",
   "vim.overrideCopy": true,
   "vim.ignorecase": true,
-
   "vim.visualModeKeyBindingsNonRecursive": [
-    // Move selection vertically
     {
       "before": ["K"],
       "commands": [
@@ -144,9 +92,7 @@
       ]
     }
   ],
-
   "vim.normalModeKeyBindingsNonRecursive": [
-    // Get around issues with undo / redo
     {
       "before": ["u"],
       "after": [],
@@ -167,8 +113,6 @@
         }
       ]
     },
-
-    // Trigger emulated vinegar traversal
     {
       "before": ["-"],
       "commands": [
@@ -183,62 +127,59 @@
       ]
     },
     {
-      "before": ["<leader>", "v", "%"], // "vinegar new-file"
+      "before": ["<leader>", "v", "%"],
       "commands": [
         {
           "command": "workbench.action.tasks.runTask",
-          "args": "newFile", // Need to improve this
+          "args": "newFile",
           "when": "editorFocus"
         }
       ]
     },
     {
-      "before": ["<leader>", "v", "d"], // "vinegar new-dir"
+      "before": ["<leader>", "v", "d"],
       "commands": [
         {
           "command": "workbench.action.tasks.runTask",
-          "args": "newDir", // Need to improve this
+          "args": "newDir",
           "when": "editorFocus"
         }
       ]
     },
     {
-      "before": ["<leader>", "v", "x"], // "vinegar delete"
+      "before": ["<leader>", "v", "x"],
       "commands": [
         {
           "command": "workbench.action.tasks.runTask",
-          "args": "deleteFile", // Need to improve this
+          "args": "deleteFile",
           "when": "editorFocus"
         }
       ]
     },
     {
-      "before": ["<leader>", "v", "X"], // "vinegar force-delete"
+      "before": ["<leader>", "v", "X"],
       "commands": [
         {
           "command": "workbench.action.tasks.runTask",
-          "args": "deleteFileForce", // Need to improve this
+          "args": "deleteFileForce",
           "when": "editorFocus"
         }
       ]
     },
     {
-      "before": ["<leader>", "v", "r"], // "vinegar rename"
+      "before": ["<leader>", "v", "r"],
       "commands": [
         {
           "command": "renameFile",
-          "args": "renameFile", // Need to improve this
+          "args": "renameFile",
           "when": "editorFocus"
         }
       ]
     },
-
     {
       "before": [":", "e", "<CR>"],
       "commands": ["workbench.action.files.revert"]
     },
-
-    // Next / prev problem
     {
       "before": ["]", "a"],
       "commands": ["editor.action.marker.next"]
@@ -257,33 +198,25 @@
       "commands": ["workbench.action.editor.previousChange"],
       "when": "editorTextFocus && !textCompareEditorActive"
     },
-    // {
-    //   "before": ["]", "c"],
-    //   "commands": ["merge-conflict.next"],
-    //   "when": "editorTextFocus && textCompareEditorActive"
-    // },
-    // {
-    //   "before": ["[", "c"],
-    //   "commands": ["merge-conflict.previous"],
-    //   "when": "editorTextFocus && textCompareEditorActive"
     {
-      "before": ["<leader>", "c", "i"], // "conflict incoming"
+      "before": ["<leader>", "c", "i"],
       "commands": ["merge-conflict.accept.incoming"]
     },
     {
-      "before": ["<leader>", "c", "c"], // "conflict current"
+      "before": ["<leader>", "c", "c"],
       "commands": ["merge-conflict.accept.current"]
     },
     {
-      "before": ["<leader>", "c", "b"], // "conflict both"
+      "before": ["<leader>", "c", "b"],
       "commands": ["merge-conflict.accept.both"]
     },
-
-    // "LSP-like"
     {
       "before": ["K"],
       "commands": [
-        { "command": "editor.action.showHover", "when": "editorTextFocus" }
+        {
+          "command": "editor.action.showHover",
+          "when": "editorTextFocus"
+        }
       ]
     },
     {
@@ -313,34 +246,26 @@
         }
       ]
     },
-    // "Telescope-like"
     {
-      "before": ["<leader>", "<leader>"], // "find buffer"
+      "before": ["<leader>", "<leader>"],
       "commands": ["workbench.action.showAllEditors"]
     },
     {
-      "before": ["<leader>", "f", "t"], // "find task",
+      "before": ["<leader>", "f", "t"],
       "commands": ["workbench.action.tasks.runTask"]
     },
     {
-      "before": ["<leader>", "f", "c"], // "find command",
+      "before": ["<leader>", "f", "c"],
       "commands": ["command-runner.run"]
     },
     {
-      "before": ["<leader>", "f", "g"], // "find with grep"
+      "before": ["<leader>", "f", "g"],
       "commands": ["find-it-faster.findWithinFiles"]
     },
     {
-      // This is more "tmux-like" than anything else, but because I use
-      // tmux inside the VS Code integrated terminal, I'd prefer not to
-      // overload the existing tmux-keybinds and instead will learn this
-      // new one.
-      "before": ["<leader>", "f", "p"], // "find project"
+      "before": ["<leader>", "f", "p"],
       "commands": ["projectManager.listProjectsNewWindow"]
     },
-
-    // % doesn't work on tags, so we add a special override
-    // @see https://github.com/VSCodeVim/Vim/issues/3872
     {
       "before": ["<leader>", "%"],
       "commands": [
@@ -349,8 +274,6 @@
         }
       ]
     },
-
-    // vim-abolish emulation
     {
       "before": ["c", "r", "c"],
       "commands": ["editor.action.transformToCamelcase"]
@@ -360,9 +283,6 @@
       "commands": ["editor.action.transformToSnakecase"]
     },
     {
-      // Abolish calls for this rather than typical "Uppercase",
-      // but because Vim natively supports uppercase in normal
-      // mode via `U`, we'll default to Abolish's defaults.
       "before": ["c", "r", "u"],
       "commands": [
         "editor.action.transformToSnakecase",
@@ -373,21 +293,13 @@
       "before": ["c", "r", "-"],
       "commands": ["editor.action.transformToKebabcase"]
     },
-    // There are others here that we're not replicating.
-
     {
-      // "Only" - implements "close (not delete) all other buffers"
-      // TODO: Consider moving this out of vim settings (where editor-centric
-      // settings are) and into keybindings.json (for application-centric settings)
       "before": ["<leader>", "o"],
       "commands": [
         "workbench.action.joinAllGroups",
         "workbench.action.closePanel",
-        // Close primary / secondary sidebars
         "workbench.action.closeSidebar",
         "workbench.action.closeAuxiliaryBar",
-
-        // cursor specific
         "composer.closeComposerTab"
       ]
     },
@@ -395,53 +307,33 @@
       "before": ["<leader>", "i"],
       "commands": ["workbench.action.toggleSidebarVisibility"]
     },
-
-    // In vim (at least in my workflows), when I quit a buffer (via :q), the
-    // corresponding pane disappears and the remaining splits even out. It's
-    // not yet clear to me whether VSCode vim will allow for me to override
-    // :q (which appears to just close the "buffer" but persist the "pane",
-    // loading up the next buffer in that pane's stack - VSCode uses the
-    // terms "Editor" and "Group" but the principles remain the same), so in
-    // the meantime I'm binding a custom one that I'll learn instead.
     {
       "before": ["<leader>", "q"],
       "commands": ["workbench.action.closeEditorsInGroup"]
     },
-
     {
       "before": ["<leader>", "f"],
       "commands": ["revealInExplorer"]
     },
-
-    // Git
     {
-      "before": ["<leader>", "g", "y"], // "git yank"
+      "before": ["<leader>", "g", "y"],
       "commands": ["gitlens.copyRemoteFileUrlToClipboard"]
     },
     {
-      "before": ["<leader>", "c", "i"], // resolve Conflict with Incoming
+      "before": ["<leader>", "c", "i"],
       "commands": ["merge-conflict.accept.incoming"]
     },
     {
-      "before": ["<leader>", "c", "c"], // resolve Conflict with Current
+      "before": ["<leader>", "c", "c"],
       "commands": ["merge-conflict.accept.current"]
     },
-
-    // Spectre-like
     {
       "before": ["<leader>", "S"],
       "commands": [
-        // Because the Search Editor isn't a buffer (as in Spectre / nvim),
-        // it's not included in the location stack, so "ctrl+o" / "ctrl+i"
-        // doesn't work here. Instead I'll try to use cmd+w to close it,
-        // and because I'm using "openEditor" (rather than "openNewEditor"),
-        // re-launching using "<leader>s" will re-open the same search.
-        // "commands": ["search.action.openEditor"]
         {
           "command": "search.action.openEditor",
           "when": "!inSearchEditor"
         },
-        // Return to the search input if you're already in there
         {
           "command": "search.action.focusQueryEditorWidget",
           "when": "inSearchEditor"
@@ -456,51 +348,28 @@
         }
       ]
     },
-
-    // Git
     {
       "before": ["<leader>", "G"],
       "commands": [
-        { "command": "workbench.action.tasks.runTask", "args": "fugitive" }
+        {
+          "command": "workbench.action.tasks.runTask",
+          "args": "fugitive"
+        }
       ]
     },
     {
       "before": ["<leader>", "g", "b"],
-      // List branches for checkout - sorts by committerdate by default... but then
-      // unsorts when you start searching? Likely can be improved.
       "commands": ["git.checkout"]
     },
     {
       "before": ["<leader>", "g", "c"],
-      // Checkout new branch (This VSCode command name is very misleading.)
       "commands": ["git.branch"]
     }
-    // {
-    //   "before": ["<leader>", "g", "g"],
-    //   "commands": [
-    //     {
-    //       "command": "command-runner.run",
-    //       "args": {
-    //         "command": "echo \"hello world\"",
-    //         "terminal": "runCommand"
-    //       }
-    //     }
-    //   ]
-    // }
   ],
-
-  //   // Edamagit
-  //   {
-  //     "before": ["<leader>", "G"],
-  //     "commands": ["magit.status"]
-  //   }
-  // ],
-
-  // GH Pull Request View
   "githubPullRequests.queries": [
     {
       "label": "Local Pull Request Branches",
-      "query": "default"
+      "query": "repo:${owner}/${repository} default"
     },
     {
       "label": "My Active Pull Requests",
@@ -524,36 +393,29 @@
     },
     {
       "label": "All Open",
-      "query": "default"
+      "query": "repo:${owner}/${repository} default"
     }
   ],
-
   "command-runner.terminal.name": "runCommand",
   "command-runner.terminal.autoClear": true,
   "command-runner.commands": {
-    // Some examples (feel free to remove)
     "echo workspaceFolder": "echo ${workspaceFolder}",
     "echo file": "echo ${file}",
-
     "gwip": "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- [skip ci]\""
   },
-
-  // Move VSCode Vim extension execution to a "dedicated host extension
-  // process" which makes it faster.
-  // @see https://github.com/microsoft/vscode/issues/75627#issuecomment-1078827311
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
-  },
   "githubPullRequests.pullBranch": "never",
-
-  "peacock.favoriteColors": [{ "name": "Just Gray", "value": "#444" }],
+  "peacock.favoriteColors": [
+    {
+      "name": "Just Gray",
+      "value": "#444"
+    }
+  ],
   "vscode_custom_css.imports": [
     "file:///Users/scottyeck/.config/vscode/custom.css",
     "file:///Users/scottyeck/.config/vscode/quickopen.css"
   ],
   "workbench.editor.labelFormat": "medium",
-
-  "foam.openDailyNote.directory": "/Users/scottyeck/notes/daily",
+  "foam.openDailyNote.directory": "/Users/scottyeck/Dropbox/notes/daily",
   "foam.openDailyNote.filenameFormat": "yyyy-mm-dd",
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -562,16 +424,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    // Currently experiencing an issue where prettier isn't preserving spacing in lists
-    // with mixed orderings, so we'll just disable for now because that is a PAIN.
     "editor.codeActionsOnSave": []
   },
   "diffEditor.renderSideBySide": true,
-
-  // Maybe resolves an issue in cursor with moving to / from the sidebar?
-  // @see https://github.com/getcursor/cursor/issues/1570
   "workbench.activityBar.orientation": "vertical",
-
   "zenMode.showTabs": "none",
   "zenMode.restore": false,
   "zenMode.hideStatusBar": false,
@@ -579,7 +435,6 @@
   "zenMode.centerLayout": true,
   "zenMode.hideLineNumbers": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
-  "window.confirmBeforeClose": "always",
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -609,7 +464,6 @@
   },
   "editor.lineNumbers": "relative",
   "debug.console.acceptSuggestionOnEnter": "on",
-  "workbench.editor.editorActionsLocation": "hidden",
   "cursor.cpp.disabledLanguages": [
     "plaintext",
     "markdown",
@@ -618,5 +472,12 @@
   "workbench.activityBar.location": "hidden",
   "github.copilot.nextEditSuggestions.enabled": true,
   "remote.autoForwardPortsSource": "hybrid",
-  "terminal.integrated.tabs.enabled": false
+  "cursor.windowSwitcher.sidebarHoverCollapsed": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "foam.logging.level": "debug",
+  "terminal.integrated.tabs.enabled": false,
+  "typescript.tsserver.log": "off",
+  "multiDiffEditor.experimental.enabled": true
 }
