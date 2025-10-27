@@ -6,6 +6,8 @@ yarn-error.log
 # Vim spellchecker dict binaries
 *.spl
 
+.idea
+
 .dotfiles
 
 # Project-centric solargraph config, since other devs may not rely on it.
