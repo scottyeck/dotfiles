@@ -1,6 +1,8 @@
 {
+  "avante.nvim": { "branch": "main", "commit": "d3ec7c7320151244f07252a73628b1417f694b06" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "night-owl.vim": { "branch": "master", "commit": "783a41a27f7fe55ed91d1ec0f0351d06ae17fbc7" },
+  "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-spectre": { "branch": "master", "commit": "ba7fb777edff6c1fbbeffd343e113af64c04e90a" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
