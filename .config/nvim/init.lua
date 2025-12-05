@@ -258,5 +258,110 @@ require('lazy').setup({
       vim.keymap.set("n", "<leader>at", function() require("avante").toggle() end, { desc = "Avante Toggle" })
       vim.keymap.set("n", "<leader>af", function() api.focus() end, { desc = "Avante Focus" })
     end,
+  },
+
+  { -- Mason: LSP server installer
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup()
+      -- Auto-install ruby-lsp
+      local mason_registry = require('mason-registry')
+      mason_registry.refresh(function()
+        if not mason_registry.is_installed('ruby-lsp') then
+          local ruby_lsp = mason_registry.get_package('ruby-lsp')
+          ruby_lsp:install()
+        end
+      end)
+    end,
   }
 })
+
+-- ========================================================================== --
+-- ==                           RUBY LSP CONFIG                            == --
+-- ========================================================================== --
+
+-- Set up LSP attach handler for keybindings
+local lsp_attach_group = vim.api.nvim_create_augroup('ruby-lsp-attach', { clear = true })
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = lsp_attach_group,
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if not client or client.name ~= 'ruby_lsp' then
+      return
+    end
+
+    local bufnr = event.buf
+    local map = function(keys, func, desc, mode)
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+    end
+
+    -- Keybindings
+    map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    map('K', vim.lsp.buf.hover, 'Hover Documentation')
+    map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+    map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+    map('<leader>f', function()
+      vim.lsp.buf.format({ async = true })
+    end, '[F]ormat document')
+
+    -- Format on save for Ruby files
+    if client.supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
+      local format_group = vim.api.nvim_create_augroup('ruby-format-on-save', { clear = true })
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = format_group,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end,
+      })
+    end
+  end,
+})
+
+-- Configure Ruby LSP using built-in API
+local function setup_ruby_lsp()
+  local function get_ruby_lsp_cmd()
+    local mason_registry = require('mason-registry')
+    if mason_registry.is_installed('ruby-lsp') then
+      local ruby_lsp = mason_registry.get_package('ruby-lsp')
+      return { ruby_lsp:get_install_path() .. '/ruby-lsp' }
+    else
+      return { 'ruby-lsp' }
+    end
+  end
+
+  local root_dir = vim.fs.dirname(vim.fs.find({ '.git', 'Gemfile', '.ruby-version' }, { upward = true })[1] or vim.fn.getcwd())
+
+  vim.lsp.config('ruby_lsp', {
+    cmd = get_ruby_lsp_cmd(),
+    filetypes = { 'ruby' },
+    root_dir = root_dir,
+    settings = {
+      rubyLsp = {
+        formatter = 'rubocop',
+        enabledFeatures = {
+          rubocop = true,
+        },
+      },
+    },
+  })
+
+  -- Enable Ruby LSP
+  vim.lsp.enable('ruby_lsp')
+end
+
+-- Set up Ruby LSP after Mason is ready
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MasonUpdateComplete',
+  callback = setup_ruby_lsp,
+  once = true,
+})
+
+-- Also try to set up immediately (in case Mason is already ready)
+vim.defer_fn(function()
+  if pcall(require, 'mason-registry') then
+    setup_ruby_lsp()
+  end
+end, 1000)
