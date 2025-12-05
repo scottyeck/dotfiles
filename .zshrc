@@ -22,6 +22,19 @@ export ZSH=/Users/$USER/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simple"
 
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(zsh-nvm git bundler zsh-vi-mode tmux yarn)
+
+# nvm configuration
+export NVM_NO_USE=false
+export NVM_LAZY_LOAD=false
+export NVM_COMPLETION=true
+export NVM_AUTO_USE=true
+
 source $ZSH/oh-my-zsh.sh
 # Custom zsh configuration
 
@@ -75,21 +88,21 @@ alias grho="git reset --hard origin/$(gcur)"
 # Base vi mode configuration
 # https://dougblack.io/words/zsh-vi-mode.html
 
-bindkey -v
-export KEYTIMEOUT=1
-
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
-export VI_MODE_SET_CURSOR=true
-
-# Remove latency when pasting large commands
-# @see https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+# bindkey -v
+# export KEYTIMEOUT=1
+#
+# bindkey '^P' up-history
+# bindkey '^N' down-history
+# bindkey '^?' backward-delete-char
+# bindkey '^h' backward-delete-char
+# bindkey '^w' backward-kill-word
+# bindkey '^r' history-incremental-search-backward
+#
+# export VI_MODE_SET_CURSOR=true
+#
+# # Remove latency when pasting large commands
+# # @see https://github.com/zsh-users/zsh-syntax-highlighting/issues/295#issuecomment-214581607
+# zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 setopt auto_cd
 cdpath=($HOME/git/hen/mvp)

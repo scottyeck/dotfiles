@@ -16,3 +16,6 @@ yarn-error.log
 
 # Project-specific repl dump
 **/*/.repl
+
+.scotty
+.lnavrc
