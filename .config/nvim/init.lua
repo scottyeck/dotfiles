@@ -126,7 +126,15 @@ require('lazy').setup({
   -- Tpope altar
   'tpope/vim-abolish',
   'tpope/vim-eunuch',
-  'tpope/vim-fugitive',
+  {
+    'tpope/vim-fugitive',
+    config = function()
+      vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
+      vim.api.nvim_create_user_command('Gwip',
+      '!git add -A && git rm $(git ls-files --deleted) 2> /dev/null && git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"',
+      {})
+    end
+  },
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
   'tpope/vim-surround',
