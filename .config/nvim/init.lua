@@ -132,10 +132,20 @@ require('lazy').setup({
   'tpope/vim-surround',
   'tpope/vim-vinegar',
 
+  'tpope/vim-rails',
+
   -- Editing enhancements
   'nvim-pack/nvim-spectre',
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
+
+  { -- Theme
+    'haishanh/night-owl.vim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'night-owl'
+    end,
+  },
 
   { -- Telescope: Fuzzy finder
     'nvim-telescope/telescope.nvim',
@@ -177,11 +187,35 @@ require('lazy').setup({
     end,
   },
 
-  { -- Theme
-    'haishanh/night-owl.vim',
-    priority = 1000,
+  {
+    "EthanJWright/vs-tasks.nvim",
+    dependencies = {
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
     config = function()
-      vim.cmd.colorscheme 'night-owl'
+      require('vstask').setup({
+        cache_json_conf = true,
+        cache_strategy = "last",
+        config_dir = ".vscode",
+        support_code_workspace = true,
+      })
+      require('telescope').load_extension('vstask')
+
+      -- Keymaps for vstask
+      vim.keymap.set('n', '<leader>tt', function()
+        require('telescope').extensions.vstask.tasks()
+      end, { desc = '[T]asks' })
+      vim.keymap.set('n', '<leader>tj', function()
+        require('telescope').extensions.vstask.jobs()
+      end, { desc = '[T]ask [J]obs' })
+      vim.keymap.set('n', '<leader>th', function()
+        require('telescope').extensions.vstask.history()
+      end, { desc = '[T]ask [H]istory' })
+      vim.keymap.set('n', '<leader>tr', function()
+        require('telescope').extensions.vstask.run()
+      end, { desc = '[T]ask [R]un command' })
     end,
-  },
+  }
 })
