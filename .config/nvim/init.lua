@@ -151,6 +151,18 @@ require('lazy').setup({
   'AndrewRadev/tagalong.vim',
 
   {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "ruby", "lua", "vim", "vimdoc" },
+        auto_install = true,
+        highlight = { enable = true },
+      })
+    end,
+  },
+
+  {
     'nvim-pack/nvim-spectre',
     config = function()
       vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
@@ -327,6 +339,36 @@ require('lazy').setup({
       vim.keymap.set("v", "<leader>ae", function() api.edit() end, { desc = "Avante Edit Selection" })
       vim.keymap.set("n", "<leader>at", function() require("avante").toggle() end, { desc = "Avante Toggle" })
       vim.keymap.set("n", "<leader>af", function() api.focus() end, { desc = "Avante Focus" })
+    end,
+  },
+
+  { -- Neotest: Test framework
+  "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "olimorris/neotest-rspec", -- RSpec adapter
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-rspec")({
+            rspec_cmd = function()
+              return { "bundle", "exec", "rspec" }
+            end,
+          }),
+        },
+      })
+
+      -- Keybindings (optional but recommended)
+      vim.keymap.set('n', '<leader>tn', require('neotest').run.run, { desc = '[T]est [N]earest' })
+      vim.keymap.set('n', '<leader>tf', function()
+        require('neotest').run.run(vim.fn.expand('%'))
+      end, { desc = '[T]est [F]ile' })
+      vim.keymap.set('n', '<leader>ts', require('neotest').summary.toggle, { desc = '[T]est [S]ummary' })
+      vim.keymap.set('n', '<leader>to', require('neotest').output.open, { desc = '[T]est [O]utput' })
     end,
   },
 
