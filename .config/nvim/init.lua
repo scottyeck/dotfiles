@@ -162,7 +162,7 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "ruby", "lua", "vim", "vimdoc" },
+        ensure_installed = { "ruby", "lua", "vim", "vimdoc", "typescript", "javascript", "tsx" },
         auto_install = true,
         highlight = { enable = true },
         textobjects = {
@@ -430,12 +430,16 @@ require('lazy').setup({
     'williamboman/mason.nvim',
     config = function()
       require('mason').setup()
-      -- Auto-install ruby-lsp
+      -- Auto-install LSP servers
       local mason_registry = require('mason-registry')
       mason_registry.refresh(function()
         if not mason_registry.is_installed('ruby-lsp') then
           local ruby_lsp = mason_registry.get_package('ruby-lsp')
           ruby_lsp:install()
+        end
+        if not mason_registry.is_installed('typescript-language-server') then
+          local tsserver = mason_registry.get_package('typescript-language-server')
+          tsserver:install()
         end
       end)
     end,
@@ -457,12 +461,12 @@ require('lazy').setup({
 -- ========================================================================== --
 
 -- Set up LSP attach handler for keybindings
-local lsp_attach_group = vim.api.nvim_create_augroup('ruby-lsp-attach', { clear = true })
+local lsp_attach_group = vim.api.nvim_create_augroup('lsp-attach', { clear = true })
 vim.api.nvim_create_autocmd('LspAttach', {
   group = lsp_attach_group,
   callback = function(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if not client or client.name ~= 'ruby_lsp' then
+    if not client then
       return
     end
 
@@ -483,7 +487,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[F]ormat document')
 
     -- Format on save for Ruby files
-    if client.supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
+    if client.name == 'ruby_lsp' and client.supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
       local format_group = vim.api.nvim_create_augroup('ruby-format-on-save', { clear = true })
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = format_group,
@@ -539,5 +543,75 @@ vim.api.nvim_create_autocmd('User', {
 vim.defer_fn(function()
   if pcall(require, 'mason-registry') then
     setup_ruby_lsp()
+  end
+end, 1000)
+
+-- ========================================================================== --
+-- ==                        TYPESCRIPT LSP CONFIG                         == --
+-- ========================================================================== --
+
+local function setup_typescript_lsp()
+  local function get_typescript_lsp_cmd()
+    local ok, mason_registry = pcall(require, 'mason-registry')
+    if ok and mason_registry.is_installed('typescript-language-server') then
+      local tsserver = mason_registry.get_package('typescript-language-server')
+      if tsserver then
+        local success, install_path = pcall(function() return tsserver:get_install_path() end)
+        if success and install_path then
+          return { install_path .. '/typescript-language-server', '--stdio' }
+        end
+      end
+    end
+    -- Fallback to global installation (we installed it via npm)
+    return { 'typescript-language-server', '--stdio' }
+  end
+
+  local root_dir = vim.fs.dirname(vim.fs.find({ '.git', 'package.json', 'tsconfig.json' }, { upward = true })[1] or vim.fn.getcwd())
+
+  vim.lsp.config('typescript', {
+    cmd = get_typescript_lsp_cmd(),
+    filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+    root_dir = root_dir,
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
+  })
+
+  -- Enable TypeScript LSP
+  vim.lsp.enable('typescript')
+end
+
+-- Set up TypeScript LSP after Mason is ready
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MasonUpdateComplete',
+  callback = setup_typescript_lsp,
+  once = true,
+})
+
+-- Also try to set up immediately (in case Mason is already ready)
+vim.defer_fn(function()
+  if pcall(require, 'mason-registry') then
+    setup_typescript_lsp()
   end
 end, 1000)
