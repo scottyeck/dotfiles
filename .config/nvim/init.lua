@@ -441,6 +441,10 @@ require('lazy').setup({
           local tsserver = mason_registry.get_package('typescript-language-server')
           tsserver:install()
         end
+        if not mason_registry.is_installed('eslint-lsp') then
+          local eslint_lsp = mason_registry.get_package('eslint-lsp')
+          eslint_lsp:install()
+        end
       end)
     end,
   },
@@ -452,6 +456,107 @@ require('lazy').setup({
     config = function()
         require("tiny-inline-diagnostic").setup()
         vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
+    end,
+  },
+
+  { -- Conform: Formatter (Prettier/ESLint)
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>f",
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end,
+        mode = "",
+        desc = "[F]ormat buffer",
+      },
+    },
+    config = function()
+      -- Helper to find local executable in node_modules
+      local function find_local_executable(cmd, filename)
+        local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
+        if root_file then
+          local root = vim.fs.dirname(root_file)
+          local local_cmd = root .. "/node_modules/.bin/" .. cmd
+          if vim.fn.executable(local_cmd) == 1 then
+            return local_cmd
+          end
+        end
+        return nil
+      end
+
+      require("conform").setup({
+        formatters_by_ft = {
+          javascript = { "prettier_local", "eslint_local" },
+          javascriptreact = { "prettier_local", "eslint_local" },
+          typescript = { "prettier_local", "eslint_local" },
+          typescriptreact = { "prettier_local", "eslint_local" },
+          json = { "prettier_local" },
+          jsonc = { "prettier_local" },
+          yaml = { "prettier_local" },
+          markdown = { "prettier_local" },
+          html = { "prettier_local" },
+          css = { "prettier_local" },
+          scss = { "prettier_local" },
+        },
+        formatters = {
+          prettier_local = {
+            condition = function(ctx)
+              -- Prettier requires a filename to infer the parser
+              return ctx.filename ~= nil and ctx.filename ~= ''
+            end,
+            command = function(ctx)
+              return find_local_executable("prettier", ctx.filename) or "prettier"
+            end,
+            args = { "--stdin-filepath", "$FILENAME" },
+            stdin = true,
+            cwd = function(ctx)
+              -- Use project root as cwd for better config resolution
+              local root_file = vim.fs.find({ "package.json", ".prettierrc", ".prettierrc.js", ".prettierrc.json" }, { upward = true, path = ctx.filename })[1]
+              return root_file and vim.fs.dirname(root_file) or nil
+            end,
+          },
+          eslint_local = {
+            condition = function(ctx)
+              -- Only run if eslint config exists
+              local eslint_config = vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs", ".eslintrc.mjs", "eslint.config.js", "eslint.config.mjs" }, { upward = true, path = ctx.filename })[1]
+              if not eslint_config then
+                return false
+              end
+              -- Check if local eslint exists
+              local local_eslint_d = find_local_executable("eslint_d", ctx.filename)
+              local local_eslint = find_local_executable("eslint", ctx.filename)
+              return local_eslint_d ~= nil or local_eslint ~= nil
+            end,
+            command = function(ctx)
+              return find_local_executable("eslint_d", ctx.filename) or
+                     find_local_executable("eslint", ctx.filename) or
+                     "eslint"
+            end,
+            args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
+            stdin = true,
+            cwd = function(ctx)
+              -- Use project root as cwd for better config resolution
+              local root_file = vim.fs.find({ "package.json", ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js" }, { upward = true, path = ctx.filename })[1]
+              return root_file and vim.fs.dirname(root_file) or nil
+            end,
+          },
+        },
+        format_on_save = {
+          timeout_ms = 5000,
+          lsp_fallback = true,
+        },
+      })
+
+      -- Format on save for JS/TS files
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.json", "*.jsonc", "*.yaml", "*.yml", "*.md", "*.html", "*.css", "*.scss" },
+        callback = function(args)
+          require("conform").format({ bufnr = args.buf })
+        end,
+      })
     end,
   }
 })
@@ -483,7 +588,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
     map('<leader>f', function()
-      vim.lsp.buf.format({ async = true })
+      require("conform").format({ async = true, lsp_fallback = true })
     end, '[F]ormat document')
 
     -- Format on save for Ruby files
@@ -613,5 +718,74 @@ vim.api.nvim_create_autocmd('User', {
 vim.defer_fn(function()
   if pcall(require, 'mason-registry') then
     setup_typescript_lsp()
+  end
+end, 1000)
+
+-- ========================================================================== --
+-- ==                            ESLINT LSP CONFIG                          == --
+-- ========================================================================== --
+
+local function setup_eslint_lsp()
+  local function get_eslint_lsp_cmd()
+    local ok, mason_registry = pcall(require, 'mason-registry')
+    if ok and mason_registry.is_installed('eslint-lsp') then
+      local eslint_lsp = mason_registry.get_package('eslint-lsp')
+      if eslint_lsp then
+        local success, install_path = pcall(function() return eslint_lsp:get_install_path() end)
+        if success and install_path then
+          return { install_path .. '/node_modules/.bin/vscode-eslint-language-server', '--stdio' }
+        end
+      end
+    end
+    -- Fallback to global installation
+    return { 'vscode-eslint-language-server', '--stdio' }
+  end
+
+  local root_file = vim.fs.find({ '.git', 'package.json', '.eslintrc', '.eslintrc.js', '.eslintrc.json', '.eslintrc.cjs', '.eslintrc.mjs', 'eslint.config.js', 'eslint.config.mjs' }, { upward = true })[1]
+  local root_dir = root_file and vim.fs.dirname(root_file) or vim.fn.getcwd()
+  
+  -- Ensure root_dir is always a valid string
+  if not root_dir or root_dir == '' then
+    root_dir = vim.fn.getcwd()
+  end
+
+  -- Only enable if we have a valid root_dir
+  if root_dir and root_dir ~= '' and vim.fn.isdirectory(root_dir) == 1 then
+    vim.lsp.config('eslint', {
+      cmd = get_eslint_lsp_cmd(),
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      root_dir = root_dir,
+      settings = {
+        eslint = {
+          validate = 'on',
+          codeAction = {
+            disableRuleComment = {
+              enable = true,
+              location = 'separateLine',
+            },
+            showDocumentation = {
+              enable = true,
+            },
+          },
+        },
+      },
+    })
+
+    -- Enable ESLint LSP
+    vim.lsp.enable('eslint')
+  end
+end
+
+-- Set up ESLint LSP after Mason is ready
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MasonUpdateComplete',
+  callback = setup_eslint_lsp,
+  once = true,
+})
+
+-- Also try to set up immediately (in case Mason is already ready)
+vim.defer_fn(function()
+  if pcall(require, 'mason-registry') then
+    setup_eslint_lsp()
   end
 end, 1000)
