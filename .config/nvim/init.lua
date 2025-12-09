@@ -145,6 +145,10 @@ require('lazy').setup({
   'tpope/vim-vinegar',
 
   'tpope/vim-rails',
+  'tpope/vim-dispatch',
+
+  'AndrewRadev/splitjoin.vim',
+  'jgdavey/vim-blockle',
 
   -- Editing enhancements
   'christoomey/vim-tmux-navigator',
@@ -153,11 +157,55 @@ require('lazy').setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = { "ruby", "lua", "vim", "vimdoc" },
         auto_install = true,
         highlight = { enable = true },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              -- Ruby blocks
+              ["ab"] = "@block.outer",
+              ["ib"] = "@block.inner",
+              -- Functions/methods
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              -- Classes
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              ["]b"] = "@block.outer",
+              ["]f"] = "@function.outer",
+              ["]c"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]B"] = "@block.outer",
+              ["]F"] = "@function.outer",
+              ["]C"] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[b"] = "@block.outer",
+              ["[f"] = "@function.outer",
+              ["[c"] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[B"] = "@block.outer",
+              ["[F"] = "@function.outer",
+              ["[C"] = "@class.outer",
+            },
+          },
+        },
       })
     end,
   },
@@ -359,16 +407,22 @@ require('lazy').setup({
               return { "bundle", "exec", "rspec" }
             end,
           }),
+          output_panel = {
+            open = 'vsplit | vertical resize 80'
+          },
         },
       })
 
-      -- Keybindings (optional but recommended)
       vim.keymap.set('n', '<leader>tn', require('neotest').run.run, { desc = '[T]est [N]earest' })
       vim.keymap.set('n', '<leader>tf', function()
         require('neotest').run.run(vim.fn.expand('%'))
       end, { desc = '[T]est [F]ile' })
       vim.keymap.set('n', '<leader>ts', require('neotest').summary.toggle, { desc = '[T]est [S]ummary' })
       vim.keymap.set('n', '<leader>to', require('neotest').output.open, { desc = '[T]est [O]utput' })
+      vim.keymap.set('n', '<leader>tp', require('neotest').output_panel.open, { desc = '[T]est Output [P]anel' })
+      vim.keymap.set('n', '<leader>tS', function()
+        require("neotest").run.run(vim.fn.getcwd())
+      end, { desc = '[T]est [S]uite' })
     end,
   },
 
