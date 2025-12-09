@@ -537,8 +537,33 @@ require('lazy').setup({
     config = function()
       local prettier = require("prettier")
 
+      -- Helper to find prettier executable (prefers prettierd, then local, then global)
+      local function find_prettier()
+        -- Try prettierd first
+        if vim.fn.executable("prettierd") == 1 then
+          return "prettierd"
+        end
+        
+        -- Try local prettierd
+        local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true })[1]
+        if root_file then
+          local root = vim.fs.dirname(root_file)
+          local local_prettierd = root .. "/node_modules/.bin/prettierd"
+          if vim.fn.executable(local_prettierd) == 1 then
+            return local_prettierd
+          end
+          local local_prettier = root .. "/node_modules/.bin/prettier"
+          if vim.fn.executable(local_prettier) == 1 then
+            return local_prettier
+          end
+        end
+        
+        -- Fallback to global prettier
+        return "prettier"
+      end
+
       prettier.setup({
-        bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
+        bin = find_prettier(),
         filetypes = {
           "css",
           "graphql",
