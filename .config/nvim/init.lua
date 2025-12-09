@@ -125,6 +125,248 @@ vim.api.nvim_create_user_command('CheckLSPClients', function()
   end
 end, {})
 
+-- Command to check null-ls sources
+vim.api.nvim_create_user_command('CheckNullLSSources', function()
+  local ok, null_ls = pcall(require, "null-ls")
+  if not ok then
+    vim.notify("null-ls not available", vim.log.levels.ERROR)
+    return
+  end
+  
+  local sources = null_ls.get_sources()
+  vim.notify(string.format("null-ls sources: %d total", #sources), vim.log.levels.INFO)
+  
+  local formatting_sources = {}
+  local diagnostic_sources = {}
+  
+  for _, source in ipairs(sources) do
+    if source.method == null_ls.methods.FORMATTING then
+      table.insert(formatting_sources, {
+        name = source.name,
+        filetypes = source.filetypes or {},
+      })
+    elseif source.method == null_ls.methods.DIAGNOSTICS then
+      table.insert(diagnostic_sources, {
+        name = source.name,
+        filetypes = source.filetypes or {},
+      })
+    end
+  end
+  
+  vim.notify(string.format("Formatting sources: %d", #formatting_sources), vim.log.levels.INFO)
+  for _, src in ipairs(formatting_sources) do
+    vim.notify(string.format("  - %s (filetypes: %s)", src.name, table.concat(src.filetypes, ", ")), vim.log.levels.INFO)
+  end
+  
+  vim.notify(string.format("Diagnostic sources: %d", #diagnostic_sources), vim.log.levels.INFO)
+  for _, src in ipairs(diagnostic_sources) do
+    vim.notify(string.format("  - %s (filetypes: %s)", src.name, table.concat(src.filetypes, ", ")), vim.log.levels.INFO)
+  end
+end, {})
+
+-- Command to test ESLint formatting manually
+vim.api.nvim_create_user_command('TestESLintFormat', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  local filetype = vim.bo.filetype
+  
+  vim.notify(string.format("Testing ESLint format for: %s (filetype: %s)", filename or "unnamed", filetype), vim.log.levels.INFO)
+  
+  -- Check if null-ls is attached
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  local null_ls_client = nil
+  for _, client in ipairs(clients) do
+    if client.name == "null-ls" then
+      null_ls_client = client
+      break
+    end
+  end
+  
+  if not null_ls_client then
+    vim.notify("ERROR: null-ls client not attached to buffer", vim.log.levels.ERROR)
+    return
+  end
+  
+  vim.notify("null-ls client found, checking sources...", vim.log.levels.INFO)
+  
+  -- Check sources
+  local null_ls = require("null-ls")
+  local sources = null_ls.get_sources()
+  local eslint_formatting = nil
+  
+  -- Look for any ESLint formatting source (builtin or custom)
+  for _, source in ipairs(sources) do
+    if source.method == null_ls.methods.FORMATTING then
+      local name = source.name or ""
+      if name == "eslint_fix" or name == "eslint_d" or name == "eslint" then
+        eslint_formatting = source
+        vim.notify(string.format("Found ESLint formatting source: %s", name), vim.log.levels.INFO)
+        break
+      end
+    end
+  end
+  
+  if not eslint_formatting then
+    vim.notify("ERROR: ESLint formatting source not found. Available formatting sources:", vim.log.levels.ERROR)
+    for _, source in ipairs(sources) do
+      if source.method == null_ls.methods.FORMATTING then
+        vim.notify(string.format("  - %s", source.name or "unknown"), vim.log.levels.INFO)
+      end
+    end
+    return
+  end
+  
+  vim.notify(string.format("ESLint source found (%s), checking runtime condition...", eslint_formatting.name), vim.log.levels.INFO)
+  
+  -- Check runtime condition (custom sources use generator_opts.runtime_condition, builtins use condition)
+  local should_run = true
+  if eslint_formatting.generator_opts and eslint_formatting.generator_opts.runtime_condition then
+    local params = {
+      bufnr = bufnr,
+      bufname = filename,
+      filename = filename,
+    }
+    should_run = eslint_formatting.generator_opts.runtime_condition(params)
+    vim.notify(string.format("Runtime condition (generator_opts) result: %s", should_run and "PASS" or "FAIL"), vim.log.levels.INFO)
+  elseif eslint_formatting._opts and eslint_formatting._opts.condition then
+    -- Builtin formatters use condition
+    should_run = eslint_formatting._opts.condition()
+    vim.notify(string.format("Runtime condition (builtin) result: %s", should_run and "PASS" or "FAIL"), vim.log.levels.INFO)
+  else
+    vim.notify("No runtime condition found, will attempt to run", vim.log.levels.INFO)
+  end
+  
+  if not should_run then
+    vim.notify("Runtime condition failed - ESLint won't run. Check eslint config and executable.", vim.log.levels.WARN)
+    return
+  end
+  
+  vim.notify("Attempting to format with ESLint...", vim.log.levels.INFO)
+  
+  -- Try to format
+  local success, err = pcall(function()
+    vim.lsp.buf.format({
+      bufnr = bufnr,
+      filter = function(client)
+        return client.name == "null-ls"
+      end,
+      async = false,
+    })
+  end)
+  
+  if success then
+    vim.notify("ESLint format completed successfully", vim.log.levels.INFO)
+  else
+    vim.notify(string.format("ESLint format error: %s", err), vim.log.levels.ERROR)
+  end
+end, {})
+
+-- Command to manually test ESLint autofix directly (bypasses null-ls)
+vim.api.nvim_create_user_command('TestESLintDirect', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  
+  if not filename or filename == "" then
+    vim.notify("No file name", vim.log.levels.ERROR)
+    return
+  end
+  
+  -- Find eslint
+  local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
+  if not root_file then
+    vim.notify("No package.json or node_modules found", vim.log.levels.ERROR)
+    return
+  end
+  
+  local root = vim.fs.dirname(root_file)
+  local eslint_cmd = root .. "/node_modules/.bin/eslint"
+  
+  if vim.fn.executable(eslint_cmd) ~= 1 then
+    vim.notify(string.format("ESLint not found at: %s", eslint_cmd), vim.log.levels.ERROR)
+    return
+  end
+  
+  -- Get relative path from project root
+  local relative_path = filename:gsub("^" .. root .. "/", "")
+  
+  vim.notify(string.format("Running: %s --fix %s (from %s)", eslint_cmd, relative_path, root), vim.log.levels.INFO)
+  
+  -- Change to project root and run ESLint
+  local old_cwd = vim.fn.getcwd()
+  vim.fn.chdir(root)
+  
+  -- Run ESLint with relative path
+  local result = vim.fn.system({ eslint_cmd, "--fix", relative_path })
+  local exit_code = vim.v.shell_error
+  
+  -- Restore original directory
+  vim.fn.chdir(old_cwd)
+  
+  if exit_code == 0 then
+    vim.notify("ESLint autofix completed successfully", vim.log.levels.INFO)
+    -- Reload buffer to see changes
+    vim.cmd("edit")
+  else
+    vim.notify(string.format("ESLint exited with code %d: %s", exit_code, result), vim.log.levels.ERROR)
+  end
+end, {})
+
+-- Test ESLint with stdin (like null-ls does)
+vim.api.nvim_create_user_command('TestESLintStdin', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  
+  if not filename or filename == "" then
+    vim.notify("No file name", vim.log.levels.ERROR)
+    return
+  end
+  
+  -- Find eslint
+  local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
+  if not root_file then
+    vim.notify("No package.json or node_modules found", vim.log.levels.ERROR)
+    return
+  end
+  
+  local root = vim.fs.dirname(root_file)
+  local eslint_cmd = root .. "/node_modules/.bin/eslint"
+  
+  if vim.fn.executable(eslint_cmd) ~= 1 then
+    vim.notify(string.format("ESLint not found at: %s", eslint_cmd), vim.log.levels.ERROR)
+    return
+  end
+  
+  -- Get buffer content
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+  local content = table.concat(lines, "\n")
+  
+  vim.notify(string.format("Testing ESLint with stdin for: %s", filename), vim.log.levels.INFO)
+  
+  -- Change to project root
+  local old_cwd = vim.fn.getcwd()
+  vim.fn.chdir(root)
+  
+  -- Run ESLint with stdin
+  local result = vim.fn.system({ eslint_cmd, "--fix", "--stdin", "--stdin-filename", filename }, content)
+  local exit_code = vim.v.shell_error
+  
+  -- Restore original directory
+  vim.fn.chdir(old_cwd)
+  
+  if exit_code <= 1 then
+    if result and #result > 0 then
+      vim.notify(string.format("ESLint returned fixed code (%d chars). Exit code: %d", #result, exit_code), vim.log.levels.INFO)
+      -- Show first 200 chars of output
+      local preview = result:sub(1, 200)
+      vim.notify(string.format("Output preview: %s...", preview), vim.log.levels.INFO)
+    else
+      vim.notify(string.format("ESLint returned no output. Exit code: %d", exit_code), vim.log.levels.WARN)
+    end
+  else
+    vim.notify(string.format("ESLint exited with code %d: %s", exit_code, result), vim.log.levels.ERROR)
+  end
+end, {})
+
 local group = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 
 -- [[ Highlight on yank ]]
@@ -669,26 +911,11 @@ require('lazy').setup({
         return "eslint"
       end
 
-      -- Check if eslint config exists
-      local function has_eslint_config()
-        local eslint_config = vim.fs.find({
-          ".eslintrc",
-          ".eslintrc.js",
-          ".eslintrc.json",
-          ".eslintrc.cjs",
-          ".eslintrc.mjs",
-          "eslint.config.js",
-          "eslint.config.mjs"
-        }, { upward = true })[1]
-        
-        return eslint_config ~= nil
-      end
-
       local sources = {}
 
-      if has_eslint_config() then
-        -- ESLint diagnostics using custom source
-        table.insert(sources, helpers.make_builtin({
+      -- Always register ESLint sources (runtime_condition will handle whether to run)
+      -- ESLint diagnostics using custom source
+      table.insert(sources, helpers.make_builtin({
           name = "eslint_diagnostics",
           meta = {
             url = "https://eslint.org/",
@@ -814,56 +1041,208 @@ require('lazy').setup({
           },
           factory = helpers.generator_factory,
         }))
-        
-        -- ESLint formatting (autofix on save)
-        table.insert(sources, helpers.make_builtin({
-          name = "eslint_fix",
-          meta = {
-            url = "https://eslint.org/",
-            description = "ESLint autofix",
-          },
-          method = null_ls.methods.FORMATTING,
-          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          generator_opts = {
-            -- Use relative path - cwd will be set to project root where node_modules exists
-            command = "node_modules/.bin/eslint",
-            runtime_condition = function(params)
-              -- Only run if local eslint exists in project
-              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
-              local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
-              if root_file then
-                local root = vim.fs.dirname(root_file)
-                local local_eslint = root .. "/node_modules/.bin/eslint"
-                return vim.fn.executable(local_eslint) == 1
-              end
-              return false
-            end,
-            args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
-            to_stdin = true,
-            format = "raw",
-            cwd = function(params)
-              -- Find project root (where eslint config is) - this is critical for plugin resolution
-              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
-              local root_file = vim.fs.find({
+      
+      -- ESLint formatting (autofix on save)
+      -- Try using builtin eslint formatter first, then fall back to custom
+      local eslint_formatting_source = nil
+      
+      -- Check if builtin eslint formatter exists
+      vim.notify("Checking for builtin ESLint formatters...", vim.log.levels.INFO)
+      if builtins.formatting then
+        vim.notify(string.format("builtins.formatting exists, checking eslint_d and eslint..."), vim.log.levels.INFO)
+        if builtins.formatting.eslint_d then
+          vim.notify("Found builtin eslint_d formatter", vim.log.levels.INFO)
+          -- Use builtin eslint_d and configure it
+          eslint_formatting_source = builtins.formatting.eslint_d.with({
+            condition = function(utils)
+              return utils.root_has_file({
                 ".eslintrc",
                 ".eslintrc.js",
                 ".eslintrc.json",
                 ".eslintrc.cjs",
                 ".eslintrc.mjs",
                 "eslint.config.js",
-                "eslint.config.mjs",
-                "package.json"
-              }, { upward = true, path = filename })[1]
-              return root_file and vim.fs.dirname(root_file) or nil
+                "eslint.config.mjs"
+              })
             end,
-          },
-          factory = helpers.formatter_factory,
-        }))
+            prefer_local = "node_modules/.bin",
+          })
+          vim.notify("Using builtin eslint_d formatter", vim.log.levels.INFO)
+        elseif builtins.formatting.eslint then
+          vim.notify("Found builtin eslint formatter", vim.log.levels.INFO)
+          -- Use builtin eslint and configure it
+          eslint_formatting_source = builtins.formatting.eslint.with({
+            condition = function(utils)
+              return utils.root_has_file({
+                ".eslintrc",
+                ".eslintrc.js",
+                ".eslintrc.json",
+                ".eslintrc.cjs",
+                ".eslintrc.mjs",
+                "eslint.config.js",
+                "eslint.config.mjs"
+              })
+            end,
+            prefer_local = "node_modules/.bin",
+          })
+          vim.notify("Using builtin eslint formatter", vim.log.levels.INFO)
+        else
+          vim.notify("No builtin eslint or eslint_d formatter found", vim.log.levels.INFO)
+        end
+      else
+        vim.notify("builtins.formatting does not exist", vim.log.levels.WARN)
+      end
+      
+      if not eslint_formatting_source then
+        vim.notify("Creating custom ESLint formatter...", vim.log.levels.INFO)
+        -- Fall back to custom formatter using make_builtin
+        local success, result = pcall(function()
+          return helpers.make_builtin({
+            name = "eslint_fix",
+            meta = {
+              url = "https://eslint.org/",
+              description = "ESLint autofix",
+            },
+            method = null_ls.methods.FORMATTING,
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+            generator_opts = {
+              command = function(params)
+                local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+                return find_eslint(filename)
+              end,
+              runtime_condition = function(params)
+                local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+                local root_file = vim.fs.find({
+                  ".eslintrc",
+                  ".eslintrc.js",
+                  ".eslintrc.json",
+                  ".eslintrc.cjs",
+                  ".eslintrc.mjs",
+                  "eslint.config.js",
+                  "eslint.config.mjs"
+                }, { upward = true, path = filename })[1]
+                
+                if root_file then
+                  local eslint_cmd = find_eslint(filename)
+                  local executable = eslint_cmd and vim.fn.executable(eslint_cmd) == 1
+                  vim.notify(string.format("[ESLint runtime_condition] filename=%s, config=%s, cmd=%s, executable=%s, result=%s", 
+                    filename or "nil", 
+                    root_file or "nil", 
+                    eslint_cmd or "nil", 
+                    executable and "YES" or "NO",
+                    executable and "PASS" or "FAIL"
+                  ), vim.log.levels.DEBUG)
+                  return executable
+                else
+                  vim.notify(string.format("[ESLint runtime_condition] No eslint config found for: %s", filename or "nil"), vim.log.levels.DEBUG)
+                end
+                return false
+              end,
+              -- ESLint doesn't support --fix with --stdin, so we use a temp file approach
+              -- Write stdin to temp file, run ESLint --fix, then output the result
+              command = function(params)
+                return "sh"
+              end,
+              args = function(params)
+                local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+                local eslint_cmd = find_eslint(filename)
+                local ext = filename:match("%.([^%.]+)$") or "tsx"
+                -- Get project root for temp file location
+                local root_file = vim.fs.find({
+                  ".eslintrc",
+                  ".eslintrc.js",
+                  ".eslintrc.json",
+                  ".eslintrc.cjs",
+                  ".eslintrc.mjs",
+                  "eslint.config.js",
+                  "eslint.config.mjs",
+                  "package.json"
+                }, { upward = true, path = filename })[1]
+                local project_root = root_file and vim.fs.dirname(root_file) or "/tmp"
+                -- Shell script: write stdin to temp file in project dir, fix it, output ONLY the file content, clean up
+                -- Redirect ESLint's stdout/stderr to /dev/null, then output only the fixed file
+                local script = string.format(
+                  'TMP=$(mktemp "%s/eslint-fix-XXXXXX.%s") && cat > "$TMP" && "%s" --fix "$TMP" >/dev/null 2>&1 && cat "$TMP" && rm -f "$TMP"',
+                  project_root,
+                  ext,
+                  eslint_cmd:gsub('"', '\\"') -- Escape quotes in path
+                )
+                return { "-c", script }
+              end,
+              to_stdin = true,
+              check_exit_code = function(code)
+                -- ESLint exits with 0 (no issues), 1 (issues found but some fixed), or 2 (fatal error)
+                -- We should accept 0 and 1 (fixes applied)
+                return code <= 1
+              end,
+              cwd = function(params)
+                local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+                local root_file = vim.fs.find({
+                  ".eslintrc",
+                  ".eslintrc.js",
+                  ".eslintrc.json",
+                  ".eslintrc.cjs",
+                  ".eslintrc.mjs",
+                  "eslint.config.js",
+                  "eslint.config.mjs",
+                  "package.json"
+                }, { upward = true, path = filename })[1]
+                return root_file and vim.fs.dirname(root_file) or nil
+              end,
+            },
+            factory = helpers.formatter_factory,
+          })
+        end)
+        
+        if success and result then
+          eslint_formatting_source = result
+          vim.notify("Using custom eslint formatter", vim.log.levels.INFO)
+        else
+          vim.notify(string.format("ERROR: Failed to create ESLint formatting source: %s", tostring(result)), vim.log.levels.ERROR)
+        end
+      end
+      
+      if eslint_formatting_source then
+        -- Debug: Inspect source structure
+        vim.notify(string.format("ESLint source structure - name: %s, method: %s, filetypes: %s", 
+          eslint_formatting_source.name or "nil",
+          eslint_formatting_source.method and tostring(eslint_formatting_source.method) or "nil",
+          eslint_formatting_source.filetypes and table.concat(eslint_formatting_source.filetypes, ",") or "nil"
+        ), vim.log.levels.INFO)
+        
+        table.insert(sources, eslint_formatting_source)
+        vim.notify(string.format("ESLint formatting source registered: %s", eslint_formatting_source.name or "unknown"), vim.log.levels.INFO)
       end
 
+      vim.notify(string.format("Registering %d null-ls sources", #sources), vim.log.levels.INFO)
+      
+      -- Log all sources being registered
+      for i, source in ipairs(sources) do
+        local source_info = string.format("Source %d: name=%s, method=%s, filetypes=%s", 
+          i, 
+          source.name or "nil",
+          source.method and tostring(source.method) or "nil",
+          source.filetypes and table.concat(source.filetypes, ",") or "nil"
+        )
+        vim.notify(source_info, vim.log.levels.INFO)
+      end
+      
       null_ls.setup({
         sources = sources,
+        -- Increase timeout for ESLint which can be slow
+        default_timeout = 30000, -- 30 seconds
       })
+      
+      -- Verify sources were registered
+      vim.defer_fn(function()
+        local registered_sources = null_ls.get_sources()
+        vim.notify(string.format("null-ls setup completed. %d sources registered.", #registered_sources), vim.log.levels.INFO)
+        for _, src in ipairs(registered_sources) do
+          if src.method == null_ls.methods.FORMATTING then
+            vim.notify(string.format("  Formatting: %s (filetypes: %s)", src.name, table.concat(src.filetypes or {}, ",")), vim.log.levels.INFO)
+          end
+        end
+      end, 100)
     end,
   }
 })
@@ -872,24 +1251,124 @@ require('lazy').setup({
 -- ==                    PRETTIER + ESLINT FORMAT ON SAVE                 == --
 -- ========================================================================== --
 
--- Format on save for JS/TS files: Prettier first, then ESLint autofix
+-- Format on save for JS/TS files: ESLint autofix first, then Prettier
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
   callback = function(args)
     local bufnr = args.buf
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    
+    -- Debug: Log format-on-save trigger
+    vim.notify(string.format("[FormatOnSave] Triggered for: %s", filename or "unnamed"), vim.log.levels.DEBUG)
     
     -- Run ESLint autofix via null-ls
-    vim.lsp.buf.format({
-      bufnr = bufnr,
-      filter = function(client)
-        return client.name == "null-ls"
-      end,
-      async = false,
-    })
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+    local has_null_ls = false
+    local null_ls_client = nil
+    for _, client in ipairs(clients) do
+      if client.name == "null-ls" then
+        has_null_ls = true
+        null_ls_client = client
+        break
+      end
+    end
+    
+    vim.notify(string.format("[FormatOnSave] Found %d LSP clients, null-ls: %s", #clients, has_null_ls and "YES" or "NO"), vim.log.levels.DEBUG)
+    
+    if has_null_ls then
+      -- Check null-ls sources using the proper API
+      local null_ls = require("null-ls")
+      local filetype = vim.bo[bufnr].filetype
+      
+      vim.notify(string.format("[FormatOnSave] Checking sources for filetype: %s", filetype), vim.log.levels.DEBUG)
+      
+      -- Get formatting sources directly using the method filter
+      local formatting_sources = null_ls.get_sources({ method = null_ls.methods.FORMATTING })
+      local all_sources = null_ls.get_sources()
+      
+      vim.notify(string.format("[FormatOnSave] Found %d formatting sources (out of %d total)", #formatting_sources, #all_sources), vim.log.levels.DEBUG)
+      
+      -- Check which formatting sources match this filetype
+      -- Filetypes are stored as a table with boolean values, not an array
+      local matching_sources = {}
+      for _, source in ipairs(formatting_sources) do
+        local source_name = source.name or "unknown"
+        local source_filetypes = source.filetypes or {}
+        local matches = false
+        
+        -- Check if filetype is in the filetypes table (it's a table with boolean values)
+        if type(source_filetypes) == "table" then
+          matches = source_filetypes[filetype] == true
+        end
+        
+        if matches then
+          table.insert(matching_sources, source_name)
+        end
+        
+        vim.notify(string.format("[FormatOnSave]   Formatting source: %s (matches %s: %s)", 
+          source_name,
+          filetype,
+          matches and "YES" or "NO"
+        ), vim.log.levels.DEBUG)
+      end
+      
+      if #matching_sources > 0 then
+        vim.notify(string.format("[FormatOnSave] Matching formatting sources: %s", table.concat(matching_sources, ", ")), vim.log.levels.DEBUG)
+      end
+      
+      -- Check if null-ls can format this buffer
+      local can_format = null_ls_client.supports_method("textDocument/formatting")
+      vim.notify(string.format("[FormatOnSave] null-ls supports formatting: %s", can_format and "YES" or "NO"), vim.log.levels.DEBUG)
+      
+      if not can_format then
+        vim.notify("[FormatOnSave] null-ls does not support formatting for this buffer", vim.log.levels.WARN)
+      end
+      
+      -- Try to format - null-ls will handle source selection automatically
+      local success, err = pcall(function()
+        -- Get buffer content before formatting to detect changes
+        local lines_before = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        
+        -- Format with null-ls (includes both eslint_fix and prettier)
+        -- Note: prettier source is auto-detected by null-ls, not explicitly registered
+        vim.lsp.buf.format({
+          bufnr = bufnr,
+          filter = function(client)
+            return client.name == "null-ls"
+          end,
+          async = false,
+        })
+        
+        -- Check if content changed
+        local lines_after = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        local changed = #lines_before ~= #lines_after
+        if not changed then
+          for i, line in ipairs(lines_before) do
+            if lines_after[i] ~= line then
+              changed = true
+              break
+            end
+          end
+        end
+        
+        if changed then
+          vim.notify("[FormatOnSave] ESLint autofix completed - buffer was modified", vim.log.levels.INFO)
+        else
+          vim.notify("[FormatOnSave] ESLint autofix completed - no changes detected", vim.log.levels.DEBUG)
+        end
+      end)
+      
+      if not success then
+        vim.notify(string.format("[FormatOnSave] Format error: %s", err), vim.log.levels.ERROR)
+      end
+    else
+      vim.notify("[FormatOnSave] null-ls client not found, skipping ESLint autofix", vim.log.levels.WARN)
+    end
 
     -- Run Prettier
-    local prettier = require("prettier")
-    prettier.format()
+    -- local prettier = require("prettier")
+    -- prettier.format()
+    -- vim.notify("[FormatOnSave] Prettier completed", vim.log.levels.DEBUG)
   end,
 })
 
