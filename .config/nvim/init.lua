@@ -641,38 +641,31 @@ require('lazy').setup({
 
       -- Helper to find eslint executable per-file (prefers local eslint for plugin support, then eslint_d)
       local function find_eslint(filename)
-        vim.notify("[ESLint null-ls] Finding ESLint executable for: " .. (filename or "unknown"), vim.log.levels.DEBUG)
-        
         -- Prefer local eslint first (has access to project's node_modules plugins)
         -- Find from the file's location, not current working directory
         local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
         if root_file then
           local root = vim.fs.dirname(root_file)
-          vim.notify("[ESLint null-ls] Found project root: " .. root, vim.log.levels.DEBUG)
           
           -- Try local eslint first (best for plugin support)
           local local_eslint = root .. "/node_modules/.bin/eslint"
           if vim.fn.executable(local_eslint) == 1 then
-            vim.notify("[ESLint null-ls] Found local eslint: " .. local_eslint .. " (preferred for plugin support)", vim.log.levels.INFO)
             return local_eslint
           end
           
           -- Try local eslint_d (might work with plugins if run from project root)
           local local_eslint_d = root .. "/node_modules/.bin/eslint_d"
           if vim.fn.executable(local_eslint_d) == 1 then
-            vim.notify("[ESLint null-ls] Found local eslint_d: " .. local_eslint_d, vim.log.levels.INFO)
             return local_eslint_d
           end
         end
         
         -- Fallback to global eslint_d
         if vim.fn.executable("eslint_d") == 1 then
-          vim.notify("[ESLint null-ls] Using global eslint_d (may not have access to project plugins)", vim.log.levels.WARN)
           return "eslint_d"
         end
         
         -- Final fallback to global eslint
-        vim.notify("[ESLint null-ls] Using global eslint (fallback, may not have access to project plugins)", vim.log.levels.WARN)
         return "eslint"
       end
 
@@ -688,20 +681,12 @@ require('lazy').setup({
           "eslint.config.mjs"
         }, { upward = true })[1]
         
-        if eslint_config then
-          vim.notify("[ESLint null-ls] Found ESLint config: " .. eslint_config, vim.log.levels.INFO)
-        else
-          vim.notify("[ESLint null-ls] No ESLint config found", vim.log.levels.WARN)
-        end
-        
         return eslint_config ~= nil
       end
 
       local sources = {}
 
       if has_eslint_config() then
-        vim.notify("[ESLint null-ls] Setting up ESLint diagnostics", vim.log.levels.INFO)
-        
         -- ESLint diagnostics using custom source
         table.insert(sources, helpers.make_builtin({
           name = "eslint_diagnostics",
@@ -759,47 +744,28 @@ require('lazy').setup({
               }, { upward = true, path = filename })[1]
               
               local cwd = root_file and vim.fs.dirname(root_file) or nil
-              vim.schedule(function()
-                vim.notify("[ESLint null-ls] Using cwd: " .. (cwd or "nil"), vim.log.levels.DEBUG)
-              end)
               return cwd
             end,
             check_exit_code = function(code)
-              vim.schedule(function()
-                vim.notify("[ESLint null-ls] Exit code: " .. code, vim.log.levels.DEBUG)
-              end)
               return code <= 1 -- 0 = no issues, 1 = issues found
             end,
             on_output = function(params, done)
               local diagnostics = {}
               local output = params.output
               
-              vim.schedule(function()
-                vim.notify("[ESLint null-ls] on_output called, output type: " .. type(output), vim.log.levels.DEBUG)
-              end)
-              
               if not output then
-                vim.schedule(function()
-                  vim.notify("[ESLint null-ls] No output received", vim.log.levels.DEBUG)
-                end)
                 if done then
                   done(diagnostics)
                 end
                 return
               end
               
-              -- Parse JSON if it's a string (null-ls might auto-parse, but handle both cases)
+              -- Parse JSON if it's a string
               if type(output) == "string" then
                 local ok, parsed = pcall(vim.json.decode, output)
                 if ok and parsed then
                   output = parsed
-                  vim.schedule(function()
-                    vim.notify("[ESLint null-ls] Parsed JSON string", vim.log.levels.DEBUG)
-                  end)
                 else
-                  vim.schedule(function()
-                    vim.notify("[ESLint null-ls] Failed to parse JSON: " .. (output:sub(1, 100) or "empty"), vim.log.levels.WARN)
-                  end)
                   if done then
                     done(diagnostics)
                   end
@@ -809,17 +775,9 @@ require('lazy').setup({
               
               -- ESLint JSON output is an array of file results
               if type(output) == "table" then
-                vim.schedule(function()
-                  vim.notify("[ESLint null-ls] Processing table with " .. #output .. " file(s)", vim.log.levels.DEBUG)
-                end)
-                
                 for i, result in ipairs(output) do
                   if result and type(result) == "table" then
                     if result.messages and type(result.messages) == "table" then
-                      vim.schedule(function()
-                        vim.notify("[ESLint null-ls] Processing " .. #result.messages .. " messages from file " .. i, vim.log.levels.DEBUG)
-                      end)
-                      
                       for j, message in ipairs(result.messages) do
                         if message.severity and message.severity > 0 then
                           -- Convert to 0-indexed (Neovim uses 0-indexed)
@@ -844,22 +802,10 @@ require('lazy').setup({
                           })
                         end
                       end
-                    else
-                      vim.schedule(function()
-                        vim.notify("[ESLint null-ls] File " .. i .. " has no messages field", vim.log.levels.DEBUG)
-                      end)
                     end
                   end
                 end
-              else
-                vim.schedule(function()
-                  vim.notify("[ESLint null-ls] Output is not a table, type: " .. type(output), vim.log.levels.WARN)
-                end)
               end
-              
-              vim.schedule(function()
-                vim.notify("[ESLint null-ls] Generated " .. #diagnostics .. " diagnostics", vim.log.levels.DEBUG)
-              end)
               
               if done then
                 done(diagnostics)
@@ -913,16 +859,11 @@ require('lazy').setup({
           },
           factory = helpers.formatter_factory,
         }))
-      else
-        vim.notify("[ESLint null-ls] No ESLint config found, skipping setup", vim.log.levels.WARN)
       end
 
-      vim.notify("[ESLint null-ls] Setting up null-ls with " .. #sources .. " source(s)", vim.log.levels.INFO)
       null_ls.setup({
-        debug = true,  -- Enable debug mode to see what's happening
         sources = sources,
       })
-      vim.notify("[ESLint null-ls] null-ls setup complete", vim.log.levels.INFO)
     end,
   }
 })
