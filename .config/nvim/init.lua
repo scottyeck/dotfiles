@@ -90,6 +90,41 @@ vim.keymap.set('n', '<leader>qk', '<cmd>cprev<CR>')
 
 vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {})
 
+-- Debug command to check diagnostics
+vim.api.nvim_create_user_command('CheckDiagnostics', function()
+  local diags = vim.diagnostic.get(0)
+  local eslint_diags = {}
+  local ts_diags = {}
+  for _, diag in ipairs(diags) do
+    if diag.source == "eslint" or (diag.code and tostring(diag.code):match("import")) then
+      table.insert(eslint_diags, diag)
+    elseif diag.source == "typescript" or diag.source == "ts" then
+      table.insert(ts_diags, diag)
+    end
+  end
+  vim.notify(string.format("Total diagnostics: %d, TypeScript: %d, ESLint/import: %d", #diags, #ts_diags, #eslint_diags), vim.log.levels.INFO)
+  if #eslint_diags > 0 then
+    for _, diag in ipairs(eslint_diags) do
+      vim.notify(string.format("  ESLint Line %d: %s (%s)", diag.lnum + 1, diag.message, diag.code or "no code"), vim.log.levels.INFO)
+    end
+  end
+  if #ts_diags > 0 then
+    for _, diag in ipairs(ts_diags) do
+      vim.notify(string.format("  TypeScript Line %d: %s (%s)", diag.lnum + 1, diag.message, diag.code or "no code"), vim.log.levels.INFO)
+    end
+  end
+end, {})
+
+-- Command to check active LSP clients
+vim.api.nvim_create_user_command('CheckLSPClients', function()
+  local clients = vim.lsp.get_active_clients()
+  local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+  vim.notify(string.format("Active clients: %d, Buffer clients: %d", #clients, #buf_clients), vim.log.levels.INFO)
+  for _, client in ipairs(buf_clients) do
+    vim.notify(string.format("  - %s (id: %d)", client.name, client.id), vim.log.levels.INFO)
+  end
+end, {})
+
 local group = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 
 -- [[ Highlight on yank ]]
@@ -455,7 +490,16 @@ require('lazy').setup({
     priority = 1000,
     config = function()
         require("tiny-inline-diagnostic").setup()
-        vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
+        -- Configure diagnostics to show in signcolumn and via tiny-inline-diagnostic
+        vim.diagnostic.config({
+          virtual_text = false, -- Disable Neovim's default virtual text (tiny-inline-diagnostic handles this)
+          signs = true, -- Show signs in signcolumn
+          underline = true, -- Underline errors
+          update_in_insert = false, -- Don't update diagnostics while typing
+          severity_sort = true, -- Sort by severity
+          -- Show diagnostics from all sources (TypeScript LSP, ESLint, etc.)
+          sources = nil, -- nil means show all sources
+        })
     end,
   },
 
@@ -584,13 +628,6 @@ require('lazy').setup({
         end,
       })
 
-      -- Format on save for JS/TS files
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-        callback = function()
-          prettier.format()
-        end,
-      })
     end,
   },
 
@@ -600,29 +637,42 @@ require('lazy').setup({
     config = function()
       local null_ls = require("null-ls")
       local helpers = require("null-ls.helpers")
+      local builtins = null_ls.builtins
 
-      -- Helper to find eslint executable (prefers eslint_d, then local, then global)
-      local function find_eslint()
-        -- Try eslint_d first
+      -- Helper to find eslint executable per-file (prefers local eslint for plugin support, then eslint_d)
+      local function find_eslint(filename)
+        vim.notify("[ESLint null-ls] Finding ESLint executable for: " .. (filename or "unknown"), vim.log.levels.DEBUG)
+        
+        -- Prefer local eslint first (has access to project's node_modules plugins)
+        -- Find from the file's location, not current working directory
+        local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
+        if root_file then
+          local root = vim.fs.dirname(root_file)
+          vim.notify("[ESLint null-ls] Found project root: " .. root, vim.log.levels.DEBUG)
+          
+          -- Try local eslint first (best for plugin support)
+          local local_eslint = root .. "/node_modules/.bin/eslint"
+          if vim.fn.executable(local_eslint) == 1 then
+            vim.notify("[ESLint null-ls] Found local eslint: " .. local_eslint .. " (preferred for plugin support)", vim.log.levels.INFO)
+            return local_eslint
+          end
+          
+          -- Try local eslint_d (might work with plugins if run from project root)
+          local local_eslint_d = root .. "/node_modules/.bin/eslint_d"
+          if vim.fn.executable(local_eslint_d) == 1 then
+            vim.notify("[ESLint null-ls] Found local eslint_d: " .. local_eslint_d, vim.log.levels.INFO)
+            return local_eslint_d
+          end
+        end
+        
+        -- Fallback to global eslint_d
         if vim.fn.executable("eslint_d") == 1 then
+          vim.notify("[ESLint null-ls] Using global eslint_d (may not have access to project plugins)", vim.log.levels.WARN)
           return "eslint_d"
         end
         
-        -- Try local eslint_d
-        local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true })[1]
-        if root_file then
-          local root = vim.fs.dirname(root_file)
-          local local_eslint_d = root .. "/node_modules/.bin/eslint_d"
-          if vim.fn.executable(local_eslint_d) == 1 then
-            return local_eslint_d
-          end
-          local local_eslint = root .. "/node_modules/.bin/eslint"
-          if vim.fn.executable(local_eslint) == 1 then
-            return local_eslint
-          end
-        end
-        
-        -- Fallback to global eslint
+        -- Final fallback to global eslint
+        vim.notify("[ESLint null-ls] Using global eslint (fallback, may not have access to project plugins)", vim.log.levels.WARN)
         return "eslint"
       end
 
@@ -637,13 +687,187 @@ require('lazy').setup({
           "eslint.config.js",
           "eslint.config.mjs"
         }, { upward = true })[1]
+        
+        if eslint_config then
+          vim.notify("[ESLint null-ls] Found ESLint config: " .. eslint_config, vim.log.levels.INFO)
+        else
+          vim.notify("[ESLint null-ls] No ESLint config found", vim.log.levels.WARN)
+        end
+        
         return eslint_config ~= nil
       end
 
       local sources = {}
 
       if has_eslint_config() then
-        local eslint_cmd = find_eslint()
+        vim.notify("[ESLint null-ls] Setting up ESLint diagnostics", vim.log.levels.INFO)
+        
+        -- ESLint diagnostics using custom source
+        table.insert(sources, helpers.make_builtin({
+          name = "eslint_diagnostics",
+          meta = {
+            url = "https://eslint.org/",
+            description = "ESLint diagnostics",
+          },
+          method = null_ls.methods.DIAGNOSTICS,
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          generator_opts = {
+            command = function(params)
+              -- Find project root and return absolute path to eslint
+              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+              return find_eslint(filename)
+            end,
+            runtime_condition = function(params)
+              -- Always run if eslint config exists (find_eslint will handle fallbacks)
+              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+              
+              local root_file = vim.fs.find({
+                ".eslintrc",
+                ".eslintrc.js",
+                ".eslintrc.json",
+                ".eslintrc.cjs",
+                ".eslintrc.mjs",
+                "eslint.config.js",
+                "eslint.config.mjs"
+              }, { upward = true, path = filename })[1]
+              
+              if root_file then
+                -- Check if any eslint executable is available
+                local eslint_cmd = find_eslint(filename)
+                if eslint_cmd and vim.fn.executable(eslint_cmd) == 1 then
+                  return true
+                end
+              end
+              return false
+            end,
+            args = { "--format", "json", "--stdin", "--stdin-filename", "$FILENAME" },
+            to_stdin = true,
+            format = "raw",  -- Use raw to handle JSON parsing ourselves
+            cwd = function(params)
+              -- Find project root (where eslint config is) - this is critical for plugin resolution
+              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+              
+              local root_file = vim.fs.find({
+                ".eslintrc",
+                ".eslintrc.js",
+                ".eslintrc.json",
+                ".eslintrc.cjs",
+                ".eslintrc.mjs",
+                "eslint.config.js",
+                "eslint.config.mjs",
+                "package.json"
+              }, { upward = true, path = filename })[1]
+              
+              local cwd = root_file and vim.fs.dirname(root_file) or nil
+              vim.schedule(function()
+                vim.notify("[ESLint null-ls] Using cwd: " .. (cwd or "nil"), vim.log.levels.DEBUG)
+              end)
+              return cwd
+            end,
+            check_exit_code = function(code)
+              vim.schedule(function()
+                vim.notify("[ESLint null-ls] Exit code: " .. code, vim.log.levels.DEBUG)
+              end)
+              return code <= 1 -- 0 = no issues, 1 = issues found
+            end,
+            on_output = function(params, done)
+              local diagnostics = {}
+              local output = params.output
+              
+              vim.schedule(function()
+                vim.notify("[ESLint null-ls] on_output called, output type: " .. type(output), vim.log.levels.DEBUG)
+              end)
+              
+              if not output then
+                vim.schedule(function()
+                  vim.notify("[ESLint null-ls] No output received", vim.log.levels.DEBUG)
+                end)
+                if done then
+                  done(diagnostics)
+                end
+                return
+              end
+              
+              -- Parse JSON if it's a string (null-ls might auto-parse, but handle both cases)
+              if type(output) == "string" then
+                local ok, parsed = pcall(vim.json.decode, output)
+                if ok and parsed then
+                  output = parsed
+                  vim.schedule(function()
+                    vim.notify("[ESLint null-ls] Parsed JSON string", vim.log.levels.DEBUG)
+                  end)
+                else
+                  vim.schedule(function()
+                    vim.notify("[ESLint null-ls] Failed to parse JSON: " .. (output:sub(1, 100) or "empty"), vim.log.levels.WARN)
+                  end)
+                  if done then
+                    done(diagnostics)
+                  end
+                  return
+                end
+              end
+              
+              -- ESLint JSON output is an array of file results
+              if type(output) == "table" then
+                vim.schedule(function()
+                  vim.notify("[ESLint null-ls] Processing table with " .. #output .. " file(s)", vim.log.levels.DEBUG)
+                end)
+                
+                for i, result in ipairs(output) do
+                  if result and type(result) == "table" then
+                    if result.messages and type(result.messages) == "table" then
+                      vim.schedule(function()
+                        vim.notify("[ESLint null-ls] Processing " .. #result.messages .. " messages from file " .. i, vim.log.levels.DEBUG)
+                      end)
+                      
+                      for j, message in ipairs(result.messages) do
+                        if message.severity and message.severity > 0 then
+                          -- Convert to 0-indexed (Neovim uses 0-indexed)
+                          local row = (message.line or 1) - 1
+                          local col = (message.column or 1) - 1
+                          local end_row = (message.endLine or message.line or 1) - 1
+                          local end_col = (message.endColumn or message.column or 1) - 1
+                          
+                          -- severity: 1 = warning, 2 = error
+                          -- Neovim: 1 = error, 2 = warning
+                          local severity = message.severity == 2 and 1 or 2
+                          
+                          table.insert(diagnostics, {
+                            row = row,
+                            col = col,
+                            end_row = end_row,
+                            end_col = end_col,
+                            code = message.ruleId,
+                            message = message.message or "",
+                            severity = severity,
+                            source = "eslint",
+                          })
+                        end
+                      end
+                    else
+                      vim.schedule(function()
+                        vim.notify("[ESLint null-ls] File " .. i .. " has no messages field", vim.log.levels.DEBUG)
+                      end)
+                    end
+                  end
+                end
+              else
+                vim.schedule(function()
+                  vim.notify("[ESLint null-ls] Output is not a table, type: " .. type(output), vim.log.levels.WARN)
+                end)
+              end
+              
+              vim.schedule(function()
+                vim.notify("[ESLint null-ls] Generated " .. #diagnostics .. " diagnostics", vim.log.levels.DEBUG)
+              end)
+              
+              if done then
+                done(diagnostics)
+              end
+            end,
+          },
+          factory = helpers.generator_factory,
+        }))
         
         -- ESLint formatting (autofix on save)
         table.insert(sources, helpers.make_builtin({
@@ -655,33 +879,77 @@ require('lazy').setup({
           method = null_ls.methods.FORMATTING,
           filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
           generator_opts = {
-            command = eslint_cmd,
+            -- Use relative path - cwd will be set to project root where node_modules exists
+            command = "node_modules/.bin/eslint",
+            runtime_condition = function(params)
+              -- Only run if local eslint exists in project
+              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+              local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true, path = filename })[1]
+              if root_file then
+                local root = vim.fs.dirname(root_file)
+                local local_eslint = root .. "/node_modules/.bin/eslint"
+                return vim.fn.executable(local_eslint) == 1
+              end
+              return false
+            end,
             args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
             to_stdin = true,
             format = "raw",
+            cwd = function(params)
+              -- Find project root (where eslint config is) - this is critical for plugin resolution
+              local filename = params.bufname or params.filename or vim.api.nvim_buf_get_name(params.bufnr or 0)
+              local root_file = vim.fs.find({
+                ".eslintrc",
+                ".eslintrc.js",
+                ".eslintrc.json",
+                ".eslintrc.cjs",
+                ".eslintrc.mjs",
+                "eslint.config.js",
+                "eslint.config.mjs",
+                "package.json"
+              }, { upward = true, path = filename })[1]
+              return root_file and vim.fs.dirname(root_file) or nil
+            end,
           },
           factory = helpers.formatter_factory,
         }))
+      else
+        vim.notify("[ESLint null-ls] No ESLint config found, skipping setup", vim.log.levels.WARN)
       end
 
+      vim.notify("[ESLint null-ls] Setting up null-ls with " .. #sources .. " source(s)", vim.log.levels.INFO)
       null_ls.setup({
+        debug = true,  -- Enable debug mode to see what's happening
         sources = sources,
       })
-
-      -- Format on save with ESLint autofix
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-        callback = function()
-          vim.lsp.buf.format({
-            filter = function(client)
-              return client.name == "null-ls"
-            end,
-            async = false,
-          })
-        end,
-      })
+      vim.notify("[ESLint null-ls] null-ls setup complete", vim.log.levels.INFO)
     end,
   }
+})
+
+-- ========================================================================== --
+-- ==                    PRETTIER + ESLINT FORMAT ON SAVE                 == --
+-- ========================================================================== --
+
+-- Format on save for JS/TS files: Prettier first, then ESLint autofix
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+  callback = function(args)
+    local bufnr = args.buf
+    
+    -- Run ESLint autofix via null-ls
+    vim.lsp.buf.format({
+      bufnr = bufnr,
+      filter = function(client)
+        return client.name == "null-ls"
+      end,
+      async = false,
+    })
+
+    -- Run Prettier
+    local prettier = require("prettier")
+    prettier.format()
+  end,
 })
 
 -- ========================================================================== --
@@ -699,25 +967,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     local bufnr = event.buf
-    
-    -- For ESLint, only attach to files with valid paths
-    if client.name == 'eslint' then
-      local filename = vim.api.nvim_buf_get_name(bufnr)
-      if not filename or filename == '' or filename:match('^%w+://') then
-        -- Skip files without valid paths (unsaved buffers, special buffers)
-        return
-      end
-      
-      -- Suppress ESLint path errors
-      vim.lsp.handlers['textDocument/diagnostic'] = function(err, result, ctx, config)
-        if err and err.message and err.message:match('path.*undefined') then
-          -- Silently ignore path errors from ESLint
-          return
-        end
-        -- Use default handler for other errors
-        vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
-      end
-    end
 
     local map = function(keys, func, desc, mode)
       mode = mode or 'n'
@@ -831,6 +1080,8 @@ local function setup_typescript_lsp()
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
         },
+        -- Ensure TypeScript validation doesn't interfere with ESLint
+        validate = true,
       },
       javascript = {
         inlayHints = {
@@ -842,6 +1093,8 @@ local function setup_typescript_lsp()
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
         },
+        -- Ensure JavaScript validation doesn't interfere with ESLint
+        validate = true,
       },
     },
   })
@@ -861,74 +1114,6 @@ vim.api.nvim_create_autocmd('User', {
 vim.defer_fn(function()
   if pcall(require, 'mason-registry') then
     setup_typescript_lsp()
-  end
-end, 1000)
--- ========================================================================== --
--- ==                            ESLINT LSP CONFIG                          == --
--- ========================================================================== --
-
-local function setup_eslint_lsp()
-  local function get_eslint_lsp_cmd()
-    local ok, mason_registry = pcall(require, 'mason-registry')
-    if ok and mason_registry.is_installed('eslint-lsp') then
-      local eslint_lsp = mason_registry.get_package('eslint-lsp')
-      if eslint_lsp then
-        local success, install_path = pcall(function() return eslint_lsp:get_install_path() end)
-        if success and install_path then
-          return { install_path .. '/node_modules/.bin/vscode-eslint-language-server', '--stdio' }
-        end
-      end
-    end
-    -- Fallback to global installation
-    return { 'vscode-eslint-language-server', '--stdio' }
-  end
-
-  local root_file = vim.fs.find({ '.git', 'package.json', '.eslintrc', '.eslintrc.js', '.eslintrc.json', '.eslintrc.cjs', '.eslintrc.mjs', 'eslint.config.js', 'eslint.config.mjs' }, { upward = true })[1]
-  local root_dir = root_file and vim.fs.dirname(root_file) or vim.fn.getcwd()
-  
-  -- Ensure root_dir is always a valid string
-  if not root_dir or root_dir == '' then
-    root_dir = vim.fn.getcwd()
-  end
-
-  -- Only enable if we have a valid root_dir
-  if root_dir and root_dir ~= '' and vim.fn.isdirectory(root_dir) == 1 then
-    vim.lsp.config('eslint', {
-      cmd = get_eslint_lsp_cmd(),
-      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-      root_dir = root_dir,
-      settings = {
-        eslint = {
-          validate = 'on',
-          codeAction = {
-            disableRuleComment = {
-              enable = true,
-              location = 'separateLine',
-            },
-            showDocumentation = {
-              enable = true,
-            },
-          },
-        },
-      },
-    })
-
-    -- Enable ESLint LSP
-    vim.lsp.enable('eslint')
-  end
-end
-
--- Set up ESLint LSP after Mason is ready
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MasonUpdateComplete',
-  callback = setup_eslint_lsp,
-  once = true,
-})
-
--- Also try to set up immediately (in case Mason is already ready)
-vim.defer_fn(function()
-  if pcall(require, 'mason-registry') then
-    setup_eslint_lsp()
   end
 end, 1000)
 
