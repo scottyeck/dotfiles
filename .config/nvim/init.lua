@@ -172,6 +172,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ci', ':diffget //2<CR>', { desc = '[C]onflict take [I]ncoming' })
       vim.keymap.set('n', '<leader>cc', ':diffget //3<CR>', { desc = '[C]onflict take [C]urrent' })
       vim.keymap.set('n', '<leader>cb', ':diffget //2 | diffget //3<CR>', { desc = '[C]onflict take [B]oth' })
+
+      -- Support for hub was dropped in vim-rhubarb as gh becomes the
+      -- primary GitHub CLI, so we override this functionality manually.
+      -- @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
+      vim.g.fugitive_git_command = "hub"
     end
   },
   'tpope/vim-rhubarb',
@@ -188,6 +193,9 @@ require('lazy').setup({
   -- Editing enhancements
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
+
+  -- Git signs in the gutter
+  'airblade/vim-gitgutter',
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -920,6 +928,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('K', vim.lsp.buf.hover, 'Hover Documentation')
     map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+    map(']a', vim.diagnostic.goto_next, '[N]ext Problem')
+    map('[a', vim.diagnostic.goto_prev, '[P]revious Problem')
     map('<leader>f', function()
       vim.lsp.buf.format({ async = true })
     end, '[F]ormat document')
