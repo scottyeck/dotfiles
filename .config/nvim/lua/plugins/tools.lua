@@ -1,5 +1,52 @@
 -- Miscellaneous tools and utilities
 return {
+  -- File explorer (replaces vim-vinegar/netrw)
+  {
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup({
+        default_file_explorer = true,
+        columns = { 'icon' },
+        keymaps = {
+          ['g?'] = 'actions.show_help',
+          ['<CR>'] = 'actions.select',
+          ['<C-v>'] = 'actions.select_vsplit',
+          ['<C-x>'] = 'actions.select_split',
+          ['<C-t>'] = 'actions.select_tab',
+          ['gp'] = 'actions.preview',
+          ['q'] = 'actions.close',
+          ['R'] = 'actions.refresh',
+          ['-'] = 'actions.parent',
+          ['_'] = 'actions.open_cwd',
+          ['`'] = 'actions.cd',
+          ['~'] = 'actions.tcd',
+          ['gs'] = 'actions.change_sort',
+          ['gx'] = 'actions.open_external',
+          ['g.'] = 'actions.toggle_hidden',
+          ['g\\'] = 'actions.toggle_trash',
+          -- Pass through to global keymaps (vim-tmux-navigator, telescope)
+          ['<C-h>'] = false,
+          ['<C-j>'] = false,
+          ['<C-k>'] = false,
+          ['<C-l>'] = false,
+          ['<C-p>'] = false,
+        },
+        use_default_keymaps = false,
+        view_options = {
+          show_hidden = true,
+        },
+        -- LSP file rename integration
+        lsp_file_methods = {
+          timeout_ms = 1000,
+          autosave_changes = true,
+        },
+      })
+      -- Use `-` to open parent directory (like vim-vinegar)
+      vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Open parent directory' })
+    end,
+  },
+
   -- Editing enhancements
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',

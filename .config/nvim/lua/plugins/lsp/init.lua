@@ -27,6 +27,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('K', vim.lsp.buf.hover, 'Hover Documentation')
     map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+    -- Refactor-specific code actions (useful for extract to function/file)
+    map('<leader>cr', function()
+      vim.lsp.buf.code_action({
+        context = { only = { 'refactor' } },
+        apply = false,
+      })
+    end, '[C]ode [R]efactor', { 'n', 'x' })
     map(']a', vim.diagnostic.goto_next, '[N]ext Problem')
     map('[a', vim.diagnostic.goto_prev, '[P]revious Problem')
     map('<leader>f', function()

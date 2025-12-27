@@ -1,6 +1,17 @@
 -- TypeScript LSP configuration
 local M = {}
 
+-- Get LSP capabilities (with completion support from nvim-cmp)
+local function get_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- Merge with cmp capabilities if available
+  local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+  if ok then
+    capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
+  end
+  return capabilities
+end
+
 function M.setup()
   local function get_typescript_lsp_cmd()
     local ok, mason_registry = pcall(require, 'mason-registry')
@@ -23,6 +34,7 @@ function M.setup()
     cmd = get_typescript_lsp_cmd(),
     filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
     root_dir = root_dir,
+    capabilities = get_capabilities(),
     settings = {
       typescript = {
         inlayHints = {
@@ -33,6 +45,10 @@ function M.setup()
           includeInlayPropertyDeclarationTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
+        },
+        preferences = {
+          providePrefixAndSuffixTextForRename = true,
+          allowRenameOfImportPath = true,
         },
         -- Ensure TypeScript validation doesn't interfere with ESLint
         validate = true,
@@ -46,6 +62,10 @@ function M.setup()
           includeInlayPropertyDeclarationTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
+        },
+        preferences = {
+          providePrefixAndSuffixTextForRename = true,
+          allowRenameOfImportPath = true,
         },
         -- Ensure JavaScript validation doesn't interfere with ESLint
         validate = true,

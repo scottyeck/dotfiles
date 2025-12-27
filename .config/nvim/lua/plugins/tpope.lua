@@ -23,7 +23,6 @@ return {
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
   'tpope/vim-surround',
-  'tpope/vim-vinegar',
 
   -- Rails/Ruby workflow
   'tpope/vim-rails',
