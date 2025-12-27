@@ -22,7 +22,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Keybindings
     map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    map('gr', vim.lsp.buf.rename, '[R]ename symbol')
+    map('gR', require('telescope.builtin').lsp_references, 'Find [R]eferences')
     map('K', vim.lsp.buf.hover, 'Hover Documentation')
     map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
