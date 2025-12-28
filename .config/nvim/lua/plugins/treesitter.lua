@@ -2,6 +2,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  pin = true, -- prevent auto-updates until new API is stable
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
