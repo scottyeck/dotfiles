@@ -2,22 +2,10 @@
 local M = {}
 
 function M.setup()
-  local function get_ruby_lsp_cmd()
-    local mason_registry = require('mason-registry')
-    if mason_registry.is_installed('ruby-lsp') then
-      local ruby_lsp = mason_registry.get_package('ruby-lsp')
-      return { ruby_lsp:get_install_path() .. '/ruby-lsp' }
-    else
-      return { 'ruby-lsp' }
-    end
-  end
-
-  local root_dir = vim.fs.dirname(vim.fs.find({ '.git', 'Gemfile', '.ruby-version' }, { upward = true })[1] or vim.fn.getcwd())
-
   vim.lsp.config('ruby_lsp', {
-    cmd = get_ruby_lsp_cmd(),
+    cmd = { 'ruby-lsp' },
     filetypes = { 'ruby' },
-    root_dir = root_dir,
+    root_markers = { '.ruby-version', 'Gemfile', '.git' },
     settings = {
       rubyLsp = {
         formatter = 'rubocop',
@@ -26,6 +14,20 @@ function M.setup()
         },
       },
     },
+    on_new_config = function(config, root_dir)
+      -- Read .ruby-version from the project root to set RBENV_VERSION
+      local ruby_version_file = root_dir .. '/.ruby-version'
+      local f = io.open(ruby_version_file, 'r')
+      if f then
+        local version = f:read('*l')
+        f:close()
+        if version then
+          version = version:gsub('%s+', '') -- trim whitespace
+          config.cmd_env = config.cmd_env or {}
+          config.cmd_env.RBENV_VERSION = version
+        end
+      end
+    end,
   })
 
   -- Enable Ruby LSP
