@@ -28,6 +28,7 @@
   "prettier.nvim": { "branch": "main", "commit": "ca6452de1accc68a1062e72f58679caa488b501a" },
   "splitjoin.vim": { "branch": "main", "commit": "9ce4fb4f0538cff02a57a393057b7ab371324483" },
   "tagalong.vim": { "branch": "main", "commit": "5a2bbf2b1d5b657685a49d48d98a4aa921c1fde3" },
+  "telescope-frecency.nvim": { "branch": "master", "commit": "fc6418bf663a182b72427487246b870f2ddbbbe2" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "9b55d36b797875b6e513f6bcc526e17cb9fe31f4" },
   "vim-abolish": { "branch": "master", "commit": "dcbfe065297d31823561ba787f51056c147aa682" },

@@ -2,7 +2,10 @@
 return {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope-frecency.nvim',
+  },
   config = function()
     local telescope = require('telescope')
     telescope.setup({
@@ -18,6 +21,7 @@ return {
 
     -- Enable telescope fzf native, if installed
     pcall(telescope.load_extension, 'fzf')
+    telescope.load_extension('frecency')
 
     -- Keymaps
     vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -29,7 +33,7 @@ return {
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = 'Find files' })
+    vim.keymap.set('n', '<C-p>', '<Cmd>Telescope frecency<CR>', { desc = 'Find files (frecency)' })
     vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
