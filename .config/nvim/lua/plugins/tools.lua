@@ -75,10 +75,28 @@ return {
 
   -- Theme
   {
-    'haishanh/night-owl.vim',
+    'oxfist/night-owl.nvim',
+    lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'night-owl'
+      local tmux_inactive_bg = '#303030' -- tmux window-style bg=colour236
+
+      require('night-owl').setup()
+      vim.cmd.colorscheme('night-owl')
+
+      -- Dim background when Neovim loses focus to match tmux inactive pane
+      vim.api.nvim_create_autocmd('FocusLost', {
+        pattern = '*',
+        callback = function()
+          vim.api.nvim_set_hl(0, 'Normal', { bg = tmux_inactive_bg })
+        end,
+      })
+      vim.api.nvim_create_autocmd('FocusGained', {
+        pattern = '*',
+        callback = function()
+          vim.api.nvim_set_hl(0, 'Normal', { bg = '#011627' })
+        end,
+      })
     end,
   },
 
