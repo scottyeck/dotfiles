@@ -18,6 +18,11 @@ return {
       local cmp = require('cmp')
       local luasnip = require('luasnip')
 
+      -- Disable completion for markdown files
+      cmp.setup.filetype('markdown', {
+        enabled = false,
+      })
+
       cmp.setup({
         snippet = {
           expand = function(args)
