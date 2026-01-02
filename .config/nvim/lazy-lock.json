@@ -42,5 +42,6 @@
   "vim-sleuth": { "branch": "master", "commit": "be69bff86754b1aa5adcbb527d7fcd1635a84080" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-tmux-navigator": { "branch": "master", "commit": "c45243dc1f32ac6bcf6068e5300f3b2b237e576a" },
-  "vs-tasks.nvim": { "branch": "main", "commit": "1dafea1a206590644d04a71159cd4f7651b6fb8e" }
+  "vs-tasks.nvim": { "branch": "main", "commit": "1dafea1a206590644d04a71159cd4f7651b6fb8e" },
+  "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" }
 }

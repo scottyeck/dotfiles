@@ -152,4 +152,13 @@ return {
       })
     end,
   },
+
+  -- Zen mode for distraction-free editing
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup()
+      vim.keymap.set('n', '<leader>z', '<cmd>ZenMode<cr>', { desc = '[Z]en mode' })
+    end,
+  },
 }
