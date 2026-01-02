@@ -51,8 +51,26 @@ return {
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
 
-  -- CSV syntax highlighting and tools
-  'mechatroner/rainbow_csv',
+  -- CSV tools
+  {
+    'emmanueltouzery/decisive.nvim',
+    ft = { 'csv' },
+    config = function()
+      require('decisive').setup{}
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'csv',
+        callback = function()
+          vim.opt_local.wrap = false
+        end,
+      })
+    end,
+    keys = {
+      { '<leader>cca', ":lua require('decisive').align_csv({})<cr>", desc = "Align CSV" },
+      { '<leader>ccA', ":lua require('decisive').align_csv_clear({})<cr>", desc = "Align CSV clear" },
+      { '[c', ":lua require('decisive').align_csv_prev_col()<cr>", desc = "CSV prev col" },
+      { ']c', ":lua require('decisive').align_csv_next_col()<cr>", desc = "CSV next col" },
+    },
+  },
 
   -- Git signs in the gutter
   'airblade/vim-gitgutter',
