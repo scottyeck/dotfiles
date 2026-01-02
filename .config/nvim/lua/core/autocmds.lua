@@ -39,6 +39,15 @@ end, {})
 
 local group = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 
+-- Set filetype for .localrc
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = group,
+  pattern = ".localrc",
+  callback = function()
+    vim.bo.filetype = "sh"
+  end,
+})
+
 -- Highlight on yank
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

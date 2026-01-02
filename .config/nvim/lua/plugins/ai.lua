@@ -7,6 +7,13 @@ return {
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
+        should_attach = function(bufnr)
+          local bufname = vim.api.nvim_buf_get_name(bufnr)
+          if bufname:match("%.localrc$") then
+            return false
+          end
+          return true
+        end,
         suggestion = {
           enabled = true,
           auto_trigger = true,
