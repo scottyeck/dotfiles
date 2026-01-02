@@ -51,6 +51,9 @@ return {
   'christoomey/vim-tmux-navigator',
   'AndrewRadev/tagalong.vim',
 
+  -- CSV syntax highlighting and tools
+  'mechatroner/rainbow_csv',
+
   -- Git signs in the gutter
   'airblade/vim-gitgutter',
 
