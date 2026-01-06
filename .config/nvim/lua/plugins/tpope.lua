@@ -21,6 +21,7 @@ return {
     end
   },
   'tpope/vim-rhubarb',
+  'junegunn/gv.vim', -- Git commit browser (:GV)
   'tpope/vim-sleuth',
   'tpope/vim-surround',
 

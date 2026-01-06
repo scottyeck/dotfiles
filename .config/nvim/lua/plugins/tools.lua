@@ -53,27 +53,53 @@ return {
 
   -- CSV tools
   {
-    'emmanueltouzery/decisive.nvim',
+    'hat0uma/csvview.nvim',
     ft = { 'csv' },
-    config = function()
-      require('decisive').setup{}
+    opts = {
+      parser = { comments = { '#', '//' } },
+      keymaps = {
+        textobject_field_inner = { 'if', mode = { 'o', 'x' } },
+        textobject_field_outer = { 'af', mode = { 'o', 'x' } },
+        jump_next_field_end = { '<Tab>', mode = { 'n', 'v' } },
+        jump_prev_field_end = { '<S-Tab>', mode = { 'n', 'v' } },
+        jump_next_row = { '<Enter>', mode = { 'n', 'v' } },
+        jump_prev_row = { '<S-Enter>', mode = { 'n', 'v' } },
+      },
+      view = {
+        display_mode = 'border',
+      },
+    },
+    config = function(_, opts)
+      require('csvview').setup(opts)
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'csv',
         callback = function()
           vim.opt_local.wrap = false
+          vim.cmd('CsvViewEnable')
         end,
       })
     end,
-    keys = {
-      { '<leader>cca', ":lua require('decisive').align_csv({})<cr>", desc = "Align CSV" },
-      { '<leader>ccA', ":lua require('decisive').align_csv_clear({})<cr>", desc = "Align CSV clear" },
-      { '[c', ":lua require('decisive').align_csv_prev_col()<cr>", desc = "CSV prev col" },
-      { ']c', ":lua require('decisive').align_csv_next_col()<cr>", desc = "CSV next col" },
-    },
+    cmd = { 'CsvViewEnable', 'CsvViewDisable', 'CsvViewToggle' },
   },
 
-  -- Git signs in the gutter
-  'airblade/vim-gitgutter',
+  -- Git signs in the gutter + inline blame
+  {
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      current_line_blame = false, -- toggle with <leader>gb
+      current_line_blame_opts = {
+        delay = 300,
+      },
+    },
+    keys = {
+      { '<leader>gl', '<cmd>Gitsigns toggle_current_line_blame<cr>', desc = 'Toggle git blame' },
+      { ']h', '<cmd>Gitsigns next_hunk<cr>', desc = 'Next hunk' },
+      { '[h', '<cmd>Gitsigns prev_hunk<cr>', desc = 'Previous hunk' },
+      { '<leader>hp', '<cmd>Gitsigns preview_hunk<cr>', desc = 'Preview hunk' },
+      { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'Stage hunk' },
+      { '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>', desc = 'Reset hunk' },
+    },
+  },
 
   -- Find and replace
   {
