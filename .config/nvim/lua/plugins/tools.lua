@@ -208,4 +208,12 @@ return {
       vim.keymap.set('n', '<leader>z', '<cmd>ZenMode<cr>', { desc = '[Z]en mode' })
     end,
   },
+
+  -- Markdown preview in browser
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+  },
 }
