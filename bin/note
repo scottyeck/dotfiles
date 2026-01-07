@@ -5,6 +5,10 @@
 # https://github.com/hachibu/note.sh/blob/main/src/note.sh
 #
 # @see https://hachibu.net/posts/2020/how-i-manage-my-random-daily-notes/
+#
+# NOTE: There is a corresponding :Note command in neovim that mirrors this behavior.
+# See ~/.config/nvim/lua/core/commands/note.lua
+# If you change the logic here, update the neovim command as well (and vice versa)
 
 set -euo pipefail
 
