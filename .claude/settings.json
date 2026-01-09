@@ -1,0 +1,28 @@
+{
+  "alwaysThinkingEnabled": true,
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(.envrc)",
+      "Read(./secrets/**)",
+      "Read(.git/config)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)"
+    ],
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)"
+    ]
+  }
+}

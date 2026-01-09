@@ -20,3 +20,4 @@ yarn-error.log
 .scotty
 .lnavrc
 .claude/*
+!.claude/settings.json
