@@ -71,19 +71,48 @@ return {
       end
 
       pickers.new({}, {
-        prompt_title = 'Recent Branches',
+        prompt_title = 'Recent Branches (<CR> checkout, <C-y> copy, <C-r> rebase, <C-m> merge)',
         finder = finders.new_table({
           results = branches,
         }),
         sorter = conf.generic_sorter({}),
         attach_mappings = function(prompt_bufnr, map)
+          local function get_branch()
+            local selection = action_state.get_selected_entry()
+            return selection and selection[1] or nil
+          end
+
+          -- <CR> = checkout (default)
           actions.select_default:replace(function()
             actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            if selection then
-              vim.cmd('Git checkout ' .. selection[1])
+            local branch = get_branch()
+            if branch then vim.cmd('Git checkout ' .. branch) end
+          end)
+
+          -- <C-y> = yank to clipboard
+          map('i', '<C-y>', function()
+            actions.close(prompt_bufnr)
+            local branch = get_branch()
+            if branch then
+              vim.fn.setreg('+', branch)
+              vim.notify('Copied: ' .. branch)
             end
           end)
+
+          -- <C-r> = rebase onto selected branch
+          map('i', '<C-r>', function()
+            actions.close(prompt_bufnr)
+            local branch = get_branch()
+            if branch then vim.cmd('Git rebase ' .. branch) end
+          end)
+
+          -- <C-m> = merge selected branch
+          map('i', '<C-m>', function()
+            actions.close(prompt_bufnr)
+            local branch = get_branch()
+            if branch then vim.cmd('Git merge ' .. branch) end
+          end)
+
           return true
         end,
       }):find()
