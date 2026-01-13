@@ -54,6 +54,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- Set up Ruby LSP immediately (doesn't need Mason - uses system gem via rbenv)
+require('plugins.lsp.ruby').setup()
+
 -- Return all LSP-related plugin specs
 return {
   -- Mason: LSP server installer
@@ -64,10 +67,8 @@ return {
       -- Auto-install LSP servers
       local mason_registry = require('mason-registry')
       mason_registry.refresh(function()
-        if not mason_registry.is_installed('ruby-lsp') then
-          local ruby_lsp = mason_registry.get_package('ruby-lsp')
-          ruby_lsp:install()
-        end
+        -- Note: ruby-lsp is NOT installed via Mason (causes rbenv/ABI issues)
+        -- Install it per Ruby version with: gem install ruby-lsp
         if not mason_registry.is_installed('typescript-language-server') then
           local tsserver = mason_registry.get_package('typescript-language-server')
           tsserver:install()
@@ -77,15 +78,13 @@ return {
           eslint_lsp:install()
         end
 
-        -- Set up LSP servers after Mason is ready
-        require('plugins.lsp.ruby').setup()
+        -- Set up TypeScript LSP after Mason is ready
         require('plugins.lsp.typescript').setup()
       end)
 
       -- Also try to set up immediately (in case Mason is already ready)
       vim.defer_fn(function()
         if pcall(require, 'mason-registry') then
-          require('plugins.lsp.ruby').setup()
           require('plugins.lsp.typescript').setup()
         end
       end, 1000)
