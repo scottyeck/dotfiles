@@ -216,4 +216,13 @@ return {
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
   },
+
+  -- Markdown table editing
+  {
+    "Kicamon/markdown-table-mode.nvim",
+    ft = { "markdown" },
+    config = function()
+      require("markdown-table-mode").setup()
+    end,
+  },
 }
