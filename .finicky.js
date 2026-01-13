@@ -4,25 +4,21 @@
 const profileNames = {
   // The profile name you supply to Finicky must match the folder name of the profile. For Chrome,
   // the folders are located at ~/Library/Application Support/Google/Chrome. Folder names are called
-  // "Profile 1", "Profile 2", etc.
-  personal: "Profile 2",
-  hen: "Profile 3"
+  // "Default", "Profile 1", "Profile 2", etc.
+  //
+  // To find out which one is which, run: identify_chrome_profiles
+  personal: "Default",
+  skylight: "Profile 1",
 };
 
 module.exports = {
   defaultBrowser: "Google Chrome",
   handlers: [
     {
-      match: [
-        /github.com\/comprehensiveio/,
-        /linear.app/,
-        /loom.com/,
-        /range.co/,
-        /render.com/,
-      ],
+      match: [/github.com\/SkylightFamily/, /linear.app/, /loom.com/],
       browser: {
         name: "Google Chrome",
-        profile: profileNames.hen,
+        profile: profileNames.skylight,
       },
     },
     {

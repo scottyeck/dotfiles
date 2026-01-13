@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cat ~/Library/Application\ Support/Google/Chrome/Local\ State | python3 -c "
+import sys, json
+
+data = json.load(sys.stdin)
+profiles = data.get('profile', {}).get('info_cache', {})
+
+for k, v in profiles.items():
+    name = v.get('name', 'Unknown')
+    email = v.get('user_name', 'No email')
+    print(f'{k}: {name} - {email}')
+"
+
