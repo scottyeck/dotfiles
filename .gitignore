@@ -21,3 +21,4 @@ yarn-error.log
 .lnavrc
 .claude/*
 !.claude/settings.json
+!.claude/commands
