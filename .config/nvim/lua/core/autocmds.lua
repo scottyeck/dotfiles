@@ -48,6 +48,25 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+-- Disable wrap for SQL files
+vim.api.nvim_create_autocmd('FileType', {
+  group = group,
+  pattern = 'sql',
+  callback = function()
+    vim.opt_local.wrap = false
+  end,
+})
+
+-- Use 2-space tabs for markdown
+vim.api.nvim_create_autocmd('FileType', {
+  group = group,
+  pattern = 'markdown',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+  end,
+})
+
 -- Highlight on yank
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
