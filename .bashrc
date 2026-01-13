@@ -13,9 +13,6 @@ PATH="$PATH:$HOME/.local/bin"
 export NODE_OPTIONS="--max-old-space-size=16198"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-export GEM_HOME="$HOME/.gem"
-# I don't need rbenv right now
-# eval "$(rbenv init -)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
