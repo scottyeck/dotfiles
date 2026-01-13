@@ -71,7 +71,7 @@ return {
       end
 
       pickers.new({}, {
-        prompt_title = 'Recent Branches (<CR> checkout, <C-y> copy, <C-r> rebase, <C-m> merge)',
+        prompt_title = 'Recent Branches (<CR> checkout, <C-y> copy, <C-r> rebase, <C-g> merge)',
         finder = finders.new_table({
           results = branches,
         }),
@@ -106,8 +106,8 @@ return {
             if branch then vim.cmd('Git rebase ' .. branch) end
           end)
 
-          -- <C-m> = merge selected branch
-          map('i', '<C-m>', function()
+          -- <C-g> = merge selected branch (not <C-m> since it's the same as <CR> in terminals)
+          map('i', '<C-g>', function()
             actions.close(prompt_bufnr)
             local branch = get_branch()
             if branch then vim.cmd('Git merge ' .. branch) end
