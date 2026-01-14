@@ -25,6 +25,7 @@ return {
           ['gx'] = 'actions.open_external',
           ['g.'] = 'actions.toggle_hidden',
           ['g\\'] = 'actions.toggle_trash',
+          ['.'] = 'actions.open_cmdline',
           -- Pass through to global keymaps (vim-tmux-navigator, telescope)
           ['<C-h>'] = false,
           ['<C-j>'] = false,
@@ -95,6 +96,8 @@ return {
       { '<leader>gl', '<cmd>Gitsigns toggle_current_line_blame<cr>', desc = 'Toggle git blame' },
       { ']h', '<cmd>Gitsigns next_hunk<cr>', desc = 'Next hunk' },
       { '[h', '<cmd>Gitsigns prev_hunk<cr>', desc = 'Previous hunk' },
+      { ']c', '/^<<<<<<<\\|^=======\\|^>>>>>>><cr>', desc = 'Next conflict marker' },
+      { '[c', '?^<<<<<<<\\|^=======\\|^>>>>>>><cr>', desc = 'Previous conflict marker' },
       { '<leader>hp', '<cmd>Gitsigns preview_hunk<cr>', desc = 'Preview hunk' },
       { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'Stage hunk' },
       { '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>', desc = 'Reset hunk' },
