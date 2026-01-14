@@ -1,18 +1,5 @@
 {
-  "alwaysThinkingEnabled": true,
-  "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true
-  },
   "permissions": {
-    "deny": [
-      "Read(.env)",
-      "Read(.env.*)",
-      "Read(.envrc)",
-      "Read(./secrets/**)",
-      "Read(.git/config)",
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)"
-    ],
     "allow": [
       "Read",
       "Glob",
@@ -23,6 +10,20 @@
       "Bash(git log:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(.envrc)",
+      "Read(./secrets/**)",
+      "Read(.git/config)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)"
     ]
-  }
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true
 }
