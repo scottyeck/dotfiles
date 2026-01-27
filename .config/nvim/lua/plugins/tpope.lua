@@ -7,7 +7,7 @@ return {
     config = function()
       vim.api.nvim_create_user_command('Glo', 'Git log --oneline', {})
       vim.api.nvim_create_user_command('Gwip',
-        '!git add -A && git rm $(git ls-files --deleted) 2> /dev/null && git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"',
+        '!git add -A && git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"',
         {})
 
       vim.keymap.set('n', '<leader>ci', ':diffget //2<CR>', { desc = '[C]onflict take [I]ncoming' })
