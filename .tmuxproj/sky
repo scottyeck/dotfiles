@@ -14,7 +14,7 @@ if [ "$SESSION_EXISTS" = "" ]; then
   # @see https://unix.stackexchange.com/a/569731
   tmux new-session -d -s $SESSION -x "$(tput cols)" -y "$(tput lines)"
 
-  tmux rename-window -t $SESSION:0 -n 'admin'
+  tmux rename-window -t $SESSION:0 'admin'
   tmux send-keys -t $SESSION:0 'cd ~/git/sl/ws/assistant-admin' C-m
   tmux send-keys -t $SESSION:0 'vim' C-m
   tmux send-keys -t $SESSION:0 ':G' C-m
