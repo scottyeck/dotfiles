@@ -165,6 +165,7 @@ mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Spokenly", id: 6740315592
 mas "Xcode", id: 497799835
 vscode "alefragnani.project-manager"
 vscode "be5invis.vscode-custom-css"
