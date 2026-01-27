@@ -40,6 +40,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias gcur='echo $(git_current_branch)'
 alias gcobak='git checkout -b $(git_current_branch)-bak'
+alias gbc='git branch --sort=-committerdate | fzf | xargs git checkout'
 alias todo='todo.sh'
 alias vtodo='vim $TODO_FILE'
 alias vim='nvim'
