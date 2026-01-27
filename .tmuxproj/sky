@@ -1,0 +1,67 @@
+#!/bin/bash
+
+SESSION="sky"
+SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
+
+# Default session target, specifying no active window, which
+# will return us to the previously active window.
+SESSION_TARGET="$SESSION"
+
+# If session doesn't exist, we'll create a new one.
+if [ "$SESSION_EXISTS" = "" ]; then
+
+  # Specify session size so that splits are even on attach.
+  # @see https://unix.stackexchange.com/a/569731
+  tmux new-session -d -s $SESSION -x "$(tput cols)" -y "$(tput lines)"
+
+  tmux rename-window -t $SESSION:0 -n 'admin'
+  tmux send-keys -t $SESSION:0 'cd ~/git/sl/ws/assistant-admin' C-m
+  tmux send-keys -t $SESSION:0 'vim' C-m
+  tmux send-keys -t $SESSION:0 ':G' C-m
+  tmux split-window -h
+  tmux send-keys -t $SESSION:0 'cd ~/git/sl/ws/assistant-admin' C-m
+  tmux split-window -v
+  tmux send-keys -t $SESSION:0 'cd ~/git/sl/ws/assistant-admin' C-m
+  tmux select-pane -L
+
+  tmux new-window -t $SESSION:1 -n 'cloud'
+  tmux send-keys -t $SESSION:1 'cd ~/git/sl/ws/cloud' C-m
+  tmux send-keys -t $SESSION:1 'vim' C-m
+  tmux send-keys -t $SESSION:1 ':G' C-m
+  tmux split-window -h
+  tmux send-keys -t $SESSION:1 'cd ~/git/sl/ws/cloud' C-m
+  tmux split-window -v
+  tmux send-keys -t $SESSION:1 'cd ~/git/sl/ws/cloud' C-m
+  tmux select-pane -L
+
+  tmux new-window -t $SESSION:2 -n 'ws'
+  tmux send-keys -t $SESSION:2 'cd ~/git/sl/ws' C-m
+  tmux split-window -h
+  tmux send-keys -t $SESSION:2 'cd ~/git/sl/ws' C-m
+  tmux select-pane -L
+  tmux send-keys -t $SESSION:2 'claude' C-m
+
+  tmux new-window -t $SESSION:3 -n 'server'
+  tmux send-keys -t $SESSION:3 'cd ~/git/sl/ws/cloud' C-m
+  tmux split-window -h
+  tmux send-keys -t $SESSION:3 'cd ~/git/sl/ws' C-m
+  tmux select-pane -L
+  tmux send-keys -t $SESSION:3 './bin/dev' C-m
+  tmux split-window -v
+  tmux send-keys -t $SESSION:3 'cd ~/git/sl/ws/assistant-admin' C-m
+  tmux send-keys -t $SESSION:3 'yarn dev' C-m
+
+  tmux new-window -t $SESSION:4 -n 'dots'
+  tmux send-keys -t $SESSION:4 "cd ~/.config" C-m
+  tmux split-window -h
+
+  # Specify the window to which we want to attach
+  SESSION_TARGET="$SESSION_TARGET:2"
+
+fi # // if session exists
+
+echo $SESSION_TARGET
+
+# Now that we know the session (either new or existing)
+# exists, attach to it.
+tmux attach-session -t "$SESSION_TARGET"
