@@ -40,7 +40,28 @@ return {
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<C-p>', '<Cmd>Telescope frecency workspace=CWD<CR>', { desc = 'Find files (frecency)' })
+    vim.keymap.set('n', '<C-p>', function()
+      local actions = require('telescope.actions')
+      local action_state = require('telescope.actions.state')
+      require('telescope').extensions.frecency.frecency({
+        workspace = 'CWD',
+        attach_mappings = function(prompt_bufnr, map)
+          -- <C-y> = yank file path to clipboard
+          map('i', '<C-y>', function()
+            local selection = action_state.get_selected_entry()
+            if selection then
+              actions.close(prompt_bufnr)
+              local path = selection.filename or selection.path or selection.value or selection[1]
+              if path then
+                vim.fn.setreg('+', path)
+                vim.notify('Copied: ' .. path)
+              end
+            end
+          end)
+          return true
+        end,
+      })
+    end, { desc = 'Find files (frecency)' })
     vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
