@@ -25,7 +25,6 @@
 #   ↕N/M Diverged from remote (yellow)
 #   PR#N Open pull request number (cyan)
 # 🌳 Git worktree indicator
-# 🐍 Python virtual environment
 # Context window usage (scaled so 100% = auto-compaction threshold):
 #   🟢 0-49% until compaction (green)
 #   🟠 50-74% until compaction (yellow)
@@ -41,7 +40,6 @@ CHECK_GITHUB_PR="${STATUSLINE_CHECK_PR:-0}"  # Set to 1 to enable PR checks
 
 # Constants
 readonly MAX_PATH_LENGTH=50
-readonly MAX_VENV_LENGTH=15
 readonly COMPACTION_THRESHOLD=77.5  # Auto-compaction triggers when 22.5% buffer remains
 
 # Helper function to parse git status efficiently
@@ -275,16 +273,6 @@ if git -C "$current_dir" rev-parse --git-dir >/dev/null 2>&1; then
     fi
 fi
 
-# Get Python virtual environment info
-venv_info=""
-if [[ -n "$VIRTUAL_ENV" ]]; then
-    venv_name=$(basename "$VIRTUAL_ENV")
-    # Smart truncation for long venv names
-    if [[ ${#venv_name} -gt $MAX_VENV_LENGTH ]]; then
-        venv_name="${venv_name:0:$((MAX_VENV_LENGTH-3))}..."
-    fi
-    venv_info=" ${GRAY}│${RESET} ${CYAN}🐍${venv_name}${RESET}"
-fi
 
 # Build context window display using pre-calculated percentage
 # Scale percentage so 100% = compaction threshold (more useful than raw context %)
@@ -330,8 +318,6 @@ output_string=" ${BLUE}🤖${RESET} ${BOLD}${BLUE}${model_name}${RESET} ${GRAY}�
 # Add git info if present
 [[ -n "$git_info" ]] && output_string="${output_string}${git_info}"
 
-# Add venv info if present (already includes separator)
-[[ -n "$venv_info" ]] && output_string="${output_string}${venv_info}"
 
 # Add context window info if present
 [[ -n "$context_info" ]] && output_string="${output_string}${context_info}"
