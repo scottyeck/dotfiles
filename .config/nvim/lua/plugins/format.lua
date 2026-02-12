@@ -71,33 +71,16 @@ return {
     config = function()
       local prettier = require("prettier")
 
-      -- Helper to find prettier executable (prefers prettierd, then local, then global)
-      local function find_prettier()
-        -- Try prettierd first
+      -- prettier.nvim only accepts "prettier" or "prettierd" as bin values
+      -- It handles finding local node_modules binaries internally
+      local function get_prettier_bin()
         if vim.fn.executable("prettierd") == 1 then
           return "prettierd"
         end
-
-        -- Try local prettierd
-        local root_file = vim.fs.find({ "package.json", "node_modules" }, { upward = true })[1]
-        if root_file then
-          local root = vim.fs.dirname(root_file)
-          local local_prettierd = root .. "/node_modules/.bin/prettierd"
-          if vim.fn.executable(local_prettierd) == 1 then
-            return local_prettierd
-          end
-          local local_prettier = root .. "/node_modules/.bin/prettier"
-          if vim.fn.executable(local_prettier) == 1 then
-            return local_prettier
-          end
-        end
-
-        -- Fallback to global prettier
         return "prettier"
       end
 
-      local bin = find_prettier()
-      vim.notify("Prettier using: " .. bin, vim.log.levels.INFO)
+      local bin = get_prettier_bin()
 
       prettier.setup({
         bin = bin,
