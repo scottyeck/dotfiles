@@ -134,6 +134,10 @@ return {
       require('night-owl').setup()
       vim.cmd.colorscheme('night-owl')
 
+      -- night-owl's terminal_color_1 (#ab0300) is too dark for removed lines
+      -- in terminal buffers (e.g. fugitive's `I` / `git add --patch`).
+      vim.g.terminal_color_1 = '#ef5350'
+
       -- Dim background when Neovim loses focus to match tmux inactive pane
       vim.api.nvim_create_autocmd('FocusLost', {
         pattern = '*',
