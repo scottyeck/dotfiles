@@ -6,6 +6,8 @@ export PATH="/opt/homebrew/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh"
 
+osascript -e 'tell application "Ghostty" to activate'
+
 if [ "$DEBUG" = "true" ]; then
   echo "--- click at $(date) ---" >> "$LOG"
   echo "ARGS: $@" >> "$LOG"
