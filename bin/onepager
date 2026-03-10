@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -z ${ONE_PAGERS_DIR+x} ]; then
+  echo "Error: Please configure and export ONE_PAGERS_DIR environment variable."
+  exit 1
+fi
+
+function usage() {
+  echo "Usage: onepager <command> [args]"
+  echo
+  echo "  commands:"
+  echo "    new [-o] <title>  Create a new one-pager (-o to open in \$EDITOR)"
+  echo "    last              Open the most recent one-pager"
+  echo
+  echo "  options:"
+  echo "    -h --help     Show usage"
+}
+
+function to_title_case() {
+  echo "$*" | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1'
+}
+
+function to_kebab_case() {
+  echo "$*" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//'
+}
+
+if [ $# -eq 0 ]; then
+  usage
+  exit 1
+fi
+
+case $1 in
+  new)
+    shift
+    OPEN=false
+    if [ "${1:-}" = "-o" ] || [ "${1:-}" = "--open" ]; then
+      OPEN=true
+      shift
+    fi
+    if [ $# -eq 0 ]; then
+      echo "Error: Please provide a title."
+      echo "Usage: onepager new [-o|--open] <title>"
+      exit 1
+    fi
+
+    TITLE="$(to_title_case "$*")"
+    DATE="$(date +'%Y%m%d')"
+    DATE_DISPLAY="$(date +'%Y-%m-%d')"
+    KEBAB="$(to_kebab_case "$TITLE")"
+    FILENAME="${DATE}-${KEBAB}.md"
+    FILEPATH="$ONE_PAGERS_DIR/$FILENAME"
+
+    mkdir -p "$ONE_PAGERS_DIR"
+
+    if [ -f "$FILEPATH" ]; then
+      echo "File already exists: $FILEPATH"
+      exit 1
+    fi
+
+    printf "# %s\n\n> %s\n\n" "$TITLE" "$DATE_DISPLAY" > "$FILEPATH"
+    echo "$FILEPATH"
+    if [ "$OPEN" = true ]; then
+      $EDITOR "$FILEPATH"
+    fi
+    ;;
+  last)
+    LATEST="$(ls -1 "$ONE_PAGERS_DIR"/*.md 2>/dev/null | sort | tail -1)"
+    if [ -z "$LATEST" ]; then
+      echo "No one-pagers found in $ONE_PAGERS_DIR"
+      exit 1
+    fi
+    $EDITOR "$LATEST"
+    ;;
+  -h|--help)
+    usage
+    ;;
+  *)
+    echo "onepager: Unknown command: $1"
+    exit 1
+    ;;
+esac
