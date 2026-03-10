@@ -12,7 +12,7 @@ PATH="$PATH:$HOME/.local/bin"
 # Provide node some more memory
 export NODE_OPTIONS="--max-old-space-size=16198"
 
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
