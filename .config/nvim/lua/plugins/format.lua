@@ -10,7 +10,23 @@ return {
       {
         "<leader>f",
         function()
-          require("conform").format({ async = true, lsp_fallback = true })
+          local filename = vim.api.nvim_buf_get_name(0)
+          local ft = vim.bo.filetype
+          local is_js_ts = ft == "javascript" or ft == "javascriptreact" or ft == "typescript" or ft == "typescriptreact"
+
+          if is_js_ts then
+            local oxfmt_config = vim.fs.find({ ".oxfmtrc.json" }, { upward = true, path = filename })[1]
+            if oxfmt_config then
+              require("conform").format({ async = true, formatters = { "oxfmt_local" } })
+            else
+              local ok, prettier = pcall(require, "prettier")
+              if ok then
+                prettier.format()
+              end
+            end
+          else
+            require("conform").format({ async = true, lsp_fallback = true })
+          end
         end,
         mode = "",
         desc = "[F]ormat buffer",
@@ -41,7 +57,6 @@ return {
 
       require("conform").setup({
         formatters_by_ft = {
-          -- Remove JS/TS from conform - using prettier.nvim + null-ls instead
           json = { "prettier_local" },
           jsonc = { "prettier_local" },
           yaml = { "prettier_local" },
@@ -49,11 +64,24 @@ return {
           html = { "prettier_local" },
           css = { "prettier_local" },
           scss = { "prettier_local" },
+          -- oxfmt_local is invoked explicitly from the BufWritePre autocmd,
+          -- but must be listed here for conform to register it
+          javascript = { "oxfmt_local" },
+          javascriptreact = { "oxfmt_local" },
+          typescript = { "oxfmt_local" },
+          typescriptreact = { "oxfmt_local" },
         },
         formatters = {
           prettier_local = {
             command = function(ctx)
               return find_local_executable("prettier", ctx.filename) or "prettier"
+            end,
+            args = { "--stdin-filepath", "$FILENAME" },
+            stdin = true,
+          },
+          oxfmt_local = {
+            command = function(ctx)
+              return find_local_executable("oxfmt", ctx.filename) or "oxfmt"
             end,
             args = { "--stdin-filepath", "$FILENAME" },
             stdin = true,

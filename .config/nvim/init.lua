@@ -46,10 +46,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       async = false,
     })
 
-    -- Run Prettier
-    local ok, prettier = pcall(require, "prettier")
-    if ok then
-      prettier.format()
+    -- Detect formatter: oxfmt vs prettier
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    local oxfmt_config = vim.fs.find({ ".oxfmtrc.json" }, { upward = true, path = filename })[1]
+
+    if oxfmt_config then
+      -- Use conform.nvim with oxfmt_local
+      require("conform").format({ bufnr = bufnr, formatters = { "oxfmt_local" } })
+    else
+      -- Use prettier (existing behavior)
+      local ok, prettier = pcall(require, "prettier")
+      if ok then
+        prettier.format()
+      end
     end
   end,
 })
