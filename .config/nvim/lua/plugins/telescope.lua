@@ -5,6 +5,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-frecency.nvim',
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   config = function()
     local telescope = require('telescope')
@@ -22,6 +23,7 @@ return {
           show_unindexed = true,
           db_safe_mode = false,
           sorting_strategy = 'descending',
+          matcher = 'fuzzy',
         },
       },
     })
