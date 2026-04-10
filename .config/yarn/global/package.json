@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@egcli/lr": "^0.18.0",
+    "@schpet/linear-cli": "^1.11.1",
     "ajv": "^6.9.1",
     "create-react-app": "^5.0.0",
     "create-vite": "^6.2.0",
