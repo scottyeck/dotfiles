@@ -14,6 +14,12 @@ return {
       vim.keymap.set('n', '<leader>cc', ':diffget //3<CR>', { desc = '[C]onflict take [C]urrent' })
       vim.keymap.set('n', '<leader>cb', ':diffget //2 | diffget //3<CR>', { desc = '[C]onflict take [B]oth' })
 
+      -- GitHub link to current line (via vim-rhubarb :GBrowse; bang yanks to clipboard)
+      vim.keymap.set('n', '<leader>gy', ':.GBrowse!<CR>', { desc = '[G]itHub [Y]ank URL' })
+      vim.keymap.set('v', '<leader>gy', ":'<,'>GBrowse!<CR>", { desc = '[G]itHub [Y]ank URL (range)' })
+      vim.keymap.set('n', '<leader>go', ':.GBrowse<CR>', { desc = '[G]itHub [O]pen in browser' })
+      vim.keymap.set('v', '<leader>go', ":'<,'>GBrowse<CR>", { desc = '[G]itHub [O]pen in browser (range)' })
+
       -- Support for hub was dropped in vim-rhubarb as gh becomes the
       -- primary GitHub CLI, so we override this functionality manually.
       -- @see https://github.com/tpope/vim-rhubarb/commit/964d48fd11db7c3a3246885993319d544c7c6fd5
