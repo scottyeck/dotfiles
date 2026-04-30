@@ -86,7 +86,38 @@ return {
   -- Git signs in the gutter + inline blame
   {
     'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    -- Override gitsigns highlight groups so changes are easier to spot.
+    -- Re-applied on ColorScheme so a `:colorscheme` swap doesn't erase them.
+    init = function()
+      local function set_hls()
+        -- Stronger backgrounds than gitsigns' default ~10% blend; used when linehl is on.
+        vim.api.nvim_set_hl(0, 'GitSignsAddLn', { bg = '#1e3a1e' })
+        vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { bg = '#3a3a1e' })
+        vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { bg = '#3a1e1e' })
+        -- Bold colored line numbers (numhl) so the gutter stays readable at a glance.
+        vim.api.nvim_set_hl(0, 'GitSignsAddNr', { fg = '#7fbf5f', bold = true })
+        vim.api.nvim_set_hl(0, 'GitSignsChangeNr', { fg = '#bfbf5f', bold = true })
+        vim.api.nvim_set_hl(0, 'GitSignsDeleteNr', { fg = '#bf5f5f', bold = true })
+      end
+      vim.api.nvim_create_autocmd('ColorScheme', { callback = set_hls })
+      set_hls()
+    end,
     opts = {
+      debug_mode = true, -- enables :Gitsigns debug_messages
+      signs = {
+        add = { text = '┃' },
+        change = { text = '┃' },
+        delete = { text = '▁' },
+        topdelete = { text = '▔' },
+        changedelete = { text = '~' },
+        untracked = { text = '┆' },
+      },
+      signs_staged_enable = true,
+      signcolumn = true,
+      numhl = true,
+      linehl = false,
+      word_diff = false,
       current_line_blame = false, -- toggle with <leader>gb
       current_line_blame_opts = {
         delay = 300,
@@ -103,17 +134,21 @@ return {
           { 'git', '-C', dir, 'rev-parse', '--absolute-git-dir', '--show-toplevel' },
           { text = true },
           function(out)
-            if out.code ~= 0 then
-              return callback({})
-            end
-            local lines = vim.split(out.stdout, '\n', { trimempty = true })
-            callback({ gitdir = lines[1], toplevel = lines[2] })
+            vim.schedule(function()
+              if out.code ~= 0 then
+                return callback({})
+              end
+              local lines = vim.split(out.stdout, '\n', { trimempty = true })
+              callback({ gitdir = lines[1], toplevel = lines[2] })
+            end)
           end
         )
       end,
     },
     keys = {
       { '<leader>gl', '<cmd>Gitsigns toggle_current_line_blame<cr>', desc = 'Toggle git blame' },
+      { '<leader>gh', '<cmd>Gitsigns toggle_linehl<cr>', desc = 'Toggle git line highlight' },
+      { '<leader>gw', '<cmd>Gitsigns toggle_word_diff<cr>', desc = 'Toggle git word diff' },
       { ']h', '<cmd>Gitsigns next_hunk<cr>', desc = 'Next hunk' },
       { '[h', '<cmd>Gitsigns prev_hunk<cr>', desc = 'Previous hunk' },
       { ']c', '/^<<<<<<<\\|^=======\\|^>>>>>>><cr>', desc = 'Next conflict marker' },
