@@ -91,6 +91,26 @@ return {
       current_line_blame_opts = {
         delay = 300,
       },
+      -- Workaround: gitsigns mis-computes worktree when gitdir is `.git/worktrees/<name>`
+      -- (falls back to `dirname(gitdir)` → `.git/worktrees`). Ask git directly instead.
+      _on_attach_pre = function(bufnr, callback)
+        local name = vim.api.nvim_buf_get_name(bufnr)
+        if name == '' then
+          return callback({})
+        end
+        local dir = vim.fs.dirname(name)
+        vim.system(
+          { 'git', '-C', dir, 'rev-parse', '--absolute-git-dir', '--show-toplevel' },
+          { text = true },
+          function(out)
+            if out.code ~= 0 then
+              return callback({})
+            end
+            local lines = vim.split(out.stdout, '\n', { trimempty = true })
+            callback({ gitdir = lines[1], toplevel = lines[2] })
+          end
+        )
+      end,
     },
     keys = {
       { '<leader>gl', '<cmd>Gitsigns toggle_current_line_blame<cr>', desc = 'Toggle git blame' },
