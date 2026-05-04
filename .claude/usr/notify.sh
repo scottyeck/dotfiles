@@ -1,5 +1,8 @@
 #!/bin/bash
+LOG="$HOME/.claude/notify-debug.log"
 INPUT=$(cat)
+echo "--- notify at $(date) ---" >> "$LOG"
+echo "INPUT: $INPUT" >> "$LOG"
 SESSION_ID=$(echo "$INPUT" | jq -r '.session_id')
 CWD=$(echo "$INPUT" | jq -r '.cwd')
 
@@ -34,8 +37,18 @@ else
   JUMP_CMD="CLAUDE_NOTIFY_DEBUG=false $CLICK $PROJECT"
 fi
 
+echo "TITLE: $TITLE" >> "$LOG"
+echo "MESSAGE: $MESSAGE" >> "$LOG"
+echo "JUMP_CMD: $JUMP_CMD" >> "$LOG"
+
+# Remove previous notification for this session before sending a new one
+/opt/homebrew/bin/terminal-notifier -remove "$SESSION_ID" >/dev/null 2>&1
+
 /opt/homebrew/bin/terminal-notifier \
   -title "$TITLE" \
   -message "$MESSAGE" \
   -sound "Funk" \
+  -group "$SESSION_ID" \
   -execute "$JUMP_CMD"
+
+echo "terminal-notifier EXIT: $?" >> "$LOG"
