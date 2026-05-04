@@ -11,6 +11,7 @@ return {
     local telescope = require('telescope')
     telescope.setup({
       defaults = {
+        file_ignore_patterns = { '%.git/', 'node_modules/', '%.DS_Store' },
         mappings = {
           i = {
             ['<C-u>'] = false,
