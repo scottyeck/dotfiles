@@ -67,6 +67,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Disable hard-wrapping in git commit / PR buffers
+vim.api.nvim_create_autocmd('FileType', {
+  group = group,
+  pattern = 'gitcommit',
+  callback = function()
+    vim.opt_local.textwidth = 0
+  end,
+})
+
 -- Highlight on yank
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
