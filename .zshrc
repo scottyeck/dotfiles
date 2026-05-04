@@ -141,4 +141,5 @@ source ~/.bashrc
 timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 3); do /usr/bin/time $shell -i -c exit; done
-}
+
+eval "$(zoxide init zsh)"
