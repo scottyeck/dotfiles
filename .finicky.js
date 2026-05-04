@@ -15,7 +15,12 @@ module.exports = {
   defaultBrowser: "Google Chrome",
   handlers: [
     {
-      match: [/github.com\/SkylightFamily/, /linear.app/, /loom.com/],
+      match: [
+        /github\.com\/SkylightFamily/,
+        /linear\.app/,
+        /loom\.com/,
+        /oidc\.us-east-1\.amazonaws.com/,
+      ],
       browser: {
         name: "Google Chrome",
         profile: profileNames.skylight,
