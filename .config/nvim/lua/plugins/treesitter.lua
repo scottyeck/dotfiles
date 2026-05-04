@@ -1,6 +1,7 @@
 -- Treesitter configuration
 return {
   "nvim-treesitter/nvim-treesitter",
+  event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   pin = true, -- prevent auto-updates until new API is stable
   dependencies = {
