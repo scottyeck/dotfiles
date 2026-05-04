@@ -39,6 +39,15 @@ end, {})
 
 local group = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 
+-- Force yaml filetype for .yml/.yaml files (override eruby.yaml detection)
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = group,
+  pattern = { "*.yml", "*.yaml" },
+  callback = function()
+    vim.bo.filetype = "yaml"
+  end,
+})
+
 -- Set filetype for .localrc
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = group,
