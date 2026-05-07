@@ -129,12 +129,19 @@ return {
         if name == '' then
           return callback({})
         end
+        -- Skip ephemeral buffers (rhubarb PR body, fugitive, terminal, etc.).
+        -- They can be wiped mid-attach, causing "Invalid buffer id" errors.
+        if vim.bo[bufnr].buftype ~= '' then
+          return
+        end
         local dir = vim.fs.dirname(name)
         vim.system(
           { 'git', '-C', dir, 'rev-parse', '--absolute-git-dir', '--show-toplevel' },
           { text = true },
           function(out)
             vim.schedule(function()
+              -- Buffer may have been wiped before git finished; skip attach.
+              if not vim.api.nvim_buf_is_valid(bufnr) then return end
               if out.code ~= 0 then
                 return callback({})
               end
