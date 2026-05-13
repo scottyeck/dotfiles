@@ -87,6 +87,40 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
+    config = function(_, opts)
+      require('gitsigns').setup(opts)
+
+      -- Linked-worktree fix: gitsigns' Repo.get caches a Repo per gitdir. If the
+      -- first caller (e.g. a fugitive buffer) doesn't supply a toplevel, gitsigns
+      -- falls back to dirname(gitdir) — `.git/worktrees` — and git happily echoes
+      -- that wrong path back as --show-toplevel. Every later attach for real files
+      -- reuses the poisoned cache entry, so ls-files runs with --work-tree set to
+      -- `.git/worktrees` and finds nothing → "Empty git obj" → no hunks.
+      --
+      -- Wrap Repo.get to detect the poison pattern (toplevel == dirname(gitdir))
+      -- and rewrite the cached repo using the linked worktree's `gitdir` metadata
+      -- file, which points to the real worktree's .git.
+      local uv = vim.uv or vim.loop
+      local repo_mod = require('gitsigns.git.repo')
+      local original_get = repo_mod.get
+      repo_mod.get = function(cwd, gitdir, toplevel)
+        local repo, err = original_get(cwd, gitdir, toplevel)
+        if repo and repo.gitdir and repo.toplevel == vim.fs.dirname(repo.gitdir) then
+          local f = io.open(repo.gitdir .. '/gitdir', 'r')
+          if f then
+            local content = f:read('*a')
+            f:close()
+            local worktree_dotgit = content and vim.trim(content) or ''
+            local real_toplevel = vim.fs.dirname(worktree_dotgit)
+            if real_toplevel and real_toplevel ~= '' and uv.fs_stat(real_toplevel) then
+              repo.toplevel = real_toplevel
+              repo.detached = repo.gitdir ~= real_toplevel .. '/.git'
+            end
+          end
+        end
+        return repo, err
+      end
+    end,
     -- Override gitsigns highlight groups so changes are easier to spot.
     -- Re-applied on ColorScheme so a `:colorscheme` swap doesn't erase them.
     init = function()
@@ -122,16 +156,21 @@ return {
       current_line_blame_opts = {
         delay = 300,
       },
-      -- Workaround: gitsigns mis-computes worktree when gitdir is `.git/worktrees/<name>`
-      -- (falls back to `dirname(gitdir)` → `.git/worktrees`). Ask git directly instead.
+      -- Linked-worktree workaround: gitsigns falls back to `dirname(gitdir)` for the
+      -- toplevel, which is wrong (`.git/worktrees`) for linked worktrees. Ask git
+      -- directly for normal buffers, and skip URI/non-normal buffers entirely so
+      -- gitsigns' bad fallback never runs for them. See the Repo.get monkey-patch
+      -- in `config` for the defense-in-depth piece.
       _on_attach_pre = function(bufnr, callback)
         local name = vim.api.nvim_buf_get_name(bufnr)
-        if name == '' then
-          return callback({})
-        end
-        -- Skip ephemeral buffers (rhubarb PR body, fugitive, terminal, etc.).
-        -- They can be wiped mid-attach, causing "Invalid buffer id" errors.
-        if vim.bo[bufnr].buftype ~= '' then
+        -- Skip empty, URI-style (fugitive://, oil://, etc.), or non-normal buffers.
+        -- Calling callback({}) for these lets gitsigns fall back to dirname(gitdir),
+        -- which is wrong for linked worktrees AND poisons its repo_cache for every
+        -- real buffer that follows. `return` (no callback) aborts attach cleanly.
+        if name == ''
+          or name:find('://', 1, true)
+          or vim.bo[bufnr].buftype ~= ''
+        then
           return
         end
         local dir = vim.fs.dirname(name)
@@ -140,10 +179,9 @@ return {
           { text = true },
           function(out)
             vim.schedule(function()
-              -- Buffer may have been wiped before git finished; skip attach.
               if not vim.api.nvim_buf_is_valid(bufnr) then return end
               if out.code ~= 0 then
-                return callback({})
+                return
               end
               local lines = vim.split(out.stdout, '\n', { trimempty = true })
               callback({ gitdir = lines[1], toplevel = lines[2] })
