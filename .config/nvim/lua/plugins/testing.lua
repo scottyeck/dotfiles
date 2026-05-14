@@ -9,16 +9,51 @@ return {
     "olimorris/neotest-rspec", -- RSpec adapter
   },
   config = function()
+    local function load_env_file(start_path)
+      local found = vim.fs.find(".env.test.local", {
+        upward = true,
+        path = start_path,
+        type = "file",
+      })[1]
+      if not found then return {} end
+
+      local env = {}
+      for line in io.lines(found) do
+        if not line:match("^%s*#") and not line:match("^%s*$") then
+          local k, v = line:match("^%s*([%w_]+)%s*=%s*(.-)%s*$")
+          if k then
+            v = v:gsub('^"(.*)"$', "%1"):gsub("^\'(.*)\'$", "%1")
+            env[k] = v
+          end
+        end
+      end
+      return env
+    end
+
+    local function rspec_with_env()
+      local start = vim.fn.expand("%:p:h")
+      if start == "" then start = vim.fn.getcwd() end
+      local env = load_env_file(start)
+      local prefix = {}
+      for k, v in pairs(env) do
+        table.insert(prefix, string.format("%s=%s", k, v))
+      end
+      if #prefix == 0 then
+        return { "bundle", "exec", "rspec" }
+      end
+      table.insert(prefix, 1, "env")
+      vim.list_extend(prefix, { "bundle", "exec", "rspec" })
+      return prefix
+    end
+
     require("neotest").setup({
       adapters = {
         require("neotest-rspec")({
-          rspec_cmd = function()
-            return { "bundle", "exec", "rspec" }
-          end,
+          rspec_cmd = rspec_with_env,
         }),
-        output_panel = {
-          open = 'vsplit | vertical resize 80'
-        },
+      },
+      output_panel = {
+        open = 'vsplit | vertical resize 80'
       },
     })
 

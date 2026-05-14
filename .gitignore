@@ -24,3 +24,6 @@ yarn-error.log
 !.claude/commands
 !.claude/hooks
 !.claude/usr
+.claude-reviews
+.env.test.local
+
