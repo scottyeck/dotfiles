@@ -4,7 +4,8 @@ return {
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope-frecency.nvim',
+    -- Pin to the 1.x line: master past v1.2.2 requires nvim 0.11.7+, we're on 0.11.4.
+    { 'nvim-telescope/telescope-frecency.nvim', version = '^1.0.0' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   config = function()

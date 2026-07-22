@@ -23,6 +23,12 @@ return {
           ['~'] = 'actions.tcd',
           ['gs'] = 'actions.change_sort',
           ['gx'] = 'actions.open_external',
+          ['gD'] = {
+            callback = function()
+              vim.ui.open(require('oil').get_current_dir())
+            end,
+            desc = 'Open current dir in Finder',
+          },
           ['g.'] = 'actions.toggle_hidden',
           ['g\\'] = 'actions.toggle_trash',
           ['.'] = 'actions.open_cmdline',
@@ -204,6 +210,28 @@ return {
     },
   },
 
+  -- Diff viewer + file history (Gvdiffsplit on steroids)
+  {
+    'sindrets/diffview.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewFileHistory', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewRefresh' },
+    keys = {
+      { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = '[G]it [D]iff view' },
+      { '<leader>gD', '<cmd>DiffviewClose<cr>', desc = '[G]it [D]iff close' },
+      { '<leader>gf', '<cmd>DiffviewFileHistory %<cr>', desc = '[G]it [F]ile history (current)' },
+      { '<leader>gF', '<cmd>DiffviewFileHistory<cr>', desc = '[G]it [F]ile history (repo)' },
+    },
+    opts = {
+      enhanced_diff_hl = true,
+      view = {
+        merge_tool = {
+          layout = 'diff3_mixed',
+          disable_diagnostics = true,
+        },
+      },
+    },
+  },
+
   -- Find and replace
   {
     'nvim-pack/nvim-spectre',
@@ -237,6 +265,18 @@ return {
       -- night-owl's terminal_color_1 (#ab0300) is too dark for removed lines
       -- in terminal buffers (e.g. fugitive's `I` / `git add --patch`).
       vim.g.terminal_color_1 = '#ef5350'
+
+      -- night-owl's NormalFloat bg matches the editor bg, making floats (gitsigns
+      -- preview, LSP hover, etc.) visually merge with the buffer. Lift it.
+      vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#0b2942' })
+      vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#0b2942', fg = '#5f7e97' })
+
+      -- Soften default Diff* highlights (Gvdiffsplit, :diffsplit). Match the
+      -- muted palette used for GitSignsAddLn/ChangeLn/DeleteLn.
+      vim.api.nvim_set_hl(0, 'DiffAdd',    { bg = '#1e3a1e' })
+      vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#1e2a3a' })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#3a1e1e', fg = '#7a4a4a' })
+      vim.api.nvim_set_hl(0, 'DiffText',   { bg = '#2a4a6a', bold = true })
 
       -- Dim background when Neovim loses focus to match tmux inactive pane
       vim.api.nvim_create_autocmd('FocusLost', {

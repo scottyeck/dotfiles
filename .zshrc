@@ -38,6 +38,8 @@ export NVM_AUTO_USE=true
 source $ZSH/oh-my-zsh.sh
 # Custom zsh configuration
 
+source $HOME/.todo/config
+
 alias gcur='echo $(git_current_branch)'
 alias gcobak='git checkout -b $(git_current_branch)-bak'
 alias gbc='git branch --sort=-committerdate | fzf | xargs git checkout'
