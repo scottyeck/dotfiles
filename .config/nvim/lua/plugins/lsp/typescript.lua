@@ -14,17 +14,12 @@ end
 
 function M.setup()
   local function get_typescript_lsp_cmd()
-    local ok, mason_registry = pcall(require, 'mason-registry')
-    if ok and mason_registry.is_installed('typescript-language-server') then
-      local tsserver = mason_registry.get_package('typescript-language-server')
-      if tsserver then
-        local success, install_path = pcall(function() return tsserver:get_install_path() end)
-        if success and install_path then
-          return { install_path .. '/typescript-language-server', '--stdio' }
-        end
-      end
+    -- Mason installs a bin shim; the package dir itself has no top-level binary
+    local mason_bin = vim.fn.stdpath('data') .. '/mason/bin/typescript-language-server'
+    if vim.fn.executable(mason_bin) == 1 then
+      return { mason_bin, '--stdio' }
     end
-    -- Fallback to global installation (we installed it via npm)
+    -- Fallback to a global install on PATH
     return { 'typescript-language-server', '--stdio' }
   end
 
