@@ -29,6 +29,20 @@ return {
             end,
             desc = 'Open current dir in Finder',
           },
+          -- Mirrors the global <leader>y, but the buffer path here is an oil:// URL
+          ['<leader>y'] = {
+            callback = function()
+              local oil = require('oil')
+              local dir, entry = oil.get_current_dir(), oil.get_cursor_entry()
+              if not dir or not entry then
+                return
+              end
+              local path = dir .. entry.name
+              vim.fn.setreg('+', path)
+              vim.notify('Copied: ' .. path)
+            end,
+            desc = 'Yank path under cursor',
+          },
           ['g.'] = 'actions.toggle_hidden',
           ['g\\'] = 'actions.toggle_trash',
           ['.'] = 'actions.open_cmdline',

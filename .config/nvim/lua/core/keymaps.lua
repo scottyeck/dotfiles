@@ -25,3 +25,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Quickfix navigation
 vim.keymap.set('n', '<leader>qj', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<leader>qk', '<cmd>cprev<CR>')
+
+-- Yank abs path of current buffer to system clipboard
+vim.keymap.set('n', '<leader>y', function()
+  local path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied: ' .. path)
+end, { desc = '[Y]ank file path' })
