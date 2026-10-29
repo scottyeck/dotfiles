@@ -221,6 +221,38 @@ return {
       { '<leader>hp', '<cmd>Gitsigns preview_hunk<cr>', desc = 'Preview hunk' },
       { '<leader>hs', '<cmd>Gitsigns stage_hunk<cr>', desc = 'Stage hunk' },
       { '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>', desc = 'Reset hunk' },
+      -- Diff base: default is the index (uncommitted changes only). Point it at a
+      -- rev to review a whole branch's worth of work inline. `main...` resolves to
+      -- the merge base, matching what `git diff main...HEAD` means.
+      {
+        '<leader>gB',
+        function()
+          vim.ui.input({ prompt = 'Diff base (rev, or `main...` for merge base): ' }, function(input)
+            if not input or input == '' then return end
+            local base = input
+            local branch = input:match('^(.-)%.%.%.$')
+            if branch then
+              local out = vim.system({ 'git', 'merge-base', branch, 'HEAD' }, { text = true }):wait()
+              if out.code ~= 0 then
+                vim.notify('No merge base with ' .. branch, vim.log.levels.ERROR)
+                return
+              end
+              base = vim.trim(out.stdout)
+            end
+            require('gitsigns').change_base(base, true)
+            vim.notify('Gitsigns base: ' .. input)
+          end)
+        end,
+        desc = '[G]it diff [B]ase (commit/branch)',
+      },
+      {
+        '<leader>gr',
+        function()
+          require('gitsigns').reset_base(true)
+          vim.notify('Gitsigns base: index')
+        end,
+        desc = '[G]it diff base [r]eset to index',
+      },
     },
   },
 
