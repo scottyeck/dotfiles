@@ -145,4 +145,8 @@ timezsh() {
   for i in $(seq 1 3); do /usr/bin/time $shell -i -c exit; done
 }
 
+maude() {
+  CLAUDE_CONFIG_DIR="$HOME/.claude-me" claude "$@"
+}
+
 eval "$(zoxide init zsh)"

@@ -1562,6 +1562,11 @@
     "@urql/core" ">=2.4.4"
     wonka "^4.0.14"
 
+"@visioncortex/vtracer@^1.0.0-alpha.4":
+  version "1.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@visioncortex/vtracer/-/vtracer-1.0.0-alpha.4.tgz#bca168228cfa27fba1b25fefac4650a36c089503"
+  integrity sha512-Hhi+vfG4ealLH1m9alrWo1lM00cWFfur4zeLEcNtzrYUjeEYTgukLNfvOXmuaGe2adugu+jl9o9IUzqHuqFO9g==
+
 "@xmldom/xmldom@~0.7.0":
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.5.tgz#09fa51e356d07d0be200642b0e4f91d8e6dd408d"
@@ -2767,10 +2772,10 @@ create-react-app@^5.0.0:
     tmp "^0.2.1"
     validate-npm-package-name "^3.0.0"
 
-create-vite@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/create-vite/-/create-vite-6.2.0.tgz#67b123f62dd31149b3423b65f08a5aa9586db8da"
-  integrity sha512-4Y1kNZcr/X/JiMipV6tAc8l+4HAHlxomS57jJq2KdZJZV2csP6ne2/I2BQqFopvizq0lZT80e/MqmdP/KBxrIA==
+create-vite@^9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/create-vite/-/create-vite-9.2.1.tgz#009429dcdbd4904cc4e1737b9d824dbc4d1d2dec"
+  integrity sha512-nE710dPFzm9CavJw4PtpOLQpNBiOzFV+tGbwcmBdg1A3TWgFkqypDmjt44oV0jvvQEdGsvFAvQ5pUnKrdcwciw==
 
 cross-spawn@^6.0.0, cross-spawn@^6.0.5:
   version "6.0.5"

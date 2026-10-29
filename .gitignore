@@ -18,8 +18,10 @@ yarn-error.log
 **/*/.repl
 
 .scotty
+.scratch
 .lnavrc
 .claude/*
+!.claude/skills
 !.claude/settings.json
 !.claude/commands
 !.claude/hooks
