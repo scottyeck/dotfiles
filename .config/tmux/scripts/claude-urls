@@ -1,0 +1,177 @@
+#!/usr/bin/env python3
+"""Pick a recent URL from Claude Code transcripts and open it.
+
+  claude-urls [--pick] [--cwd DIR] fzf picker, scoped to DIR's Claude project
+  claude-urls --list [--cwd DIR]   print entries (url<TAB>display), newest first
+  claude-urls --list --all         every project
+
+Transcripts live on disk, so links survive closed sessions. Entries older than
+CLAUDE_URLS_DAYS (default 3) are dropped.
+"""
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+
+PROJECTS = Path.home() / ".claude" / "projects"
+MAX_AGE = float(os.environ.get("CLAUDE_URLS_DAYS", "3")) * 86400
+CACHE = Path.home() / ".cache" / "claude-urls" / "index.json"
+
+MD_LINK = re.compile(r"\[([^\]\n]+)\]\((https?://[^)\s]+)\)")
+BARE_URL = re.compile(r"https?://[^\s<>()\[\]`\"']+")
+MD_NOISE = re.compile(r"[*_`>#]+|^\s*(?:[-+]|\d+\.)\s+")
+
+
+def project_dir(cwd):
+    # Claude Code names project dirs by swapping every non-alphanumeric for "-"
+    return PROJECTS / re.sub(r"[^A-Za-z0-9]", "-", cwd)
+
+
+def clean(line):
+    line = MD_NOISE.sub("", line)
+    return re.sub(r"\s+", " ", line).strip(" :-")
+
+
+def extract(text):
+    """Yield (url, description) for every link in a block of assistant text."""
+    prev, fenced = "", False
+    for raw in text.split("\n"):
+        # links in code fences are API calls and examples, not things to open
+        if raw.lstrip().startswith("```"):
+            fenced = not fenced
+            continue
+        if fenced:
+            continue
+        found = [(u, t) for t, u in MD_LINK.findall(raw)]
+        rest = MD_LINK.sub(r"\1", raw)
+        found += [(u.rstrip(".,;:"), None) for u in BARE_URL.findall(rest)]
+        context = clean(BARE_URL.sub("", rest))
+        for url, label in found:
+            desc = label or context
+            # a bare "Chart:" label leans on the paragraph above it
+            if len(desc) < 15 and prev:
+                desc = f"{desc} - {prev}" if desc else prev
+            yield url, desc
+        if clean(raw):
+            prev = clean(BARE_URL.sub("", rest))
+
+
+def scan(f, state):
+    """Parse only the bytes appended since the last scan - transcripts are append-only."""
+    size = f.stat().st_size
+    if size < state["offset"]:
+        state.update(offset=0, links=[])
+    with f.open("rb") as fh:
+        fh.seek(state["offset"])
+        chunk = fh.read(size - state["offset"])
+    # stop at the last newline so a half-written line gets re-read next time
+    chunk = chunk[: chunk.rfind(b"\n") + 1]
+    state["offset"] += len(chunk)
+    for line in chunk.splitlines():
+        # skip the json parse for the bulk of lines that can't matter
+        if b'"ai-title"' not in line and (b'"assistant"' not in line or b"http" not in line):
+            continue
+        try:
+            ev = json.loads(line)
+        except ValueError:
+            continue
+        if ev.get("type") == "ai-title":
+            state["title"] = ev.get("aiTitle") or state["title"]
+        if ev.get("type") != "assistant" or ev.get("isSidechain"):
+            continue
+        ts = datetime.fromisoformat(ev["timestamp"].replace("Z", "+00:00")).timestamp()
+        for block in ev.get("message", {}).get("content", []):
+            if block.get("type") == "text":
+                state["links"] += [[ts, u, d] for u, d in extract(block["text"])]
+
+
+def entries(dirs):
+    cutoff = time.time() - MAX_AGE
+    try:
+        cache = json.loads(CACHE.read_text())
+    except (OSError, ValueError):
+        cache = {}
+    seen = {}
+    for d in dirs:
+        for f in d.glob("*.jsonl"):
+            if f.stat().st_mtime < cutoff:
+                continue
+            state = cache.setdefault(str(f), {"offset": 0, "title": f.stem[:8], "links": []})
+            scan(f, state)
+            for ts, url, desc in state["links"]:
+                if ts >= cutoff and (url not in seen or seen[url][0] < ts):
+                    seen[url] = (ts, state["title"], desc)
+    # drop files that have aged out or been deleted so the cache stays small
+    cache = {p: s for p, s in cache.items() if os.path.exists(p) and os.path.getmtime(p) >= cutoff}
+    CACHE.parent.mkdir(parents=True, exist_ok=True)
+    tmp = CACHE.with_suffix(".tmp")
+    tmp.write_text(json.dumps(cache))
+    tmp.replace(CACHE)
+    return sorted(((v[0], url, v[1], v[2]) for url, v in seen.items()), reverse=True)
+
+
+def age(ts):
+    s = time.time() - ts
+    return f"{int(s // 60)}m" if s < 3600 else f"{int(s // 3600)}h" if s < 86400 else f"{int(s // 86400)}d"
+
+
+def render(rows):
+    out, last = [], None
+    for ts, url, title, desc in rows:
+        # dim the session on follow-on rows so its links read as a group
+        color = "\033[2;36m" if title == last else "\033[36m"
+        last = title
+        title = title if len(title) <= 28 else title[:27] + "…"
+        desc = desc or re.sub(r"^https?://", "", url)
+        out.append(f"{url}\t\033[2m{age(ts):>3}\033[0m  {color}{title:<28}\033[0m  {desc[:90]}\n")
+    return "".join(out)
+
+
+def listing(cwd, all_projects):
+    dirs = [p for p in PROJECTS.iterdir() if p.is_dir()] if all_projects else [project_dir(cwd)]
+    return render(entries(d for d in dirs if d.is_dir()))
+
+
+def main():
+    args = sys.argv[1:]
+    cwd = args[args.index("--cwd") + 1] if "--cwd" in args else os.getcwd()
+
+    if "--list" in args:
+        sys.stdout.write(listing(cwd, "--all" in args))
+        return
+
+    self_cmd = f"{sys.executable} {sys.argv[0]} --list --cwd '{cwd}'"
+    rows, scope = listing(cwd, False), "this project"
+    if not rows:
+        rows, scope = listing(cwd, True), "all projects"
+    if not rows:
+        subprocess.run(["tmux", "display-message", "no recent Claude links"])
+        return
+
+    fzf = shutil.which("fzf") or "/opt/homebrew/bin/fzf"
+    result = subprocess.run(
+        # sh, not $SHELL - preview runs on every cursor move and zsh startup is slow
+        [fzf, "--with-shell=/bin/sh -c",
+         "--ansi", "--no-input", "--no-sort", "--layout=reverse", "--info=hidden",
+         "--delimiter=\t", "--with-nth=2", "--accept-nth=1",
+         f"--header={scope}  ·  ctrl-a all  ctrl-p project  ctrl-y copy  / search",
+         "--preview=printf %s {1}", "--preview-window=down,1,wrap,border-top",
+         "--bind", "j:down,k:up,q:abort",
+         "--bind", "/:show-input+unbind(j,k,q,/)",
+         "--bind", f"ctrl-a:reload({self_cmd} --all)+change-header(all projects)",
+         "--bind", f"ctrl-p:reload({self_cmd})+change-header(this project)",
+         "--bind", "ctrl-y:execute-silent(printf %s {1} | pbcopy)+abort"],
+        input=rows, capture_output=True, text=True,
+    )
+    url = result.stdout.strip()
+    if url:
+        subprocess.run(["open", url])
+
+
+if __name__ == "__main__":
+    main()
