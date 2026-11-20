@@ -79,6 +79,19 @@ readonly DIM_GREEN='\033[32m'
 readonly DIM_YELLOW='\033[33m'
 readonly DIM_RED='\033[31m'
 
+# Profile badge - args let each config dir identify itself, e.g. `statusline-command.sh work blue`
+profile_label="$1"
+case "$2" in
+    red)    profile_color="$RED" ;;
+    green)  profile_color="$GREEN" ;;
+    yellow) profile_color="$YELLOW" ;;
+    blue)   profile_color="$BLUE" ;;
+    purple) profile_color="$PURPLE" ;;
+    cyan)   profile_color="$CYAN" ;;
+    orange) profile_color='\033[38;5;208m' ;;
+    *)      profile_color="$WHITE" ;;
+esac
+
 # Read JSON input from stdin
 input=$(cat)
 
@@ -314,6 +327,7 @@ fi
 
 # Build output string with smart separators
 output_string=" ${BLUE}🤖${RESET} ${BOLD}${BLUE}${model_name}${RESET} ${GRAY}│${RESET} ${PURPLE}📁 ${dir_display}${RESET}"
+[[ -n "$profile_label" ]] && output_string=" ${BOLD}${profile_color}[${profile_label}]${RESET}${output_string}"
 
 # Add git info if present
 [[ -n "$git_info" ]] && output_string="${output_string}${git_info}"
