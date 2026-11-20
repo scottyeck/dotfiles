@@ -23,6 +23,16 @@ function M.setup()
       formatter = 'rubocop',
       linters = { 'rubocop' },
     },
+    handlers = {
+      -- RuboCop cops crash on half-typed buffers, and the default handler's hit-enter prompt blocks typing
+      ['window/showMessage'] = function(err, params, ctx)
+        if params.message:match('^Error running diagnostics') then
+          vim.lsp.log.warn('ruby_lsp: ' .. params.message)
+          return params
+        end
+        return vim.lsp.handlers['window/showMessage'](err, params, ctx)
+      end,
+    },
   })
 
   vim.lsp.enable('ruby_lsp')
