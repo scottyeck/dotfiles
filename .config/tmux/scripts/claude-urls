@@ -18,7 +18,8 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-PROJECTS = Path.home() / ".claude" / "projects"
+# every config dir (~/.claude, ~/.claude-me via CLAUDE_CONFIG_DIR, ...) keeps its own transcripts
+PROJECTS = sorted(Path.home().glob(".claude*/projects"))
 MAX_AGE = float(os.environ.get("CLAUDE_URLS_DAYS", "3")) * 86400
 CACHE = Path.home() / ".cache" / "claude-urls" / "index.json"
 
@@ -27,9 +28,9 @@ BARE_URL = re.compile(r"https?://[^\s<>()\[\]`\"']+")
 MD_NOISE = re.compile(r"[*_`>#]+|^\s*(?:[-+]|\d+\.)\s+")
 
 
-def project_dir(cwd):
+def project_dirs(cwd):
     # Claude Code names project dirs by swapping every non-alphanumeric for "-"
-    return PROJECTS / re.sub(r"[^A-Za-z0-9]", "-", cwd)
+    return [p / re.sub(r"[^A-Za-z0-9]", "-", cwd) for p in PROJECTS]
 
 
 def clean(line):
@@ -133,7 +134,7 @@ def render(rows):
 
 
 def listing(cwd, all_projects):
-    dirs = [p for p in PROJECTS.iterdir() if p.is_dir()] if all_projects else [project_dir(cwd)]
+    dirs = [d for p in PROJECTS for d in p.iterdir()] if all_projects else project_dirs(cwd)
     return render(entries(d for d in dirs if d.is_dir()))
 
 
